@@ -37,7 +37,7 @@ git switch -c <branch> origin/<branch>	# create local branch tracking a remote b
 # -----------------------------
 # COMMITTING & PUSHING
 # -----------------------------
-git add .
+git add -A				# -A uploads entire repo; . and * not
 git commit -m "commit message"
 git push -u origin <branch-name>	# first push of a branch (afterwards just: git push)
 git push				#subsequent pushes				
