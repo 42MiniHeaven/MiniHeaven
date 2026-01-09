@@ -1,25 +1,60 @@
 // Most important Git commands
 
-git branch
-// show which branch you are currently on
-
-git checkout -b <branch-name>
-// create a new branch and switch to it
-
-git switch <branch-name>
-// switch to an existing branch
-
-git rebase origin/main
-// make sure your branch is up to date with main
-
-git push -u origin <branch-name>
-// first push of a branch (afterwards just: git push)
+# -----------------------------
+# DAILY START
+# -----------------------------
+git fetch        	# always fetch first
+git status		# always check where you are and what has changed
+git branch -a    	# see what's available (-a for all, local & remote)
 
 
-// For merging back to main
+# -----------------------------
+# WORKING WITH BRANCHES
+# -----------------------------
+git branch			# show which LOCAL branches (* = current)
+git switch <branch-name>	# switch to an existing LOCAL branch
 
+git checkout -b <branch-name>	# create a new branch and switch to it
+// OR
+git switch -c <branch-name>	
+
+
+# -----------------------------
+# WORKING WITH REMOTE BRANCHES
+# -----------------------------
+git branch -r			# list remote branches
+git switch -c <branch> origin/<branch>	# create local branch tracking a remote branch
+
+
+# -----------------------------
+# KEEPING YOUR BRANCH UP TO DATE
+# -----------------------------
+git fetch			# get latest remote changes
+git rebase origin/main		# make sure your branch is up to date with main
+// OR (simpler , but less clean history)
+git merge origin/main
+
+
+# -----------------------------
+# COMMITTING & PUSHING
+# -----------------------------
+git add .
+git commit -m "commit message"
+git push -u origin <branch-name>	# first push of a branch (afterwards just: git push)
+git push				#subsequent pushes				
+
+
+# -----------------------------
+# MERGING BACK TO MAIN
+# -----------------------------
 git switch main
-git pull
+git pull			# ensure main is up to date
 git merge <branch-name>
 git push
 
+
+# -----------------------------
+# STILL NEEDED: HANDLING PROBLEMS & CLEANUP
+# -----------------------------
+
+XXXXXX
