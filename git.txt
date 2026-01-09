@@ -1,0 +1,25 @@
+// Most important Git commands
+
+git branch
+// show which branch you are currently on
+
+git checkout -b <branch-name>
+// create a new branch and switch to it
+
+git switch <branch-name>
+// switch to an existing branch
+
+git rebase origin/main
+// make sure your branch is up to date with main
+
+git push -u origin <branch-name>
+// first push of a branch (afterwards just: git push)
+
+
+// For merging back to main
+
+git switch main
+git pull
+git merge <branch-name>
+git push
+
