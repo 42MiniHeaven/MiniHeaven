@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/09 22:15:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/10 16:39:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ typedef struct	s_parser
 
 typedef struct	s_exec
 {
-	int		args;
-	int		*status;
-	pid_t	*process;
-	int		pipefd[2];
-	t_parser	
+	int			args;
+	int			*status;
+	pid_t		*process;
+	int			pipefd[2];
+	t_parser	*parser;	
 }	t_exec;
 
 #endif
