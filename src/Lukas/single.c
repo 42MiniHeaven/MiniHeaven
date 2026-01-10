@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 19:23:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/10 21:29:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/10 22:25:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@ void	single(t_cmd data)
 	//builtin echo hello
 	//command echo hello
 	(void)data;
-	printf("I want to execute\n");
 	execve("/usr/bin/ls", argv, NULL); //pass him a checked path
 }
