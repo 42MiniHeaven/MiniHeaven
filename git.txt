@@ -56,7 +56,15 @@ git push
 
 
 # -----------------------------
-# STILL NEEDED: HANDLING PROBLEMS & CLEANUP
+# CLEANUP
+# -----------------------------
+git branch -d <branch-name>         # delete local branch
+git push origin --delete <branch>   # delete remote branch
+git fetch --prune                   # remove stale remote refs
+
+
+# -----------------------------
+# STILL NEEDED: HANDLING PROBLEMS
 # -----------------------------
 
 XXXXXX
