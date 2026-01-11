@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   single.c                                           :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/10 19:23:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/11 14:17:43 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/11 15:01:36 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/01/11 15:58:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-void	single(t_cmd data)
-{
-	char	*argv[] = {"/usr/bin/ls", 0};
-	//check if builtin
-	//if builtin execute
-	//else fork and execute there
-	//builtin echo hello
-	//command echo hello
-	(void)data;
-	execve("/usr/bin/ls", argv, NULL); //pass him a checked path
-}
+# include <stdio.h>
+# include <stdlib.h>
+# include <ctype.h>
+# include <string.h>
+
+typedef int	(*builtin_func)(char **argv);		//prototype for our function
+
+builtin_func	find_builtin(const char *name);	//Lookup function
+
+int	builtin_exit(char **argv);
+//int	builtin_cd(char **argv);
+
+#endif

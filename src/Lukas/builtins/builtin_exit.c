@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/10 23:17:07 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/11 15:47:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "builtins.h"
 
 static int	is_numeric(char *s)
 {
@@ -33,7 +35,7 @@ int	builtin_exit(char **argv)
 	printf("exit\n");
 
 	if (!argv[1])
-		exit();		//exit from other calls
+		exit(42);		//exit from other calls
 	if (!is_numeric(argv[1]))
 	{
 		fprintf(stderr, "exit: %s: numeric argument required\n", argv[1]);

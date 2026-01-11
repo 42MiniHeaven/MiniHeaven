@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   single.c                                           :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/10 19:23:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/11 14:17:43 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/11 15:13:36 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/01/11 15:58:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#include "builtins.h"
 
-void	single(t_cmd data)
+typedef struct
 {
-	char	*argv[] = {"/usr/bin/ls", 0};
-	//check if builtin
-	//if builtin execute
-	//else fork and execute there
-	//builtin echo hello
-	//command echo hello
-	(void)data;
-	execve("/usr/bin/ls", argv, NULL); //pass him a checked path
+	const char	*name;
+	builtin_func	func;
+} builtin;
+
+static builtin	builtins[] = 
+{
+//	{"cd", builtin_cd},
+	{"exit", builtin_exit},
+	{NULL, NULL}
+};
+
+builtin_func	find_builtin(const char *name)
+{
+	int	i;
+
+	i = 0;
+	while (builtins[i].name)
+	{
+		if (strcmp(name, builtins[i].name) == 0)
+			return (builtins[i].func);
+		i++;
+	}
+	return (NULL);
 }
+

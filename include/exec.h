@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:09:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/10 21:24:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/11 14:15:59 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ enum flag
 typedef struct s_cmd
 {
 	char			**argv;
-	enum flag		flag;
+	enum flag		flag;		//maybe a second int to choose after flag (singles: builtin, fork, no fork
 	char			**envp;
 	int				in_fd;		//default STDIN
 	int				out_fd;		//default STDOUT
