@@ -6,76 +6,35 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 16:50:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/10 21:19:00 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/12 21:34:42 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+//#include "../../include/exec.h"
+#include "executor.h"
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	i;
-	t_cmd	cmd;
-	char	**path = envp;
+	char	*argv_ls[] = {"ls", "-l", 0};
+	char	*env;
 
-	if (argc == 1)
-		return (1);
-	i = atoi(argv[1]);
-	if (i == 0)		//create real case
-	{
-		char *argv[] = {"ls", "-l", NULL};
-	
-		cmd.argv = argv;
-		cmd.flag = 0;
-		cmd.envp = path;
-		cmd.in_fd = STDIN_FILENO;
-		cmd.out_fd = STDOUT_FILENO;
-		cmd.next = NULL;
-	}
-	if (i == 1)
-	{
-		char *argv[] = {"ls", "-l", NULL};
-	
-		cmd.argv = argv;
-		cmd.flag = 1;
-		cmd.envp = path;
-		cmd.in_fd = STDIN_FILENO;
-		cmd.out_fd = STDOUT_FILENO;
-		cmd.next = NULL;
-	}
-	if (i == 2)		//create real case
-	{
-		char *argv[] = {"ls", "-l", NULL};
-	
-		cmd.argv = argv;
-		cmd.flag = 2;
-		cmd.envp = path;
-		cmd.in_fd = STDIN_FILENO;
-		cmd.out_fd = STDOUT_FILENO;
-		cmd.next = NULL;
-	}
-	if (i == 3)		//create real case
-	{
-		char *argv[] = {"ls", "-l", NULL};
-	
-		cmd.argv = argv;
-		cmd.flag = 3;
-		cmd.envp = path;
-		cmd.in_fd = STDIN_FILENO;
-		cmd.out_fd = STDOUT_FILENO;
-		cmd.next = NULL;
-	}
-	if (i == 4)		//create real case
-	{
-		char *argv[] = {"ls", "-l", NULL};
-	
-		cmd.argv = argv;
-		cmd.flag = 4;
-		cmd.envp = path;
-		cmd.in_fd = STDIN_FILENO;
-		cmd.out_fd = STDOUT_FILENO;
-		cmd.next = NULL;
-	}
-	decider(cmd);
+	t_command cmd = {
+		.argv = argv_ls,
+		.input_file = 0,
+		.output_file = 0,
+		.append = 0
+	};
+
+	t_pipeline p = {
+		.cmds = &cmd,
+		.count = 1
+	};
+	(void)argc;
+	(void)argv;
+//	(void)envp; auskommentiert fuers testen
+	env = strdup(ret_env(envp));
+	printf("%s\n", env);
+	decider(p, envp);
+	free(env);
 	return (0);
 }

@@ -6,43 +6,23 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 15:55:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/10 21:23:36 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/12 21:11:35 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+//#include "../../include/exec.h"
+#include "executor.h"
 
-int	decider(t_cmd data)
+int	decider(t_pipeline data, char **envp)
 {
-	if (data.flag == FORK)
+	if (data.count == 0)
+		return (42); //no command to execute
+	if (data.count == 1)
 	{
-		printf("entered FORK\n");
+		single(data, envp);
 		return (0);
 	}
-	if (data.flag == SINGLE)
-	{
-		single(data);
-		return(0);
-	}
-	if (data.flag == HEREDOC)
-	{
-		printf("entered HEREDOC\n");
-		return (0);
-	}
-	if (data.flag == REDIRECT)
-	{
-		printf("entered REDIRECT\n");
-		return (0);
-	}
-	if (data.flag == EMPTY)
-	{
-		printf("entered EMPTY\n");
-		return (0);
-	}
-	if (data.flag == COUNT)
-	{
-		printf("entered COUNT\n");
-		return (0);
-	}
-	return (1);
+	if (data.count == 2)
+		printf("we enter 2\n");
+	return (0);
 }

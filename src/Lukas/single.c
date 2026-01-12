@@ -6,20 +6,21 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 19:23:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/11 14:17:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/12 21:13:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+//#include "../../include/exec.h"
+#include "executor.h"
 
-void	single(t_cmd data)
+void	single(t_pipeline data, char **envp)
 {
-	char	*argv[] = {"/usr/bin/ls", 0};
+	(void)envp;
+	//check if path
 	//check if builtin
 	//if builtin execute
 	//else fork and execute there
 	//builtin echo hello
 	//command echo hello
-	(void)data;
-	execve("/usr/bin/ls", argv, NULL); //pass him a checked path
+	execve("/usr/bin/ls", data.cmds[0].argv, 0); //pass him a checked path
 }

@@ -6,19 +6,19 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:22:03 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/11 17:06:01 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:47:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "externals.h"
 
-extern char	**environ;
+//extern char	**environ;
 
 static void	child(char **bla)
 {
 	(void)bla;
 	char	*argv[] = {"/usr/bin/ls", 0};
-	execve("/usr/bin/ls", argv, environ);
+	execve("/usr/bin/ls", argv, 0);
 }
 
 void	run_external(char **argv)
