@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:33:04 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/12 21:35:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/13 15:18:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef struct	s_pipeline
 int		decider(t_pipeline data, char **envp);
 void	single(t_pipeline data, char **envp);
 
-//exec_utils
-char	*ret_env(char **envp);
+//path_utils
+char	*ret_unresolved(char **envp);
+char	**ret_patharr(char *env);
+
+//path_confirm
+char	*ret_absolute(char *cmd);
+char	*ret_builtabsolute(char *cmd, char **dirs);
+int		is_executable(const char *path);
 #endif
