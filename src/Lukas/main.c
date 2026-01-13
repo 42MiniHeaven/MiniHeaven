@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 16:50:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/13 15:49:45 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:37:27 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 //		printf("%s\n", arr[i]);
 //		i++;
 //	}
-	absolute = ret_absolute("/usr/bin/ls");
+//	absolute = ret_absolute("/usr/bin/ls");
 //	if (absolute)
 //		printf("1: %s\n", absolute);
 //	else

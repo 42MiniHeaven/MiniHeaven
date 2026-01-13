@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:33:04 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/13 15:18:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:25:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,5 @@ char	*ret_unresolved(char **envp);
 char	**ret_patharr(char *env);
 
 //path_confirm
-char	*ret_absolute(char *cmd);
-char	*ret_builtabsolute(char *cmd, char **dirs);
-int		is_executable(const char *path);
+char	*ret_full_path(char *cmd, char **dirs);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 14:34:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/13 16:03:46 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:27:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,14 @@ static char	*ret_builtabsolute(char *cmd, char **dirs)
 
 char	*ret_full_path(char *cmd, char **dirs)
 {
+	char	*ret;
 	
+	ret = ret_absolute(cmd);
+	if (!ret)
+	{
+		ret = ret_builtabsolute(cmd, dirs);
+		if (!ret)
+			return (NULL);
+	}
+	return (ret);
 }
