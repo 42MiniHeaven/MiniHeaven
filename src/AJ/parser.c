@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/12 23:24:31 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:44:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "libft/libft.h"
+
+int ft_is_operator(int c)
+{
+    return (c == '|' || c == '<' || c == '>');
+}
+
+int ft_isspace(int c)
+{
+    return (c == ' ');   
+}
 
 /*
  * GENERAL: Adds a new token to the end of the current token list. Tells what 
@@ -42,8 +53,9 @@ void    token_add_back(t_token **list, t_token *new)
         return ;
     }
     tmp = *list;
-    while (tmp->next) // goes through list until it finds last node
+    while (tmp->next) { // goes through list until it finds last node
         tmp = tmp->next;
+    }
     tmp->next = new; // new token is liked to last node
 }
 
@@ -70,11 +82,15 @@ void lex_word(char *input, int *i, t_token **tokens)
     char    *value;
     t_token *token;
 
-    start = i;
-    while(!(is_operator(input[*i])))
+    start = *i;
+    while(!(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
         (*i)++;
     value = ft_substr(input, start, *i - start);
+    if (!value)
+        write(1, "A\n", 2); // Free when error;
     token = token_new(WORD, value);
+    if (!token)
+        write(1, "b\n", 2); // Free when error;
     token_add_back(tokens, token);
 }
 
@@ -95,34 +111,25 @@ void    lex_operator(char *input, int *i, t_token **tokens)
 {
     t_token *token;
 
+    token = NULL;    
     if (input[*i] == '|')
-        token = token_new(PIPE, '|');
+        token = token_new(PIPE, "|");
     else if (input[*i] == '>' && input[(*i) + 1] != '>')
-        token = token_new(REDIR_OUT, '>');
+        token = token_new(REDIR_OUT, ">");
     else if (input[*i] == '<' && input[(*i) + 1] != '<')
-        token = token_new(REDIR_IN, '<');
+        token = token_new(REDIR_IN, "<");
     else if (input[*i] == '>' && input[(*i) + 1] == '>')
     {
-        token = token_new(APPEND, '>>');
+        token = token_new(APPEND, ">>");
         (*i)++;
     }
     else if (input[*i] == '<' && input[(*i) + 1] == '<')
     {
-        token = token_new(HEREDOC, '<<');
+        token = token_new(HEREDOC, "<<");
         (*i)++;
     }
     (*i)++;
     token_add_back(tokens, token);
-}
-
-int is_operator(int c)
-{
-    return (c == '|' || c == '<' || c == '>');
-}
-
-int ft_isspace(int c)
-{
-    return (c == ' ');   
 }
 
 /*
@@ -135,28 +142,30 @@ int ft_isspace(int c)
 t_token	*lexer(char *input)
 {
 	t_token *tokens;
+    size_t input_len;
     int	i;
 
 	tokens = NULL;
+    input_len = ft_strlen(input);
     i = 0;
-	while (input[i])
+	while ((size_t)i < input_len)
 	{
 		if (ft_isspace(input[i])) // cast to unsigned char to avoid undefined behaviour?
         {
             i++;
             continue ;
         }
-        else if (is_operator(input[i]))
-            lex_operator(input, i, tokens);
+        else if (ft_is_operator(input[i]))
+            lex_operator(input, &i, &tokens);
         else
-            lex_word(input, i, tokens);
+            lex_word(input, &i, &tokens);
 	}
     return (tokens);
 }
 
 int main(void)
 {
-    char *line = "ls -l | grep txt >> output.txt";
+    char *line = "ls -l | cat << e";
     t_token *tokens = lexer(line);
 
     while (tokens)
