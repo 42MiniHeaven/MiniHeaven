@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/14 19:44:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/15 21:09:28 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void lex_word(char *input, int *i, t_token **tokens)
     t_token *token;
 
     start = *i;
-    while(!(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
+    while(input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
         (*i)++;
     value = ft_substr(input, start, *i - start);
     if (!value)
@@ -111,7 +111,7 @@ void    lex_operator(char *input, int *i, t_token **tokens)
 {
     t_token *token;
 
-    token = NULL;    
+    token = NULL;
     if (input[*i] == '|')
         token = token_new(PIPE, "|");
     else if (input[*i] == '>' && input[(*i) + 1] != '>')
@@ -148,7 +148,7 @@ t_token	*lexer(char *input)
 	tokens = NULL;
     input_len = ft_strlen(input);
     i = 0;
-	while ((size_t)i < input_len)
+	while ((size_t)i < input_len) // could only be input[i] but that way is safer
 	{
 		if (ft_isspace(input[i])) // cast to unsigned char to avoid undefined behaviour?
         {
