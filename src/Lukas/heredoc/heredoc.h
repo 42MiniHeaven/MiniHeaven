@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:09:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/16 16:50:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/18 18:53:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@
 
 typedef struct s_heredoc
 {
-	char	**text; //appends every read input string to this function
+	char	**lines; //appends every read input string to this function
 	char	*word;	//delimiter for heredoc
-	int		tsize;	//textarr size -> starts with 1 for NULL string
-	int		expand;	//active expanding 0 false or 1 true
+	size_t	count;	//textarr size -> starts with 1 for NULL string
 } t_heredoc;
 
 //heredoc.c
-void	mh_heredoc(int n, char *word);
+void	mh_heredoc(char *word);
 //static void	mh_heredoc_read(t_heredoc *data);
 //static void	mh_heredoc_write(t_heredoc *data);
 //static void	mh_heredoc_realloc(t_heredoc *data);

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 18:40:14 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/16 14:15:38 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/18 14:42:22 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 		return (1);
-	mh_heredoc(1, argv[1]);
+	mh_heredoc(argv[1]);
 	return (0);
 }
