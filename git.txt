@@ -6,14 +6,14 @@
 
 # WORKING ONLY ON MAIN
 git fetch        	# always fetch first
-git status		# always check where you are and what has changed
+git status			# always check where you are and what has changed
 git branch -a    	# see what's available (-a for all, local & remote)
 
 # !!DON'T FORGET TO SWITCH TO YOUR BRANCH!!
 git switch <branch-name>	# switch to an existing LOCAL branch
 
 # KEEPING YOUR BRANCH UP TO DATE
-git fetch			# get latest remote changes
+git fetch					# get latest remote changes
 git rebase origin/main		# make sure your branch is up to date with main
 // OR (simpler , but less clean history)
 git merge origin/main
@@ -22,7 +22,7 @@ git merge origin/main
 # -----------------------------
 # WORKING WITH BRANCHES
 # -----------------------------
-git branch			# show which LOCAL branches (* = current)
+git branch					# show which LOCAL branches (* = current)
 git switch <branch-name>	# switch to an existing LOCAL branch
 
 git checkout -b <branch-name>	# create a new branch and switch to it
@@ -47,8 +47,12 @@ git push				#subsequent pushes
 
 
 # -----------------------------
-# MERGING BACK TO MAIN
+# MERGING BACK TO MAIN / FROM MAIN
 # -----------------------------
+INFO: 	To get information FROM main onto a branch first check if main is locally
+		up-to-date. Switch to the branch that you want to add info to.
+		Then 'git merge <main>', done.
+
 git switch main
 git pull			# ensure main is up to date
 git merge <branch-name>
