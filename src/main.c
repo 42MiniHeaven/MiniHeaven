@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/11 21:31:22 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/18 19:38:04 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "miniheaven.h"
 
 /* 
  * GENERAL:
@@ -33,11 +34,12 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*input; //input string
+	char		*input; //input string
+	t_heaven	miniheaven;
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
+	miniheaven.envp = envp;
 	signal(SIGQUIT, SIG_IGN); // ctrl-\ signal is ignored
 	while(1)
 	{

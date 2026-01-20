@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/18 21:36:50 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/18 22:35:44 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ t_token	*lexer(char *input)
 
 int main(void)
 {
-    char *line = "ls -l | cat << e";
+    char *line = "ls -l || cat <<< e";
     t_token *tokens = lexer(line);
 
     // struct needs to be initialised with zero

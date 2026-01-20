@@ -12,12 +12,6 @@
 
 #include "parser.h"
 
-// PARSER GENEREL TO-DOS
-// Handles grammar & structure:
-//  -Pipe placement
-//  -Redirection correctness
-//  -Missing operands
-
 // Why return type t_cmd* ? 
 // --> Parser is creating the list, not modifying an existing one.
 // Why t_token *tokens and not t_token **tokens?
@@ -33,55 +27,68 @@
 //     }
 //     return;
 // }
-int check_operands()
-{}
-
-int check_redirections()
+int check_operands(t_token *tokens, t_token *current, t_token *prev)
 {
-
+    // example: echo > file.txt
+    // example: echo hello | > file.txt
 }
 
-int check_pipes(t_token *tokens)
+int check_redirections(t_token *tokens, t_token *current, t_token *prev)
 {
-    t_token *current;
-    t_token *prev;
+    // can redirations appear at the beginning of the command?
+    // HEREDOC <<, REDIR_IN <
+    while (current != NULL)
+    {
+        if (current->type == REDIR_IN || current->type == REDIR_OUT ) //needs to be simpler than listing all the redirections
 
-    if (!tokens)
-        return (1); // empty input ok for pipes
+    // REDIR_OUT = 2,  	// >
+    // REDIR_IN = 3,   	// <
+    // APPEND = 4,     	// >>
+    // HEREDOC = 5 
+    }
+}
+
+int check_pipes(t_token *tokens, t_token *current, t_token *prev)
+{
+    // if (!tokens)
+    //     return (1); // empty input ok for pipes - needed?
     if (tokens->type == PIPE)
     {
-        printf("Syntax error: pipe at the beginning\n"); // replace printf
-        return (0);
+        printf("Syntax error: pipe at the beginning\n");
+        return (0); // free gedöns
     }
-    current = tokens;
-    prev = NULL;
     while (current != NULL) // in case this creates issues create a new varaible
     {
-        if (current->type == PIPE && prev && prev->type == PIPE)
+        if (current->type == PIPE && prev && prev->type == PIPE) // to be removed if bonus
         {
-            printf("Syntax error: two pipes in a row\n"); // replace printf
-            return (0);
+            printf("Syntax error: two pipes in a row, did not handle bonus\n");
+            return (0); // free gedöns
         }
         prev = current;
         current = current->next;
     }
     if (prev && prev->type != WORD)
     {
-            printf("Syntax error: word needed at the end\n"); // replace printf
-            return (0);
+            printf("Syntax error: word needed at the end\n");
+            return (0); // free gedöns
     }
     return (1);
 }
 
 int parse_input_check(t_token *tokens)
 {
+    t_token *current;
+    t_token *prev;
+    
     if (!tokens)
         return (0);
-    if (!check_pipes(tokens))
+    current = tokens;
+    prev = NULL;
+    if (!check_pipes(tokens, current, prev))
         return (0);
-    if (!check_redirections(tokens))
+    if (!check_redirections(tokens, current, prev))
         return (0);
-    if (!check_operands(tokens))
+    if (!check_operands(tokens, current, prev))
         return (0);
     return (1);
 }
