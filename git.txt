@@ -3,9 +3,20 @@
 # -----------------------------
 # DAILY START
 # -----------------------------
+
+# WORKING ONLY ON MAIN
 git fetch        	# always fetch first
 git status		# always check where you are and what has changed
 git branch -a    	# see what's available (-a for all, local & remote)
+
+# !!DON'T FORGET TO SWITCH TO YOUR BRANCH!!
+git switch <branch-name>	# switch to an existing LOCAL branch
+
+# KEEPING YOUR BRANCH UP TO DATE
+git fetch			# get latest remote changes
+git rebase origin/main		# make sure your branch is up to date with main
+// OR (simpler , but less clean history)
+git merge origin/main
 
 
 # -----------------------------
@@ -27,18 +38,9 @@ git switch -c <branch> origin/<branch>	# create local branch tracking a remote b
 
 
 # -----------------------------
-# KEEPING YOUR BRANCH UP TO DATE
-# -----------------------------
-git fetch			# get latest remote changes
-git rebase origin/main		# make sure your branch is up to date with main
-// OR (simpler , but less clean history)
-git merge origin/main
-
-
-# -----------------------------
 # COMMITTING & PUSHING
 # -----------------------------
-git add .
+git add -A				# -A uploads entire repo; . and * not
 git commit -m "commit message"
 git push -u origin <branch-name>	# first push of a branch (afterwards just: git push)
 git push				#subsequent pushes				
