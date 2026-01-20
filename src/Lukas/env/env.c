@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/20 18:43:00 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/20 22:44:32 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 t_env	*env_new(char *key, char *value)
 {
-	t_env	node;
+	t_env	*node;
 
 	node = malloc(sizeof(t_env));
 	if (!node)
@@ -69,7 +69,7 @@ t_env	*env_find(t_env *env, char *key)
 {
 	while (env)
 	{
-		if (ft_strcmp(env->key, key) == 0)
+		if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
 			return (env);
 		env = env->next;
 	}
@@ -98,7 +98,7 @@ char **env_to_envp(t_env *env)
 	while (env)
 	{
 		if (env->value)
-			envp[i++] = ft_strjoin_three(env->key, "=", env->value);
+			envp[i++] = ft_strjoin_env(env->key, env->value);
 		else
 			envp[i++] = ft_strdup(env->key);
 		env = env->next;
