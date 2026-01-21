@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:13:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 14:36:07 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:00:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ char	*ft_strjoin_env(char const *s1, char const *s2)
 	if (ptr == NULL)
 		return (0);
 	i = 0;
-	while (s1[i] != '\0')
+	while (s1[i])
 	{
 		ptr[i] = s1[i];
 		i++;
 	}
 	ptr[i++] = '=';
 	j = 0;
-	while (s2[j] != '\0')
+	while (s2[j])
 	{
 		ptr[i + j] = s2[j];
 		j++;

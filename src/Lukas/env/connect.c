@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   connect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:07:00 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 13:47:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:54:16 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,27 @@
 
 /*File Description:	This file needs to be optimized for our merge*/
 
-void	create_env(char **envp)
+void	create_env(t_env **start, char **envp)
 {
-	t_env	*start = NULL;
-	t_env	*tmp;
-	char	**arr;
-	size_t	i = 0;
+	size_t	i;
 	char	*key;
 	char	*value;
 	size_t	len;
 	size_t	s;
 	size_t	n;
 
+	i = 0;
 	while (envp[i])
 	{
 		s = 0;
 		while (envp[i][s] && envp[i][s] != '=')
 			s++;
-		n = s + 2;
+		n = s + 1;
 		len = ft_strlen(envp[i]);
 		key = ft_substr(envp[i], 0, s);
 		value = ft_substr(envp[i], n, len - n);
-		tmp = env_new(key, value);
-		env_add_back(&start, tmp);
+		env_add_back(start, env_new(key, value));
 		i++;
 	}
-	arr = env_to_envp(start);
-	if (!arr)
-		return;
-	i = -1;
-	while (arr[++i])
-		printf("%s\n", arr[i]);
-	free_arr(arr);
-	free_linked(start);
 }
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	create_env(envp);
-	return (0);
-}

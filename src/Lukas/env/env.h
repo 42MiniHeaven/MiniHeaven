@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 14:31:19 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:05:12 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+void	create_env(t_env **start, char **envp);
 t_env	*env_new(char *key, char *value);
 void	env_add_back(t_env **env, t_env *new);
 t_env	*env_find(t_env *env, char *key);
