@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:13:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 14:15:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:36:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ char	*ft_strjoin_env(char const *s1, char const *s2)
 	}
 	return (ptr);
 }
-

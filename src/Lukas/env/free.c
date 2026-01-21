@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:19:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 13:36:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:33:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_arr(char **arr)
 	size_t	i;
 
 	if (!arr || !*arr)
-		return;
+		return ;
 	i = -1;
 	while (arr[++i])
 		free(arr[i]);
@@ -36,14 +36,14 @@ void	free_arr(char **arr)
 void	free_str(char *str)
 {
 	if (!str)
-		return;
+		return ;
 	free(str);
 	str = NULL;
 }
 
 /*Func Description:	Freeing the used linked list of our costum environment
 			Mabye some rework for later*/
-		
+
 void	free_linked(t_env *head)
 {
 	t_env	*tmp;
@@ -52,8 +52,8 @@ void	free_linked(t_env *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp->key);			//set it to NULL?
-		free(tmp->value);		//set it to NULL?
+		free(tmp->key);
+		free(tmp->value);
 		free(tmp);
 	}
 }

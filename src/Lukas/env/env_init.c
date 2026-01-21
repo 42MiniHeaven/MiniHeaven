@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 14:00:17 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:35:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ t_env	*env_new(char *key, char *value)
 			or be the head of the list if there is none.
 */
 
-void	env_add_back(t_env **env, t_env *new) //add a environment to the end of the linked list
+void	env_add_back(t_env **env, t_env *new)
 {
 	t_env	*tmp;
 
 	if (!env || !new)
-		return;
+		return ;
 	if (!*env)
 	{
 		*env = new;
-		return;
+		return ;
 	}
 	tmp = *env;
 	while (tmp->next)
@@ -81,10 +81,9 @@ t_env	*env_find(t_env *env, char *key)
 
 /*Function Decription: Used to create a 2 dimensional Array of the Environment
 			We need this function for execve, which relays on ENVP.
-			Since we and to modify our env we want also a modified ENVP if necessary.
 */
 
-char **env_to_envp(t_env *env)
+char	**env_to_envp(t_env *env)
 {
 	int		i;
 	char	**envp;
