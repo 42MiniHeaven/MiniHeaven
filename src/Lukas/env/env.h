@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/20 22:14:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 13:29:40 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ t_env	*env_new(char *key, char *value);
 void	env_add_back(t_env **env, t_env *new);
 t_env	*env_find(t_env *env, char *key);
 char	**env_to_envp(t_env *env);
+//free.c
+void	free_arr(char **arr);
+void	free_str(char *str);
+void	free_linked(t_env *head);
 //ft_substr
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 //ft_calloc

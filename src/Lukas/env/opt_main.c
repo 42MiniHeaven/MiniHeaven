@@ -6,11 +6,13 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:07:00 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/20 22:55:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 13:47:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
+/*File Description:	This file needs to be optimized for our merge*/
 
 void	create_env(char **envp)
 {
@@ -43,6 +45,8 @@ void	create_env(char **envp)
 	i = -1;
 	while (arr[++i])
 		printf("%s\n", arr[i]);
+	free_arr(arr);
+	free_linked(start);
 }
 
 int	main(int argc, char **argv, char **envp)

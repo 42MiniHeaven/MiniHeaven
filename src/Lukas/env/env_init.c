@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/20 22:44:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:00:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 /*File Description: Functions to modify the shells environment.
 			Used by: export, unset or $PATH for example
-*/
+			Environment handling (Day 1–2)
+			Internal env stored as linked list.
+			Converted to envp only for execve.
+			Order preserved. Ownership clear.*/
 
 /*Function Decription:	Used to create a new node for the env linked list
 			Every Node consists of key, value and next.
