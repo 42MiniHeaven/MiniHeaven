@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:07:00 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 17:54:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/23 15:07:13 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ void	create_env(t_env **start, char **envp)
 		i++;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 17:05:12 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:07:49 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <aio.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>	//strcmp change later
+
+typedef struct s_exec t_exec;
 
 typedef struct s_env
 {
@@ -29,10 +32,14 @@ t_env	*env_new(char *key, char *value);
 void	env_add_back(t_env **env, t_env *new);
 t_env	*env_find(t_env *env, char *key);
 char	**env_to_envp(t_env *env);
+//builtin_env.c
+void	builtin_env(t_exec data, char *str);
 //free.c
 void	free_arr(char **arr);
 void	free_str(char *str);
 void	free_linked(t_env *head);
+//builtin_export.c
+void	builtin_export(t_exec data, char *cmd);
 //ft_substr
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 //ft_calloc
@@ -47,4 +54,8 @@ char	*ft_strdup(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 //ft_strjoin_env
 char	*ft_strjoin_env(char const *s1, char const *s2);
+//ft_putstr_fd
+void	ft_putstr_fd(char *s, int fd);
+//ft_strchr
+char	*ft_strchr(const char *s, int c);
 #endif

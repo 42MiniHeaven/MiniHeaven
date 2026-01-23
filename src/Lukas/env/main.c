@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 17:50:21 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:18:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	data.envp = env_to_envp(data.env);
 	if (!data.envp)
 		return (free_linked(data.env), 1);
-	int	i = -1;
-	while (data.envp[++i])
-		printf("%s\n", data.envp[i]);
-	while(1 && i < 55)
+	while(1)
 	{
 		in = readline("MiniHeaven> ");
 		if (!in)
@@ -39,13 +36,17 @@ int	main(int argc, char **argv, char **envp)
 			free(in); //dont know if we need this
 			exit(0);
 		}
-		if (in)
+		if (ft_strncmp(in, "env", ft_strlen(in)) == 0)
 		{
-			//printf("%s\n", in); //pass to parser
+			builtin_env(data, in);
+			add_history(in);
+		}
+		if (ft_strncmp(in, "export", 6) == 0)
+		{
+			builtin_export(data, in);
 			add_history(in);
 		}
 		free(in);
-		i++;
 	}
 	free_arr(data.envp);
 	free_linked(data.env);
