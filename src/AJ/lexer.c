@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/18 22:35:44 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/21 20:45:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@
  */
 
 /* PARSER
+ * Grammar: 
+ *              input        → pipeline
+ *              pipeline     → command ( '|' command )*
+ *              command      → prefix* WORD suffix*
+ *              prefix       → redirection
+ *              suffix       → WORD | redirection
+ *              redirection  → ('>' | '<' | '>>' | '<<') WORD
+ * 
  * ????? --> Only interprets structure 
  */
  

@@ -1,174 +1,160 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                         :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/18 21:34:58 by azielnic         ###   ########.fr       */
+/*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
+/*   Updated: 2026/01/25 00:13:48 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// Why return type t_cmd* ? 
-// --> Parser is creating the list, not modifying an existing one.
-// Why t_token *tokens and not t_token **tokens?
-// --> The pipeline is the top level, so parse_pipeline consumes all tokens.
-// t_cmd   *parse_pipeline(t_token *tokens)
-// {
-//     t_cmd *cmds;
-
-//     cmds = NULL;
-//     while (tokens) // could lead to issues think of including length or next node
-//     {
-//         cmds = parse_cmommand(&tokens);
-//     }
-//     return;
-// }
-int check_operands(t_token *tokens, t_token *current, t_token *prev)
+char **ft_realloc(char **old, size_t old_count, size_t new_count)
 {
-    // example: echo > file.txt
-    // example: echo hello | > file.txt
+	char 	**new;
+	size_t	i;
+	
+	new = ft_calloc(new_count, sizeof(char *));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (i < old_count && i < new_count)
+	{
+		new[i] = old[i];
+		i++;
+	}
+	free (old); // only frees array of pointers not strings themself
+	return (new);
+}
+int	syntax_error(char *message)
+{
+	ft_putstr_fd("Syntax error: ", 2);
+	ft_putendl_fd(message, 2);
+	return (0);
+}
+t_redir	*redir_new(int type, char *file)
+{
+	t_redir	*r;
+
+	r = ft_calloc(1, sizeof(t_redir));
+	if (!r)
+		return (NULL);
+	r->type = type;
+	r->file = file;
+	return (r);
+}
+int	redir_add(t_cmd *cmd, int type, char *file)
+{
+	t_redir *new;
+	t_redir	*temp;
+	
+	new = redir_new(type, file);
+	if (!new)
+		return (0);
+	if (!cmd->redir)
+	{
+		cmd->redir = new;
+		return (1);
+	}
+	temp = cmd->redir;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new;
+	return (1);
 }
 
-int check_redirections(t_token *tokens, t_token *current, t_token *prev)
+int	argv_add(t_cmd *cmd, char *word)
 {
-    // can redirations appear at the beginning of the command?
-    // HEREDOC <<, REDIR_IN <
-    while (current != NULL)
-    {
-        if (current->type == REDIR_IN || current->type == REDIR_OUT ) //needs to be simpler than listing all the redirections
-
-    // REDIR_OUT = 2,  	// >
-    // REDIR_IN = 3,   	// <
-    // APPEND = 4,     	// >>
-    // HEREDOC = 5 
-    }
+	int	i;
+	char *dup;
+	
+	i = 0;
+	while (cmd->argv && cmd->argv[i])
+		i++;
+	dup = ft_strdup(word);
+	if (!dup)
+		return (0);
+	cmd->argv = ft_realloc(cmd->argv, i, i + 2);
+	if (!cmd->argv)
+	{
+		free(dup);
+		return (0);
+	}
+	cmd->argv[i] = dup;
+	cmd->argv[i + 1] = NULL;
+	return (1);
 }
 
-int check_pipes(t_token *tokens, t_token *current, t_token *prev)
+t_cmd	*cmd_new(void)
 {
-    // if (!tokens)
-    //     return (1); // empty input ok for pipes - needed?
-    if (tokens->type == PIPE)
-    {
-        printf("Syntax error: pipe at the beginning\n");
-        return (0); // free gedöns
-    }
-    while (current != NULL) // in case this creates issues create a new varaible
-    {
-        if (current->type == PIPE && prev && prev->type == PIPE) // to be removed if bonus
-        {
-            printf("Syntax error: two pipes in a row, did not handle bonus\n");
-            return (0); // free gedöns
-        }
-        prev = current;
-        current = current->next;
-    }
-    if (prev && prev->type != WORD)
-    {
-            printf("Syntax error: word needed at the end\n");
-            return (0); // free gedöns
-    }
-    return (1);
+	t_cmd	*cmd;
+
+	cmd = ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	cmd->argv = NULL; // needed? theoretically yes
+	return (cmd);
 }
 
-int parse_input_check(t_token *tokens)
+t_cmd	*parse(t_token *tokens)
 {
-    t_token *current;
-    t_token *prev;
-    
-    if (!tokens)
-        return (0);
-    current = tokens;
-    prev = NULL;
-    if (!check_pipes(tokens, current, prev))
-        return (0);
-    if (!check_redirections(tokens, current, prev))
-        return (0);
-    if (!check_operands(tokens, current, prev))
-        return (0);
-    return (1);
-}
+	t_cmd				*head;
+	t_cmd				*current;
+	enum e_parser_state	state;
+	int					last_redir;
 
-// Helper to create a token
-t_token *create_token(char *value, int type)
-{
-    t_token *tok = malloc(sizeof(t_token));
-    tok->value = value;
-    tok->type = type;
-    tok->next = NULL;
-    return tok;
-}
-
-int main()
-{
-    // Example 1: valid input "echo hello | grep hi"
-    t_token *t1 = create_token("echo", WORD);
-    t_token *t2 = create_token("hello", WORD);
-    t_token *t3 = create_token("|", PIPE);
-    t_token *t4 = create_token("grep", WORD);
-    t_token *t5 = create_token("hi", WORD);
-    t1->next = t2;
-    t2->next = t3;
-    t3->next = t4;
-    t4->next = t5;
-
-    printf("Test 1: %d\n", parser_input_check(t1)); // should print 1
-
-    // Example 2: pipe at the beginning "| ls"
-    t_token *p1 = create_token("|", PIPE);
-    t_token *p2 = create_token("ls", WORD);
-    p1->next = p2;
-
-    printf("Test 2: %d\n", parse_input_check(p1)); // should print 0
-
-    // Example 3: pipe at the end "ls |"
-    t_token *p3 = create_token("ls", WORD);
-    t_token *p4 = create_token("|", PIPE);
-    p3->next = p4;
-
-    printf("Test 3: %d\n", parse_input_check(p3)); // should print 0
-
-    // Example 4: two pipes in a row "ls || grep"
-    t_token *p5 = create_token("ls", WORD);
-    t_token *p6 = create_token("|", PIPE);
-    t_token *p7 = create_token("|", PIPE);
-    t_token *p8 = create_token("grep", WORD);
-    p5->next = p6;
-    p6->next = p7;
-    p7->next = p8;
-
-    printf("Test 4: %d\n", parse_input_check(p5)); // should print 0
-
-    // Free memory (optional in tests, but good practice)
-    t_token *tmp;
-    while (t1)
-    {
-        tmp = t1->next;
-        free(t1);
-        t1 = tmp;
-    }
-    while (p1)
-    {
-        tmp = p1->next;
-        free(p1);
-        p1 = tmp;
-    }
-    while (p3)
-    {
-        tmp = p3->next;
-        free(p3);
-        p3 = tmp;
-    }
-    while (p5)
-    {
-        tmp = p5->next;
-        free(p5);
-        p5 = tmp;
-    }
-
-    return 0;
+	head = NULL;
+	current = NULL;
+	state = EXPECT_COMMAND;
+	last_redir = -1;
+	while (tokens)
+	{
+		if (state == EXPECT_COMMAND)
+		{
+			if (tokens->type == WORD)
+			{
+				if (!current)
+				{
+					current = cmd_new();
+					if (!head)
+						head = current;
+				}
+				current->cmd = tokens->type;
+				if (!argv_add(current, tokens->value))
+					return (NULL);
+				state = EXPECT_ARG_OR_REDIR;
+			}
+			else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
+			{
+				if (!current)
+				{
+					current = cmd_new();
+					if (!head)
+						head = current;
+				}
+				last_redir =tokens->type;
+				state = EXPECT_REDIR_TARGET;
+			}
+			else
+				return (syntax_error("unexpected/wrong token"));
+		}
+		else if (state == EXPECT_REDIR_TARGET)
+		{
+			if (tokens->type != WORD)
+				return (syntax_error("expected filename after redirection"));
+			if (!redir_add(current, last_redir, tokens->value))
+				return (NULL);
+			if (current->cmd)
+				state = EXPECT_ARG_OR_REDIR;
+			else
+				state = EXPECT_COMMAND;
+		}
+		tokens = tokens->next;
+	}
+	if (state == EXPECT_REDIR_TARGET)
+		return (syntax_error("unexpected end of input; WORD needed"));
+	return (head);
 }
