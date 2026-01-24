@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 20:54:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:21:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include "exec.h"
+#include "../exec.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char	*in;
 
-	create_env(&data.env, envp);
+	create_env_list(&data.env, envp);
 	data.envp = env_to_envp(data.env);
 	if (!data.envp)
 		return (free_linked(data.env), 1);

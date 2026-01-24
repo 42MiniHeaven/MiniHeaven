@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 20:51:57 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:44:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include "exec.h"
+#include "../exec.h"
 
 static void	print_sorted(char **arr, int n)
 {
@@ -52,13 +52,14 @@ static	int	env_size(t_env *env)
 	return (i);
 }
 
-void	builtin_export(t_exec data, char *cmd)
+static void	export_check(t_exec data, char *cmd1, char *cmd2)
 {
 	int		s;
 	int		e;
 	char	*test;
-	int		size;
+	char	*cmd;
 
+	cmd = ft_strjoin_cmd(cmd1, cmd2);
 	e = 0;
 	while (cmd[e] && cmd[e] != '=')
 		e++;
@@ -67,14 +68,34 @@ void	builtin_export(t_exec data, char *cmd)
 		s++;
 	s++;
 	test = ft_substr(cmd, s, e - s);
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
-	{
-		data.envp = env_to_envp(data.env);
-		size = env_size(data.env);
-		print_sorted(data.envp, size);
-	}
-	else if (!env_find(data.env, test))
+	if (!env_find(data.env, test))
 		env_set(data.env, 2, cmd);
 	else
 		env_set(env_find(data.env, test), 1, cmd + e + 1);
+}
+
+void	builtin_export(t_exec data, char *cmd)
+{
+	char	**split;
+	int		i;
+	int		size;
+
+	split = ft_split(cmd, ' ');
+	if (!split)
+		return ;
+	i = 1;
+	if (!split[1])
+	{
+		if (ft_strncmp(cmd, "export", ft_strlen(split[0])) == 0)
+		{
+			data.envp = env_to_envp(data.env);
+			size = env_size(data.env);
+			print_sorted(data.envp, size);
+		}
+	}
+	while (split[i])
+	{
+		export_check(data, split[0], split[i]);
+		i++;
+	}
 }

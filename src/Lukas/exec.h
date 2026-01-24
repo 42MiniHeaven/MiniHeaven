@@ -6,14 +6,14 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:30:59 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 17:52:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:10:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "env.h"
+# include "env/env.h"
 
 typedef struct s_exec
 {

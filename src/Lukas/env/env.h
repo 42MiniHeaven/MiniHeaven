@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 20:50:59 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:40:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
-
-void	create_env(t_env **start, char **envp);
+//env_utils
 t_env	*env_new(char *key, char *value);
 void	env_add_back(t_env **env, t_env *new);
 t_env	*env_find(t_env *env, char *key);
 char	**env_to_envp(t_env *env);
+//env_init.c
+void	create_env_list(t_env **start, char **envp);
 //builtin_env.c
 void	builtin_env(t_exec data, char *str);
 //free.c
@@ -65,4 +66,6 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_strchr(const char *s, int c);
 //ft_split
 char	**ft_split(char const *s, char c);
+//ft_strjoin
+char	*ft_strjoin_cmd(char const *s1, char const *s2);
 #endif
