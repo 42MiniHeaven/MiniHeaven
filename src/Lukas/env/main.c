@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/23 16:18:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 20:54:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ int	main(int argc, char **argv, char **envp)
 	t_exec	data = {NULL, NULL, 0};
 	(void)argc;
 	(void)argv;
-	char	*in; //input string
+	char	*in;
 
 	create_env(&data.env, envp);
 	data.envp = env_to_envp(data.env);
 	if (!data.envp)
 		return (free_linked(data.env), 1);
-	while(1)
+	while (1)
 	{
 		in = readline("MiniHeaven> ");
 		if (!in)
 		{
-			free(in); //dont know if we need this
+			free(in);
 			exit(0);
 		}
 		if (ft_strncmp(in, "env", ft_strlen(in)) == 0)
@@ -44,6 +44,11 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strncmp(in, "export", 6) == 0)
 		{
 			builtin_export(data, in);
+			add_history(in);
+		}
+		if (ft_strncmp(in, "unset", 5) == 0)
+		{
+			builtin_unset(data, in);
 			add_history(in);
 		}
 		free(in);

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 18:24:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 20:51:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static	int	env_size(t_env *env)
 	return (i);
 }
 
-
 void	builtin_export(t_exec data, char *cmd)
 {
 	int		s;
@@ -71,7 +70,7 @@ void	builtin_export(t_exec data, char *cmd)
 	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
 	{
 		data.envp = env_to_envp(data.env);
-		size = env_size(data.env);	
+		size = env_size(data.env);
 		print_sorted(data.envp, size);
 	}
 	else if (!env_find(data.env, test))

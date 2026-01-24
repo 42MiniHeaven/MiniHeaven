@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 18:23:05 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 20:50:59 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <stdlib.h>
 # include <string.h>	//strcmp change later
 
-typedef struct s_exec t_exec;
-
+typedef struct s_exec	t_exec;
 typedef struct s_env
 {
 	char			*key;
@@ -42,6 +41,10 @@ void	free_linked(t_env *head);
 void	builtin_export(t_exec data, char *cmd);
 //env_set.c
 void	env_set(t_env *env, int create, char *value);
+//env_unset.c
+void	env_unset(t_env **env, char *cmd);
+//builtin_unset.c
+void	builtin_unset(t_exec data, char *cmd);
 //ft_substr
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 //ft_calloc
@@ -60,4 +63,6 @@ char	*ft_strjoin_env(char const *s1, char const *s2);
 void	ft_putstr_fd(char *s, int fd);
 //ft_strchr
 char	*ft_strchr(const char *s, int c);
+//ft_split
+char	**ft_split(char const *s, char c);
 #endif
