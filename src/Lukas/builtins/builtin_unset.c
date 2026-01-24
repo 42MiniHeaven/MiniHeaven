@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 19:41:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 23:11:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:52:33 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "../env/env.h"
 #include "../exec.h"
 
 /**

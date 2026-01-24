@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:10:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 23:11:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:52:04 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "../env/env.h"
 #include "../exec.h"
 
 void	builtin_env(t_exec data, char *str)

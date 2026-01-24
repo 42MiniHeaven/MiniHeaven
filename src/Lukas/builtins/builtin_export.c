@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 23:44:05 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:52:21 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "../env/env.h"
 #include "../exec.h"
 
 static void	print_sorted(char **arr, int n)
