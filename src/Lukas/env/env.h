@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/23 16:07:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 18:23:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	free_str(char *str);
 void	free_linked(t_env *head);
 //builtin_export.c
 void	builtin_export(t_exec data, char *cmd);
+//env_set.c
+void	env_set(t_env *env, int create, char *value);
 //ft_substr
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 //ft_calloc

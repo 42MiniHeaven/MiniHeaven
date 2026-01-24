@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/23 17:40:48 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 18:24:35 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,47 +38,44 @@ static void	print_sorted(char **arr, int n)
 		printf("%s\n", arr[i]);
 }
 
-static void	add_back(t_env *env, char *cmd)
+static	int	env_size(t_env *env)
 {
+	int		i;
 	t_env	*tmp;
-	size_t	s;
-	size_t	n;
-	size_t	len;
-	size_t	start;
 
-	len = ft_strlen(cmd);
+	if (!env)
+		return (0);
+	i = 0;
+	tmp = env;
+	while (tmp && ++i)
+		tmp = tmp->next;
+	return (i);
+}
+
+
+void	builtin_export(t_exec data, char *cmd)
+{
+	int		s;
+	int		e;
+	char	*test;
+	int		size;
+
+	e = 0;
+	while (cmd[e] && cmd[e] != '=')
+		e++;
 	s = 0;
 	while (cmd[s] && cmd[s] != ' ')
 		s++;
 	s++;
-	start = s;
-	while (cmd[s] && cmd[s] != '=')
-		s++;
-	n = s + 1;
-	tmp = env_new(ft_substr(cmd, start, s - start), ft_substr(cmd, n, len - n));
-	env_add_back(&env, tmp);
-}
-
-void	builtin_export(t_exec data, char *cmd)
-{
-	int		i;
-	char	*test;
-
-	i = 0;
-	while (cmd[i] && cmd[i] != '=')
-		i++;
-	test = ft_substr(cmd, 0, i);
+	test = ft_substr(cmd, s, e - s);
 	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
 	{
-		while (data.envp[i])
-			i++;	
-		print_sorted(data.envp, i);
+		data.envp = env_to_envp(data.env);
+		size = env_size(data.env);	
+		print_sorted(data.envp, size);
 	}
-	if (!env_find(data.env, test))
-	{
-		add_back(data.env, cmd);
-	}
-//	if (env_find)
-//		update_key();
-	free(test);
+	else if (!env_find(data.env, test))
+		env_set(data.env, 2, cmd);
+	else
+		env_set(env_find(data.env, test), 1, cmd + e + 1);
 }

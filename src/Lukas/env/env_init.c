@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/23 17:45:50 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/24 18:19:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ void	env_add_back(t_env **env, t_env *new)
 
 t_env	*env_find(t_env *env, char *key)
 {
+	size_t	len;
+
+	len = ft_strlen(key);
 	while (env)
 	{
-		if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
+		if (ft_strncmp(env->key, key, len) == 0 && env->key[len] == '\0')
 			return (env);
 		env = env->next;
 	}
