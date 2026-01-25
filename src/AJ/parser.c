@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 20:15:26 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/25 21:30:27 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,86 @@ t_cmd	*cmd_new(void)
 	cmd->cmd = NULL; // needed? theoretically yes
 	return (cmd);
 }
+void	init_command(t_cmd **head, t_cmd **current)
+{
+	*current = cmd_new();
+	if (!*head)
+		*head = *current;
+}
+
+int	handle_redir_target(int state, t_cmd **current, int *last_redir, 
+	t_token *tokens)
+{
+	if (tokens->type != WORD)
+	{
+		syntax_error("expected filename after redirection");
+		return (-1); // how to hanlde the error?
+	}
+	if (!redir_add(*current, *last_redir, tokens->value))
+		return (-1); // how to hanlde the error?
+	if ((*current)->cmd)
+		state = EXPECT_ARG_OR_REDIR;
+	else
+		state = EXPECT_COMMAND;
+	return (state);
+}
+
+int	handle_arg_or_redir(int state, t_cmd **current, int *last_redir, 
+	t_token *tokens)
+{
+	if (tokens->type == WORD)
+	{
+		if (!cmd_add(*current, tokens->value))
+			return (-1); // how to hanlde the error?
+	}
+	else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
+	{
+		*last_redir = tokens->type;
+		state = EXPECT_REDIR_TARGET;
+	}
+	else if (tokens->type == PIPE)
+	{
+		if (!(*current)->cmd)
+		{
+			syntax_error("empty command before pipe");
+			return (-1); // how to hanlde the error?
+		}
+		(*current)->next = cmd_new();
+		(*current) = (*current)->next;
+		state = EXPECT_COMMAND;
+	}
+	else
+	{
+		syntax_error("unexpected token");
+		return (-1); // how to hanlde the error?
+	}
+	return (state);
+}
+
+int	handle_command(int state, t_cmd **current, int *last_redir, 
+	t_token *tokens, t_cmd **head)
+{
+	if (tokens->type == WORD)
+	{
+		if (!*current)
+			init_command(head, current);
+		(*current)->cmd = &tokens->value;
+		state = EXPECT_ARG_OR_REDIR;
+	}
+	else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
+	{
+		if (!*current)
+			init_command(head, current);
+		*last_redir = tokens->type;
+		state = EXPECT_REDIR_TARGET;
+	}
+	else
+	{
+		syntax_error("unexpected/wrong token");
+		return (-1) ; // how to hanlde the error?
+	}
+	return (state);
+}
 
 t_cmd	*parse(t_token *tokens)
 {
@@ -113,75 +193,11 @@ t_cmd	*parse(t_token *tokens)
 	while (tokens)
 	{
 		if (state == EXPECT_COMMAND)
-		{
-			if (tokens->type == WORD)
-			{
-				if (!current)
-				{
-					current = cmd_new();
-					if (!head)
-						head = current;
-				}
-				current->cmd = &tokens->value;
-				state = EXPECT_ARG_OR_REDIR;
-			}
-			else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
-			{
-				if (!current)
-				{
-					current = cmd_new();
-					if (!head)
-						head = current;
-				}
-				last_redir =tokens->type;
-				state = EXPECT_REDIR_TARGET;
-			}
-			else
-			{
-				syntax_error("unexpected/wrong token");
-				return (NULL);
-			}
-		}
+			state = handle_command(state, &current, &last_redir, tokens, &head);
 		else if (state == EXPECT_ARG_OR_REDIR)
-		{
-			if (tokens->type == WORD)
-			{
-				if (!cmd_add(current, tokens->value))
-					return (NULL);
-			}
-			else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
-			{
-				last_redir = tokens->type;
-				state = EXPECT_REDIR_TARGET;
-			}
-			else if (tokens->type == PIPE)
-			{
-				if (!current->cmd)
-				{
-					syntax_error("empty command before pipe");
-					return (NULL);
-				}
-				current->next = cmd_new();
-				current = current->next;
-				state = EXPECT_COMMAND;
-			}
-			else
-				syntax_error("unexpected token");
-		}
+			state = handle_arg_or_redir(state, &current, &last_redir, tokens);
 		else if (state == EXPECT_REDIR_TARGET)
-		{
-			if (tokens->type != WORD)
-			{
-				syntax_error("expected filename after redirection");
-				return (NULL);
-			}
-			if (!redir_add(current, last_redir, tokens->value))
-				return (NULL);
-			if (current->cmd)
-				state = EXPECT_ARG_OR_REDIR;
-			else
-				state = EXPECT_COMMAND;
-		}
+			state = handle_redir_target(state, &current, &last_redir, tokens);
 		tokens = tokens->next;
 	}
 	if (state == EXPECT_REDIR_TARGET)
