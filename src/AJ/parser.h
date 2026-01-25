@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 18:07:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/25 20:15:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ struct  s_redir
 // Product of the parser
 struct s_cmd 
 {
-	char		*cmd;   // command itself; ["ls"]
-	char        **argv; // command flag or not ["-l", NULL], dymanic uses realloc
+	char        **cmd; // command incl flags ["-l", NULL], dymanic uses realloc
 	t_redir		*redir; // linked list of redirections
 	t_cmd       *next;  // next command in pipeline
 };

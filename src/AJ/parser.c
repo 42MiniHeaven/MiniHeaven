@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 18:10:20 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/25 20:15:26 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,25 @@ int	redir_add(t_cmd *cmd, int type, char *file)
 	return (1);
 }
 
-int	argv_add(t_cmd *cmd, char *word)
+int	cmd_add(t_cmd *cmd, char *word)
 {
 	int	i;
 	char *dup;
 	
 	i = 0;
-	while (cmd->argv && cmd->argv[i])
+	while (cmd->cmd && cmd->cmd[i])
 		i++;
 	dup = ft_strdup(word);
 	if (!dup)
 		return (0);
-	cmd->argv = ft_realloc(cmd->argv, i, i + 2);
-	if (!cmd->argv)
+	cmd->cmd = ft_realloc(cmd->cmd, i, i + 2);
+	if (!cmd->cmd)
 	{
 		free(dup);
 		return (0);
 	}
-	cmd->argv[i] = dup;
-	cmd->argv[i + 1] = NULL;
+	cmd->cmd[i] = dup;
+	cmd->cmd[i + 1] = NULL;
 	return (1);
 }
 
@@ -95,7 +95,7 @@ t_cmd	*cmd_new(void)
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->argv = NULL; // needed? theoretically yes
+	cmd->cmd = NULL; // needed? theoretically yes
 	return (cmd);
 }
 
@@ -122,9 +122,7 @@ t_cmd	*parse(t_token *tokens)
 					if (!head)
 						head = current;
 				}
-				current->cmd = tokens->value;
-				if (!argv_add(current, tokens->value))
-					return (NULL);
+				current->cmd = &tokens->value;
 				state = EXPECT_ARG_OR_REDIR;
 			}
 			else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
@@ -148,7 +146,7 @@ t_cmd	*parse(t_token *tokens)
 		{
 			if (tokens->type == WORD)
 			{
-				if (!argv_add(current, tokens->value))
+				if (!cmd_add(current, tokens->value))
 					return (NULL);
 			}
 			else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)

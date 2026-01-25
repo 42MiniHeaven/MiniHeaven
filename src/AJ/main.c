@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 17:46:11 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 18:03:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/25 20:16:16 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ int main(void)
     {
         int i = 0;
 
-        printf("CMD: %s\n", c->cmd);
-
-        printf("ARGV:");
-        while (c->argv && c->argv[i])
-            printf(" [%s]", c->argv[i++]);
+        printf("CMD:");
+        while (c->cmd && c->cmd[i])
+            printf(" [%s]", c->cmd[i++]);
         printf("\n");
 
         t_redir *r = c->redir;
