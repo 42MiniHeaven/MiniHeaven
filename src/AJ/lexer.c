@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/21 20:45:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/25 17:46:32 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int ft_isspace(int c)
 }
 
 /*
- * GENERAL: Adds a new tok
-TYPE=0 VALUE=-l"en to the end of the current token list. Tells what 
+ * GENERAL: Adds a new token to the end of the current token list. Tells what 
  * it does (add) and where it does it (back) applying it to tokens.
  * 
  * NOTE:    t_token **list is a pointer to the head pointer of the list.
@@ -196,16 +195,16 @@ t_token	*lexer(char *input)
     return (tokens);
 }
 
-int main(void)
-{
-    char *line = "ls -l || cat <<< e";
-    t_token *tokens = lexer(line);
+// int main(void)
+// {
+//     char *line = "ls -l || cat <<< e";
+//     t_token *tokens = lexer(line);
 
-    // struct needs to be initialised with zero
-    while (tokens)
-    {
-        printf("TYPE=%d VALUE=%s\n", tokens->type, tokens->value);
-        tokens = tokens->next;
-    }
-    return (0);
-}
+//     // struct needs to be initialised with zero
+//     while (tokens)
+//     {
+//         printf("TYPE=%d VALUE=%s\n", tokens->type, tokens->value);
+//         tokens = tokens->next;
+//     }
+//     return (0);
+// }

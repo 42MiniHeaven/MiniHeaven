@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 00:10:38 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/25 18:07:07 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,8 @@ struct s_cmd
 	t_redir		*redir; // linked list of redirections
 	t_cmd       *next;  // next command in pipeline
 };
+
+t_token *lexer(char *input);
+t_cmd   *parse(t_token *tokens);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 00:13:48 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/01/25 17:53:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ t_cmd	*parse(t_token *tokens)
 					if (!head)
 						head = current;
 				}
-				current->cmd = tokens->type;
+				current->cmd = tokens->value;
 				if (!argv_add(current, tokens->value))
 					return (NULL);
 				state = EXPECT_ARG_OR_REDIR;
@@ -139,12 +139,44 @@ t_cmd	*parse(t_token *tokens)
 				state = EXPECT_REDIR_TARGET;
 			}
 			else
-				return (syntax_error("unexpected/wrong token"));
+			{
+				syntax_error("unexpected/wrong token");
+				return (NULL);
+			}
+		}
+		else if (state == EXPECT_ARG_OR_REDIR)
+		{
+			if (tokens->type == WORD)
+			{
+				if (!argv_add(current, tokens->value))
+					return (NULL);
+			}
+			else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
+			{
+				last_redir = tokens->type;
+				state = EXPECT_REDIR_TARGET;
+			}
+			else if (tokens->type == PIPE)
+			{
+				if (!current->cmd)
+				{
+					syntax_error("empty command before pipe");
+					return (NULL);
+				}
+				current->next = cmd_new();
+				current = current->next;
+				state = EXPECT_COMMAND;
+			}
+			else
+				syntax_error("unexpected token");
 		}
 		else if (state == EXPECT_REDIR_TARGET)
 		{
 			if (tokens->type != WORD)
-				return (syntax_error("expected filename after redirection"));
+			{
+				syntax_error("expected filename after redirection");
+				return (NULL);
+			}
 			if (!redir_add(current, last_redir, tokens->value))
 				return (NULL);
 			if (current->cmd)
@@ -155,6 +187,9 @@ t_cmd	*parse(t_token *tokens)
 		tokens = tokens->next;
 	}
 	if (state == EXPECT_REDIR_TARGET)
-		return (syntax_error("unexpected end of input; WORD needed"));
+	{
+		syntax_error("unexpected end of input; WORD needed");
+		return (NULL);
+	}
 	return (head);
 }
