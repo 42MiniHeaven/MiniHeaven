@@ -6,12 +6,23 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 23:52:21 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/01/25 00:19:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
 #include "../exec.h"
+
+/**
+ * @brief   Export allows to add to env list.
+ *
+ * export on its own prints the environment list in alphabetical order.
+ * with an argument export adds it to the env list
+ *
+ * @param   data	Struct containing env list and envp
+ * @param   cmd		Input string containing export and potential flags
+ */
+
 
 static void	print_sorted(char **arr, int n)
 {
