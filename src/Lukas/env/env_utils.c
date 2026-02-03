@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 23:15:22 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:40:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_env	*env_find(t_env *env, char *key)
 			We need this function for execve, which relays on ENVP.
 */
 
-char	**env_to_envp(t_env *env)
+char	**llist_to_env(t_env *env)
 {
 	int		i;
 	char	**envp;

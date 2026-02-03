@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/10 16:39:50 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:55:26 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,13 @@
 # include <sys/wait.h>		//waitpid
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../src/Lukas/exec.h"
+# include "../src/Lukas/env/env.h"
 
-// idea: use enums for specific operands
-
-// typedef enum operands
-// {
-	
-// } ;
-
-typedef struct	s_tokens
+typedef struct	s_mh
 {
-	char *token;
-	t_tokens *next; // check again how linked lists work
-
-}	t_tokens;
-
-typedef struct	s_parser
-{
-	char *line;
-//	char *history; // maybe an array maybe a file maybe name of file 
-	char *	
-
-}	t_parser;
-
-typedef struct	s_exec
-{
-	int			args;
-	int			*status;
-	pid_t		*process;
-	int			pipefd[2];
-	t_parser	*parser;	
-}	t_exec;
+	t_cmd	*cmd;
+	t_exec	*exec;
+}	t_mh;
 
 #endif

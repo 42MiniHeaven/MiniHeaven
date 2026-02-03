@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 23:40:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:40:48 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_env
 t_env	*env_new(char *key, char *value);
 void	env_add_back(t_env **env, t_env *new);
 t_env	*env_find(t_env *env, char *key);
-char	**env_to_envp(t_env *env);
+char	**llist_to_env(t_env *env);
 //env_init.c
 void	create_env_list(t_env **start, char **envp);
 //builtin_env.c

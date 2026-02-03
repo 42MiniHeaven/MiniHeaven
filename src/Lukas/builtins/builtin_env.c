@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:10:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/25 00:21:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:24:54 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @param   str		Input str
  */
 
-void	builtin_env(t_exec data, char *str)
+int	builtin_env(t_exec data, char *str)
 {
 	t_env	*current;
 
@@ -30,7 +30,7 @@ void	builtin_env(t_exec data, char *str)
 	if (ft_strchr(str, ' '))
 	{
 		ft_putstr_fd("Error", 2);
-		return ;
+		return (1);
 	}
 	while (current)
 	{
@@ -39,4 +39,5 @@ void	builtin_env(t_exec data, char *str)
 		current = current->next;
 	}
 	data.exit_status = 0;
+	return (0);
 }
