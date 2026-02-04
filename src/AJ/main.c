@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 17:46:11 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 20:16:16 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/04 22:23:52 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main(void)
 {
-    char    *line = "ls -l | cat << e";
+    char    *line = "ls -l | echo hello";
+    // char    *line = "< input.txt";
     t_token *tokens;
     t_token *tmp;
     t_cmd   *cmds;
@@ -42,7 +43,7 @@ int main(void)
 
         printf("CMD:");
         while (c->cmd && c->cmd[i])
-            printf(" [%s]", c->cmd[i++]);
+            printf(" [%c]", c->cmd[i++]);
         printf("\n");
 
         t_redir *r = c->redir;
@@ -55,6 +56,6 @@ int main(void)
         c = c->next;
         printf("\n");
     }
-
+    destroy_all(cmds, tokens);
     return (0);
 }

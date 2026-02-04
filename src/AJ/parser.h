@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 20:15:13 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/04 22:23:28 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,23 @@ typedef struct	s_token t_token;
 typedef struct  s_redir t_redir;
 typedef struct  s_cmd t_cmd;
 
+/* 	
+	WORD		ls, -l, filename
+	PIPE		|
+	REDIR_OUT	>
+	REDIR_IN	<
+	APPEND		>>
+	HEREDOC		<<
+*/
+
 enum	e_token_type
 {
-	WORD = 0,       	// ls, -l, filename
-	PIPE = 1,       	// |
-	REDIR_OUT = 2,  	// >
-	REDIR_IN = 3,   	// <
-	APPEND = 4,     	// >>
-	HEREDOC = 5     	// <<
+	WORD = 0,
+	PIPE = 1,
+	REDIR_OUT = 2,
+	REDIR_IN = 3,
+	APPEND = 4,
+	HEREDOC = 5
 };
 
 enum	e_parser_state
@@ -60,12 +69,14 @@ struct  s_redir
 // Product of the parser
 struct s_cmd 
 {
-	char        **cmd; // command incl flags ["-l", NULL], dymanic uses realloc
+	char        *cmd;	// command only
+	char		**argv;	// flags ["-l", NULL], dymanic uses realloc
 	t_redir		*redir; // linked list of redirections
 	t_cmd       *next;  // next command in pipeline
 };
 
 t_token *lexer(char *input);
 t_cmd   *parse(t_token *tokens);
+void	destroy_all(t_cmd *cmds, t_token *tokens);
 
 #endif

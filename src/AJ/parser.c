@@ -6,12 +6,100 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 21:30:27 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/04 22:36:21 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/*
+ * 	IDEA: 	Either all information from the lexer is duplicated or borrowed.
+ * 			This is important when it comes to freeing.
+ * 			Parser in our case borrows everything. Pointers are stored directly
+ * 			and no strdup is used. Tokens sray alive until execution finishes.
+ * 			
+ * IMPORTANT: !!The tokens are also freed last AFTER EXECUTION FINISHES!!
+ * 				This causes the parser and lexer to be connected and not
+ * 				independant which is ok.
+ *
+ * 	Memory usage:	input
+ *					→ lexer creates tokens
+ *					→ parser builds AST using token pointers
+ *					→ executor runs commands
+ *					→ free AST (not strings)
+ *					→ free tokens (strings freed here)
+ *
+ */
+
+/*
+ * INFO:	Only what was allocated needs to be freed. Only the t_redir
+ *			contiguous block is allocated. the int is not dynamically
+ *			allocated so also does not need to be freed. The other two are
+ *			pointers (pointing to allocated memory somewhere but are not
+ *			allocated themselves). The content of the pointers is feed 
+ *			somehwere else.
+ * 
+ * 			t_redir includes:	-type (int)
+ *								-file (char *)
+ *								-next (t_redir *)		
+ */
+
+void	free_redirs(t_redir *redir)
+{
+	t_redir	*next;
+	
+	while (redir)
+	{
+		next = redir->next;
+		free(redir);
+		redir = next;
+	}
+}
+ 
+void	free_cmds(t_cmd *cmd)
+{
+	t_cmd	*next;
+	
+	while (cmd)
+	{
+		next = cmd->next;
+		// if (cmd->cmd)
+		// 	free(cmd->cmd);
+		if (cmd->argv)
+			free(cmd->argv);
+		if (cmd->redir)
+			free_redirs(cmd->redir);
+		free(cmd);
+		cmd = next;
+	}
+}
+
+void	free_tokens(t_token *token)
+{
+	t_token	*next;
+
+	while (token)
+	{
+		next = token->next;
+		free(token->value);
+		free(token);
+		token = next;
+	}
+}
+
+/*
+ * GENERAL: Cleaning funtion which first destroys all parser output and then
+ * 			all lexer output.
+ */
+
+void	destroy_all(t_cmd *cmds, t_token *tokens)
+{
+	free_cmds(cmds);
+	free_tokens(tokens);
+}
+
+/////////////// destroy functions above will get tehir own file ///////////////////
+ 
 char **ft_realloc(char **old, size_t old_count, size_t new_count)
 {
 	char 	**new;
@@ -66,25 +154,20 @@ int	redir_add(t_cmd *cmd, int type, char *file)
 	return (1);
 }
 
-int	cmd_add(t_cmd *cmd, char *word)
+int	argv_add(t_cmd *cmd, char *word)
 {
 	int	i;
-	char *dup;
 	
+	if (!cmd)
+		return (0);
 	i = 0;
-	while (cmd->cmd && cmd->cmd[i])
+	while (cmd->argv && cmd->argv[i])
 		i++;
-	dup = ft_strdup(word);
-	if (!dup)
+	cmd->argv = ft_realloc(cmd->argv, i, i + 2);
+	if (!cmd->argv)
 		return (0);
-	cmd->cmd = ft_realloc(cmd->cmd, i, i + 2);
-	if (!cmd->cmd)
-	{
-		free(dup);
-		return (0);
-	}
-	cmd->cmd[i] = dup;
-	cmd->cmd[i + 1] = NULL;
+	cmd->argv[i] = word;
+	cmd->argv[i + 1] = NULL;
 	return (1);
 }
 
@@ -95,7 +178,6 @@ t_cmd	*cmd_new(void)
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->cmd = NULL; // needed? theoretically yes
 	return (cmd);
 }
 void	init_command(t_cmd **head, t_cmd **current)
@@ -127,7 +209,7 @@ int	handle_arg_or_redir(int state, t_cmd **current, int *last_redir,
 {
 	if (tokens->type == WORD)
 	{
-		if (!cmd_add(*current, tokens->value))
+		if (!argv_add(*current, tokens->value))
 			return (-1); // how to hanlde the error?
 	}
 	else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
@@ -161,7 +243,9 @@ int	handle_command(int state, t_cmd **current, int *last_redir,
 	{
 		if (!*current)
 			init_command(head, current);
-		(*current)->cmd = &tokens->value;
+		(*current)->cmd = tokens->value;
+		if (!argv_add(*current, tokens->value))
+			return (-1); // error?
 		state = EXPECT_ARG_OR_REDIR;
 	}
 	else if (tokens->type >= REDIR_OUT && tokens->type <= HEREDOC)
