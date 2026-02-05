@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 20:53:04 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:07:09 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	update_env(t_env *env, char *cmd)
 		return ;
 	}
 	free(env->value);
-	env->value = ft_strdup(cmd);
+	env->value = cmd; //maybe strdup
 }
 
 /**

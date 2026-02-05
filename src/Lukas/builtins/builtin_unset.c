@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 19:41:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 23:52:33 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:07:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
-#include "../exec.h"
+#include "../../../include/execute.h"
 
 /**
  * @brief   Unsets environment variables specified in a command string.
@@ -23,21 +23,22 @@
  * @param   cmd		Command string containing variable names to remove.
  */
 
-void	builtin_unset(t_exec data, char *cmd)
+int	builtin_unset(t_mh *mh, char **argv)
 {
 	char	**split;
 	int		i;
 
-	split = ft_split(cmd, ' ');
+	split = ft_split(argv[0], ' ');
 	if (!split)
-		return ;
+		return (1);
 	i = 1;
 	while (split[i])
 	{
-		env_unset(&data.env, split[i]);
+		env_unset(&mh->llist, split[i]);
 		i++;
 	}
 	free_arr(split);
 	split = NULL;
-	data.envp = env_to_envp(data.env);
+	mh->env = llist_to_env(mh->llist);
+	return (0);
 }

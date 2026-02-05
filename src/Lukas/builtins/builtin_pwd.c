@@ -6,16 +6,19 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:58:16 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/25 16:00:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:04:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "../../../include/execute.h"
 
-int	builtin_pwd(void)
+int	builtin_pwd(t_mh *mh, char **argv)
 {
 	char	*cwd;
 
+	(void)argv;
+	(void)mh;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{

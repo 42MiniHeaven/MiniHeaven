@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/03 18:40:28 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:01:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,18 @@ t_env	*env_find(t_env *env, char *key)
 	return (NULL);
 }
 
+/*
+*/
+
+char	*get_env_value(char *key, t_env *env)
+{
+	t_env	*node;
+
+	node = env_find(env, key);
+	if (!node)
+		return (NULL);
+	return (node->value);
+}
 /*Function Decription: Used to create a 2 dimensional Array of the Environment
 			We need this function for execve, which relays on ENVP.
 */

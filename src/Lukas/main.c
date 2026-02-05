@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/03 22:01:55 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:20:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_mh	data;
+	t_cmd	cmd;
 	(void)argc;
 	(void)argv;
-	char *test[] = {NULL};
+	char *test[] = {"echo", "Test", NULL};
 
+	cmd.argv = test;
+	cmd.next = NULL;
 	ft_memset(&data, 0, sizeof(data));
 	init_shell(&data, envp);
+	data.cmds = cmd;
 	/*
 	char	*in; //input string
 	while(1)
@@ -39,6 +43,6 @@ int	main(int argc, char **argv, char **envp)
 		free(in);
 	}*/
 	//parser&&lexer
-	execute(test, data.env);
+	dispatcher(&data.cmds, data.env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 18:36:39 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/03 22:01:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 14:07:54 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	init_shell(t_mh *data, char **envp)
 		data->env = llist_to_env(data->llist);
 	}
 	else
-		printf("no env\n");	//SHLVL PWD & _
+		printf("SHLVL PWD & _ missing.\n");	//SHLVL PWD & _
 }

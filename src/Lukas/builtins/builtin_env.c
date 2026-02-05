@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:10:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/03 17:24:54 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:17:26 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
-#include "../exec.h"
+#include "../../../include/execute.h"
 
 /**
  * @brief   displays current environment
@@ -22,12 +22,12 @@
  * @param   str		Input str
  */
 
-int	builtin_env(t_exec data, char *str)
+int	builtin_env(t_mh *mh, char **argv)
 {
 	t_env	*current;
 
-	current = data.env;
-	if (ft_strchr(str, ' '))
+	current = mh->llist;
+	if (argv[1])
 	{
 		ft_putstr_fd("Error", 2);
 		return (1);
@@ -38,6 +38,6 @@ int	builtin_env(t_exec data, char *str)
 			printf("%s=%s\n", current->key, current->value);
 		current = current->next;
 	}
-	data.exit_status = 0;
+//	mh.exit_status = 0;
 	return (0);
 }

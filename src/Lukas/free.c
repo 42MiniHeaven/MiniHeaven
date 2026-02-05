@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:19:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/21 14:33:05 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:16:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "../../include/execute.h"
 
 /*General Description:	Freeing the allocated space from environment*/
 

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/11 15:47:10 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:18:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static int	is_numeric(char *s)
 	return (1);
 }
 
-int	builtin_exit(char **argv)
+int	builtin_exit(t_mh *mh, char **argv)
 {
 	long	status;
 
 	printf("exit\n");
-
+	(void)mh;
 	if (!argv[1])
 		exit(42);		//exit from other calls
 	if (!is_numeric(argv[1]))

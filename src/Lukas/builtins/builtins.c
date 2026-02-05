@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:13:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/03 22:20:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 15:38:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../../../include/execute.h"
 
 typedef struct
 {
@@ -25,7 +25,7 @@ static builtin	builtins[] =
 	{"env", builtin_env},
 	{"exit", builtin_exit},
 	{"export", builtin_export},
-	{"pwd", builtin_pwd};
+	{"pwd", builtin_pwd},
 	{"unset", builtin_unset},
 	{NULL, NULL}
 };
@@ -52,6 +52,7 @@ int	is_builtin(const char *name)
 	int	len;
 
 	len = ft_strlen(name);
+	i = 0;
 	while (builtins[i].name)
 	{
 		if (ft_strncmp(name, builtins[i].name, len) == 0)

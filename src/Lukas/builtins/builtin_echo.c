@@ -6,15 +6,14 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 00:00:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/25 14:58:36 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:11:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../env/env.h"
-#include "../exec.h"
+#include "../../../include/execute.h"
 
 /**
- * @brief   Prints a to terminal
+ * @brief   Prints to a terminal
  *
  * Splits the input command into tokens and calls env_unset() for each variable
  * name found.
@@ -36,11 +35,12 @@ int	is_valid_n_flag(char *str)
 		return (0);
 }
 
-int	builtin_echo(char **argv)
+int	builtin_echo(t_mh *mh, char **argv)
 {
 	int	i;
 	int	newline;
 
+	(void)mh;
 	i = 1;
 	newline = 1;
 	while (argv[i] && is_valid_n_flag(argv[i]))
@@ -50,7 +50,7 @@ int	builtin_echo(char **argv)
 	}
 	while (argv[i])
 	{
-		write(1, argv[i], ft_strlen(argv[i]);
+		write(1, argv[i], ft_strlen(argv[i]));
 		if (argv[i + 1])
 			write(1, " ", 1);
 		i++;

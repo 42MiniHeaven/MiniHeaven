@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/03 18:40:48 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:15:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,14 @@ typedef struct s_env
 t_env	*env_new(char *key, char *value);
 void	env_add_back(t_env **env, t_env *new);
 t_env	*env_find(t_env *env, char *key);
+char	*get_env_value(char *key, t_env *env);
 char	**llist_to_env(t_env *env);
 //env_init.c
 void	create_env_list(t_env **start, char **envp);
-//builtin_env.c
-void	builtin_env(t_exec data, char *str);
-//free.c
-void	free_arr(char **arr);
-void	free_str(char *str);
-void	free_linked(t_env *head);
-//builtin_export.c
-void	builtin_export(t_exec data, char *cmd);
 //env_set.c
 void	env_set(t_env *env, int create, char *value);
 //env_unset.c
 void	env_unset(t_env **env, char *cmd);
-//builtin_unset.c
-void	builtin_unset(t_exec data, char *cmd);
 //ft_substr
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 //ft_calloc
