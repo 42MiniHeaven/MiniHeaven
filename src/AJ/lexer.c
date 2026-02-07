@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/07 19:34:17 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:52:46 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@
 // inside double quotes
 // }
 
+
+// decide how to design the error should it be a void or an int should it exit here or not 
+int	syntax_error(char *message)
+{
+	ft_putstr_fd("Syntax error: ", 2);
+	ft_putendl_fd(message, 2);
+	return (0);
+}
+
 int ft_is_operator(int c)
 {
     return (c == '|' || c == '<' || c == '>');
@@ -43,20 +52,21 @@ int ft_is_operator(int c)
 
 int ft_isspace(int c)
 {
-    return (c == ' ');   
+    return (c == ' ');   // could include more whitespaces
 }
 
 /*
- * GENERAL: Adds a new token to the end of the current token list. Tells what 
- * it does (add) and where it does it (back) applying it to tokens.
+ * GENERAL: Adds a new token to the end of the current token list. Function name 
+ *			says what the functions does (add) and where it does it (back) 
+ *			applying it to tokens.
  * 
- * NOTE:    t_token **list is a pointer to the head pointer of the list.
- *          In case the list is empty it is needed so the head can be updated.
- *          t_token *new is the token to be added.
+ * NOTE:	t_token **list is a pointer to the head pointer of the list.
+ *			In case the list is empty it is needed so the head can be updated.
+ *			t_token *new is the token to be added.
  * 
- * INFO:    Common in linked list naming conventions:
- *              - add_front → adds at the head (beginning)
- *              - add_back → adds at the tail (end)
+ * INFO:	Common in linked list naming conventions:
+ *			- add_front → adds at the head (beginning)
+ *			- add_back → adds at the tail (end)
  */
 
 void    token_add_back(t_token **list, t_token *new)
@@ -81,7 +91,7 @@ void    token_add_back(t_token **list, t_token *new)
  * GENERAL: Combines the gathered info and ONLY creates a new node.
  */
 
-t_token *token_new(/* t_token_type type, */ int type, char *value)
+t_token *token_new(int type, char *value)
 {
     t_token *token;
 
@@ -94,22 +104,66 @@ t_token *token_new(/* t_token_type type, */ int type, char *value)
     return (token);
 }
 
-void lex_word(char *input, int *i, t_token **tokens)
+void	create_token(char *input, int *i, int start, t_token **tokens)
 {
-    int     start;
-    char    *value;
+	char    *value;
     t_token *token;
 
-    start = *i;
-    while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
-        (*i)++;
-    value = ft_substr(input, start, *i - start);
+	value = ft_substr(input, start, *i - start);
     if (!value)
-        write(1, "A\n", 2); // Free when error;
+        syntax_error("failure assigning 'value' in lex_word function"); // Free when error;
     token = token_new(WORD, value);
     if (!token)
-        write(1, "b\n", 2); // Free when error;
+        syntax_error("failure assigning 'token' in lex_word function"); // Free when error;
     token_add_back(tokens, token);
+}
+
+int	quote_handler(char *input, int *i)
+{	
+	if (input[*i] == '\'')
+	{
+		(*i)++;
+		while (input[*i] && input[*i] != '\'')
+			(*i)++;
+		if (!input[*i])
+		{
+			syntax_error("unclosed single quote");
+			return (0);
+		}
+		(*i)++;
+	}
+	// // allow escaped quotes (\") to be skipped??
+	else if (input[*i] == '"')
+	{
+		(*i)++;
+		while (input[*i] && input[*i] != '"')
+			(*i)++;
+		if (!input[*i])
+		{
+			syntax_error("unclosed double quote");
+			return (0);
+		}
+		(*i)++;
+	}
+	return (1);
+}
+
+void lex_word(char *input, int *i, t_token **tokens)
+{
+ 	int		start;
+
+	start = *i;
+    while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
+	{
+        if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
+		{
+			if (!quote_handler(input, i))
+				return ;
+		}
+		else
+			(*i)++;
+	}
+	create_token(input, i, start, tokens);
 }
 
 /*
@@ -153,8 +207,7 @@ void    lex_operator(char *input, int *i, t_token **tokens)
 /*
  * GENERAL: Converts the received input into tokens and prepares them for parsing.
  * 
- * NOTE:    Helper functions were created to make the code more readble. Can also 
- *          be left out and incorporated directly into the code. Any thoughts on this?
+ * NOTE:    Helper functions were created to make the code more readble.
  */
 
 t_token	*lexer(char *input)
@@ -168,7 +221,7 @@ t_token	*lexer(char *input)
     i = 0;
 	while ((size_t)i < input_len) // could only be input[i] but that way is safer
 	{
-		if (ft_isspace(input[i])) // cast to unsigned char to avoid undefined behaviour?
+		if (ft_isspace(input[i]))
         {
             i++;
             continue ;
@@ -181,16 +234,15 @@ t_token	*lexer(char *input)
     return (tokens);
 }
 
-// int main(void)
-// {
-//     char *line = "ls -l || cat <<< e";
-//     t_token *tokens = lexer(line);
+int main(void)
+{
+    char *line = "echo blub \"hello world\"blabla ls -l || cat <<< e";
+    t_token *tokens = lexer(line);
 
-//     // struct needs to be initialised with zero
-//     while (tokens)
-//     {
-//         printf("TYPE=%d VALUE=%s\n", tokens->type, tokens->value);
-//         tokens = tokens->next;
-//     }
-//     return (0);
-// }
+    while (tokens)
+    {
+        printf("TYPE=%d VALUE=%s\n", tokens->type, tokens->value);
+        tokens = tokens->next;
+    }
+    return (0);
+}
