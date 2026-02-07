@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 19:15:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:12:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ char	*ft_strchr(const char *s, int c);
 //ft_split
 char	**ft_split(char const *s, char c);
 //ft_strjoin
-char	*ft_strjoin_cmd(char const *s1, char const *s2);
+char	*ft_strjoin_char(char const *s1, char const *s2, char c);
 #endif

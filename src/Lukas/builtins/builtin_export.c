@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 17:28:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:13:15 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	export_check(t_mh *mh, char *cmd1, char *cmd2)
 	char	*test;
 	char	*cmd;
 
-	cmd = ft_strjoin_cmd(cmd1, cmd2);
+	cmd = ft_strjoin_char(cmd1, cmd2, '=');
 	if (!cmd)
 		return (1);
 	e = 0;

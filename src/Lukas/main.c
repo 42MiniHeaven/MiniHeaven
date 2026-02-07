@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 19:20:45 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:17:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	cmd;
 	(void)argc;
 	(void)argv;
-	char *test[] = {"echo", "Test", NULL};
+	char *test[] = {"ls", NULL};
 
 	cmd.argv = test;
 	cmd.next = NULL;
@@ -43,6 +43,6 @@ int	main(int argc, char **argv, char **envp)
 		free(in);
 	}*/
 	//parser&&lexer
-	dispatcher(&data.cmds, data.env);
+	dispatcher(&data);
 	return (0);
 }

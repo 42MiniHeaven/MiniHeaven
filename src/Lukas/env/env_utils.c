@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 17:01:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:14:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	**llist_to_env(t_env *env)
 	while (env)
 	{
 		if (env->value)
-			envp[i++] = ft_strjoin_env(env->key, env->value);
+			envp[i++] = ft_strjoin_char(env->key, env->value, '=');
 		else
 			envp[i++] = ft_strdup(env->key);
 		env = env->next;

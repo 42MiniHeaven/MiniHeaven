@@ -6,13 +6,14 @@
 #    By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/05 19:17:45 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/07 16:57:37 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC := main.c \
 		init.c \
 		dispatcher.c \
+		exec_builtin.c \
 		free.c \
 		env/env_init.c \
 		env/env_utils.c \
@@ -26,7 +27,8 @@ SRC := main.c \
 		builtins/builtin_exit.c \
 		builtins/builtin_export.c \
 		builtins/builtin_pwd.c \
-		builtins/builtin_unset.c
+		builtins/builtin_unset.c \
+		external/resolve.c
 		
 NAME := MiniHeaven
 CC := cc
