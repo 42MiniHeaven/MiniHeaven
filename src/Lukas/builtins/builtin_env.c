@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:10:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 17:17:26 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:07:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
  * @param   str		Input str
  */
 
-int	builtin_env(t_mh *mh, char **argv)
+int	builtin_env(t_cmd *cmd, t_env **env)
 {
 	t_env	*current;
 
-	current = mh->llist;
-	if (argv[1])
+	current = *env;
+	if (cmd->argv[1])
 	{
 		ft_putstr_fd("Error", 2);
 		return (1);

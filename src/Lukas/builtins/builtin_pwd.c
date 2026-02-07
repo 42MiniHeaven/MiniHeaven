@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:58:16 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 19:04:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:18:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "../../../include/execute.h"
 
-int	builtin_pwd(t_mh *mh, char **argv)
+int	builtin_pwd(t_cmd *cmd, t_env **env)
 {
 	char	*cwd;
 
-	(void)argv;
-	(void)mh;
+	(void)cmd;
+	(void)env;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 17:13:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:18:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static	int	env_size(t_env *env)
 	return (i);
 }
 
-static int	export_check(t_mh *mh, char *cmd1, char *cmd2)
+static int	export_check(t_env *env, char *cmd1, char *cmd2)
 {
 	int		s;
 	int		e;
@@ -81,15 +81,15 @@ static int	export_check(t_mh *mh, char *cmd1, char *cmd2)
 		s++;
 	s++;
 	test = ft_substr(cmd, s, e - s);
-	if (!env_find(mh->llist, test))
-		env_set(mh->llist, 2, cmd);
+	if (!env_find(env, test))
+		env_set(env, 2, cmd);
 	else
-		env_set(env_find(mh->llist, test), 1, cmd + e + 1);
+		env_set(env_find(env, test), 1, cmd + e + 1);
 	free(cmd);
 	return (0);
 }
 
-int	builtin_export(t_mh *mh, char **argv)
+int	builtin_export(t_cmd *cmd, t_env **env)
 {
 	char	**split;
 	int		i;
@@ -97,22 +97,21 @@ int	builtin_export(t_mh *mh, char **argv)
 	int		status;
 
 	status = 0;
-	split = ft_split(argv[0], ' ');
+	split = ft_split(cmd->argv[0], ' ');
 	if (!split)
 		return (1);
 	i = 1;
 	if (!split[i])
 	{
-		if (ft_strncmp(argv[0], "export", ft_strlen(split[0])) == 0)
+		if (ft_strncmp(cmd->argv[0], "export", ft_strlen(split[0])) == 0)
 		{
-			mh->env = llist_to_env(mh->llist);
-			size = env_size(mh->llist);
-			print_sorted(mh->env, size);
+			size = env_size(*env);
+			print_sorted(llist_to_env(*env),size);
 		}
 	}
 	while (split[i])
 	{
-		if (export_check(mh, split[0], split[i]) != 0)
+		if (export_check(*env, split[0], split[i]) != 0)
 			status = 1;
 		i++;
 	}

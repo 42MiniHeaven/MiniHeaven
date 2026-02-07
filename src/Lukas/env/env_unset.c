@@ -6,11 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:03:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/24 20:43:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:58:11 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+#include "../../../include/execute.h"
 
 /**
  * @brief   Removes an element from the environment list.

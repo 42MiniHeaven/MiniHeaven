@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 16:35:08 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 17:11:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:05:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ static int	cd_error(const char *message, const char *path)
 	return (1);
 }
 
-int	builtin_cd(t_mh *mh, char **argv)
+int	builtin_cd(t_cmd *cmd, t_env **env)
 {
 	char	*target;
 	char	*oldpwd;
 
-	if (argv[1] && argv[2])
+	if (cmd->argv[1] && cmd->argv[2])
 		return (cd_error("too many arguments", NULL));
-	target = get_cd_target(argv, mh->llist);
+	target = get_cd_target(cmd->argv, *env);
 	if (!target)
 		return (cd_error("HOME not set", NULL)); //check later
 	oldpwd = getcwd(NULL, 0);
@@ -59,9 +59,9 @@ int	builtin_cd(t_mh *mh, char **argv)
 		free(oldpwd);
 		return (1);
 	}
-	update_pwd_oldpwd(mh->llist, oldpwd);
+	update_pwd_oldpwd(*env, oldpwd);
 	free(oldpwd);
-	if (argv[1] && ft_strncmp(argv[1], "-", ft_strlen(argv[1])) == 0)
-		printf("%s\n", get_env_value("PWD", mh->llist));
+	if (cmd->argv[1] && ft_strncmp(cmd->argv[1], "-", ft_strlen(cmd->argv[1])) == 0)
+		printf("%s\n", get_env_value("PWD", *env));
 	return (0);
 }

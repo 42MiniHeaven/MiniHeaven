@@ -6,30 +6,30 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 20:18:08 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 20:41:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:00:19 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execute.h"
 
-int	exec_builtin(t_mh *mh)
+int	exec_builtin(t_cmd *cmds, t_env *env)
 {
-	int	len = ft_strlen(mh->cmds.argv[0]);
-	if (!mh || !mh->cmds.argv || !mh->cmds.argv[0])
+	int	len = ft_strlen(cmds->argv[0]);
+	if (!cmds || !cmds->argv || !cmds->argv[0])
 		return (0);
-	if (!ft_strncmp(mh->cmds.argv[0], "cd", len))
-		return (builtin_cd(mh, mh->cmds.argv));
-	if (!ft_strncmp(mh->cmds.argv[0], "echo", len))
-		return (builtin_echo(mh, mh->cmds.argv));
-	if (!ft_strncmp(mh->cmds.argv[0], "env", len))
-		return (builtin_env(mh, mh->cmds.argv));
-	if (!ft_strncmp(mh->cmds.argv[0], "exit", len))
-		return (builtin_exit(mh, mh->cmds.argv));
-	if (!ft_strncmp(mh->cmds.argv[0], "export", len))
-		return (builtin_export(mh, mh->cmds.argv));
-	if (!ft_strncmp(mh->cmds.argv[0], "pwd", len))
-		return (builtin_pwd(mh, mh->cmds.argv));
-	if (!ft_strncmp(mh->cmds.argv[0], "unset", len))
-		return (builtin_unset(mh, mh->cmds.argv));
+	if (!ft_strncmp(cmds->argv[0], "cd", len))
+		return (builtin_cd(cmds, &env));
+	if (!ft_strncmp(cmds->argv[0], "echo", len))
+		return (builtin_echo(cmds, &env));
+	if (!ft_strncmp(cmds->argv[0], "env", len))
+		return (builtin_env(cmds, &env));
+	if (!ft_strncmp(cmds->argv[0], "exit", len))
+		return (builtin_exit(cmds, &env));
+	if (!ft_strncmp(cmds->argv[0], "export", len))
+		return (builtin_export(cmds, &env));
+	if (!ft_strncmp(cmds->argv[0], "pwd", len))
+		return (builtin_pwd(cmds, &env));
+	if (!ft_strncmp(cmds->argv[0], "unset", len))
+		return (builtin_unset(cmds, &env));
 	return (1);
 }

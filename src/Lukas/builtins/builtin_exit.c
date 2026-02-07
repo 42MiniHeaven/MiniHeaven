@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 17:18:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:12:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+//#include "../env/env.h"
+#include "../../../include/execute.h"
 
 static int	is_numeric(char *s)
 {
@@ -28,24 +30,24 @@ static int	is_numeric(char *s)
 	return (1);
 }
 
-int	builtin_exit(t_mh *mh, char **argv)
+int	builtin_exit(t_cmd *cmd, t_env **env)
 {
 	long	status;
 
+	(void)env;
 	printf("exit\n");
-	(void)mh;
-	if (!argv[1])
+	if (!cmd->argv[1])
 		exit(42);		//exit from other calls
-	if (!is_numeric(argv[1]))
+	if (!is_numeric(cmd->argv[1]))
 	{
-		fprintf(stderr, "exit: %s: numeric argument required\n", argv[1]);
+		fprintf(stderr, "exit: %s: numeric argument required\n", cmd->argv[1]);
 		exit(2);
 	}
-	if (argv[2])
+	if (cmd->argv[2])
 	{
 		fprintf(stderr, "exit: too many arguments\n");
 		return (1);
 	}
-	status = atol(argv[1]);
+	status = atol(cmd->argv[1]);
 	exit((unsigned char)status);
 }

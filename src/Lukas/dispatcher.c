@@ -6,24 +6,19 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 21:23:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 17:25:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 21:47:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execute.h"
-/*
-int	exec_pipe(char **cmd, char **env) // change to t_cmd
-{
-	int	status = 0;
-	(void)env;
-	int	i = -1;
-	while (cmd[++i])
-		printf("pipe: %s\n", cmd[i]);
-	return (status);
-}
-*/
 
-int	exec_external(t_mh *mh)
+int	exec_pipe(t_cmd *cmds, t_env *env)
+{
+	return (dispatch_pipeline(cmds, env));
+}
+
+
+int	exec_external(t_cmd *cmds, t_env *env)
 {
 	pid_t	pid;
 	int		status;
@@ -33,7 +28,7 @@ int	exec_external(t_mh *mh)
 	{
 //		setup_child_signals();
 //		apply_redirections(cmd);
-		execve(resolve_path(mh->cmds.argv[0], mh->llist), mh->cmds.argv, llist_to_env(mh->llist));
+		execve(resolve_path(cmds->argv[0], env), cmds->argv, llist_to_env(env));
 //		perror("execve");
 		exit(127);
 	}
@@ -41,37 +36,36 @@ int	exec_external(t_mh *mh)
 	return (status); //(extract_exit_status(status));
 }
 
-int	exec_single(t_mh *mh) // change to t_cmd
+int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
 {
 	int	status = 0;
 
 //	if (!cmd->argv || !cmd->argv[0])
 //		return (apply_redirs_only(cmd));
-	if (is_builtin(mh->cmds.argv[0]))
+	if (is_builtin(cmds->argv[0]))
 	{
 //		if (apply_redirections(cmd) != 0)
 //			return (1);
-		status = exec_builtin(mh);
+		status = exec_builtin(cmds, env);
 //		restore_std_fds();
 		return (status);
 	}
 	else
-		return (exec_external(mh));
+		return (exec_external(cmds, env));
 }
 
-int	dispatcher(t_mh *mh) //change to t_cmd
+int	dispatcher(t_cmd *cmds, t_env *env) //change to t_cmd
 {
 	int	status = 0;
 
-	if (!mh || !mh->cmds.argv[0])
+	if (!cmds || !cmds->argv[0])
 		return (0);
-	if (!mh->cmds.next) //change to ->next
+	if (!cmds->next) //change to ->next
 //	if	(handle_all_heredocs(cmds) != 0)
 //		return (1);
-		status = exec_single(mh);
-//	else
-//		printf("no piping yet!\n");
-//		status = exec_pipe(cmds, env);
+		status = exec_single(cmds, env);
+	else
+		status = exec_pipe(cmds, env);
 //	update_exit_status(status);
 	return (status);
 }

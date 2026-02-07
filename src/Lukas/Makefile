@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/07 16:57:37 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/07 20:17:00 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRC := main.c \
 		dispatcher.c \
 		exec_builtin.c \
 		free.c \
+		forking.c \
 		env/env_init.c \
 		env/env_utils.c \
 		env/env_set.c \

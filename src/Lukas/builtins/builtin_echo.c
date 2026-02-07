@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 00:00:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 16:11:20 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:06:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ int	is_valid_n_flag(char *str)
 		return (0);
 }
 
-int	builtin_echo(t_mh *mh, char **argv)
+int	builtin_echo(t_cmd *cmd, t_env **env)
 {
 	int	i;
 	int	newline;
 
-	(void)mh;
+	(void)env;
 	i = 1;
 	newline = 1;
-	while (argv[i] && is_valid_n_flag(argv[i]))
+	while (cmd->argv[i] && is_valid_n_flag(cmd->argv[i]))
 	{
 		newline = 0;
 		i++;
 	}
-	while (argv[i])
+	while (cmd->argv[i])
 	{
-		write(1, argv[i], ft_strlen(argv[i]));
-		if (argv[i + 1])
+		write(1, cmd->argv[i], ft_strlen(cmd->argv[i]));
+		if (cmd->argv[i + 1])
 			write(1, " ", 1);
 		i++;
 	}

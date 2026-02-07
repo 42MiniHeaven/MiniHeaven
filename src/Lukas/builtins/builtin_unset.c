@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 19:41:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/05 19:07:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:00:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,21 @@
  * @param   cmd		Command string containing variable names to remove.
  */
 
-int	builtin_unset(t_mh *mh, char **argv)
+int	builtin_unset(t_cmd *cmd, t_env **env)
 {
 	char	**split;
 	int		i;
 
-	split = ft_split(argv[0], ' ');
+	split = ft_split(cmd->argv[0], ' ');
 	if (!split)
 		return (1);
 	i = 1;
 	while (split[i])
 	{
-		env_unset(&mh->llist, split[i]);
+		env_unset(env, split[i]);
 		i++;
 	}
 	free_arr(split);
 	split = NULL;
-	mh->env = llist_to_env(mh->llist);
 	return (0);
 }

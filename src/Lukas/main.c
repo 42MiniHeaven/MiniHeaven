@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 17:17:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 23:05:26 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_mh	data;
 	t_cmd	cmd;
+	t_cmd	cmd2;
 	(void)argc;
 	(void)argv;
 	char *test[] = {"ls", NULL};
+	char *test2[] = {"ls", "env", NULL};
 
 	cmd.argv = test;
-	cmd.next = NULL;
+	cmd.next = &cmd2;
+	cmd2.argv = test2;
+	cmd2.next = NULL;
 	ft_memset(&data, 0, sizeof(data));
 	init_shell(&data, envp);
 	data.cmds = cmd;
@@ -43,6 +47,6 @@ int	main(int argc, char **argv, char **envp)
 		free(in);
 	}*/
 	//parser&&lexer
-	dispatcher(&data);
+	dispatcher(&data.cmds, data.llist);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 18:02:46 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 16:57:12 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 21:42:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct	s_cmd
 
 typedef struct s_mh
 {
-	char	**env;
 	t_env	*llist;
 	t_cmd	cmds;
 	int		last_exit;
@@ -37,7 +36,7 @@ typedef struct s_mh
 //init.c
 void	init_shell(t_mh *mh, char **envp);
 //dispatcher.c
-int		dispatcher(t_mh *mh);
+int		dispatcher(t_cmd *cmds, t_env *env);
 //builtins.c
 builtin_func	find_builtin(const char *name);
 int				is_builtin(const char *name);
@@ -46,7 +45,9 @@ void	free_arr(char **arr);
 void	free_str(char *str);
 void	free_linked(t_env *head);
 //exec_builtin.c
-int		exec_builtin(t_mh *mh);
+int		exec_builtin(t_cmd *cmds, t_env *env);
 //resolve.c
 char	*resolve_path(char *cmd, t_env *env);
+//forking.c
+int		dispatch_pipeline(t_cmd *cmds, t_env *env);
 #endif

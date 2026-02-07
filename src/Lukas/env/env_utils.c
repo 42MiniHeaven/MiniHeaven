@@ -6,11 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 17:14:24 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/07 22:58:46 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+#include "../../../include/execute.h"
 
 /*File Description: Functions to modify the shells environment.
 			Used by: export, unset or $PATH for example
