@@ -6,14 +6,14 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/04 22:36:21 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:38:37 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /*
- * 	IDEA: 	Either all information from the lexer is duplicated or borrowed.
+ * IDEA: 	Either all information from the lexer is duplicated or borrowed.
  * 			This is important when it comes to freeing.
  * 			Parser in our case borrows everything. Pointers are stored directly
  * 			and no strdup is used. Tokens sray alive until execution finishes.
@@ -28,7 +28,6 @@
  *					→ executor runs commands
  *					→ free AST (not strings)
  *					→ free tokens (strings freed here)
- *
  */
 
 /*
@@ -63,8 +62,6 @@ void	free_cmds(t_cmd *cmd)
 	while (cmd)
 	{
 		next = cmd->next;
-		// if (cmd->cmd)
-		// 	free(cmd->cmd);
 		if (cmd->argv)
 			free(cmd->argv);
 		if (cmd->redir)
@@ -109,7 +106,7 @@ char **ft_realloc(char **old, size_t old_count, size_t new_count)
 	if (!new)
 		return (NULL);
 	i = 0;
-	while (i < old_count && i < new_count)
+	while (old && i < old_count && i < new_count)
 	{
 		new[i] = old[i];
 		i++;
@@ -153,19 +150,25 @@ int	redir_add(t_cmd *cmd, int type, char *file)
 	temp->next = new;
 	return (1);
 }
+/*
+ * INFO: 	tmp is used in case allocation fails. Otherwise this would cause a 
+ * 			leak.
+ */
 
 int	argv_add(t_cmd *cmd, char *word)
 {
-	int	i;
+	int		i;
+	char	**tmp;
 	
 	if (!cmd)
 		return (0);
 	i = 0;
 	while (cmd->argv && cmd->argv[i])
 		i++;
-	cmd->argv = ft_realloc(cmd->argv, i, i + 2);
-	if (!cmd->argv)
+	tmp = ft_realloc(cmd->argv, i, i + 2);
+	if (!tmp)
 		return (0);
+	cmd->argv = tmp;
 	cmd->argv[i] = word;
 	cmd->argv[i + 1] = NULL;
 	return (1);
@@ -197,7 +200,7 @@ int	handle_redir_target(int state, t_cmd **current, int *last_redir,
 	}
 	if (!redir_add(*current, *last_redir, tokens->value))
 		return (-1); // how to hanlde the error?
-	if ((*current)->cmd)
+	if ((*current)->argv)
 		state = EXPECT_ARG_OR_REDIR;
 	else
 		state = EXPECT_COMMAND;
@@ -207,6 +210,8 @@ int	handle_redir_target(int state, t_cmd **current, int *last_redir,
 int	handle_arg_or_redir(int state, t_cmd **current, int *last_redir, 
 	t_token *tokens)
 {
+	t_cmd	*new;
+	
 	if (tokens->type == WORD)
 	{
 		if (!argv_add(*current, tokens->value))
@@ -219,12 +224,15 @@ int	handle_arg_or_redir(int state, t_cmd **current, int *last_redir,
 	}
 	else if (tokens->type == PIPE)
 	{
-		if (!(*current)->cmd)
+		if (!(*current)->cmd || !(*current)->argv || !(*current)->argv[0])
 		{
 			syntax_error("empty command before pipe");
 			return (-1); // how to hanlde the error?
 		}
-		(*current)->next = cmd_new();
+		new = cmd_new();
+		if (!new)
+			return (-1); // handle error
+		(*current)->next = new;
 		(*current) = (*current)->next;
 		state = EXPECT_COMMAND;
 	}
@@ -265,10 +273,10 @@ int	handle_command(int state, t_cmd **current, int *last_redir,
 
 t_cmd	*parse(t_token *tokens)
 {
-	t_cmd				*head;
-	t_cmd				*current;
-	enum e_parser_state	state;
-	int					last_redir;
+	t_cmd	*head;
+	t_cmd	*current;
+	int		state;
+	int		last_redir;
 
 	head = NULL;
 	current = NULL;
@@ -282,11 +290,23 @@ t_cmd	*parse(t_token *tokens)
 			state = handle_arg_or_redir(state, &current, &last_redir, tokens);
 		else if (state == EXPECT_REDIR_TARGET)
 			state = handle_redir_target(state, &current, &last_redir, tokens);
+		if (state == -1)
+		{
+			free_cmds(head);
+			return (NULL);
+		}
 		tokens = tokens->next;
 	}
 	if (state == EXPECT_REDIR_TARGET)
 	{
 		syntax_error("unexpected end of input; WORD needed");
+		free_cmds(head);
+		return (NULL);
+	}
+	if (state == EXPECT_COMMAND && head)
+	{
+		syntax_error("unexpected pipe at the end");
+		free_cmds(head);
 		return (NULL);
 	}
 	return (head);

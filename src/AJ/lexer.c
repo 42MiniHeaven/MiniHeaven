@@ -6,32 +6,18 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/01/25 17:46:32 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:34:17 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/*  NEXT TO_DOs 
-    
-    - Validity check (e.g all operations or only quotes), maybe with copy of the original string
-    - Check for single and double quotes validity by going through the string and checking for start and end
-    - e.g. with strdup_section(char *string itself, int start, int end) 
- */
-
-/* INPUT CHECKER
- *     --> validate_input() checks:
- *      -Control characters
- *      -Unsupported operators
- *      -Unclosed quotes
- */
- 
-/* LEXER
+/* 
+ * LEXER
  * The lexer transforms a raw input string into a linked list of tokens 
  * (words and operators) that are easier to parse. --> Only tokenises
- */
-
-/* PARSER
+ 
+ * PARSER
  * Grammar: 
  *              input        → pipeline
  *              pipeline     → command ( '|' command )*
@@ -174,8 +160,8 @@ void    lex_operator(char *input, int *i, t_token **tokens)
 t_token	*lexer(char *input)
 {
 	t_token *tokens;
-    size_t input_len;
-    int	i;
+    size_t  input_len;
+    int     i;
 
 	tokens = NULL;
     input_len = ft_strlen(input);
