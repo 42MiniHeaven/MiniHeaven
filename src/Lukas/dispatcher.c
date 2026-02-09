@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 21:23:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 21:47:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/09 22:56:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	exec_external(t_cmd *cmds, t_env *env)
 	if (pid == 0)
 	{
 //		setup_child_signals();
-//		apply_redirections(cmd);
+		if (apply_redirections(cmds->redirs))
+			return (1);
 		execve(resolve_path(cmds->argv[0], env), cmds->argv, llist_to_env(env));
 //		perror("execve");
 		exit(127);
@@ -44,10 +45,13 @@ int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
 //		return (apply_redirs_only(cmd));
 	if (is_builtin(cmds->argv[0]))
 	{
-//		if (apply_redirections(cmd) != 0)
-//			return (1);
+		if (apply_redirections(cmds->redirs) != 0)
+		{
+			restore_std_fds(cmds->stdfds);
+			return (1);
+		}
 		status = exec_builtin(cmds, env);
-//		restore_std_fds();
+		restore_std_fds(cmds->stdfds);
 		return (status);
 	}
 	else

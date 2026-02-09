@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 18:02:46 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 21:42:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/09 22:56:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,38 @@
 # include <unistd.h>	//write
 # include <sys/types.h>	//waitpid
 # include <sys/wait.h>	//waitpid
+# include <fcntl.h>		//open flags
 # include "../Libft/include/libft.h"
 # include "../src/Lukas/env/env.h"
 # include "../src/Lukas/builtins/builtins.h"
 
+typedef struct	s_std_fds
+{
+	int	in;
+	int	out;
+	int	err;
+} t_std_fds;
+
+typedef enum	e_redir_type
+{
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC,
+} t_redir_type;
+
+typedef struct	s_redir
+{
+	t_redir_type	type;
+	char			*target;
+	struct s_redir	*next;
+} t_redir;
+
 typedef struct	s_cmd
 {
 	char			**argv;
+	t_redir			*redirs;
+	t_std_fds		*stdfds;
 	struct s_cmd	*next;
 } t_cmd;
 
@@ -50,4 +75,9 @@ int		exec_builtin(t_cmd *cmds, t_env *env);
 char	*resolve_path(char *cmd, t_env *env);
 //forking.c
 int		dispatch_pipeline(t_cmd *cmds, t_env *env);
+//redirections.c
+int		apply_redirections(t_redir *redit);
+//fds.c
+int	safe_std_fds(t_std_fds *saved);
+void	restore_std_fds(t_std_fds *saved);
 #endif

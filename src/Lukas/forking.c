@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 20:05:14 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 23:04:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/09 22:36:15 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	dispatch_pipeline(t_cmd *cmds, t_env *env)
 				close(fd[0]);
 				close(fd[1]);
 			}
+			if (apply_redirections(cmd->redirs))
+				exit(1);
 			if (is_builtin(cmd->argv[0]))
 				exit(exec_builtin(cmd, env));
 			else
