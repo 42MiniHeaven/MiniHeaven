@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/09 16:22:53 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/10 23:14:48 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,30 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_mh	data;
 	t_cmd	cmd;
+	t_redir	redir;
+	t_std_fds	fds;
 	t_cmd	cmd2;
-	t_cmd	cmd3;
+//	t_cmd	cmd3;
 	(void)argc;
 	(void)argv;
-	char *test[] = {"ls", "env", NULL};
-	char *test2[] = {"grep", "t", NULL};
-	char *test3[] = {"wc", "-l", NULL};
+	char *test[] = {"cat", NULL};
+	char target[] = "Makefile";
+	char *test2[] = {"wc", "-l", NULL};
+//	char *test3[] = {"wc", "-l", NULL};
 
+	if (safe_std_fds(&fds) != 0)
+		return (42);
 	cmd.argv = test;
-	cmd.next = &cmd2;
+	cmd.next = NULL;
+	redir.target = target;
+	redir.type = REDIR_IN;
+	redir.next = NULL;
+	cmd.redirs = &redir;
+	cmd.stdfds = &fds;
 	cmd2.argv = test2;
-	cmd2.next = &cmd3;
-	cmd3.argv = test3;
-	cmd3.next = NULL;
+	cmd2.next = NULL;
+//	cmd3.argv = test3;
+//	cmd3.next = NULL;
 	ft_memset(&data, 0, sizeof(data));
 	init_shell(&data, envp);
 	data.cmds = cmd;

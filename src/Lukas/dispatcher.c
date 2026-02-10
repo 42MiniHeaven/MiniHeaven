@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 21:23:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/09 22:56:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/10 23:00:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
 	int	status = 0;
 
 //	if (!cmd->argv || !cmd->argv[0])
-//		return (apply_redirs_only(cmd));
+//		return (apply_redirs_only(cmds->redirs));
 	if (is_builtin(cmds->argv[0]))
 	{
 		if (apply_redirections(cmds->redirs) != 0)
@@ -50,6 +50,7 @@ int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
 			restore_std_fds(cmds->stdfds);
 			return (1);
 		}
+		printf("single\n");
 		status = exec_builtin(cmds, env);
 		restore_std_fds(cmds->stdfds);
 		return (status);

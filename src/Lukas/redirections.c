@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:39:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/09 22:57:18 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/10 22:54:33 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	apply_redirections(t_redir *redir)
 		}
 		else if (redir->type == REDIR_OUT)
 		{
+			printf("test\n");
 			fd = open(redir->target, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (fd < 0)
 				return (perror(redir->target), 1);
@@ -44,5 +45,6 @@ int	apply_redirections(t_redir *redir)
 		}
 		redir = redir->next;
 	}
+	printf("test2\n");
 	return (0);
 }
