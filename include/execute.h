@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 18:02:46 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/09 22:56:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/12 19:57:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <sys/types.h>	//waitpid
 # include <sys/wait.h>	//waitpid
 # include <fcntl.h>		//open flags
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../Libft/include/libft.h"
 # include "../src/Lukas/env/env.h"
 # include "../src/Lukas/builtins/builtins.h"
@@ -40,6 +42,7 @@ typedef struct	s_redir
 {
 	t_redir_type	type;
 	char			*target;
+	int				fd;
 	struct s_redir	*next;
 } t_redir;
 
@@ -80,4 +83,7 @@ int		apply_redirections(t_redir *redit);
 //fds.c
 int	safe_std_fds(t_std_fds *saved);
 void	restore_std_fds(t_std_fds *saved);
+//heredoc.c
+int	handle_heredoc(t_redir *redir);
+int	handle_all_heredocs(t_cmd *cmds);
 #endif

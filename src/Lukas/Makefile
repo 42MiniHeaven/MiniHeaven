@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/09 22:57:39 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/12 20:04:34 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC := main.c \
 		forking.c \
 		redirections.c \
 		fds.c \
+		heredoc.c \
 		env/env_init.c \
 		env/env_utils.c \
 		env/env_set.c \
@@ -36,6 +37,7 @@ SRC := main.c \
 NAME := MiniHeaven
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I Libft/include
+LDLIBS := -lreadline
 
 OBJ := $(SRC:.c=.o)
 
@@ -48,7 +50,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDLIBS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
