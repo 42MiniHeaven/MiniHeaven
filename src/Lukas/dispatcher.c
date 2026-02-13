@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 21:23:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/12 19:54:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/13 21:01:26 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
 int	dispatcher(t_cmd *cmds, t_env *env) //change to t_cmd
 {
 	int	status = 0;
-
+	
 	if (!cmds || !cmds->argv[0])
 		return (0);
 	if	(handle_all_heredocs(cmds) != 0)
@@ -70,7 +70,9 @@ int	dispatcher(t_cmd *cmds, t_env *env) //change to t_cmd
 	if (!cmds->next) //change to ->next
 		status = exec_single(cmds, env);
 	else
+	{
 		status = exec_pipe(cmds, env);
+	}
 //	update_exit_status(status);
 	return (status);
 }

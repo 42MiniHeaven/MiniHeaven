@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:59:18 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:48:52 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	update_env(t_env *env, char *cmd)
 	if (!cmd)
 	{
 		env->value = NULL;
+		env->hidden = 2;	//define numbers to display on export or env
 		return ;
 	}
 	free(env->value);

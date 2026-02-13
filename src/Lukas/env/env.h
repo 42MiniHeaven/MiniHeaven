@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:05:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:21:50 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:48:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
+	int				hidden;
 	struct s_env	*next;
 }	t_env;
 //env_utils

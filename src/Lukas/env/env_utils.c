@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:58:46 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:50:33 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ t_env	*env_new(char *key, char *value)
 		return (NULL);
 	node->key = key;
 	node->value = value;
+	if (node->value)
+		node->hidden = 0;
+	else
+		node->hidden = 1;
 	node->next = NULL;
 	return (node);
 }
