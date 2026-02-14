@@ -1,5 +1,9 @@
 *.pdf
+*.o
+*.a
+*.json
 ./a.out
+.vscode
 todo.txt
 .swp
 *.a

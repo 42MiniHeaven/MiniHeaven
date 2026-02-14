@@ -3,35 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/09 23:19:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 14:11:00 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <stdlib.h>
+#include "miniheaven.h"
 
-int	main(void)
+/* 
+ * GENERAL:
+ * 		The main currently displays a prompt and reads input. 
+ * 
+ * IMPLEMENTED:		
+ * 		-readline 
+ * 		-history
+ * 		-ctrl-\ (should do nothing according to the subject)
+ * 
+ * TO BE IMPLEMENTED:
+ * 		-exit builtin
+ * 		-ctrl+d handling (needs its own signal handler)
+ * 		-ctrl+c handling (needs its own signal handler)
+ */
+
+int	main(int argc, char **argv, char **envp)
 {
-	char	*in; //input string
+	char		*input; //input string
+	t_heaven	miniheaven;
+
+	(void) argc;
+	(void) argv;
+	miniheaven.envp = envp;
+	signal(SIGQUIT, SIG_IGN); // ctrl-\ signal is ignored
 	while(1)
 	{
-		in = readline("MiniHeaven> ");
-		if (!in)
+		input = readline("MiniHeaven> ");
+		if (!input)
 		{
-			free(in); //dont know if we need this
-			exit(0);
+			break;
+			//exit(0);
 		}
-		if (in)
+		if (input)
 		{
-			printf("%s\n", in); //pass to parser
-			add_history(in);
+			printf("%s", input); //pass to parser
+			if (input[0] != '\0')
+			{
+				printf("\n");
+				add_history(input);
+			}
 		}
-		free(in);
+		free(input);
 	}
 	return (0);
 }

@@ -6,50 +6,49 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/01/10 16:39:50 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 14:10:31 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIHEAVEN_H
 # define MINIHEAVEN_H
 
-# include <stdio.h>			//printf
-# include <unistd.h>		//write
-# include <stdlib.h>		//malloc
-# include <sys/types.h>		//pid_t
-# include <sys/wait.h>		//waitpid
+# include <stdio.h>					// printf
+# include <unistd.h>				// write
+# include <stdlib.h>				// malloc
+# include <sys/types.h>				// pid_t
+# include <sys/wait.h>				// waitpid
+# include <fcntl.h>					// open flags
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../../Libft/include/libft.h"
+# include "parser.h"
+# include "../src/Lukas/env/env.h"
+# include "../src/Lukas/builtins/builtins.h"
 
-// idea: use enums for specific operands
+// Maybe delete later
+# include <aio.h>
+# include <ctype.h>
 
-// typedef enum operands
-// {
-	
-// } ;
+typedef struct	s_shell	t_shell;
+typedef struct	s_fd t_fd;
 
-typedef struct	s_tokens
+// main structure comtaining everything, which also can be freed easily
+struct	s_shell
 {
-	char *token;
-	t_tokens *next; // check again how linked lists work
+	t_token *tokens;
+	t_cmd	*cmds;
+	int		exit_code;
+	t_env	*envp;
+	int		last_signal
+};
 
-}	t_tokens;
-
-typedef struct	s_parser
+struct s_fd
 {
-	char *line;
-//	char *history; // maybe an array maybe a file maybe name of file 
-	char *	
-
-}	t_parser;
-
-typedef struct	s_exec
-{
-	int			args;
-	int			*status;
-	pid_t		*process;
-	int			pipefd[2];
-	t_parser	*parser;	
-}	t_exec;
+	int	in;
+	int	out;
+	int	err;
+};
 
 #endif
