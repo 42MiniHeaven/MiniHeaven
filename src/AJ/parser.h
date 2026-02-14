@@ -6,19 +6,14 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/04 22:23:28 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/14 14:03:53 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../../Libft/include/libft.h"
+#include "../../include/miniheaven.h"
 
 typedef struct	s_token t_token;
 typedef struct  s_redir t_redir;
@@ -78,5 +73,6 @@ struct s_cmd
 t_token *lexer(char *input);
 t_cmd   *parse(t_token *tokens);
 void	destroy_all(t_cmd *cmds, t_token *tokens);
+int		syntax_error(char *message);
 
 #endif

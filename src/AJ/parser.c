@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/07 17:38:37 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/14 14:02:40 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../../include/miniheaven.h"
 
 /*
  * IDEA: 	Either all information from the lexer is duplicated or borrowed.
@@ -71,18 +71,18 @@ void	free_cmds(t_cmd *cmd)
 	}
 }
 
-void	free_tokens(t_token *token)
-{
-	t_token	*next;
-
-	while (token)
-	{
-		next = token->next;
-		free(token->value);
-		free(token);
-		token = next;
-	}
-}
+// void	free_tokens(t_token *token)
+// {
+// 	t_token	*next;
+	
+// 	while (token)
+// 	{
+// 		next = token->next;
+// 		free(token->value);
+// 		free(token);
+// 		token = next;
+// 	}
+// }
 
 /*
  * GENERAL: Cleaning funtion which first destroys all parser output and then
@@ -92,7 +92,8 @@ void	free_tokens(t_token *token)
 void	destroy_all(t_cmd *cmds, t_token *tokens)
 {
 	free_cmds(cmds);
-	free_tokens(tokens);
+	(void) tokens;
+	// free_tokens(tokens);
 }
 
 /////////////// destroy functions above will get tehir own file ///////////////////

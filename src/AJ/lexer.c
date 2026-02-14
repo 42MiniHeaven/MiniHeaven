@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/07 23:52:46 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/14 14:02:50 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../../include/miniheaven.h"
 
 /* 
  * LEXER
@@ -38,12 +38,12 @@
 
 
 // decide how to design the error should it be a void or an int should it exit here or not 
-int	syntax_error(char *message)
-{
-	ft_putstr_fd("Syntax error: ", 2);
-	ft_putendl_fd(message, 2);
-	return (0);
-}
+// int	syntax_error(char *message)
+// {
+// 	ft_putstr_fd("Syntax error: ", 2);
+// 	ft_putendl_fd(message, 2);
+// 	return (0);
+// }
 
 int ft_is_operator(int c)
 {
@@ -216,7 +216,7 @@ t_token	*lexer(char *input)
     size_t  input_len;
     int     i;
 
-	tokens = NULL;
+	tokens = NULL; // memset?
     input_len = ft_strlen(input);
     i = 0;
 	while ((size_t)i < input_len) // could only be input[i] but that way is safer
@@ -234,15 +234,15 @@ t_token	*lexer(char *input)
     return (tokens);
 }
 
-int main(void)
-{
-    char *line = "echo blub \"hello world\"blabla ls -l || cat <<< e";
-    t_token *tokens = lexer(line);
+// int main(void)
+// {
+//     char *line = "echo blub \"hello world\"blabla ls -l || cat <<< e";
+//     t_token *tokens = lexer(line);
 
-    while (tokens)
-    {
-        printf("TYPE=%d VALUE=%s\n", tokens->type, tokens->value);
-        tokens = tokens->next;
-    }
-    return (0);
-}
+//     while (tokens)
+//     {
+//         printf("TYPE=%d VALUE=%s\n", tokens->type, tokens->value);
+//         tokens = tokens->next;
+//     }
+//     return (0);
+// }

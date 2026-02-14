@@ -6,15 +6,15 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 17:46:11 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/07 19:37:03 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/14 14:03:00 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../../include/miniheaven.h"
 
 int main(void)
 {
-    char    *line = "ls -l | cat << e |";
+    char    *line = "ls -l | cat << e";
     t_token *tokens;
     t_token *tmp;
     t_cmd   *cmds;
