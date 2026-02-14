@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/12 20:04:34 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/14 12:59:42 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC := main.c \
 		builtins/builtin_unset.c \
 		external/resolve.c
 		
-NAME := MiniHeaven
+NAME := minishell
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I Libft/include
 LDLIBS := -lreadline
