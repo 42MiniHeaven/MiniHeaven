@@ -6,13 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 21:23:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:34:57 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 20:37:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-#include "../../include/execute.h"
-
 
 int	exec_pipe(t_cmd *cmds, t_env *env)
 {
@@ -39,7 +37,7 @@ int	exec_external(t_cmd *cmds, t_env *env)
 	return (status); //(extract_exit_status(status));
 }
 
-int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
+int	exec_single(t_cmd *cmds, t_env *env, t_fds *fds)
 {
 	int	status = 0;
 
@@ -49,19 +47,18 @@ int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
 	{
 		if (apply_redirections(cmds->redir) != 0)
 		{
-		//	restore_std_fds(cmds->stdfds);
+			restore_std_fds(fds);
 			return (1);
 		}
-		printf("single\n");
 		status = exec_builtin(cmds, env);
-//		restore_std_fds(cmds->fds);
+		restore_std_fds(fds);
 		return (status);
 	}
 	else
 		return (exec_external(cmds, env));
 }
 
-int	dispatcher(t_cmd *cmds, t_env *env) //change to t_cmd
+int	dispatcher(t_cmd *cmds, t_env *env, t_fds *fds)
 {
 	int	status = 0;
 	
@@ -70,7 +67,7 @@ int	dispatcher(t_cmd *cmds, t_env *env) //change to t_cmd
 	if	(handle_all_heredocs(cmds) != 0)
 		return (1);
 	if (!cmds->next) //change to ->next
-		status = exec_single(cmds, env);
+		status = exec_single(cmds, env, fds);
 	else
 	{
 		status = exec_pipe(cmds, env);

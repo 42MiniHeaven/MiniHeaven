@@ -6,12 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:39:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:39:08 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:18:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-#include "../../include/execute.h"
 
 int	apply_redirections(t_redir *redir)
 {
@@ -29,7 +28,6 @@ int	apply_redirections(t_redir *redir)
 		}
 		else if (redir->type == REDIR_OUT)
 		{
-			printf("test\n");
 			fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (fd < 0)
 				return (perror(redir->file), 1);

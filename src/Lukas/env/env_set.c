@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:21:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 21:34:53 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	update_env(t_env *env, char *cmd)
 	if (!cmd)
 	{
 		env->value = NULL;
-		env->hidden = 2;	//define numbers to display on export or env
+		env->is_exported = 0;	//define numbers to display on export or env
 		return ;
 	}
 	free(env->value);
@@ -47,21 +47,16 @@ static void	update_env(t_env *env, char *cmd)
 static void	add_back(t_env *env, char *cmd)
 {
 	t_env	*tmp;
-	size_t	s;
-	size_t	n;
+	size_t	i;
+//	size_t	n;
 	size_t	len;
-	size_t	start;
+//	size_t	start;
 
 	len = ft_strlen(cmd);
-	s = 0;
-	while (cmd[s] && cmd[s] != ' ')
-		s++;
-	s++;
-	start = s;
-	while (cmd[s] && cmd[s] != '=')
-		s++;
-	n = s + 1;
-	tmp = env_new(ft_substr(cmd, start, s - start), ft_substr(cmd, n, len - n));
+	i = 0;
+	while (cmd[i] && cmd[i] != '=')
+		i++;
+	tmp = env_new(ft_substr(cmd, 0, i), ft_substr(cmd, i + 1, len - i + 1));
 	env_add_back(&env, tmp);
 }
 
@@ -78,7 +73,12 @@ static void	add_back(t_env *env, char *cmd)
 void	env_set(t_env *env, int create, char *value)
 {
 	if (create == 1)
+	{
 		update_env(env, value);
+	}
 	if (create == 2)
+	{
+		printf("%s\n", value);
 		add_back(env, value);
+	}
 }

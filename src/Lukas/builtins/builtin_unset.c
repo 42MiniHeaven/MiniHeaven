@@ -6,13 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 19:41:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:55:24 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:12:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
 #include "../../include/miniheaven.h"
-#include "../../include/execute.h"
 
 /**
  * @brief   Unsets environment variables specified in a command string.

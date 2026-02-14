@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:51:46 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:06:59 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,41 @@ struct	s_fds
 	int	out;
 	int	err;
 };
+
+//PROTOTYPES LUKAS
+//init.c
+void	init_shell(t_shell *data, char **envp);
+
+//dispatcher.c
+int		dispatcher(t_cmd *cmds, t_env *env, t_fds *fds);
+
+//builtins.c
+builtin_func	find_builtin(const char *name);
+int				is_builtin(const char *name);
+
+//free.c
+void	free_arr(char **arr);
+void	free_str(char *str);
+void	free_linked(t_env *head);
+
+//exec_builtin.c
+int		exec_builtin(t_cmd *cmds, t_env *env);
+
+//resolve.c
+char	*resolve_path(char *cmd, t_env *env);
+
+//forking.c
+int		dispatch_pipeline(t_cmd *cmds, t_env *env);
+
+//redirections.c
+int		apply_redirections(t_redir *redit);
+
+//fds.c
+int		safe_std_fds(t_shell *data);
+void	restore_std_fds(t_fds *saved);
+
+//heredoc.c
+int	handle_heredoc(t_redir *redir);
+int	handle_all_heredocs(t_cmd *cmds);
 
 #endif

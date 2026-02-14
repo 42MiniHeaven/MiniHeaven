@@ -6,12 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:19:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:54:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:11:32 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-#include "../../include/execute.h"
 
 /*General Description:	Freeing the allocated space from environment*/
 

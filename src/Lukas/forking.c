@@ -6,12 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 20:05:14 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:36:12 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:11:46 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-#include "../../include/execute.h"
 
 int	dispatch_pipeline(t_cmd *cmds, t_env *env)
 {
