@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 18:02:46 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/12 19:57:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:31:12 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,39 +30,8 @@ typedef struct	s_std_fds
 	int	err;
 } t_std_fds;
 
-typedef enum	e_redir_type
-{
-	REDIR_IN,
-	REDIR_OUT,
-	REDIR_APPEND,
-	REDIR_HEREDOC,
-} t_redir_type;
-
-typedef struct	s_redir
-{
-	t_redir_type	type;
-	char			*target;
-	int				fd;
-	struct s_redir	*next;
-} t_redir;
-
-typedef struct	s_cmd
-{
-	char			**argv;
-	t_redir			*redirs;
-	t_std_fds		*stdfds;
-	struct s_cmd	*next;
-} t_cmd;
-
-typedef struct s_mh
-{
-	t_env	*llist;
-	t_cmd	cmds;
-	int		last_exit;
-} t_mh;
-
 //init.c
-void	init_shell(t_mh *mh, char **envp);
+void	init_shell(t_shell *data, char **envp);
 //dispatcher.c
 int		dispatcher(t_cmd *cmds, t_env *env);
 //builtins.c

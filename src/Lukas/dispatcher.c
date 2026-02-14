@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dispatcher.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 21:23:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/13 21:01:26 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:34:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/miniheaven.h"
 #include "../../include/execute.h"
+
 
 int	exec_pipe(t_cmd *cmds, t_env *env)
 {
@@ -27,7 +29,7 @@ int	exec_external(t_cmd *cmds, t_env *env)
 	if (pid == 0)
 	{
 //		setup_child_signals();
-		if (apply_redirections(cmds->redirs))
+		if (apply_redirections(cmds->redir))
 			return (1);
 		execve(resolve_path(cmds->argv[0], env), cmds->argv, llist_to_env(env));
 //		perror("execve");
@@ -45,14 +47,14 @@ int	exec_single(t_cmd *cmds, t_env *env) // change to t_cmd
 //		return (apply_redirs_only(cmds->redirs));
 	if (is_builtin(cmds->argv[0]))
 	{
-		if (apply_redirections(cmds->redirs) != 0)
+		if (apply_redirections(cmds->redir) != 0)
 		{
-			restore_std_fds(cmds->stdfds);
+		//	restore_std_fds(cmds->stdfds);
 			return (1);
 		}
 		printf("single\n");
 		status = exec_builtin(cmds, env);
-		restore_std_fds(cmds->stdfds);
+//		restore_std_fds(cmds->fds);
 		return (status);
 	}
 	else

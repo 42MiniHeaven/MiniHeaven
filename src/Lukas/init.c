@@ -6,13 +6,13 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 14:22:46 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:28:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/execute.h"
+#include "../../include/miniheaven.h"
 
-void	init_shell(t_mh *data, char **envp)
+void	init_shell(t_shell *data, char **envp)
 {
 	if (envp[0] != NULL)
 	{

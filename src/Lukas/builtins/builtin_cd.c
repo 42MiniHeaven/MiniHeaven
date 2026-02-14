@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 16:35:08 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:05:10 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:22:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 static char *get_cd_target(char **args, t_env *env)
 {

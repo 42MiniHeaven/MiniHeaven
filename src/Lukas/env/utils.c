@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:13:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:59:54 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:22:08 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 char	*ft_strjoin_char(char const *s1, char const *s2, char c)
 {

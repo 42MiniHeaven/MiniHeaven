@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   forking.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 20:05:14 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/10 23:06:26 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:36:12 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/miniheaven.h"
 #include "../../include/execute.h"
 
 int	dispatch_pipeline(t_cmd *cmds, t_env *env)
@@ -39,7 +40,7 @@ int	dispatch_pipeline(t_cmd *cmds, t_env *env)
 				close(fd[0]);
 				close(fd[1]);
 			}
-			if (apply_redirections(cmd->redirs))
+			if (apply_redirections(cmd->redir))
 				exit(1);
 			if (is_builtin(cmd->argv[0]))
 				exit(exec_builtin(cmd, env));

@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:58:16 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:18:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:23:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 int	builtin_pwd(t_cmd *cmd, t_env **env)
 {

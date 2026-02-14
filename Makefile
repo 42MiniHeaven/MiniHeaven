@@ -6,33 +6,35 @@
 #    By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/14 12:59:42 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/14 15:18:34 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC := main.c \
-		init.c \
-		dispatcher.c \
-		exec_builtin.c \
-		free.c \
-		forking.c \
-		redirections.c \
-		fds.c \
-		heredoc.c \
-		env/env_init.c \
-		env/env_utils.c \
-		env/env_set.c \
-		env/env_unset.c \
-		env/utils.c \
-		builtins/builtins.c \
-		builtins/builtin_cd.c \
-		builtins/builtin_echo.c \
-		builtins/builtin_env.c \
-		builtins/builtin_exit.c \
-		builtins/builtin_export.c \
-		builtins/builtin_pwd.c \
-		builtins/builtin_unset.c \
-		external/resolve.c
+SRC := src/main.c \
+		src/AJ/lexer.c \
+		src/AJ/parser.c \
+		src/Lukas/init.c \
+		src/Lukas/dispatcher.c \
+		src/Lukas/exec_builtin.c \
+		src/Lukas/free.c \
+		src/Lukas/forking.c \
+		src/Lukas/redirections.c \
+		src/Lukas/fds.c \
+		src/Lukas/heredoc.c \
+		src/Lukas/env/env_init.c \
+		src/Lukas/env/env_utils.c \
+		src/Lukas/env/env_set.c \
+		src/Lukas/env/env_unset.c \
+		src/Lukas/env/utils.c \
+		src/Lukas/builtins/builtins.c \
+		src/Lukas/builtins/builtin_cd.c \
+		src/Lukas/builtins/builtin_echo.c \
+		src/Lukas/builtins/builtin_env.c \
+		src/Lukas/builtins/builtin_exit.c \
+		src/Lukas/builtins/builtin_export.c \
+		src/Lukas/builtins/builtin_pwd.c \
+		src/Lukas/builtins/builtin_unset.c \
+		src/Lukas/external/resolve.c
 		
 NAME := minishell
 CC := cc
@@ -41,7 +43,7 @@ LDLIBS := -lreadline
 
 OBJ := $(SRC:.c=.o)
 
-LIBFT_DIR := ../../Libft
+LIBFT_DIR := Libft
 LIBFT := $(LIBFT_DIR)/libft.a
 
 all: $(LIBFT) $(NAME)

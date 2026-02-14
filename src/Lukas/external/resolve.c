@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   resolve.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 16:30:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 17:24:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:21:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 char	*resolve_path(char *cmd, t_env *env)
 {

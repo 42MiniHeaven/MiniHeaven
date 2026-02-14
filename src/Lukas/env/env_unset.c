@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:03:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:58:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:21:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 /**
  * @brief   Removes an element from the environment list.

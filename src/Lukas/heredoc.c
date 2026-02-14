@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:08:18 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/13 21:00:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:52:42 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 int	handle_heredoc(t_redir *redir)
 {
@@ -22,7 +22,7 @@ int	handle_heredoc(t_redir *redir)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || strcmp(line, redir->target) == 0)
+		if (!line || strcmp(line, redir->file) == 0)
 		{
 			free(line);
 			break;
@@ -44,10 +44,10 @@ int	handle_all_heredocs(t_cmd *cmds)
 	cmd = cmds;
 	while (cmd)
 	{
-		r = cmd->redirs;
+		r = cmd->redir;
 		while (r)
 		{
-			if (r->type == REDIR_HEREDOC)
+			if (r->type == HEREDOC)
 			{
 				if (handle_heredoc(r))
 					return (1);

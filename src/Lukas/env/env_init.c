@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:07:00 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/13 20:49:05 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:21:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 /**
  * @brief   Creates the environment list.

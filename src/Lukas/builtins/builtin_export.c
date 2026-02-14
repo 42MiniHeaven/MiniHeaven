@@ -6,12 +6,12 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:18:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:23:22 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 /**
  * @brief   Export allows to add to env list.

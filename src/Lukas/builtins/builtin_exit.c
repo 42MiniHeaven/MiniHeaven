@@ -6,13 +6,13 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/07 22:12:57 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/14 15:23:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 //#include "../env/env.h"
-#include "../../../include/execute.h"
+#include "../../include/miniheaven.h"
 
 static int	is_numeric(char *s)
 {
