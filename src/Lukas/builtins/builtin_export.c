@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/16 21:13:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:33:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 		if (ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) == 0)
 		{
 			size = env_size(*env);
-			return (print_sorted(llist_to_env(*env),size));
+			return (print_sorted(llist_to_env(*env),size - 1));
 		}
 	}
 	while (cmd->argv[i])
