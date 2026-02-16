@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/14 14:02:50 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:55:57 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void    lex_operator(char *input, int *i, t_token **tokens)
  * NOTE:    Helper functions were created to make the code more readble.
  */
 
-t_token	*lexer(char *input)
+void	lexer(t_shell *data, char *input)
 {
 	t_token *tokens;
     size_t  input_len;
@@ -231,7 +231,7 @@ t_token	*lexer(char *input)
         else
             lex_word(input, &i, &tokens);
 	}
-    return (tokens);
+    data->tokens = tokens;
 }
 
 // int main(void)

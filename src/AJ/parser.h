@@ -6,14 +6,17 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/14 17:46:54 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:56:46 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "../../include/miniheaven.h"
+# include "../../include/miniheaven.h"
+
+typedef struct s_shell t_shell; // should be working without as already in miniheaven.h
 
 typedef struct	s_token t_token;
 typedef struct  s_redir t_redir;
@@ -71,7 +74,7 @@ struct s_cmd
 	t_cmd       *next;  // next command in pipeline
 };
 
-t_token *lexer(char *input);
+void	lexer(t_shell *data, char *input);
 t_cmd   *parse(t_token *tokens);
 void	destroy_all(t_cmd *cmds, t_token *tokens);
 int		syntax_error(char *message);

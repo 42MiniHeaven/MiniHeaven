@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 20:38:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:51:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 		if (input)
 		{
 			add_history(input);
-			data.tokens = lexer(input);
+			lexer(&data, input);
 		}
 		data.cmds = parse(data.tokens);
 		dispatcher(data.cmds, data.llist, data.fds);
