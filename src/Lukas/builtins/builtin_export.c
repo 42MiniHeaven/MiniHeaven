@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 21:25:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:17:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	print_sorted(char **arr, int n)
 	}
 	i = -1;
 	while (arr[++i])
-		printf("%s\n", arr[i]);
+		printf("declare -x %s\n", arr[i]);
 	return (0);
 }
 
