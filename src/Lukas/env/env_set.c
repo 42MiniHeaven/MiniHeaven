@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 21:34:53 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:14:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,14 @@ static void	add_back(t_env *env, char *cmd)
  * @param   *value	either a string or NULL.
  */
 
-void	env_set(t_env *env, int create, char *value)
+void	env_set(t_env *env, int new, char *value)
 {
-	if (create == 1)
+	if (new == 1)
 	{
 		update_env(env, value);
 	}
-	if (create == 2)
+	if (new == 2)
 	{
-		printf("%s\n", value);
 		add_back(env, value);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/16 16:17:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:13:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,25 @@ static	int	env_size(t_env *env)
 	return (i);
 }
 
-static int	export_check(t_env *env, char *str)
+static int	export_check(t_env **env, char *str)
 {
-	int		i;
+	int	i;
 	char	*key;
 	char	*value;
 
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
-	key = ft_substr(str, 0, i - 1);
+	key = ft_substr(str, 0, i);
 	if (!key)
 		return (1);
-	value = ft_substr(str, i + 1, ft_strlen(str) - (i + 1) );
+	value = ft_substr(str, i + 1, ft_strlen(str) - i + 1);
 	if (!value)
 		return (free(key), 1);
-	if (!env_find(env, key))
-		env_set(env, 2, str);
+	if (env_find(*env, key))
+		env_set(env_find(*env, key), 1, value);
 	else
-		env_set(env_find(env, key), 1, value);
+		env_set(*env, 2, str);
 	return (0);
 }
 
@@ -104,7 +104,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 	}
 	while (cmd->argv[i])
 	{
-		if (export_check(*env, cmd->argv[i]) != 0)
+		if (export_check(env, cmd->argv[i]) != 0)
 			status = 1;
 		i++;
 	}
