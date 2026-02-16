@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 16:14:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 21:26:27 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:15:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_env	*env_new(char *key, char *value)
 	if (!node)
 		return (NULL);
 	node->key = ft_strdup(key);
-	node->value = ft_strdup(value);
+	if (value)
+		node->value = ft_strdup(value);
+	else
+		node->value = NULL;
 	if (node->value)
 		node->is_exported = 0;
 	else
