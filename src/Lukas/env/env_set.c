@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/16 21:14:10 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:16:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	update_env(t_env *env, char *cmd)
 	if (!cmd)
 	{
 		env->value = NULL;
-		env->is_exported = 0;	//define numbers to display on export or env
+		env->is_exported = 0;
 		return ;
 	}
 	free(env->value);
-	env->value = cmd; //maybe strdup
+	env->value = ft_strdup(cmd);
 }
 
 /**
@@ -48,9 +48,7 @@ static void	add_back(t_env *env, char *cmd)
 {
 	t_env	*tmp;
 	size_t	i;
-//	size_t	n;
 	size_t	len;
-//	size_t	start;
 
 	len = ft_strlen(cmd);
 	i = 0;
