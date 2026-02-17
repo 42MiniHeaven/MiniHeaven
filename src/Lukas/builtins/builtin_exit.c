@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/17 16:29:07 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:23:12 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 static int	is_numeric(char *s)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	if (!s)
 		return (0);
 	if (s[i] == '+' || s[i] == '-')
@@ -38,7 +40,7 @@ int	builtin_exit(t_cmd *cmd, t_env **env)
 	printf("exit\n");
 	free_linked(*env);
 	if (!cmd->argv[1])
-		exit(42);		//exit from other calls
+		exit(42);//exit from other calls
 	if (!is_numeric(cmd->argv[1]))
 	{
 		fprintf(stderr, "exit: %s: numeric argument required\n", cmd->argv[1]);

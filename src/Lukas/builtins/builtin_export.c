@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/16 21:33:24 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:22:11 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
  * @param   data	Struct containing env list and envp
  * @param   cmd		Input string containing export and potential flags
  */
-
 
 static int	print_sorted(char **arr, int n)
 {
@@ -66,7 +65,7 @@ static	int	env_size(t_env *env)
 
 static int	export_check(t_env **env, char *str)
 {
-	int	i;
+	int		i;
 	char	*key;
 	char	*value;
 
@@ -99,7 +98,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 		if (ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) == 0)
 		{
 			size = env_size(*env);
-			return (print_sorted(llist_to_env(*env),size - 1));
+			return (print_sorted(llist_to_env(*env), size - 1));
 		}
 	}
 	while (cmd->argv[i])
