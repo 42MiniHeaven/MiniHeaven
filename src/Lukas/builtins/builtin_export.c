@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 21:25:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:22:11 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
  * @param   data	Struct containing env list and envp
  * @param   cmd		Input string containing export and potential flags
  */
-
 
 static int	print_sorted(char **arr, int n)
 {
@@ -46,7 +45,7 @@ static int	print_sorted(char **arr, int n)
 	}
 	i = -1;
 	while (arr[++i])
-		printf("%s\n", arr[i]);
+		printf("declare -x %s\n", arr[i]);
 	return (0);
 }
 
@@ -64,7 +63,7 @@ static	int	env_size(t_env *env)
 	return (i);
 }
 
-static int	export_check(t_env *env, char *str)
+static int	export_check(t_env **env, char *str)
 {
 	int		i;
 	char	*key;
@@ -73,16 +72,16 @@ static int	export_check(t_env *env, char *str)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
-	key = ft_substr(str, 0, i - 1);
+	key = ft_substr(str, 0, i);
 	if (!key)
 		return (1);
-	value = ft_substr(str, i + 1, ft_strlen(str) - (i + 1) );
+	value = ft_substr(str, i + 1, ft_strlen(str) - i + 1);
 	if (!value)
 		return (free(key), 1);
-	if (!env_find(env, key))
-		env_set(env, 2, str);
+	if (env_find(*env, key))
+		env_set(env_find(*env, key), 1, value);
 	else
-		env_set(env_find(env, key), 1, value);
+		env_set(*env, 2, str);
 	return (0);
 }
 
@@ -99,12 +98,12 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 		if (ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) == 0)
 		{
 			size = env_size(*env);
-			return (print_sorted(llist_to_env(*env),size));
+			return (print_sorted(llist_to_env(*env), size - 1));
 		}
 	}
 	while (cmd->argv[i])
 	{
-		if (export_check(*env, cmd->argv[i]) != 0)
+		if (export_check(env, cmd->argv[i]) != 0)
 			status = 1;
 		i++;
 	}

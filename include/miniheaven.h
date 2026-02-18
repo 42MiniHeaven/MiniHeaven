@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/16 21:21:03 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:47:52 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <aio.h>
 # include <ctype.h>
 
+typedef struct	s_token	t_token;
 typedef struct	s_shell	t_shell;
 typedef struct	s_fds	t_fds;
 
@@ -88,4 +89,12 @@ void	restore_std_fds(t_fds *saved);
 int	handle_heredoc(t_redir *redir);
 int	handle_all_heredocs(t_cmd *cmds);
 
+//cleanUp.c
+void	free_struct_tokens(t_token *lst);
+void	free_struct_cmds(t_cmd *lst);
+void	free_struct_llist(t_env *lst);
+void	free_struct_shell(t_shell *data);
+
+//free_call.c
+void	free_call(t_shell data, int args, char *input);
 #endif

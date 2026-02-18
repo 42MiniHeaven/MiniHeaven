@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:19:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 17:11:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/18 17:27:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ void	free_linked(t_env *head)
 {
 	t_env	*tmp;
 
+	if (!head)
+		return ;
 	while (head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp->key);
-		free(tmp->value);
+		if (tmp->key)
+			free(tmp->key);
+		if (tmp->value)
+			free(tmp->value);
 		free(tmp);
 	}
+	tmp = NULL;
 }

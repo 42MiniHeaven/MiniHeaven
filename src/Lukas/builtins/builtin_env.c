@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:10:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:22:29 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/16 20:17:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	builtin_env(t_cmd *cmd, t_env **env)
 	current = *env;
 	if (cmd->argv[1])
 	{
-		ft_putstr_fd("Error", 2);
+		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
 	while (current)
 	{
-		if (current->value)
+		if (current->value[0] != '\0')
 			printf("%s=%s\n", current->key, current->value);
 		current = current->next;
 	}

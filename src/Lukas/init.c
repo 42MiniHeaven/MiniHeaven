@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/16 21:18:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:48:17 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ static void	env_i(t_env **llist)
 	env = malloc (sizeof(char *) * 4);
 	if (!env)
 		return ;
+	
 	shlvl_str = get_env_value("SHLVL", *llist);
-	shlvl = 1;
+	shlvl = 0;
 	if (shlvl_str)
-		shlvl = ft_atoi(shlvl_str) + 1;
+		shlvl = ft_atoi(shlvl_str);
 	env[0] = ft_strjoin("PWD=", get_pwd());
 	env[1] = ft_strjoin("SHLVL=", ft_itoa(shlvl));
 	env[2] = ft_strjoin("_=", get_shell_path());

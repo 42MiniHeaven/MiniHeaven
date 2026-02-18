@@ -6,17 +6,19 @@
 #    By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/14 18:50:54 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/18 20:10:03 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC := src/main.c \
+		src/cleanUp.c \
+		src/free.c \
+		src/free_call.c \
 		src/AJ/lexer.c \
 		src/AJ/parser.c \
 		src/Lukas/init.c \
 		src/Lukas/dispatcher.c \
 		src/Lukas/exec_builtin.c \
-		src/Lukas/free.c \
 		src/Lukas/forking.c \
 		src/Lukas/redirections.c \
 		src/Lukas/fds.c \
@@ -38,7 +40,7 @@ SRC := src/main.c \
 		
 NAME := minishell
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -I Libft/include
+CFLAGS := -Wall -Wextra -Werror -I Libft/include -g
 LDLIBS := -lreadline
 
 OBJ := $(SRC:.c=.o)
