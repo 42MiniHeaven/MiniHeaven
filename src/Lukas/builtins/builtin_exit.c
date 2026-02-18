@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/17 17:23:12 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/18 23:07:43 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	builtin_exit(t_cmd *cmd, t_env **env)
 
 	(void)env;
 	printf("exit\n");
-	free_linked(*env);
+	free_env(*env);
 	if (!cmd->argv[1])
 		exit(42);//exit from other calls
 	if (!is_numeric(cmd->argv[1]))

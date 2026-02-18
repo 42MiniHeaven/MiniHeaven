@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 22:18:32 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/18 23:07:19 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int				is_builtin(const char *name);
 //free.c
 void	free_arr(char **arr);
 void	free_str(char *str);
-void	free_linked(t_env *head);
+void	free_env(t_env *head);
 
 //exec_builtin.c
 int		exec_builtin(t_cmd *cmds, t_env *env);
@@ -89,12 +89,11 @@ void	restore_std_fds(t_fds *saved);
 int	handle_heredoc(t_redir *redir);
 int	handle_all_heredocs(t_cmd *cmds);
 
-//cleanUp.c
+//free_call.c
+void	free_call(t_shell data, int args, char *input);
 void	free_tokens(t_token *lst);
 void	free_cmds(t_cmd *lst);
 void	free_llist(t_env *lst);
 void	free_shell(t_shell *data);
 
-//free_call.c
-void	free_call(t_shell data, int args, char *input);
 #endif

@@ -6,12 +6,11 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/18 21:42:43 by azielnic         ###   ########.fr        #
+#    Updated: 2026/02/18 22:28:03 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC := src/main.c \
-		src/cleanUp.c \
 		src/free.c \
 		src/free_call.c \
 		src/AJ/lexer.c \

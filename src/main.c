@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 20:48:02 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/18 23:31:38 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	main(int argc, char **argv, char **envp)
 		dispatcher(data.cmds, data.llist, data.fds);
 		free_call(data, 0, input);
 	}
-		free_call(data, 1, input);
+	free_call(data, 1, input);
 	return (0);
 }

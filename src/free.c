@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:19:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 17:27:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/18 23:36:36 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-
-/*General Description:	Freeing the allocated space from environment*/
-
-/*Func Description:	Freeing the allocated space for our Array of Strings.
-			frees the strings and set the arr to NULL*/
 
 void	free_arr(char **arr)
 {
@@ -25,13 +20,13 @@ void	free_arr(char **arr)
 		return ;
 	i = -1;
 	while (arr[++i])
+	{
 		free(arr[i]);
+		arr[i] = NULL;
+	}
 	free(arr);
 	arr = NULL;
 }
-
-/*Func Description:	Freeing the allocated string
-			frees the string.*/
 
 void	free_str(char *str)
 {
@@ -41,10 +36,13 @@ void	free_str(char *str)
 	str = NULL;
 }
 
-/*Func Description:	Freeing the used linked list of our costum environment
-			Mabye some rework for later*/
-
-void	free_linked(t_env *head)
+/* 
+ * DESCRIPTION
+ *		Freeing the used linked list of our custom environment.
+ *		Maybe some rework for later.
+ */
+ 
+void	free_env(t_env *head)
 {
 	t_env	*tmp;
 
@@ -55,9 +53,16 @@ void	free_linked(t_env *head)
 		tmp = head;
 		head = head->next;
 		if (tmp->key)
+		{
 			free(tmp->key);
+			tmp->key = NULL;
+		}
 		if (tmp->value)
+		{
 			free(tmp->value);
+			tmp->value = NULL;
+		}
+		tmp->is_exported = 0;
 		free(tmp);
 	}
 	tmp = NULL;
