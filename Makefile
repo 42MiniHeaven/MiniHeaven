@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/17 16:37:39 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/18 18:02:31 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC := src/main.c \
 		src/Lukas/redirections.c \
 		src/Lukas/fds.c \
 		src/Lukas/heredoc.c \
+		src/Lukas/cleanUp.c \
+		src/Lukas/free_call.c \
 		src/Lukas/env/env_init.c \
 		src/Lukas/env/env_utils.c \
 		src/Lukas/env/env_set.c \
