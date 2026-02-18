@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 18:03:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:53:40 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	main(int argc, char **argv, char **envp)
 		dispatcher(data.cmds, data.llist, data.fds);
 		free_call(data, 0, input);
 	}
-	free_call(data, 1, input);
+		free_call(data, 1, input);
 	return (0);
 }

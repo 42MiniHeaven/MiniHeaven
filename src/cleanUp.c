@@ -6,12 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:27:09 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 18:17:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:01:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-#include "../AJ/parser.h"
 
 void	free_struct_tokens(t_token *lst)
 {
