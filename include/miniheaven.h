@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 20:47:52 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/18 22:18:32 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ int	handle_heredoc(t_redir *redir);
 int	handle_all_heredocs(t_cmd *cmds);
 
 //cleanUp.c
-void	free_struct_tokens(t_token *lst);
-void	free_struct_cmds(t_cmd *lst);
-void	free_struct_llist(t_env *lst);
-void	free_struct_shell(t_shell *data);
+void	free_tokens(t_token *lst);
+void	free_cmds(t_cmd *lst);
+void	free_llist(t_env *lst);
+void	free_shell(t_shell *data);
 
 //free_call.c
 void	free_call(t_shell data, int args, char *input);

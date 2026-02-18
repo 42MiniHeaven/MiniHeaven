@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_call.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:47:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 18:17:55 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/18 22:15:48 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	free_call(t_shell data, int args, char *input)
 {
 	if (input)
 		free(input);
-	if (data.tokens)
-		free_struct_tokens(data.tokens);
 	if (data.cmds)
-		free_struct_cmds(data.cmds);
+		free_cmds(data.cmds);
+	if (data.tokens)
+		free_tokens(data.tokens);
 	if (args == 1)
 	{
-		free_struct_llist(data.llist);
-		free_struct_shell(&data);
+		free_llist(data.llist);
+		free_shell(&data);
 	}
 }

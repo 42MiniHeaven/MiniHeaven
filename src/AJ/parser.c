@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/14 14:02:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/18 22:20:46 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,58 +43,58 @@
  *								-next (t_redir *)		
  */
 
-void	free_redirs(t_redir *redir)
-{
-	t_redir	*next;
-	
-	while (redir)
-	{
-		next = redir->next;
-		free(redir);
-		redir = next;
-	}
-}
- 
-void	free_cmds(t_cmd *cmd)
-{
-	t_cmd	*next;
-	
-	while (cmd)
-	{
-		next = cmd->next;
-		if (cmd->argv)
-			free(cmd->argv);
-		if (cmd->redir)
-			free_redirs(cmd->redir);
-		free(cmd);
-		cmd = next;
-	}
-}
-
-// void	free_tokens(t_token *token)
+// void	free_redirs(t_redir *redir)
 // {
-// 	t_token	*next;
+// 	t_redir	*next;
 	
-// 	while (token)
+// 	while (redir)
 // 	{
-// 		next = token->next;
-// 		free(token->value);
-// 		free(token);
-// 		token = next;
+// 		next = redir->next;
+// 		free(redir);
+// 		redir = next;
+// 	}
+// }
+ 
+// void	free_cmds(t_cmd *cmd)
+// {
+// 	t_cmd	*next;
+	
+// 	while (cmd)
+// 	{
+// 		next = cmd->next;
+// 		if (cmd->argv)
+// 			free(cmd->argv);
+// 		if (cmd->redir)
+// 			free_redirs(cmd->redir);
+// 		free(cmd);
+// 		cmd = next;
 // 	}
 // }
 
-/*
- * GENERAL: Cleaning funtion which first destroys all parser output and then
- * 			all lexer output.
- */
+// // void	free_tokens(t_token *token)
+// // {
+// // 	t_token	*next;
+	
+// // 	while (token)
+// // 	{
+// // 		next = token->next;
+// // 		free(token->value);
+// // 		free(token);
+// // 		token = next;
+// // 	}
+// // }
 
-void	destroy_all(t_cmd *cmds, t_token *tokens)
-{
-	free_cmds(cmds);
-	(void) tokens;
-	// free_tokens(tokens);
-}
+// /*
+//  * GENERAL: Cleaning funtion which first destroys all parser output and then
+//  * 			all lexer output.
+//  */
+
+// void	destroy_all(t_cmd *cmds, t_token *tokens)
+// {
+// 	free_cmds(cmds);
+// 	(void) tokens;
+// 	// free_tokens(tokens);
+// }
 
 /////////////// destroy functions above will get tehir own file ///////////////////
  
@@ -159,17 +159,15 @@ int	redir_add(t_cmd *cmd, int type, char *file)
 int	argv_add(t_cmd *cmd, char *word)
 {
 	int		i;
-	char	**tmp;
 	
 	if (!cmd)
 		return (0);
 	i = 0;
 	while (cmd->argv && cmd->argv[i])
 		i++;
-	tmp = ft_realloc(cmd->argv, i, i + 2);
-	if (!tmp)
+	cmd->argv = ft_realloc(cmd->argv, i, i + 2);
+	if (!cmd->argv)
 		return (0);
-	cmd->argv = tmp;
 	cmd->argv[i] = word;
 	cmd->argv[i + 1] = NULL;
 	return (1);
