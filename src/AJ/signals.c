@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/22 22:22:36 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/22 22:37:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ extern volatile sig_atomic_t	g_signal_status;
 void	handle_signals(int sigtype)
 {
 	g_signal_status = sigtype;
-	if (sigtype == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	// if (sigtype == SIGINT)
+	// {
+	// 	write(1, "\n", 1);
+	// 	rl_on_new_line();
+	// 	rl_replace_line("", 0);
+	// 	rl_redisplay();
+	// }
 }
