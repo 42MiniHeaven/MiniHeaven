@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/16 21:55:57 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:20:39 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,16 @@ void    lex_operator(char *input, int *i, t_token **tokens)
     (*i)++;
     token_add_back(tokens, token);
 }
+/*
+ * DESCRIPTION
+ *      
+ *
+ */
+
+// void    validity_check(char *input)
+// {
+    
+// }
 
 /*
  * GENERAL: Converts the received input into tokens and prepares them for parsing.
@@ -210,16 +220,18 @@ void    lex_operator(char *input, int *i, t_token **tokens)
  * NOTE:    Helper functions were created to make the code more readble.
  */
 
-void	lexer(t_shell *data, char *input)
+void	lexer(t_shell *data, char *input)   // should be called tokeniser
 {
 	t_token *tokens;
     size_t  input_len;
     int     i;
 
-	tokens = NULL; // memset?
+//  if (validity_check(input) == 0 / 1);
+//      return (error);
+	ft_memset(&tokens, 0, sizeof(tokens));
     input_len = ft_strlen(input);
     i = 0;
-	while ((size_t)i < input_len) // could only be input[i] but that way is safer
+	while ((size_t)i < input_len)   // could only be input[i] but that way is safer
 	{
 		if (ft_isspace(input[i]))
         {
@@ -233,7 +245,6 @@ void	lexer(t_shell *data, char *input)
 	}
     data->tokens = tokens;
 }
-
 // int main(void)
 // {
 //     char *line = "echo blub \"hello world\"blabla ls -l || cat <<< e";

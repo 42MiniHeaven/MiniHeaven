@@ -6,12 +6,17 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 23:07:19 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:56:14 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIHEAVEN_H
 # define MINIHEAVEN_H
+
+// needed for sigaction()
+# ifndef _POSIX_C_SOURCE
+#  define _POSIX_C_SOURCE 200809L
+# endif
 
 # include <stdio.h>					// printf
 # include <unistd.h>				// write
@@ -41,9 +46,9 @@ struct	s_shell
 	t_token *tokens;
 	t_cmd	*cmds;
 	int		exit_code;
+	int		last_signal;
 	t_env	*llist;
 	t_fds	*fds;
-	int		last_signal;
 };
 
 struct	s_fds

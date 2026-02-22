@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/18 22:28:03 by azielnic         ###   ########.fr        #
+#    Updated: 2026/02/22 22:24:25 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRC := src/main.c \
 		src/free_call.c \
 		src/AJ/lexer.c \
 		src/AJ/parser.c \
+		src/AJ/signals.c \
 		src/Lukas/init.c \
 		src/Lukas/dispatcher.c \
 		src/Lukas/exec_builtin.c \
@@ -39,7 +40,7 @@ SRC := src/main.c \
 		
 NAME := minishell
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -I Libft/include -g
+CFLAGS := -Wall -Wextra -Werror -g -I Libft/include
 LDLIBS := -lreadline
 
 OBJ := $(SRC:.c=.o)
@@ -58,7 +59,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDLIBS) -o $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
@@ -70,7 +71,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
 
 banner:
 	@echo '  __  __ _       _ _   _'

@@ -6,12 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 20:48:17 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:03:54 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-#include "env/env.h"
+
+volatile sig_atomic_t	g_signal_status = 0;
 
 static char	*get_shell_path()
 {
@@ -64,6 +65,7 @@ static void	env_i(t_env **llist)
 
 void	init_shell(t_shell *data, char **envp)
 {
+	
 	if (envp[0] != NULL)
 		create_env_list(&data->llist, envp);
 	else
