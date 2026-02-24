@@ -6,27 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/22 23:17:46 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/24 21:16:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniheaven.h"
-
-extern volatile sig_atomic_t	g_signal_status;
-
-#include <sys/ioctl.h>
-
-/*
- * DESCRIPTION
- *		The ioctl function  the second variable TIOCSTI fakes input a
- */
-int	hook_main(void)
-{
-	ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	rl_replace_line("", 0);
-	rl_clear_history();
-	return (0);
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -37,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	ft_memset(&data, 0, sizeof(data));
 	init_shell(&data, envp);
-	rl_signal_event_hook = hook_main;
+	rl_signal_event_hook = rl_hook;
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -51,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 				add_history(input);
 			lexer(&data, input);
 		}
-		data.cmds = parse(data.tokens);
+		data.cmds = parse(data.tokens); // change input to &data to match lexer
 		dispatcher(data.cmds, data.llist, data.fds);
 		free_call(data, 0, input);
 	}
