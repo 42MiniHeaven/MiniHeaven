@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/25 20:20:27 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:36:49 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@
  * 
  * ????? --> Only interprets structure 
  */
- 
-// int validate_input(char* input) // returns true or false, false should print an error
-// {
-// not in quotes
-// inside single quotes
-// inside double quotes
-// }
-
-
-// decide how to design the error should it be a void or an int should it exit here or not 
-// int	syntax_error(char *message)
-// {
-// 	ft_putstr_fd("Syntax error: ", 2);
-// 	ft_putendl_fd(message, 2);
-// 	return (0);
-// }
 
 int ft_is_operator(int c)
 {
@@ -56,17 +40,14 @@ int ft_isspace(int c)
 }
 
 /*
- * GENERAL: Adds a new token to the end of the current token list. Function name 
- *			says what the functions does (add) and where it does it (back) 
- *			applying it to tokens.
+ * DESCRIPTION
+ * Adds a new token to the end of the current token list. Function name says what the 
+ * functions does (add) and where it does it (back) applying it to tokens.
  * 
- * NOTE:	t_token **list is a pointer to the head pointer of the list.
- *			In case the list is empty it is needed so the head can be updated.
- *			t_token *new is the token to be added.
- * 
- * INFO:	Common in linked list naming conventions:
- *			- add_front → adds at the head (beginning)
- *			- add_back → adds at the tail (end)
+ * NOTE
+ * t_token **list is a pointer to the head pointer of the list.
+ * In case the list is empty it is needed so the head can be updated.
+ * t_token *new is the token to be added.
  */
 
 void    token_add_back(t_token **list, t_token *new)
@@ -88,7 +69,8 @@ void    token_add_back(t_token **list, t_token *new)
 }
 
 /*
- * GENERAL: Combines the gathered info and ONLY creates a new node.
+ * DESCRIPTION
+ * Combines the gathered info and ONLY creates a new node.
  */
 
 t_token *token_new(int type, char *value)
@@ -173,24 +155,16 @@ void    lex_operator(char *input, int *i, t_token **tokens)
     (*i)++;
     token_add_back(tokens, token);
 }
-/*
- * DESCRIPTION
- *      
- *
- */
-
-// void    validity_check(char *input)
-// {
-    
-// }
 
 /*
- * GENERAL: Converts the received input into tokens and prepares them for parsing.
+ * DESCRIPTION 
+ * Converts the received input into tokens and prepares them for parsing.
  * 
- * NOTE:    Helper functions were created to make the code more readble.
+ * NOTE
+ * Helper functions were created to make the code more readble.
  */
 
-void	lexer(t_shell *data, char *input)   // should be called tokeniser
+void	lexer(t_shell *data, char *input)   // should be called tokeniser??
 {
 	t_token *tokens;
     size_t  input_len;
@@ -215,15 +189,3 @@ void	lexer(t_shell *data, char *input)   // should be called tokeniser
 	}
     data->tokens = tokens;
 }
-// int main(void)
-// {
-//     char *line = "echo blub \"hello world\"blabla ls -l || cat <<< e";
-//     t_token *tokens = lexer(line);
-
-//     while (tokens)
-//     {
-//         printf("TYPE=%d VALUE=%s\n", tokens->type, tokens->value);
-//         tokens = tokens->next;
-//     }
-//     return (0);
-// }
