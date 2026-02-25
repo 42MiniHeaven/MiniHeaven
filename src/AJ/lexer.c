@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/25 20:36:49 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/25 23:24:26 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,23 +100,61 @@ void	create_token(char *input, int *i, int start, t_token **tokens)
     token_add_back(tokens, token);
 }
 
-void lex_word(char *input, int *i, t_token **tokens)
+void    lex_word(t_shell *data, char *input, int *i, t_token **tokens)
 {
- 	int		start;
+	char	*word;
+	char	*segment;
+	char	*tmp;
+	char	*temp;
 
-	start = *i;
-    while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
+	word = ft_strdup("");
+	temp = ft_calloc(2, sizeof(char));
+	if (!word)
+		return;
+	while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
 	{
-        if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
+		if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
 		{
-			if (!quote_handler(input, i))
+			segment = quote_handler(input, i);
+			if (!segment)
+			{
+ 				free(word);
 				return ;
+			}
+			tmp = word;
+			word = ft_strjoin(word, segment);
+			free(tmp);
+			free(segment);
 		}
 		else
+		{
+			temp[0] = input[*i];
+			temp[1] = '\0';
+			word = ft_strjoin(word, temp);
 			(*i)++;
+		}
 	}
-	create_token(input, i, start, tokens);
+    token_add_back(tokens, token_new(WORD, word));
 }
+
+// void lex_word(char *input, int *i, t_token **tokens)
+// {
+//  	int		start;
+
+// 		start = *i;
+//     while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
+// 	{
+//         if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
+// 		{
+// 			if (!quote_handler(input, i))
+// 				return ;
+//             //else continue; // so when the quote is finsihed the token is created
+// 		}
+// 		else
+// 			(*i)++;
+// 	}
+// 	create_token(input, i, start, tokens);
+// }
 
 /*
  * GENERAL: Determines the operator at input[i], creates the correct token, 
