@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:47:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 23:37:29 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/24 22:55:48 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "../include/miniheaven.h"
 
 /*
  * IDEA: 	Either all information from the lexer is duplicated or borrowed.

@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:19:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 23:36:36 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/24 22:55:53 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "../include/miniheaven.h"
 
 void	free_arr(char **arr)
 {

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 20:07:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/23 22:26:46 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/24 22:20:20 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-// input = echo $test"$lol"'lul';
+/*
+ * TO BE IMPLEMENTED?
+ * Currently quotes are printed. In the expander section the quotes could be 
+ * stripped for both single and double quotes.
+ *
+ */
 
 void	fill_mask(char *str, char *mask, int *i, char c, char type)
 {

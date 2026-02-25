@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/22 22:24:25 by azielnic         ###   ########.fr        #
+#    Updated: 2026/02/25 20:19:30 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC := src/main.c \
 		src/AJ/lexer.c \
 		src/AJ/parser.c \
 		src/AJ/signals.c \
+		src/AJ/quotes.c \
 		src/Lukas/init.c \
 		src/Lukas/dispatcher.c \
 		src/Lukas/exec_builtin.c \

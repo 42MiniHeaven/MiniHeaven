@@ -6,13 +6,17 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/24 21:21:16 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/24 21:45:56 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-
 #include <sys/ioctl.h>
+
+/*
+ * First initialised in 
+ * extern -> 
+ */
 
 extern volatile sig_atomic_t	g_signal_status;
 
@@ -36,10 +40,37 @@ extern volatile sig_atomic_t	g_signal_status;
  * 
  * "\n": This is the character being "pushed." In this case, it’s a newline
  * (Enter key).
+ * 
+ * So if the user presses Ctrl+C:
+ * 		-The signal handler sets g_signaln
+ * 		-Readline continues waiting
+ * 		-The hook injects a newline
+ * 		-Readline finishes immediately
+ * 
+ * Effect: The prompt returns instantly.
+ * Without this, Readline would still be blocking.
+ */
+
+/*
+ * TO BE IMPLEMENTED
+ * Ctrl+C behaviour for:
+ * 		[ ]Prompt mode
+ * 		[ ]Here-doc mode
+ * 		[ ]Execution mode
+ * 		[ ]Child processes
+ * 
+ * During execution (before fork): ??
+ * signal(SIGINT, SIG_IGN);
+ * signal(SIGQUIT, SIG_IGN);
+ * 
+ * Child processes should restore default: ???????
+ * signal(SIGINT, SIG_DFL);
+ * signal(SIGQUIT, SIG_DFL);
  */
 
 int	rl_hook(void)
 {
+	// consider setting and if (g_signal == SIGINT), g_signal = 0;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	rl_replace_line("", 0);
 	rl_clear_history();

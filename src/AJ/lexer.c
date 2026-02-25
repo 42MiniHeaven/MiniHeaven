@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/18 20:20:39 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:20:27 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,36 +116,6 @@ void	create_token(char *input, int *i, int start, t_token **tokens)
     if (!token)
         syntax_error("failure assigning 'token' in lex_word function"); // Free when error;
     token_add_back(tokens, token);
-}
-
-int	quote_handler(char *input, int *i)
-{	
-	if (input[*i] == '\'')
-	{
-		(*i)++;
-		while (input[*i] && input[*i] != '\'')
-			(*i)++;
-		if (!input[*i])
-		{
-			syntax_error("unclosed single quote");
-			return (0);
-		}
-		(*i)++;
-	}
-	// // allow escaped quotes (\") to be skipped??
-	else if (input[*i] == '"')
-	{
-		(*i)++;
-		while (input[*i] && input[*i] != '"')
-			(*i)++;
-		if (!input[*i])
-		{
-			syntax_error("unclosed double quote");
-			return (0);
-		}
-		(*i)++;
-	}
-	return (1);
 }
 
 void lex_word(char *input, int *i, t_token **tokens)
