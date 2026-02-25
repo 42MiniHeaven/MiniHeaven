@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:56:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2025/05/20 12:23:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/24 20:23:54 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,8 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+
+//Minishell ones
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strjoin_char(char const *s1, char const *s2, char c);
 #endif

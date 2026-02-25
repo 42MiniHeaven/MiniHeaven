@@ -3,42 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 18:35:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 19:50:40 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/24 15:58:21 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/17 17:16:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/miniheaven.h"
 #include "env.h"
-
-/**
- * @brief   Appends a new node to the environment list.
- *
- * This functions adds a node to the end of env lst.
- * Or sets it as the head of the lst.
- *
- * @param   **env	Pointer to the environment list.
- * @param   *new	ENV node containing key=value pair.
- */
-
-void	env_add_back(t_env **env, t_env *new)
-{
-	t_env	*tmp;
-
-	if (!env || !new)
-		return ;
-	if (!*env)
-	{
-		*env = new;
-		return ;
-	}
-	tmp = *env;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
+#include "../../include/miniheaven.h"
 
 /**
  * @brief   Updates an element in the environment list.
@@ -49,12 +22,12 @@ void	env_add_back(t_env **env, t_env *new)
  * @param   *cmd	Input string containing a key=value pair.
  */
 
-void	update_env(t_env *env, char *cmd)
+static void	update_env(t_env *env, char *cmd)
 {
 	if (!cmd)
 	{
 		env->value = NULL;
-		env->flag = 1;
+		env->is_exported = 0;
 		return ;
 	}
 	free(env->value);
@@ -71,7 +44,7 @@ void	update_env(t_env *env, char *cmd)
  * @param   *cmd	Input string containing a key=value pair.
  */
 
-void	add_back(t_env **env, char *cmd)
+static void	add_back(t_env *env, char *cmd)
 {
 	t_env	*tmp;
 	size_t	i;
@@ -82,5 +55,27 @@ void	add_back(t_env **env, char *cmd)
 	while (cmd[i] && cmd[i] != '=')
 		i++;
 	tmp = env_new(ft_substr(cmd, 0, i), ft_substr(cmd, i + 1, len - i + 1));
-	env_add_back(env, tmp);
+	env_add_back(&env, tmp);
+}
+
+/**
+ * @brief   Appends or updates a linked list element.
+ *
+ * This function should apply changes to our MiniHeaven's environment.
+ * With this function export should behave same as in BASH.
+ *
+ * @param   *env	either a pointer to a linked list element or NULL.
+ * @param   *value	either a string or NULL.
+ */
+
+void	env_set(t_env *env, int new, char *value)
+{
+	if (new == 1)
+	{
+		update_env(env, value);
+	}
+	if (new == 2)
+	{
+		add_back(env, value);
+	}
 }

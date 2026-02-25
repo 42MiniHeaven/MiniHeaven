@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dispatcher.c                                       :+:      :+:    :+:   */
+/*   exec_external.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 15:14:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 13:40:33 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/23 15:40:24 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/25 12:53:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
-int	dispatcher(t_cmd *cmds, t_env *lst, t_fds *fds, int *status)
+int	exec_external(t_cmd *cmds, t_env *env)
 {
-	int	last_exit;
+	pid_t	pid;
+	int		status;
 
-	(void)status;
-	last_exit = 0;
-	if (!cmds || !cmds->argv[0])
-		return (0); //return success on empty cmd?!
-	if (handle_all_heredocs(cmds) != 0)
-		return (1);
-	if (!cmds->next)
-		last_exit = exec_single(cmds, lst, fds);
-	else
-		last_exit = exec_pipe(cmds, lst);
-	return (last_exit);
+	pid = fork();
+	if (pid == 0)
+	{
+		//setup_child_signals();
+		if (apply_redirections(cmds->redir))
+			return (1);
+		execve(resolve_path(cmds->argv[0], env), cmds->argv, lst_to_env(env));
+		//perror("execve");
+		//error message!
+		exit (127);
+	}
+	waitpid(pid, &status, 0);
+	return (status); // (extract_exit_status(status));
 }

@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 20:32:37 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 17:32:42 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/19 16:07:00 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/17 17:16:00 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "env.h"
-#include "../../../include/miniheaven.h"
+#include "env.h"
+#include "../../include/miniheaven.h"
 
 static char	*get_shlvl(char *str)
 {
@@ -49,7 +49,7 @@ void	create_env_list(t_env **start, char **envp)
 			s++;
 		key = ft_substr(envp[i], 0, s);
 		value = ft_substr(envp[i], s + 1, ft_strlen(envp[i]) - (s + 1));
-		if (ft_strcmp(key, "SHLVL") == 0
+		if (ft_strncmp(key, "SHLVL", ft_strlen(key)) == 0
 			&& (ft_strlen(key) == ft_strlen("SHLVL")))
 		{
 			tmp = get_shlvl(value);

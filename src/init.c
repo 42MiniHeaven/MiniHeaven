@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dispatcher.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 15:14:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 13:40:33 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/24 14:55:36 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/24 22:41:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "../include/miniheaven.h"
 
-int	dispatcher(t_cmd *cmds, t_env *lst, t_fds *fds, int *status)
+void	init_shell(t_shell *data, char **envp)
 {
-	int	last_exit;
-
-	(void)status;
-	last_exit = 0;
-	if (!cmds || !cmds->argv[0])
-		return (0); //return success on empty cmd?!
-	if (handle_all_heredocs(cmds) != 0)
-		return (1);
-	if (!cmds->next)
-		last_exit = exec_single(cmds, lst, fds);
+	if (envp[0] != NULL)
+		create_env_list(&data->lst, envp);
 	else
-		last_exit = exec_pipe(cmds, lst);
-	return (last_exit);
+		init_empty_env(&data->lst);
+	safe_std_fds(data);
 }

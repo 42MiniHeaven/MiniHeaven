@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_call.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 17:47:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/18 23:37:29 by azielnic         ###   ########.fr       */
+/*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/25 19:46:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,31 @@ void	free_cmds(t_cmd *head)
 	}
 }
 
-/*
- * Seems to me that this function duplicates free_env(), fomer free_struct_lst()
- * I added	'head->is_exported = 0;' into the function and hope it doesn't break
- * your logic. Check it out.
- */
+void	free_env(t_env *head)
+{
+	t_env	*tmp;
 
-// void	free_llist(t_env *head)
-// {
-// 	t_env	*next;
-
-// 	while (head)
-// 	{
-// 		next = head->next;
-// 		free(head->key);
-// 		head->key = NULL;
-// 		free(head->value);
-// 		head->value = NULL;
-// 		head->is_exported = 0;
-// 		free(head);
-// 		head = NULL;
-// 		head = next;
-// 	}
-// }
+	if (!head)
+		return ;
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		if (tmp->key)
+		{
+			free(tmp->key);
+			tmp->key = NULL;
+		}
+		if (tmp->value)
+		{
+			free(tmp->value);
+			tmp->value = NULL;
+		}
+		tmp->flag = 0;
+		free(tmp);
+	}
+	tmp = NULL;
+}
 
 void	free_shell(t_shell *data)
 {
@@ -130,7 +132,7 @@ void	free_call(t_shell data, int args, char *input)
 		free(input);
 	if (args == 1)
 	{
-		free_env(data.llist);
+		free_env(data.lst);
 		free_shell(&data);
 	}
 }

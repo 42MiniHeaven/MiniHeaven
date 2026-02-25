@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 20:33:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/24 20:36:00 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/24 20:03:27 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/14 15:21:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ void	env_unset(t_env **env, char *key)
 {
 	t_env	*curr;
 	t_env	*prev;
+	size_t	len;
 
+	len = ft_strlen(key);
 	curr = *env;
 	prev = NULL;
 	while (curr)
 	{
-		if (!ft_strcmp(curr->key, key))
+		if (ft_strncmp(curr->key, key, len) == 0 && curr->key[len] == '\0')
 		{
 			if (prev)
 				prev->next = curr->next;

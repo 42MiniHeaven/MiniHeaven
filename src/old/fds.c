@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fds.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 14:48:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/24 14:55:03 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/09 22:47:24 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/14 17:46:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	restore_std_fds(t_fds *saved)
 	}
 	if (saved->out != -1)
 	{
-		dup2(saved->out, STDOUT_FILENO);
+		dup2(saved->out , STDOUT_FILENO);
 		close(saved->out);
 	}
 	if (saved->err != -1)
@@ -49,3 +49,4 @@ void	restore_std_fds(t_fds *saved)
 		close(saved->err);
 	}
 }
+

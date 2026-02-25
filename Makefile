@@ -6,27 +6,30 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/02/20 13:49:10 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/02/24 22:20:08 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC := src/main.c \
 		src/free.c \
 		src/free_call.c \
+		src/init.c \
 		src/AJ/lexer.c \
 		src/AJ/parser.c \
-		src/Lukas/init.c \
 		src/Lukas/dispatcher.c \
 		src/Lukas/exec_builtin.c \
-		src/Lukas/forking.c \
-		src/Lukas/redirections.c \
+		src/Lukas/exec_external.c \
+		src/Lukas/exec_pipe.c \
+		src/Lukas/exec_single.c \
 		src/Lukas/fds.c \
 		src/Lukas/heredoc.c \
+		src/Lukas/init_empty_env.c \
+		src/Lukas/redirections.c \
 		src/Lukas/env/env_init.c \
-		src/Lukas/env/env_utils.c \
+		src/Lukas/env/env_new.c \
 		src/Lukas/env/env_set.c \
 		src/Lukas/env/env_unset.c \
-		src/Lukas/env/utils.c \
+		src/Lukas/env/env_utils.c \
 		src/Lukas/builtins/builtins.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \

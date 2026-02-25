@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 15:03:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/23 15:11:59 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/25 15:58:16 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/14 15:23:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtins.h"
 #include "../../include/miniheaven.h"
 
-void	free_arr(char **arr)
+int	builtin_pwd(t_cmd *cmd, t_env **env)
 {
-	size_t	i;
+	char	*cwd;
 
-	if (!arr || !*arr)
-		return ;
-	i = -1;
-	while (arr[++i])
+	(void)cmd;
+	(void)env;
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
 	{
-		free(arr[i]);
-		arr[i] = NULL;
+		perror("pwd");
+		return (1);
 	}
-	free(arr);
-	arr = NULL;
-}
-
-void	free_str(char *str)
-{
-	if (!str)
-		return ;
-	free(str);
-	str = NULL;
+	write(1, cwd, ft_strlen(cwd));
+	write(1, "\n", 1);
+	free(cwd);
+	return (0);
 }

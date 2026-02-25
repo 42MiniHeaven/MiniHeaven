@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dispatcher.c                                       :+:      :+:    :+:   */
+/*   exec_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 15:14:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 13:40:33 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/23 15:27:55 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/25 13:24:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
-int	dispatcher(t_cmd *cmds, t_env *lst, t_fds *fds, int *status)
+int	exec_single(t_cmd *cmds, t_env *env, t_fds *fds)
 {
 	int	last_exit;
 
-	(void)status;
 	last_exit = 0;
-	if (!cmds || !cmds->argv[0])
-		return (0); //return success on empty cmd?!
-	if (handle_all_heredocs(cmds) != 0)
-		return (1);
-	if (!cmds->next)
-		last_exit = exec_single(cmds, lst, fds);
+	if (is_builtin(cmds->argv[0]))
+	{
+		if (apply_redirections(cmds->redir) != 0)
+		{
+			restore_std_fds(fds);
+			return (1);
+		}
+		last_exit = exec_builtin(cmds, env);
+		restore_std_fds(fds);
+		return (last_exit);
+	}
 	else
-		last_exit = exec_pipe(cmds, lst);
-	return (last_exit);
+		return (last_exit = exec_external(cmds, env));
 }

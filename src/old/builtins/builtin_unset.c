@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 18:22:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/24 18:26:24 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/24 19:41:42 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/14 17:12:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
