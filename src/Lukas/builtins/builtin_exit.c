@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/25 15:08:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 19:50:05 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/25 20:14:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
