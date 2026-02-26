@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 22:48:19 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 20:14:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:28:03 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	builtin_exit(t_cmd *cmd, t_env **env)
 
 	(void)env;
 	printf("exit\n");
-	if (!cmd->argv[1])
+	if (cmd->argv[1])
 		exit(42);
 	if (!is_numeric(cmd->argv[1]))
 	{

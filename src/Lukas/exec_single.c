@@ -6,28 +6,29 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:27:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 13:24:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/26 16:43:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
-int	exec_single(t_cmd *cmds, t_env *env, t_fds *fds)
+int	exec_single(t_cmd *cmds, t_env *env, t_fds *fds,
+				int *last_exit, int *should_exit)
 {
-	int	last_exit;
+	int	exec_result;
 
-	last_exit = 0;
 	if (is_builtin(cmds->argv[0]))
 	{
 		if (apply_redirections(cmds->redir) != 0)
 		{
 			restore_std_fds(fds);
-			return (1);
+			*last_exit = 1;
+			return (EXEC_OK);
 		}
-		last_exit = exec_builtin(cmds, env);
+		exec_result = exec_builtin(cmds, env, last_exit, should_exit);
 		restore_std_fds(fds);
-		return (last_exit);
+		return (exec_result);
 	}
 	else
-		return (last_exit = exec_external(cmds, env));
+		return (exec_external(cmds, env, last_exit), EXEC_OK);
 }

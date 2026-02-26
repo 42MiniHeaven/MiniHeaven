@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 15:24:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 17:09:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/25 22:40:35 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ typedef struct s_env	t_env;
 
 typedef enum e_builtin_status
 {
-	BUILTIN_NOT_FOUND = 0,
-	BUILTIN_OK = 1,
+	BUILTIN_OK = 0,
+	BUILTIN_NOT_FOUND = 1,
 	BUILTIN_EXIT = 2
 }	t_builtin_status;
 

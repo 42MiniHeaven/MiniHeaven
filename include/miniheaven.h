@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 13:24:57 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/02/26 18:45:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 # include <aio.h>
 # include <ctype.h>
 
+typedef enum e_exec_result
+{
+	EXEC_OK,
+	EXEC_EXIT_REQUEST
+}	t_exec_result;
+
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
 typedef struct s_fds	t_fds;
@@ -40,10 +46,10 @@ struct	s_shell
 {
 	t_token	*tokens;
 	t_cmd	*cmds;
-	int		exit_code;
-	int		status;
 	t_env	*lst;
 	t_fds	*fds;
+	int		last_exit;
+	int		should_exit;
 	int		last_signal;
 };
 
@@ -72,7 +78,7 @@ void	init_shell(t_shell *data, char **envp);
 //PROTOTYPES LUKAS
 
 //dispatcher.c
-int		dispatcher(t_cmd *cmds, t_env *lst, t_fds *fds, int *status);
+int		dispatcher(t_shell *data);
 
 //exec_builtin.c
 int		exec_builtin(t_cmd *cmds, t_env *env);
