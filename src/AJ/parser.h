@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/25 20:21:04 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:33:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	lexer(t_shell *data, char *input);
 t_cmd   *parse(t_token *tokens);
 void	destroy_all(t_cmd *cmds, t_token *tokens);
 int		syntax_error(char *message);
-int		quote_handler(char *input, int *i);
+char	*quote_handler(char *input, int *i);
 
 void	handle_signals(int sigtype);
 int		rl_hook(void);

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/25 23:24:26 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:32:01 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ void	create_token(char *input, int *i, int start, t_token **tokens)
         syntax_error("failure assigning 'token' in lex_word function"); // Free when error;
     token_add_back(tokens, token);
 }
-
-void    lex_word(t_shell *data, char *input, int *i, t_token **tokens)
+// void	lex_word(t_shell *data, char *input, int *i, t_token **tokens)
+void	lex_word(char *input, int *i, t_token **tokens)
 {
 	char	*word;
 	char	*segment;
@@ -110,7 +110,7 @@ void    lex_word(t_shell *data, char *input, int *i, t_token **tokens)
 	word = ft_strdup("");
 	temp = ft_calloc(2, sizeof(char));
 	if (!word)
-		return;
+		return ;
 	while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
 	{
 		if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
@@ -122,13 +122,13 @@ void    lex_word(t_shell *data, char *input, int *i, t_token **tokens)
 				return ;
 			}
 			tmp = word;
-			word = ft_strjoin(word, segment);
+			word = ft_strjoin(tmp, segment);
 			free(tmp);
 			free(segment);
 		}
 		else
-		{
-			temp[0] = input[*i];
+        {			
+            temp[0] = input[*i];
 			temp[1] = '\0';
 			word = ft_strjoin(word, temp);
 			(*i)++;
@@ -136,6 +136,8 @@ void    lex_word(t_shell *data, char *input, int *i, t_token **tokens)
 	}
     token_add_back(tokens, token_new(WORD, word));
 }
+
+///////////////////////////// SIMPLE LEXER HANDLER /////////////////////////
 
 // void lex_word(char *input, int *i, t_token **tokens)
 // {
