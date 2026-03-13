@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/12 20:32:01 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/13 22:08:28 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,13 @@ int ft_is_operator(int c)
     return (c == '|' || c == '<' || c == '>');
 }
 
+// https://www.linux.org/threads/bash-03-%E2%80%93-command-line-processing.38676/ 
+// "A token that contains no quotes and at least one meta-character is an ‘operator’."
+
 int ft_isspace(int c)
 {
-    return (c == ' ');   // could include more whitespaces
+    return (c == ' ');   // could include more whitespaces (tab and newline)
+    // could also include additional separation characters like & , and ;
 }
 
 /*
@@ -99,64 +103,65 @@ void	create_token(char *input, int *i, int start, t_token **tokens)
         syntax_error("failure assigning 'token' in lex_word function"); // Free when error;
     token_add_back(tokens, token);
 }
-// void	lex_word(t_shell *data, char *input, int *i, t_token **tokens)
-void	lex_word(char *input, int *i, t_token **tokens)
-{
-	char	*word;
-	char	*segment;
-	char	*tmp;
-	char	*temp;
 
-	word = ft_strdup("");
-	temp = ft_calloc(2, sizeof(char));
-	if (!word)
-		return ;
-	while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
-	{
-		if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
-		{
-			segment = quote_handler(input, i);
-			if (!segment)
-			{
- 				free(word);
-				return ;
-			}
-			tmp = word;
-			word = ft_strjoin(tmp, segment);
-			free(tmp);
-			free(segment);
-		}
-		else
-        {			
-            temp[0] = input[*i];
-			temp[1] = '\0';
-			word = ft_strjoin(word, temp);
-			(*i)++;
-		}
-	}
-    token_add_back(tokens, token_new(WORD, word));
-}
+// void	lex_word(t_shell *data, char *input, int *i, t_token **tokens)
+// void	lex_word(char *input, int *i, t_token **tokens)
+// {
+// 	char	*word;
+// 	char	*segment;
+// 	char	*tmp;
+// 	char	*temp;
+
+// 	word = ft_strdup("");
+// 	temp = ft_calloc(2, sizeof(char));
+// 	if (!word)
+// 		return ;
+// 	while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
+// 	{
+// 		if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
+// 		{
+// 			segment = quote_handler(input, i);
+// 			if (!segment)
+// 			{
+//  				free(word);
+// 				return ;
+// 			}
+// 			tmp = word;
+// 			word = ft_strjoin(tmp, segment);
+// 			free(tmp);
+// 			free(segment);
+// 		}
+// 		else
+//         {			
+//             temp[0] = input[*i];
+// 			temp[1] = '\0';
+// 			word = ft_strjoin(word, temp);
+// 			(*i)++;
+// 		}
+// 	}
+//     token_add_back(tokens, token_new(WORD, word));
+// }
 
 ///////////////////////////// SIMPLE LEXER HANDLER /////////////////////////
 
-// void lex_word(char *input, int *i, t_token **tokens)
-// {
-//  	int		start;
+void lex_word(char *input, int *i, t_token **tokens)
+{
+ 	int		start;
 
-// 		start = *i;
-//     while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
-// 	{
-//         if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
-// 		{
-// 			if (!quote_handler(input, i))
-// 				return ;
-//             //else continue; // so when the quote is finsihed the token is created
-// 		}
-// 		else
-// 			(*i)++;
-// 	}
-// 	create_token(input, i, start, tokens);
-// }
+		start = *i;
+    while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
+	{
+        if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
+		{
+			if (!lex_quotes(input, i))
+				return ;
+            //else continue; // so when the quote is finsihed the token is created
+		}
+		else
+			(*i)++;
+	}
+	create_token(input, i, start, tokens);
+}
 
 /*
  * GENERAL: Determines the operator at input[i], creates the correct token, 
