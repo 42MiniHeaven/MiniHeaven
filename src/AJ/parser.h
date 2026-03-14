@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/13 22:05:51 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/14 15:48:41 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ struct s_cmd
 };
 
 void	lexer(t_shell *data, char *input);
-t_cmd   *parse(t_token *tokens);
+t_cmd	*parse(t_token *tokens);
 void	destroy_all(t_cmd *cmds, t_token *tokens);
 int		syntax_error(char *message);
 int		lex_quotes(char *input, int *i);

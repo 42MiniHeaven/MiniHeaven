@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 19:50:15 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:26:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,19 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, handle_signals);
 		input = readline("MiniHeaven> ");
 		if (!input)	// should only be triggered by ctrl+d not by ctrl+c
-			break;
+			break ;
 		if (input)
 		{
 			if (ft_strlen(input) > 0)
 				add_history(input);
 			lexer(&data, input);
 		}
-		data.cmds = parse(data.tokens); // change input to &data to match lexer
+		// possible to create a function build_commands() which includes
+		// parsing and expansion to keep the main cleaner. 
+		data.cmds = parse(data.tokens);
+		if (!data.cmds)
+			break ;
+		expand_commands(&data);
 		dispatcher(data.cmds, data.llist, data.fds);
 		free_call(data, 0, input);
 	}
