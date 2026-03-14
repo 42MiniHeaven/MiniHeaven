@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/12 17:08:18 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:52:42 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/23 17:41:10 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/25 17:31:21 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	handle_heredoc(t_redir *redir)
 	int		fd[2];
 	char	*line;
 
+	line = NULL;
 	if (pipe(fd) < 0)
 		return (1);
 	while (1)
 	{
-		line = readline("> ");
-		if (!line || strcmp(line, redir->file) == 0)
+		if (!line || ft_strcmp(line, redir->file) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		write(fd[1], line, ft_strlen(line));
 		write(fd[1], "\n", 1);

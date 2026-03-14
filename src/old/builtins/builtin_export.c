@@ -5,13 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 15:10:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/17 17:22:11 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/24 17:26:54 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/13 19:32:00 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
 #include "../../include/miniheaven.h"
+
+static int	arr_len(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return (0);
+	while (arr[i])
+		i++;
+	return (i);
+}
 
 /**
  * @brief   Export allows to add to env list.
@@ -23,19 +35,23 @@
  * @param   cmd		Input string containing export and potential flags
  */
 
-static int	print_sorted(char **arr, int n)
+static void	print_sorted(char **arr)
 {
 	int		i;
 	int		j;
+	int		n;
 	char	*tmp;
 
+	n = arr_len(arr);
+	if (n < 2)
+		return ;
 	i = -1;
 	while (++i < n - 1)
 	{
 		j = -1;
 		while (++j < n - i - 1)
 		{
-			if (ft_strncmp(arr[j], arr[j + 1], ft_strlen(arr[j])) > 0)
+			if (ft_strcmp(arr[j], arr[j + 1]) > 0)
 			{
 				tmp = arr[j];
 				arr[j] = arr[j + 1];
@@ -44,62 +60,35 @@ static int	print_sorted(char **arr, int n)
 		}
 	}
 	i = -1;
-	while (arr[++i])
+	while (arr[++i] && ft_strncmp(arr[i], "_", 1) && i < n - 1)
 		printf("declare -x %s\n", arr[i]);
-	return (0);
-}
-
-static	int	env_size(t_env *env)
-{
-	int		i;
-	t_env	*tmp;
-
-	if (!env)
-		return (0);
-	i = 0;
-	tmp = env;
-	while (tmp && ++i)
-		tmp = tmp->next;
-	return (i);
 }
 
 static int	export_check(t_env **env, char *str)
 {
-	int		i;
 	char	*key;
 	char	*value;
 
-	i = 0;
-	while (str[i] && str[i] != '=')
-		i++;
-	key = ft_substr(str, 0, i);
-	if (!key)
-		return (1);
-	value = ft_substr(str, i + 1, ft_strlen(str) - i + 1);
-	if (!value)
-		return (free(key), 1);
+	key = get_key(str);
+	value = get_value(str);
 	if (env_find(*env, key))
-		env_set(env_find(*env, key), 1, value);
+		update_env(env_find(*env, key), value);
 	else
-		env_set(*env, 2, str);
+		add_back(env, str);
 	return (0);
 }
 
 int	builtin_export(t_cmd *cmd, t_env **env)
 {
 	int		i;
-	int		size;
 	int		status;
 
 	status = 0;
 	i = 1;
 	if (!cmd->argv[i])
 	{
-		if (ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) == 0)
-		{
-			size = env_size(*env);
-			return (print_sorted(llist_to_env(*env), size - 1));
-		}
+		if (!ft_strcmp(cmd->argv[0], "export"))
+			return (print_sorted(lst_to_env(*env)), 0);
 	}
 	while (cmd->argv[i])
 	{

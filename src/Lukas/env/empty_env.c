@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_empty_env.c                                   :+:      :+:    :+:   */
+/*   empty_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 15:05:24 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 13:26:42 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 17:28:57 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 18:01:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "../../../include/miniheaven.h"
 
 static char	*get_shell_path(void)
 {
 	char	buf[4096];
+	char	*ret;
 	ssize_t	len;
 
 	len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
@@ -24,12 +25,16 @@ static char	*get_shell_path(void)
 		return (NULL);
 	}
 	buf[len] = '\0';
-	return (ft_strdup(buf));
+	ret = ft_strjoin("_=", buf);
+	if (!ret)
+		return (NULL);
+	return (ret);
 }
 
 static char	*get_pwd(void)
 {
 	char	*cwd;
+	char	*ret;
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
@@ -37,25 +42,44 @@ static char	*get_pwd(void)
 		perror("getcwd");
 		return (NULL);
 	}
-	return (cwd);
+	ret = ft_strjoin("PWD=", cwd);
+	if (!ret)
+		return (NULL);
+	free(cwd);
+	return (ret);
 }
 
-void	init_empty_env(t_env **lst)
+static char *get_shlvl(int shlvl)
+{
+	char	*tmp;
+	char	*ret;
+
+	if (!shlvl)
+		return (NULL);
+	tmp = ft_itoa(shlvl);
+	ret = ft_strjoin("SHLVL=", tmp);
+	if (!ret)
+	{
+		free(tmp);
+		return (NULL);
+	}
+	free(tmp);
+	return (ret);
+}
+
+char	**empty_env(void)
 {
 	char	**env;
-	char	*shlvl_str;
 	int		shlvl;
 
 	env = malloc(sizeof(char *) * 4);
 	if (!env)
-		return ;
-	shlvl_str = get_env_value("SHLVL", *lst);
-	shlvl = 0;
-	if (shlvl_str)
-		shlvl = ft_atoi(shlvl_str);
-	env[0] = ft_strjoin("PWD=", get_pwd());
-	env[1] = ft_strjoin("SHLVL=", ft_itoa(shlvl));
-	env[2] = ft_strjoin("_=", get_shell_path());
+		return (NULL);
+	shlvl = 1;
+	env[0] = get_pwd();
+	env[1] = get_shlvl(shlvl);
+	env[2] = get_shell_path();
 	env[3] = NULL;
-	create_env_list(lst, env);
+	return (env);
 }
+

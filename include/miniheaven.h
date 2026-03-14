@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/26 18:45:58 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/14 15:41:40 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ typedef struct s_fds	t_fds;
 // main structure comtaining everything, which also can be freed easily
 struct	s_shell
 {
-	t_token	*tokens;
-	t_cmd	*cmds;
-	t_env	*lst;
-	t_fds	*fds;
-	int		last_exit;
-	int		should_exit;
-	int		last_signal;
+	t_token			*tokens;
+	t_cmd			*cmds;
+	t_environment	*list;
+	t_fds			*fds;
+	int				last_exit;
+	int				should_exit;
+	int				last_signal;
 };
 
 struct	s_fds
@@ -63,7 +63,12 @@ struct	s_fds
 
 //free.c
 void	free_arr(char **arr);
-void	free_str(char *str);
+
+//free_environment.c
+void	free_environment(t_environment *list);
+
+//free_fds.c
+void	free_fds(t_shell *data);
 
 //free_call.c
 void	free_call(t_shell data, int args, char *input);
@@ -72,8 +77,21 @@ void	free_cmds(t_cmd *lst);
 void	free_shell(t_shell *data);
 void	free_env(t_env *head);
 
-//init.c
-void	init_shell(t_shell *data, char **envp);
+//shell_init.c
+void	shell_init(t_shell *data, char **envp);
+
+//check_args.c
+void	check_args(int argc, char **argv, char **envp);
+
+//loop.c
+void	loop(t_shell *data);
+
+//loop_utils.c
+void	reset_shell(t_shell *data);
+void	free_loop(t_shell *data);
+
+//on_failure.c
+void	on_failure(t_shell *data, char *issue);
 
 //PROTOTYPES LUKAS
 
@@ -84,13 +102,13 @@ int		dispatcher(t_shell *data);
 int		exec_builtin(t_cmd *cmds, t_env *env);
 
 //exec_external.c
-int		exec_external(t_cmd *cmds, t_env *env);
+int		exec_external(t_cmd *cmds, t_env *env, int *last_exit);
 
 //exec_pipe.c
-int		exec_pipe(t_cmd *cmds, t_env *env);
+int		exec_pipe(t_cmd *cmds, t_env *env, int *last_exit);
 
 //exec_single.c
-int		exec_single(t_cmd *cmds, t_env *env, t_fds *fds);
+int		exec_single(t_cmd *cmds, t_env *env, t_fds *fds, int *last_exit);
 
 //fds.c
 int		safe_std_fds(t_shell *data);
@@ -100,8 +118,8 @@ void	restore_std_fds(t_fds *saved);
 int		handle_heredoc(t_redir *redir);
 int		handle_all_heredocs(t_cmd *cmds);
 
-//init_empty_env.c
-void	init_empty_env(t_env **lst);
+//empty_env_lst_init.c
+void	empty_env_init(t_shell *data);
 
 //redirections.c
 int		apply_redirections(t_redir *redir);

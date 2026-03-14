@@ -3,60 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 20:32:37 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 17:32:42 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 14:33:26 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 15:15:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "env.h"
 #include "../../../include/miniheaven.h"
 
-static char	*get_shlvl(char *str)
-{
-	char	*tmp;
-
-	tmp = ft_itoa(ft_atoi(str) + 1);
-	if (!tmp)
-		return (free(str), NULL);
-	free(str);
-	return (tmp);
-}
-/**
- * @brief   Creates the environment list.
- *
- * This function creates the environment list of MiniHeaven.
- *
- * @param   start	Head of our linked list
- * @param   envp	Array of Strings containing our envp
- *					provided by the system.
- */
-
-void	create_env_list(t_env **start, char **envp)
+int	env_init(t_environment *start, char **envp)
 {
 	size_t	i;
 	char	*key;
 	char	*value;
-	char	*tmp;
-	size_t	s;
+	int		flag;
 
 	i = -1;
 	while (envp[++i])
 	{
-		s = 0;
-		while (envp[i][s] && envp[i][s] != '=')
-			s++;
-		key = ft_substr(envp[i], 0, s);
-		value = ft_substr(envp[i], s + 1, ft_strlen(envp[i]) - (s + 1));
-		if (ft_strcmp(key, "SHLVL") == 0
-			&& (ft_strlen(key) == ft_strlen("SHLVL")))
-		{
-			tmp = get_shlvl(value);
-			value = tmp;
-		}
-		env_add_back(start, env_new(key, value));
-		free(value);
-		free(key);
+		flag = 0;
+		key = get_key(envp[i]);
+		value = get_value(envp[i]);
+		if (value != NULL)
+			flag = 1;
+		if (env_add(start, env_create_node(key, value, flag)) == 0)
+			return (0);
 	}
+	return (1);
 }

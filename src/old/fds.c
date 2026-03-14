@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fds.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 22:47:24 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 17:46:30 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/24 14:48:22 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/12 16:14:00 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	safe_std_fds(t_shell *data)
 {
 	t_fds	*saved;
 
+	data->fds = NULL;
 	saved = malloc(sizeof(t_fds));
 	if (!saved)
 		return (1);
@@ -40,7 +41,7 @@ void	restore_std_fds(t_fds *saved)
 	}
 	if (saved->out != -1)
 	{
-		dup2(saved->out , STDOUT_FILENO);
+		dup2(saved->out, STDOUT_FILENO);
 		close(saved->out);
 	}
 	if (saved->err != -1)
@@ -49,4 +50,3 @@ void	restore_std_fds(t_fds *saved)
 		close(saved->err);
 	}
 }
-

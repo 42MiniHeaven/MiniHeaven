@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resolve.c                                          :+:      :+:    :+:   */
+/*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/25 12:55:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 12:59:59 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 12:38:18 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 15:09:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniheaven.h"
 
-char	*resolve_path(char *cmd, t_env *env)
+t_env	*env_create_node(char *key, char *value, int flag)
 {
-	char	*path;
-	char	**dirs;
-	char	*full;
-	int		i;
+	t_env	*node;
 
-	if (ft_strchr(cmd, '/'))
-		return (cmd);
-	path = get_env_value("PATH", env);
-	if (!path)
-		return (cmd);
-	dirs = ft_split(path, ':');
-	if (!dirs)
-		return (cmd);
-	i = 0;
-	while (dirs[i])
-	{
-		full = ft_strjoin_char(dirs[i], cmd, '/');
-		if (access(full, X_OK) == 0)
-			return (free_arr(dirs), full);
-		free(full);
-		i++;
-	}
-	free_arr(dirs);
-	return (cmd);
+	node = malloc(sizeof(t_env));
+	if (!node)
+		return (NULL);
+	node->key = key;
+	node->value = value;
+	node->flag = flag;
+	node->next = NULL;
+	return (node);
 }

@@ -5,18 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 20:20:21 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 19:46:13 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 12:16:20 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 17:39:08 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
-
-# include <aio.h> //maybe delete later
-# define VAR_EXPORTED 1
-# define VAR_READONLY 2
-# define VAR_HIDDEN   4
 
 typedef struct s_env
 {
@@ -26,23 +21,32 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_environment
+{
+	t_env	*head;
+	int		size;
+}	t_environment;
+
+//create_node.c
+t_env	*env_create_node(char *key, char *value, int flag);
+
 //env_init.c
-void	create_env_list(t_env **start, char **envp);
+int		env_init(t_environment *start, char **envp);
 
-//env_new.c
-t_env	*env_new(char *key, char *value);
-
-//env_utils
-t_env	*env_find(t_env *env, char *key);
-char	*get_env_value(char *key, t_env *env);
-char	**lst_to_env(t_env *env);
+//env_add.c
+int		env_add(t_environment *list, t_env *node);
 
 //env_set.c
-void	env_add_back(t_env **env, t_env *new);
-void	update_env(t_env *env, char *cmd);
-void	add_back(t_env **env, char *cmd);
+int		env_set(t_environment *list, t_env *node);
 
-//env_unset.c
-void	env_unset(t_env **env, char *key);
+//env_remove.c
+int		env_remove(t_environment *list, const char *key);
+
+//empty_env.c
+char	**empty_env(void);
+
+//env_utils.c
+char	*get_key(const char *str);
+char	*get_value(const char *str);
 
 #endif

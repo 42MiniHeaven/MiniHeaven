@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 00:00:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 15:22:24 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/24 17:21:37 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/24 17:53:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -5,67 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 21:37:56 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 19:51:15 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 12:45:45 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 15:12:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
 #include "../../../include/miniheaven.h"
 
-/*Function Decription:	Used to find a node in the linked list
-			We need this function to return a pointer to the found value or NULL
-*/
-
-t_env	*env_find(t_env *env, char *key)
-{
-	while (env)
-	{
-		if (!ft_strcmp(env->key, key))
-			return (env);
-		env = env->next;
-	}
-	return (NULL);
-}
-
-char	*get_env_value(char *key, t_env *env)
-{
-	t_env	*node;
-
-	node = env_find(env, key);
-	if (!node)
-		return (NULL);
-	return (node->value);
-}
-/*Function Decription: Used to create a 2 dimensional Array of the Environment
-			We need this function for execve, which relays on ENVP.
-*/
-
-char	**lst_to_env(t_env *env)
+char	*get_key(const char *str)
 {
 	int		i;
-	char	**envp;
-	t_env	*tmp;
 
-	i = 0;
-	tmp = env;
-	while (tmp && ++i)
-		tmp = tmp->next;
-	envp = malloc(sizeof(char *) * (i + 1));
-	if (!envp)
+	if (!str)
 		return (NULL);
 	i = 0;
-	while (env)
-	{
-		if (env->value)
-		{
-			if (ft_strcmp(env->key, "_") != 0)
-				envp[i++] = ft_strjoin_char(env->key, env->value, '=');
-		}
-		else
-			envp[i++] = ft_strdup(env->key);
-		env = env->next;
-	}
-	envp[i] = NULL;
-	return (envp);
+	while (str[i] && str[i] != '=')
+		i++;
+	if (str[i] != '=')
+		return (NULL);
+	return (ft_substr(str, 0, i));
+}
+
+char	*get_value(const char *str)
+{
+	int		i;
+	int		j;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	if (str[i] != '=')
+		return (NULL);
+	i++;
+	j = i;
+	while (str[j])
+		j++;
+	return (ft_substr(str, i, j - i));
 }

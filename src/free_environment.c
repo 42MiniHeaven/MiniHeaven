@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_environment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 15:03:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/23 15:11:59 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 15:36:29 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 18:03:53 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "../include/miniheaven.h"
 
-void	free_arr(char **arr)
+void	free_environment(t_environment *list)
 {
-	size_t	i;
+	t_env	*curr;
+	t_env	*tmp;
 
-	if (!arr || !*arr)
+	if (!list)
 		return ;
-	i = -1;
-	while (arr[++i])
+	curr = list->head;
+	while (curr)
 	{
-		free(arr[i]);
-		arr[i] = NULL;
+		tmp = curr->next;
+		if (curr->key)
+			free(curr->key);
+		if (curr->value)
+			free(curr->value);
+		free(curr);
+		curr = tmp;
 	}
-	free(arr);
-	arr = NULL;
-}
-
-void	free_str(char *str)
-{
-	if (!str)
-		return ;
-	free(str);
-	str = NULL;
+	list->head = NULL;
+	list->size = 0;
+	free(list);
+	list = NULL;
 }

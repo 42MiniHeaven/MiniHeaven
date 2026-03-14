@@ -1,48 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_unset.c                                        :+:      :+:    :+:   */
+/*   env_remove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 20:33:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/24 20:36:00 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 14:22:26 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 15:11:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "../../include/miniheaven.h"
+#include "../../../include/miniheaven.h"
 
-/**
- * @brief   Removes an element from the environment list.
- *
- * Compares the given key to all node keys and removes the matching node.
- *
- * @param   env	Head of linked list.
- * @param   key	Input string identifying the element to remove.
- */
-
-void	env_unset(t_env **env, char *key)
+int	env_remove(t_environment *list, const char *key)
 {
 	t_env	*curr;
 	t_env	*prev;
 
-	curr = *env;
+	if (!list || !key)
+		return (0);
+	curr = list->head;
 	prev = NULL;
 	while (curr)
 	{
-		if (!ft_strcmp(curr->key, key))
+		if (ft_strcmp(curr->key, key) == 0)
 		{
 			if (prev)
 				prev->next = curr->next;
 			else
-				*env = curr->next;
+				list->head = curr->next;
 			free(curr->key);
 			free(curr->value);
 			free(curr);
-			return ;
+			list->size--;
+			return (1);
 		}
 		prev = curr;
 		curr = curr->next;
 	}
+	return (0);
 }

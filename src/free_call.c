@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 22:11:54 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/14 15:48:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	free_cmds(t_cmd *head)
 	}
 	next = NULL;
 }
-
+/*
 void	free_env(t_env *head)
 {
 	t_env	*tmp;
@@ -117,27 +117,4 @@ void	free_env(t_env *head)
 		free(tmp);
 	}
 	tmp = NULL;
-}
-
-void	free_shell(t_shell *data)
-{
-	restore_std_fds(data->fds);
-	free(data);
-}
-
-void	free_call(t_shell data, int args, char *input)
-{
-	if (data.cmds)
-	{
-		free_cmds(data.cmds);
-	}
-	if (data.tokens)
-		free_tokens(data.tokens);
-	if (input)
-		free(input);
-	if (args == 1)
-	{
-		free_env(data.lst);
-		free_shell(&data);
-	}
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/18 22:20:46 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:33:26 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ t_cmd	*parse(t_token *tokens)
 			state = handle_redir_target(state, &current, &last_redir, tokens);
 		if (state == -1)
 		{
-			free_cmds(head);
+			//return and exit cleanlyfree_cmds(head);
 			return (NULL);
 		}
 		tokens = tokens->next;
@@ -299,13 +299,13 @@ t_cmd	*parse(t_token *tokens)
 	if (state == EXPECT_REDIR_TARGET)
 	{
 		syntax_error("unexpected end of input; WORD needed");
-		free_cmds(head);
+		//return and exit cleanlyfree_cmds(head);
 		return (NULL);
 	}
 	if (state == EXPECT_COMMAND && head)
 	{
 		syntax_error("unexpected pipe at the end");
-		free_cmds(head);
+		//return and exit cleanlyfree_cmds(head);
 		return (NULL);
 	}
 	return (head);

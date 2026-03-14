@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 20:18:08 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/14 20:37:37 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/02/24 14:34:46 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/02/24 14:44:40 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 int	exec_builtin(t_cmd *cmds, t_env *env)
 {
-	int	len = ft_strlen(cmds->argv[0]);
 	if (!cmds || !cmds->argv || !cmds->argv[0])
-		return (0);
-	if (!ft_strncmp(cmds->argv[0], "cd", len))
+		return (BUILTIN_NOT_FOUND);
+	if (!ft_strcmp(cmds->argv[0], "cd"))
 		return (builtin_cd(cmds, &env));
-	if (!ft_strncmp(cmds->argv[0], "echo", len))
+	if (!ft_strcmp(cmds->argv[0], "echo"))
 		return (builtin_echo(cmds, &env));
-	if (!ft_strncmp(cmds->argv[0], "env", len))
+	if (!ft_strcmp(cmds->argv[0], "env"))
 		return (builtin_env(cmds, &env));
-	if (!ft_strncmp(cmds->argv[0], "exit", len))
-		return (builtin_exit(cmds, &env));
-	if (!ft_strncmp(cmds->argv[0], "export", len))
+	if (!ft_strcmp(cmds->argv[0], "exit"))
+		return (BUILTIN_EXIT);
+	if (!ft_strcmp(cmds->argv[0], "export"))
 		return (builtin_export(cmds, &env));
-	if (!ft_strncmp(cmds->argv[0], "pwd", len))
+	if (!ft_strcmp(cmds->argv[0], "pwd"))
 		return (builtin_pwd(cmds, &env));
-	if (!ft_strncmp(cmds->argv[0], "unset", len))
+	if (!ft_strcmp(cmds->argv[0], "unset"))
 		return (builtin_unset(cmds, &env));
-	return (1);
+	return (BUILTIN_NOT_FOUND);
 }

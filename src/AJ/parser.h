@@ -6,10 +6,9 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/16 21:56:46 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/12 13:25:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PARSER_H
 # define PARSER_H

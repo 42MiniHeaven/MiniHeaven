@@ -5,82 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 18:35:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/25 19:50:40 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/14 13:14:39 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/14 15:12:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniheaven.h"
-#include "env.h"
 
-/**
- * @brief   Appends a new node to the environment list.
- *
- * This functions adds a node to the end of env lst.
- * Or sets it as the head of the lst.
- *
- * @param   **env	Pointer to the environment list.
- * @param   *new	ENV node containing key=value pair.
- */
-
-void	env_add_back(t_env **env, t_env *new)
+int	env_set(t_environment *list, t_env *node)
 {
-	t_env	*tmp;
+	t_env	*curr;
 
-	if (!env || !new)
-		return ;
-	if (!*env)
+	curr = list->head;
+	while (curr)
 	{
-		*env = new;
-		return ;
+		if (ft_strcmp(curr->key, node->key) == 0)
+		{
+			free(curr->value);
+			curr->value = node->value;
+			curr->flag = node->flag;
+			free(node->key);
+			free(node);
+			return (1);
+		}
+		curr = curr->next;
 	}
-	tmp = *env;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
-
-/**
- * @brief   Updates an element in the environment list.
- *
- * Updates the passed elements value. Either the value of cmd or NULL.
- *
- * @param   *env	Pointer to the note to update.
- * @param   *cmd	Input string containing a key=value pair.
- */
-
-void	update_env(t_env *env, char *cmd)
-{
-	if (!cmd)
-	{
-		env->value = NULL;
-		env->flag = 1;
-		return ;
-	}
-	free(env->value);
-	env->value = ft_strdup(cmd);
-}
-
-/**
- * @brief   Appends a new element to the environment list.
- *
- * Parses the given command string to extract a key-value pair,
- * creates a new environment node, and appends it to the list.
- *
- * @param   *env	Pointer to the environment list.
- * @param   *cmd	Input string containing a key=value pair.
- */
-
-void	add_back(t_env **env, char *cmd)
-{
-	t_env	*tmp;
-	size_t	i;
-	size_t	len;
-
-	len = ft_strlen(cmd);
-	i = 0;
-	while (cmd[i] && cmd[i] != '=')
-		i++;
-	tmp = env_new(ft_substr(cmd, 0, i), ft_substr(cmd, i + 1, len - i + 1));
-	env_add_back(env, tmp);
+	return (env_add(list, node));
 }
