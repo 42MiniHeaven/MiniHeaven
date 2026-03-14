@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/25 20:32:46 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/13 22:45:44 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,5 +309,19 @@ t_cmd	*parse(t_token *tokens)
 		free_cmds(head);
 		return (NULL);
 	}
+
+	// Before the head is returned to the main including the commands for the execution
+	// expansion needs to happen.
+	// Checks for $, handles quotes and removes quotes and replaces it with the expansion.
+	// 1. Single quotes: Trims quotes only
+	// 2. Double quotes: Trims quotes and expands varaiable
+	// 3. No quotes: Expands and splits words
+	// SPECIAL CASE: HEREDOC
+	// At some point in the expander it needs to be checked with redirections there are. 
+	// For heredoc:
+	// $hi -> does not expand
+	// "$hi" -> trims quotes only, $ stays
+	// '$hi' -> trims quotes only, $ stays
+	
 	return (head);
 }
