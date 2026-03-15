@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/14 15:48:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/15 16:06:49 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	free_cmds(t_cmd *head)
 		next = head->next;
 		if (head->argv)
 		{
-			free(head->argv);
+			free_arr(head->argv);
 			head->argv = NULL;
 		}
 		while (head->redir)

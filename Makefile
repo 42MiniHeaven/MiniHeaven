@@ -6,22 +6,33 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/14 17:37:26 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/15 16:44:13 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC := src/main.c \
 		src/check_args.c \
+		src/fake_cmd.c \
+		src/free.c \
 		src/free_environment.c \
 		src/free_call.c \
+		src/loop.c \
+		src/loop_utils.c \
 		src/shell_init.c \
+		src/Lukas/child.c \
+		src/Lukas/execute.c \
+		src/Lukas/exec_single.c \
+		src/Lukas/exec_external.c \
 		src/Lukas/env/create_node.c \
 		src/Lukas/env/env_init.c \
 		src/Lukas/env/env_add.c \
 		src/Lukas/env/env_remove.c \
 		src/Lukas/env/env_set.c \
 		src/Lukas/env/empty_env.c \
-		src/Lukas/env/env_utils.c
+		src/Lukas/env/env_utils.c \
+		src/Lukas/env/env_get.c \
+		src/Lukas/external/resolve.c \
+		src/Lukas/external/env_arr.c
 
 NAME := minishell
 CC := cc

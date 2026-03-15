@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/14 15:41:40 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/15 16:44:51 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "../../Libft/include/libft.h"
 # include "../src/AJ/parser.h"
 # include "../src/Lukas/env/env.h"
-# include "../src/Lukas/builtins/builtins.h"
+//# include "../src/Lukas/builtins/builtins.h"
 
 // Maybe delete later
 # include <aio.h>
@@ -68,7 +68,7 @@ void	free_arr(char **arr);
 void	free_environment(t_environment *list);
 
 //free_fds.c
-void	free_fds(t_shell *data);
+//void	free_fds(t_shell *data);
 
 //free_call.c
 void	free_call(t_shell data, int args, char *input);
@@ -90,43 +90,52 @@ void	loop(t_shell *data);
 void	reset_shell(t_shell *data);
 void	free_loop(t_shell *data);
 
+//fake_cmd.c
+void	fake_cmd(t_cmd **cmd);
+
 //on_failure.c
-void	on_failure(t_shell *data, char *issue);
+//void	on_failure(t_shell *data, char *issue);
 
 //PROTOTYPES LUKAS
 
-//dispatcher.c
-int		dispatcher(t_shell *data);
+//child.c
+void	child(t_cmd *cmds, t_environment *list);
+
+//execute.c
+int		execute(t_shell *data);
 
 //exec_builtin.c
-int		exec_builtin(t_cmd *cmds, t_env *env);
+//int		exec_builtin(t_cmd *cmds, t_env *env);
 
 //exec_external.c
-int		exec_external(t_cmd *cmds, t_env *env, int *last_exit);
+int		exec_external(t_cmd *cmds, t_environment *list);
 
 //exec_pipe.c
-int		exec_pipe(t_cmd *cmds, t_env *env, int *last_exit);
+//int		exec_pipe(t_cmd *cmds, t_env *env, int *last_exit);
 
 //exec_single.c
-int		exec_single(t_cmd *cmds, t_env *env, t_fds *fds, int *last_exit);
+int		exec_single(t_shell *cmds);
 
 //fds.c
-int		safe_std_fds(t_shell *data);
-void	restore_std_fds(t_fds *saved);
+//int		safe_std_fds(t_shell *data);
+//void	restore_std_fds(t_fds *saved);
 
 //heredoc.c
-int		handle_heredoc(t_redir *redir);
-int		handle_all_heredocs(t_cmd *cmds);
+//int		handle_heredoc(t_redir *redir);
+//int		handle_all_heredocs(t_cmd *cmds);
 
 //empty_env_lst_init.c
 void	empty_env_init(t_shell *data);
 
 //redirections.c
-int		apply_redirections(t_redir *redir);
+//int		apply_redirections(t_redir *redir);
 
 //resolve_path.c
 char	*resolve_path(char *cmd, t_env *env);
 
 //builtins.c
-int		is_builtin(const char *name);
+//int		is_builtin(const char *name);
+
+//env_arr.c
+char	**env_arr(t_env *env);
 #endif
