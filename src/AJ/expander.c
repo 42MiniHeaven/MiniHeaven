@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/14 23:23:18 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/16 17:04:01 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,22 @@
 
 // ------------------------------------------------------------------------
 
+// Looks if key exists (key = whatever is writte after $)
+
+void replace_var(t_shell *data, char *word) // add shell 
+{
+	while (*word)
+	{
+		if (ft_strnstr(word, '$?\'0 \'', 3) || ft_strnstr(word, '$? ', 3))
+		{
+			write(1, data->exit_code, ft_strlen(ft_itoa(data->exit_code)));
+		}
+		*word++;
+	}
+	// look for key using: t_env	*env_find(t_env *env, char *key)
+	// once key is found value for key needs to be found: char	*get_env_value(char *key, t_env *env)
+}
+
 void	fill_mask(char *str, char *mask, int *i, char c, char type)
 {
 	mask[(*i)++] = 'Q';
@@ -83,10 +99,29 @@ static char	*create_mask(char *str)
 	}
 	return (mask);	
 }
-
-int	needs_expansion(char *word) // make it a bool?
+/*
+ * DESCRIPTION
+ * Checks if word contains $ and if yes, if the $ is not in single quotes.
+ * Returns either 0 or 1 (false or true).
+ */
+// make it a bool?
+int	needs_expansion(char *word, char *mask)
 {
-	return (ft_strchr(word, '$'));
+	int i;
+	int needed;
+	
+	i = 0;
+	needed = 0;
+	if (ft_strchr(word, '$') != NULL)
+	{
+		while (word[i] && mask[i])
+		{
+			if (word[i] == '$' && mask[i] != 'S')
+				needed = 1;
+			i++;
+		}
+	}
+	return (needed);
 }
 
 // Checks for $, handles quotes and removes quotes and replaces it with the expansion.
@@ -96,9 +131,9 @@ int	needs_expansion(char *word) // make it a bool?
 
 char	*expand_variables(char *word, char *mask, t_shell *data)
 {
-	if (needs_expansion(word))
+	if (needs_expansion(word, mask))
 	{
-		
+		replace_var(data, word); // needs to be created
 	}
 	return (word);
 	
@@ -109,7 +144,7 @@ char *expand_word(char *word, t_shell *data)
 	char *mask;
 
 	mask = create_mask(word);
-	word = expand_variables(word, mask, data); // needs to be created
+	word = expand_variables(word, mask, data);
 	word = remove_quotes(word); // needs to be created	
 	
 	// also word splitting if needed
