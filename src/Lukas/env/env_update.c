@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_get.c                                          :+:      :+:    :+:   */
+/*   env_update.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 15:58:24 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:20:17 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/16 16:13:30 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/16 16:34:54 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniheaven.h"
 
-char	*get_env_value(t_env *env, char *key)
+void	env_update(t_env *env, char *value)
 {
-	while (env)
+	if (!env)
+		return ;
+	if (!value)
 	{
-		if (!ft_strcmp(env->key, key))
-			return (env->value);
-		env = env->next;
+		free(env->value);
+		env->value = NULL;
+		env->flag = 1;
+		return ;
 	}
-	return (NULL);
+	free(env->value);
+	env->value = ft_strdup(value);
+	if (env->key && env->value)
+		env->flag = 0;
 }

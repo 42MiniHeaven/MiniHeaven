@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 12:16:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 16:04:23 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:26:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,19 @@ int		env_add(t_environment *list, t_env *node);
 int		env_set(t_environment *list, t_env *node);
 
 //env_get.c
-char	*get_env_value(char *key, t_env *env);
+char	*get_env_value(t_env *env, char *key);
+
+//env_update.c
+void	env_update(t_env *env, char *value);
 
 //env_remove.c
 int		env_remove(t_environment *list, const char *key);
 
 //empty_env.c
 char	**empty_env(void);
+
+//env_find.c
+t_env	*env_find(t_env *env, char *key);
 
 //env_utils.c
 char	*get_key(const char *str);

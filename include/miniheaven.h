@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 16:44:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:30:16 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 # include <sys/types.h>				// pid_t
 # include <sys/wait.h>				// waitpid
 # include <fcntl.h>					// open flags
+# include <errno.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../../Libft/include/libft.h"
 # include "../src/AJ/parser.h"
 # include "../src/Lukas/env/env.h"
-//# include "../src/Lukas/builtins/builtins.h"
+# include "../src/Lukas/builtins/builtins.h"
 
 // Maybe delete later
 # include <aio.h>
@@ -50,7 +51,6 @@ struct	s_shell
 	t_fds			*fds;
 	int				last_exit;
 	int				should_exit;
-	int				last_signal;
 };
 
 struct	s_fds
@@ -105,16 +105,16 @@ void	child(t_cmd *cmds, t_environment *list);
 int		execute(t_shell *data);
 
 //exec_builtin.c
-//int		exec_builtin(t_cmd *cmds, t_env *env);
+int		exec_builtin(t_shell *data);
 
 //exec_external.c
-int		exec_external(t_cmd *cmds, t_environment *list);
+int		exec_external(t_shell *data);
 
 //exec_pipe.c
 //int		exec_pipe(t_cmd *cmds, t_env *env, int *last_exit);
 
 //exec_single.c
-int		exec_single(t_shell *cmds);
+int		exec_single(t_shell *data);
 
 //fds.c
 //int		safe_std_fds(t_shell *data);

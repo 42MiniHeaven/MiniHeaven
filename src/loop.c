@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 13:41:05 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/15 18:57:22 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	loop(t_shell *data)
 //	}
 	fake_cmd(&data->cmds);
 //	data->cmds = parse(data->tokens);
-	data->last_exit = execute(data);
+	execute(data);
 	printf("%d\n", data->last_exit);
 //	free(input);
 	free_loop(data);

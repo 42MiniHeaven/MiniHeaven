@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:18:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 16:55:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:30:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	fake_cmd(t_cmd **cmd)
 		return ;
 	}
 	tmp->cmd = NULL;
-	arg[0] = ft_strdup("ls");
-	arg[1] = ft_strdup("-al");
+	arg[0] = ft_strdup("cd");
+	arg[1] = ft_strdup("src");
 	arg[2] = NULL;
 	tmp->argv = arg;
 	tmp->redir = NULL;

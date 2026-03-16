@@ -6,19 +6,41 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:52:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 16:43:53 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/15 18:51:03 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
-int	exec_external(t_cmd *cmds, t_environment *list)
+void	wait_child(pid_t pid, t_shell *data)
+{
+	int	status;
+	int	sig;
+
+	if (pid <= 0)
+		return ;
+	if (waitpid(pid, &status, 0) == -1)
+	{
+		perror("waitpid");
+		data->last_exit = 1;
+		return ;
+	}
+	if (WIFEXITED(status))
+		data->last_exit = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		sig = WTERMSIG(status);
+		if (sig == SIGQUIT)
+			printf("Quit (core dumped)\n");
+		data->last_exit = 128 + sig;
+	}
+	else
+		data->last_exit = 1;
+}
+
+int	exec_external(t_shell *data)
 {
 	pid_t	pid;
-	int		status;
-
-	(void)cmds;
-	(void)list;
 
 	pid = fork();
 	if (pid < 0)
@@ -26,11 +48,8 @@ int	exec_external(t_cmd *cmds, t_environment *list)
 		return (1);
 	}
 	if (pid == 0)
-		child(cmds, list);
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));
+		child(data->cmds, data->list);
+	else
+		wait_child(pid, data);
 	return (0);
 }

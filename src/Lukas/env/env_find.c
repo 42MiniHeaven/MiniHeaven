@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_get.c                                          :+:      :+:    :+:   */
+/*   env_find.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 15:58:24 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:20:17 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/16 16:15:45 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/16 16:18:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/miniheaven.h"
 
-char	*get_env_value(t_env *env, char *key)
+t_env	*env_find(t_env *env, char *key)
 {
-	while (env)
+	if (!env || !key)
+		return (NULL);
+	while (env != NULL)
 	{
 		if (!ft_strcmp(env->key, key))
-			return (env->value);
+			return (env);
 		env = env->next;
 	}
 	return (NULL);
