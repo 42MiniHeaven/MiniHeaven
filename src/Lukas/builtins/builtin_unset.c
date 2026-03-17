@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:55:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 17:02:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:24:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ int	builtin_unset(t_cmd *cmd, t_env *env)
 	return (0);
 }
 */
-int	builtin_unset(t_cmd *cmd, t_env *env)
+int	builtin_unset(t_cmd *cmd, t_environment *list)
 {
 	int	i;
 
-	if (!env || !cmd)
+	if (!list || !cmd)
 		return (0);
 	i = 1;
 	while (cmd[i])
 	{
-		env_unset(env, cmd[i]);
+		env_remove(list, cmd[i]);
 		i++;
 	}
 	return (0);

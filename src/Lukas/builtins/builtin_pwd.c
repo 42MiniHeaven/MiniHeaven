@@ -6,19 +6,19 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:39:35 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 16:49:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:23:27 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "../../include/miniheaven.h"
-/*
-int	builtin_pwd(t_cmd *cmd, t_env *env)
+
+int	builtin_pwd(t_cmd *cmd, t_environment *list)
 {
 	char	*cwd;
 
 	(void)cmd;
-	(void)env;
+	(void)list;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
@@ -30,7 +30,7 @@ int	builtin_pwd(t_cmd *cmd, t_env *env)
 	free(cwd);
 	return (0);
 }
-*/
+/*
 int	builtin_pwd(t_cmd *cmd, t_env *env)
 {
 	char	*cwd;
@@ -38,8 +38,12 @@ int	builtin_pwd(t_cmd *cmd, t_env *env)
 	(void)cmd;
 	cwd = get_env_value(env_find(env, "PWD"), "PWD");
 	if (!cwd)
-		return (0);
+	{
+		perror("pwd");
+		return (1);
+	}
 	write(1, cwd, ft_strlen(cwd));
 	write(1, "\n", 1);
 	return (0);
 }
+*/

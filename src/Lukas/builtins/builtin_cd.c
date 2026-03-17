@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:13:40 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:32:04 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:21:33 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ static int	cd_error(const char *message, const char *path)
 	return (1);
 }
 
-int	builtin_cd(t_cmd *cmd, t_env *env)
+int	builtin_cd(t_cmd *cmd, t_environment *list)
 {
 	char	*target;
 	char	*oldpwd;
 
 	if (cmd->argv[1] && cmd->argv[2])
 		return (cd_error("too many arguments", NULL));
-	target = get_cd_target(cmd->argv, env);
+	target = get_cd_target(cmd->argv, list->head);
 	if (!target)
 		return (cd_error("HOME not set", NULL));
 	oldpwd = getcwd(NULL, 0);
@@ -68,10 +68,10 @@ int	builtin_cd(t_cmd *cmd, t_env *env)
 		free(oldpwd);
 		return (1);
 	}
-	update_pwd_oldpwd(env, oldpwd);
+	update_pwd_oldpwd(list->head, oldpwd);
 	free(oldpwd);
 	if (cmd->argv[1]
 		&& ft_strcmp(cmd->argv[1], "-") == 0)
-		printf("%s\n", get_env_value(env, "PWD"));
+		printf("%s\n", get_env_value(list->head, "PWD"));
 	return (0);
 }

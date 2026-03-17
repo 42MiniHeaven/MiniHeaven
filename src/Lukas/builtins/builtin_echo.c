@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:32:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 15:04:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:22:55 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int	is_valid_n_flag(char *str)
 		return (0);
 }
 
-int	builtin_echo(t_cmd *cmd, t_env *env)
+int	builtin_echo(t_cmd *cmd, t_environment *list)
 {
 	int	i;
 	int	newline;
 
-	(void)env;
+	(void)list;
 	i = 1;
 	newline = 1;
 	while (cmd->argv[i] && is_valid_n_flag(cmd->argv[i]))
