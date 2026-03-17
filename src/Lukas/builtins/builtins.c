@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_single.c                                      :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 14:45:47 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/17 14:42:50 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/17 14:44:03 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
-int	exec_single(t_shell *data)
+int	is_builtin(const char *name)
 {
-	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
-		return (0);
-	if (is_builtin(data->cmds->argv[0]))
-		data->last_exit = exec_builtin(data);
-	else
-		exec_external(data);
+	if (ft_strcmp(name, "cd"))
+		return (1);
+	if (ft_strcmp(name, "echo"))
+		return (1);
+	if (ft_strcmp(name, "env"))
+		return (1);
+	if (ft_strcmp(name, "exit"))
+		return (1);
+	if (ft_strcmp(name, "export"))
+		return (1);
+	if (ft_strcmp(name, "pwd"))
+		return (1);
+	if (ft_strcmp(name, "unset"))
+		return (1);
 	return (0);
 }

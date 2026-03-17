@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/16 16:29:17 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/17 14:45:17 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,9 @@ SRC := src/main.c \
 		src/Lukas/exec_external.c \
 		src/Lukas/exec_builtin.c \
 		src/Lukas/builtins/builtin_cd.c \
+		src/Lukas/builtins/builtin_echo.c \
+		src/Lukas/builtins/builtin_pwd.c \
+		src/Lukas/builtins/builtins.c \
 		src/Lukas/env/create_node.c \
 		src/Lukas/env/env_init.c \
 		src/Lukas/env/env_add.c \

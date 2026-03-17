@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:30:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/17 14:44:40 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@
 // Maybe delete later
 # include <aio.h>
 # include <ctype.h>
-
-typedef enum e_exec_result
-{
-	EXEC_OK,
-	EXEC_EXIT_REQUEST
-}	t_exec_result;
 
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
@@ -134,7 +128,7 @@ void	empty_env_init(t_shell *data);
 char	*resolve_path(char *cmd, t_env *env);
 
 //builtins.c
-//int		is_builtin(const char *name);
+int		is_builtin(const char *name);
 
 //env_arr.c
 char	**env_arr(t_env *env);

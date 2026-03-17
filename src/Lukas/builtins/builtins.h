@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:08:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:09:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/17 14:35:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ int				builtin_pwd(t_cmd *cmd, t_env *env);
 int				builtin_unset(t_cmd *cmd, t_env *env);
 
 #endif
-

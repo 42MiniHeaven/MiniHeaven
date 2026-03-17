@@ -1,24 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_single.c                                      :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 14:45:47 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/17 14:39:35 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/17 16:49:51 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtins.h"
 #include "../../include/miniheaven.h"
-
-int	exec_single(t_shell *data)
+/*
+int	builtin_pwd(t_cmd *cmd, t_env *env)
 {
-	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
+	char	*cwd;
+
+	(void)cmd;
+	(void)env;
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("pwd");
+		return (1);
+	}
+	write(1, cwd, ft_strlen(cwd));
+	write(1, "\n", 1);
+	free(cwd);
+	return (0);
+}
+*/
+int	builtin_pwd(t_cmd *cmd, t_env *env)
+{
+	char	*cwd;
+
+	(void)cmd;
+	cwd = get_env_value(env_find(env, "PWD"), "PWD");
+	if (!cwd)
 		return (0);
-	if (is_builtin(data->cmds->argv[0]))
-		data->last_exit = exec_builtin(data);
-	else
-		exec_external(data);
+	write(1, cwd, ft_strlen(cwd));
+	write(1, "\n", 1);
 	return (0);
 }
