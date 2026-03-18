@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/16 17:04:01 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/18 22:41:04 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,109 @@
 
 // ------------------------------------------------------------------------
 
+char	*append_char(char *str, char c)
+{
+	char	*new;
+	int		len;
+
+	if(!str)
+		return (NULL);
+	len = ft_strlen(str);
+	new = ft_calloc(len + 2, sizeof(char));
+	if (!new)
+	{
+		free(str);
+		return (NULL);
+	}
+	ft_memcpy(new, str, len);
+	new[len] = c;
+	new[len + 1] = '\0'; // redundant because of calloc, should we keep anyway to be explicit?
+	free(str);
+	return(new);
+}
+
+char	*str_join_free(char *str1, char *str2)
+{
+	char	*new;
+	int		len1;
+	int		len2;
+	
+	if (!str1 || !str2)
+		return (NULL);
+	len1 = ft_strlen(str1);
+	len2 = ft_strlen(str2);
+	new = ft_calloc(len1 + len2 + 1, sizeof(char));
+	if (!new)
+	{
+		free(str1);
+		return (NULL);
+	}
+	ft_memcpy(new, str1, len1);
+	ft_memcpy(new + len1, str2, len2);
+	new[len1 + len2] = '\0';
+	free(str1);
+	return (new);	
+}
+
+char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
+{
+	int		start;
+	int		j;
+	char	*key;
+	char	*value;
+	
+	start = *i + 1;
+	j = start;
+	while (ft_isalnum(word[j]) || word[j] == '_')
+		j++;
+	key = ft_substr(word, start, j - start);
+	value = get_env_value(key, data->llist);
+	if (!value)
+		value = "";
+	result = str_join_free(result, value);
+	free(key);
+	*i = j;
+	return (result);
+}
+
 // Looks if key exists (key = whatever is writte after $)
 
-void replace_var(t_shell *data, char *word) // add shell 
+char	*replace_var(t_shell *data, char *word, char *mask) // add shell 
 {
-	while (*word)
+	int		i;
+	char	*tmp_exit;
+	char	*result;
+
+	if (!word)
+		return (NULL);
+	i = 0;
+	tmp_exit = ft_itoa(data->exit_code); // We need to have this as ft_itoa allocates memory and we would get leaks if we used it directly instead of tmp;
+	result = ft_strdup("");
+	while (word[i])
 	{
-		if (ft_strnstr(word, '$?\'0 \'', 3) || ft_strnstr(word, '$? ', 3))
+		if (word[i] == '$' && mask[i] != 'S')
 		{
-			write(1, data->exit_code, ft_strlen(ft_itoa(data->exit_code)));
+			if (word[i + 1] && word[i + 1] == '?')
+			{
+				result = str_join_free(result, tmp_exit); // join result and exit code
+				i = i + 2;
+			}
+			else if (ft_isalnum(word[i + 1]) || word[i + 1] == '_')
+				result = handle_env_var(word, &i, result, data); // look up var
+			else
+			{
+				result = append_char(result, '$');
+				i++;
+			}
 		}
-		*word++;
+		else
+		{
+			result = append_char(result, word[i]);
+			i++;	
+		}
 	}
+	free (tmp_exit);
+	return (result);
 	// look for key using: t_env	*env_find(t_env *env, char *key)
 	// once key is found value for key needs to be found: char	*get_env_value(char *key, t_env *env)
 }
@@ -84,7 +175,7 @@ static char	*create_mask(char *str)
 	int	i;
 	char	*mask;
 
-	mask = calloc((strlen(str) + 1), sizeof(char));
+	mask = ft_calloc((strlen(str) + 1), sizeof(char));
 	if (!mask)
 		return NULL;
 	i = 0;
@@ -131,12 +222,13 @@ int	needs_expansion(char *word, char *mask)
 
 char	*expand_variables(char *word, char *mask, t_shell *data)
 {
-	if (needs_expansion(word, mask))
-	{
-		replace_var(data, word); // needs to be created
-	}
-	return (word);
+	char	*expanded_word;
 	
+	if (!needs_expansion(word, mask))
+		return (word);
+	expanded_word = replace_var(data, word, mask);
+	free(word);
+	return (expanded_word);
 }
 
 char *expand_word(char *word, t_shell *data)
@@ -145,7 +237,7 @@ char *expand_word(char *word, t_shell *data)
 
 	mask = create_mask(word);
 	word = expand_variables(word, mask, data);
-	word = remove_quotes(word); // needs to be created	
+	// word = remove_quotes(word); // needs to be created	
 	
 	// also word splitting if needed
 	
@@ -163,10 +255,10 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	if (cmd->cmd)
 		cmd->cmd = expand_word(cmd->cmd, data);
-	if (cmd->argv)
-		expand_agrs(cmd->argv, data); // needs to be created
-	if (cmd->redir)
-		expand_redir(cmd->redir, data); // needs to be created
+	// if (cmd->argv)
+	// 	expand_agrs(cmd->argv, data); // needs to be created
+	// if (cmd->redir)
+	// 	expand_redir(cmd->redir, data); // needs to be created
 }
 
 /*
@@ -191,7 +283,7 @@ void	expand_commands(t_shell *data)
 	tmp_cmd = data->cmds;
 	while (tmp_cmd)
 	{
-		expand_cmd(tmp_cmd, &data);
+		expand_cmd(tmp_cmd, data);
 		tmp_cmd = tmp_cmd->next;
 	}
 }
