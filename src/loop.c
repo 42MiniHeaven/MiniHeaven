@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/19 12:22:18 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/19 13:16:55 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	loop(t_shell *data)
 	printf("%d\n", data->last_exit);
 	free(input);
 	free_loop(data);
-//	loop(data);
+	loop(data);
 }
