@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 14:44:40 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/19 10:48:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		exec_builtin(t_shell *data);
 int		exec_external(t_shell *data);
 
 //exec_pipe.c
-//int		exec_pipe(t_cmd *cmds, t_env *env, int *last_exit);
+int		exec_pipe(t_shell *data);
 
 //exec_single.c
 int		exec_single(t_shell *data);
@@ -122,7 +122,7 @@ int		exec_single(t_shell *data);
 void	empty_env_init(t_shell *data);
 
 //redirections.c
-//int		apply_redirections(t_redir *redir);
+int		setup_redirections(t_redir *redir);
 
 //resolve_path.c
 char	*resolve_path(char *cmd, t_env *env);

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 18:42:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/19 10:47:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	child(t_cmd *cmds, t_environment *list)
 
 	if (!cmds || !cmds->argv || !cmds->argv[0])
 		exit (0);
+	if (setup_redirections(cmds->redir))
+		exit(1);
 	envp = env_arr(list->head);
 	path = resolve_path(cmds->argv[0], list->head);
 	if (!path)
