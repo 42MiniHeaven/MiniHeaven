@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/18 22:41:04 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/21 16:03:15 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
 	char	*key;
 	char	*value;
 	
+	printf("ENtered\n");
 	start = *i + 1;
 	j = start;
 	while (ft_isalnum(word[j]) || word[j] == '_')
@@ -127,6 +128,7 @@ char	*replace_var(t_shell *data, char *word, char *mask) // add shell
 	char	*tmp_exit;
 	char	*result;
 
+	printf("Entered replace_var\n");
 	if (!word)
 		return (NULL);
 	i = 0;
@@ -203,8 +205,10 @@ int	needs_expansion(char *word, char *mask)
 	
 	i = 0;
 	needed = 0;
+	printf("Word: %s\n", word);
 	if (ft_strchr(word, '$') != NULL)
 	{
+		printf("Entered needs_expansion loop\n");
 		while (word[i] && mask[i])
 		{
 			if (word[i] == '$' && mask[i] != 'S')
@@ -224,8 +228,10 @@ char	*expand_variables(char *word, char *mask, t_shell *data)
 {
 	char	*expanded_word;
 	
+	
 	if (!needs_expansion(word, mask))
 		return (word);
+	printf("Entered expand_variables\n");
 	expanded_word = replace_var(data, word, mask);
 	free(word);
 	return (expanded_word);
@@ -253,12 +259,16 @@ char *expand_word(char *word, t_shell *data)
 
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
-	if (cmd->cmd)
-		cmd->cmd = expand_word(cmd->cmd, data);
+	int	i;
+
+	i = 1;
+	if (cmd->argv[i])
+		cmd->argv[i] = expand_word(cmd->argv[i], data);
 	// if (cmd->argv)
 	// 	expand_agrs(cmd->argv, data); // needs to be created
 	// if (cmd->redir)
 	// 	expand_redir(cmd->redir, data); // needs to be created
+	i++;
 }
 
 /*

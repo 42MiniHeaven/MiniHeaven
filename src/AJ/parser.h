@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/14 15:48:41 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/21 15:46:51 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int		lex_quotes(char *input, int *i);
 void	handle_signals(int sigtype);
 int		rl_hook(void);
 // void	check_signals(t_shell data);
+void	expand_commands(t_shell *data);
 
 #endif
