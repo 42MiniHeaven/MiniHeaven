@@ -6,9 +6,10 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/12 13:25:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/21 15:46:51 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PARSER_H
 # define PARSER_H
@@ -59,8 +60,8 @@ struct s_token
 struct  s_redir
 {
 	int             type;   // REDIR_IN, REDIR_OUT, APPEND, HEREDOC
-	char            *file;
 	int				fd;
+	char            *file;
 	struct s_redir  *next;
 };
 
@@ -74,8 +75,14 @@ struct s_cmd
 };
 
 void	lexer(t_shell *data, char *input);
-t_cmd   *parse(t_token *tokens);
+t_cmd	*parse(t_token *tokens);
 void	destroy_all(t_cmd *cmds, t_token *tokens);
 int		syntax_error(char *message);
+int		lex_quotes(char *input, int *i);
+
+void	handle_signals(int sigtype);
+int		rl_hook(void);
+// void	check_signals(t_shell data);
+void	expand_commands(t_shell *data);
 
 #endif

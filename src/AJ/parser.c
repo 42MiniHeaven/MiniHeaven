@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/12 20:33:26 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/14 21:19:02 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,8 +281,10 @@ t_cmd	*parse(t_token *tokens)
 	current = NULL;
 	state = EXPECT_COMMAND;
 	last_redir = -1;
+	// export as function and call built_command_list()
 	while (tokens)
 	{
+		printf("Token: [%s]\n", tokens->value);
 		if (state == EXPECT_COMMAND)
 			state = handle_command(state, &current, &last_redir, tokens, &head);
 		else if (state == EXPECT_ARG_OR_REDIR)
@@ -291,21 +293,22 @@ t_cmd	*parse(t_token *tokens)
 			state = handle_redir_target(state, &current, &last_redir, tokens);
 		if (state == -1)
 		{
-			//return and exit cleanlyfree_cmds(head);
+			free_cmds(head);
 			return (NULL);
 		}
 		tokens = tokens->next;
 	}
+	// export as function and call check_syntax_errors()
 	if (state == EXPECT_REDIR_TARGET)
 	{
 		syntax_error("unexpected end of input; WORD needed");
-		//return and exit cleanlyfree_cmds(head);
+		free_cmds(head);
 		return (NULL);
 	}
 	if (state == EXPECT_COMMAND && head)
 	{
 		syntax_error("unexpected pipe at the end");
-		//return and exit cleanlyfree_cmds(head);
+		free_cmds(head);
 		return (NULL);
 	}
 	return (head);
