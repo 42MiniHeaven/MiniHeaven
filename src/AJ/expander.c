@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/21 16:03:15 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/21 22:40:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,12 @@ char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
 	char	*key;
 	char	*value;
 	
-	printf("ENtered\n");
 	start = *i + 1;
 	j = start;
 	while (ft_isalnum(word[j]) || word[j] == '_')
 		j++;
 	key = ft_substr(word, start, j - start);
-	value = get_env_value(key, data->llist);
+	value = get_env_value(data->list->head, key);
 	if (!value)
 		value = "";
 	result = str_join_free(result, value);
@@ -128,11 +127,10 @@ char	*replace_var(t_shell *data, char *word, char *mask) // add shell
 	char	*tmp_exit;
 	char	*result;
 
-	printf("Entered replace_var\n");
 	if (!word)
 		return (NULL);
 	i = 0;
-	tmp_exit = ft_itoa(data->exit_code); // We need to have this as ft_itoa allocates memory and we would get leaks if we used it directly instead of tmp;
+	tmp_exit = ft_itoa(data->last_exit); // We need to have this as ft_itoa allocates memory and we would get leaks if we used it directly instead of tmp;
 	result = ft_strdup("");
 	while (word[i])
 	{
@@ -208,7 +206,6 @@ int	needs_expansion(char *word, char *mask)
 	printf("Word: %s\n", word);
 	if (ft_strchr(word, '$') != NULL)
 	{
-		printf("Entered needs_expansion loop\n");
 		while (word[i] && mask[i])
 		{
 			if (word[i] == '$' && mask[i] != 'S')
@@ -231,7 +228,6 @@ char	*expand_variables(char *word, char *mask, t_shell *data)
 	
 	if (!needs_expansion(word, mask))
 		return (word);
-	printf("Entered expand_variables\n");
 	expanded_word = replace_var(data, word, mask);
 	free(word);
 	return (expanded_word);
@@ -261,14 +257,16 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	int	i;
 
-	i = 1;
-	if (cmd->argv[i])
+	i = 0;
+	while (cmd->argv[i])
+	{
 		cmd->argv[i] = expand_word(cmd->argv[i], data);
+		i++;
+	}
 	// if (cmd->argv)
 	// 	expand_agrs(cmd->argv, data); // needs to be created
 	// if (cmd->redir)
 	// 	expand_redir(cmd->redir, data); // needs to be created
-	i++;
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/14 21:19:02 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/21 21:03:33 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ char **ft_realloc(char **old, size_t old_count, size_t new_count)
 	i = 0;
 	while (old && i < old_count && i < new_count)
 	{
-		new[i] = old[i];
+		new[i] = ft_strdup(old[i]);
+		free(old[i]);
 		i++;
 	}
 	free (old); // only frees array of pointers not strings themself
