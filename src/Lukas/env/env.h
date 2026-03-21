@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 12:16:20 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:26:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/21 10:17:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_environment
 }	t_environment;
 
 //create_node.c
-t_env	*env_create_node(char *key, char *value, int flag);
+t_env	*env_create_node(char *key, char *value);
 
 //env_init.c
 int		env_init(t_environment *start, char **envp);
