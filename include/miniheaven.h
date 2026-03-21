@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/19 10:48:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/21 14:31:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ void	free_env(t_env *head);
 
 //shell_init.c
 void	shell_init(t_shell *data, char **envp);
+
+//error.c
+void	ft_error(char *func, char *error, int fd);
 
 //check_args.c
 void	check_args(int argc, char **argv, char **envp);

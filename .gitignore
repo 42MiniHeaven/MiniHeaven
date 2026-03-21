@@ -3,10 +3,12 @@
 *.a
 *.json
 ./a.out
-.vscode
-todo.txt
+*.vscode
+*.txt
 .swp
 *.a
 *.o
-MiniHeaven
+supress.sh
+minishell.supp
+minishell
 old

@@ -6,12 +6,13 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/21 10:24:01 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/21 14:25:39 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC := src/main.c \
 		src/check_args.c \
+		src/error.c \
 		src/fake_cmd.c \
 		src/free.c \
 		src/free_environment.c \
@@ -31,6 +32,7 @@ SRC := src/main.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \
 		src/Lukas/builtins/builtin_export.c \
+		src/Lukas/builtins/builtin_exit.c \
 		src/Lukas/builtins/builtin_env.c \
 		src/Lukas/builtins/builtin_pwd.c \
 		src/Lukas/builtins/builtins.c \
