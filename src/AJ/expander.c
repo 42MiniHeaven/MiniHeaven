@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/21 16:03:15 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/21 20:28:11 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ char	*replace_var(t_shell *data, char *word, char *mask) // add shell
 	i = 0;
 	tmp_exit = ft_itoa(data->exit_code); // We need to have this as ft_itoa allocates memory and we would get leaks if we used it directly instead of tmp;
 	result = ft_strdup("");
+	if (!result)
+		return (NULL); // do we need an error?
 	while (word[i])
 	{
 		if (word[i] == '$' && mask[i] != 'S')
@@ -174,12 +176,12 @@ void	fill_mask(char *str, char *mask, int *i, char c, char type)
 
 static char	*create_mask(char *str)
 {
-	int	i;
+	int		i;
 	char	*mask;
 
 	mask = ft_calloc((strlen(str) + 1), sizeof(char));
 	if (!mask)
-		return NULL;
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{
@@ -192,6 +194,51 @@ static char	*create_mask(char *str)
 	}
 	return (mask);	
 }
+
+/*
+ * DESCRIPTION
+ * Exists for the remove_quotes funtion to check the length of the new string without the quotes. 
+ * It uses the mask and substracts the number of quotes.
+ */
+
+int	count_len(char *mask)
+{
+	int	i;
+	int	len;
+	
+	i = 0;
+	len = 0;
+	while (mask[i])
+	{
+		if (mask[i] != 'Q')
+			len++;
+		i++;
+	}
+	return(len);
+}
+
+char	*remove_quotes(char *word, char *mask)
+{
+	int		i;
+	int		j;
+	char	*result;
+	
+	i = 0;
+	j = 0;
+	result = ft_calloc(count_len(mask) + 1, sizeof(char));
+	if (!result)
+		return (NULL); // do we need an error?
+	while (word[j] && mask[j])
+	{
+		while (mask[j] && mask[j] == 'Q')
+			j++;
+		result[i] = word[j];
+		i++;
+		j++;
+	}
+	return (result);
+}
+
 /*
  * DESCRIPTION
  * Checks if word contains $ and if yes, if the $ is not in single quotes.
@@ -228,28 +275,48 @@ char	*expand_variables(char *word, char *mask, t_shell *data)
 {
 	char	*expanded_word;
 	
-	
 	if (!needs_expansion(word, mask))
 		return (word);
-	printf("Entered expand_variables\n");
 	expanded_word = replace_var(data, word, mask);
 	free(word);
 	return (expanded_word);
 }
 
-char *expand_word(char *word, t_shell *data)
+bool	expand_word(char *word, t_shell *data)
 {
-	char *mask;
-
-	mask = create_mask(word);
-	word = expand_variables(word, mask, data);
-	// word = remove_quotes(word); // needs to be created	
+	char	*mask;
+	char	*new_mask;
 	
+	mask = NULL;
+	new_mask = NULL;
+	mask = create_mask(word);
+	if (!mask)
+		return (false);
+	word = expand_variables(word, mask, data);
+	printf("Word: %s\n", word);
+	printf("Mask: %s\n", mask);
+	new_mask = create_mask(word);
+	printf("New mask: %s\n", new_mask);
+	if (!new_mask)
+		return (false);
+	word = remove_quotes(word, new_mask);	
+	printf("ARG res: %s\n", word);
 	// also word splitting if needed
 	
-	free(mask);
-	return (word);
+	free(mask); // safe free to check if this already exist
+	free(new_mask); // safe free to check if this already exist
+	return (true);
 }
+
+// void	free_three(char **a, char **b, char **c)
+// {
+// 	if (a && *a)
+// 		free(*a);
+// 	if (b && *b)
+// 		free(*b);
+// 	if (c && *c)
+// 		free(*c);
+// }
 
 /*
  * DESCRIPTION
@@ -261,11 +328,14 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (cmd->argv[i])
-		cmd->argv[i] = expand_word(cmd->argv[i], data);
-	// if (cmd->argv)
-	// 	expand_agrs(cmd->argv, data); // needs to be created
+	{
+		if (!expand_word(cmd->argv[i], data))
+			return ;//handle malloc fails
+		printf("ARG res after: %s\n", cmd->argv[i]);
+
+	}
 	// if (cmd->redir)
 	// 	expand_redir(cmd->redir, data); // needs to be created
 	i++;
