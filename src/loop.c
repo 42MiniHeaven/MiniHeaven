@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 22:16:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:48:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 void	loop(t_shell *data)
 {
@@ -29,7 +29,9 @@ void	loop(t_shell *data)
 	}
 //	fake_cmd(&data->cmds);
 	data->cmds = parse(data->tokens);
+	printf("after parse\n");
 	expand_commands(data);
+	printf("after expand\n");
 	execute(data);
 	printf("%d\n", data->last_exit);
 	free(input);

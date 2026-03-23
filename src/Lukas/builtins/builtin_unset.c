@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:55:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 22:24:20 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../env/env.h"
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 /**
  * @brief   Unsets environment variables specified in a command string.

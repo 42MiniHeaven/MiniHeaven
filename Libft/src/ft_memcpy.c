@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:06:01 by lwittwer          #+#    #+#             */
-/*   Updated: 2025/05/21 13:53:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:10:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"	
+#include "../include/libft.h"	
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

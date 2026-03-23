@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   loop_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:24:46 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 21:06:22 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:36 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 //i assume last exit should be kept for echo #?
 

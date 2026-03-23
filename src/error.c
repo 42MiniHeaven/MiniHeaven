@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:58:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 14:31:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:35 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 void	ft_error(char *func, char *error, int fd)
 {

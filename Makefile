@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/22 12:39:29 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/23 17:39:01 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ SRC := src/main.c \
 
 NAME := minishell
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -I Libft/include -g
+CFLAGS := -Wall -Wextra -Werror -I Libft/include -I include -g
 LDLIBS := -lreadline
 
 OBJ := $(SRC:.c=.o)

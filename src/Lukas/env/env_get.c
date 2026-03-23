@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:58:24 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:20:17 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/miniheaven.h"
+#include "miniheaven.h"
 
 char	*get_env_value(t_env *env, char *key)
 {

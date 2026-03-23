@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 14:31:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:17:59 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../../Libft/include/libft.h"
+# include "../Libft/include/libft.h"
 # include "../src/AJ/parser.h"
 # include "../src/Lukas/env/env.h"
 # include "../src/Lukas/builtins/builtins.h"

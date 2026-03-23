@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:05:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 16:06:23 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:21:55 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 void	free_arr(char **arr)
 {

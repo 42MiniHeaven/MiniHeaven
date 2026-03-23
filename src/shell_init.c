@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/14 17:39:22 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:38 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 /**
  * @brief Initializes the shell environment list and stores the standard fds.

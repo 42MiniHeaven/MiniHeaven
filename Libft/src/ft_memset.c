@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:51:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2025/05/21 14:03:29 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:10:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 void	*ft_memset(void *s, int c, size_t n)
 {

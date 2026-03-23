@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   empty_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 17:28:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/14 18:01:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/miniheaven.h"
+#include "miniheaven.h"
 
 static char	*get_shell_path(void)
 {

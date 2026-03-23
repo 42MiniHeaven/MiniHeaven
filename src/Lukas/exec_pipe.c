@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/19 14:16:29 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 static int	create_pipe(t_cmd *cmd, int *fd)
 {

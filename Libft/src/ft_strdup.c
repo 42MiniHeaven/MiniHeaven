@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:56:16 by lwittwer          #+#    #+#             */
-/*   Updated: 2025/05/20 18:21:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:10:59 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 char	*ft_strdup(const char *s)
 {
