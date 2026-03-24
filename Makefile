@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/23 17:39:01 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/24 12:54:15 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC := src/main.c \
 		src/Lukas/exec_builtin.c \
 		src/Lukas/exec_pipe.c \
 		src/Lukas/redirections.c \
+		src/Lukas/heredoc.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \
 		src/Lukas/builtins/builtin_export.c \
@@ -65,6 +66,9 @@ LIBFT := $(LIBFT_DIR)/libft.a
 
 all: banner $(LIBFT) $(NAME)
 
+debug:
+	$(MAKE) CFLAGS="$(CFLAGS) -g" re
+
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
@@ -84,7 +88,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug $(LIBFT)
 
 banner:
 	@echo '  __  __ _       _ _   _'

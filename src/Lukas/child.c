@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:38 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:48:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	child(t_cmd *cmds, t_environment *list)
 	char	**envp;
 	char	*path;
 
-	printf("2\n");
 	if (!cmds || !cmds->argv || !cmds->argv[0])
 		exit (0);
 	if (setup_redirections(cmds->redir))

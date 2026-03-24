@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:10:10 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/23 17:46:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:43:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	execute(t_shell *data)
 {
-	if (!data->cmds)
+	if (!data->cmds || !data->cmds->argv[0])
 		return (0);
-	if (!data->cmds->next)
+	if (handle_all_heredocs(data->cmds) != 0)
 	{
-		printf("entered execute\n");
-		return (exec_single(data));
+		data->last_exit = 1;
+		return (0);
 	}
+	if (!data->cmds->next)
+		return (exec_single(data));
 	return (exec_pipe(data));
 }

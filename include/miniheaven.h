@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:17:59 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:54:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ int		exec_pipe(t_shell *data);
 int		exec_single(t_shell *data);
 
 //fds.c
-//int		safe_std_fds(t_shell *data);
-//void	restore_std_fds(t_fds *saved);
+int		safe_std_fds(t_shell *data);
+void	restore_std_fds(t_fds *saved);
 
 //heredoc.c
-//int		handle_heredoc(t_redir *redir);
-//int		handle_all_heredocs(t_cmd *cmds);
+int		handle_heredoc(t_redir *redir);
+int		handle_all_heredocs(t_cmd *cmds);
 
 //empty_env_lst_init.c
 void	empty_env_init(t_shell *data);
