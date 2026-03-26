@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 11:23:04 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,26 @@ int	exec_pipe(t_shell *data)
 	int		prev_fd;
 	pid_t	last_pid;
 	pid_t	pid;
+	t_cmd	*tmp;
 
+	tmp = data->cmds;
 	prev_fd = -1;
-	while (data->cmds)
+	while (tmp)
 	{
-		if (create_pipe(data->cmds, fd))
+		if (create_pipe(tmp, fd))
 		{
 			data->last_exit = 1;
 			return (0);
 		}
-		pid = fork_child(data->cmds, data->list, prev_fd, fd);
+		pid = fork_child(tmp, data->list, prev_fd, fd);
 		if (pid < 0)
 		{
 			data->last_exit = 1;
 			return (0);
 		}
 		last_pid = pid;
-		parent_pipe_cleanup(data->cmds, &prev_fd, fd);
-		data->cmds = data->cmds->next;
+		parent_pipe_cleanup(tmp, &prev_fd, fd);
+		tmp = tmp->next;
 	}
 	wait_last_child(last_pid, &data->last_exit);
 	return (0);

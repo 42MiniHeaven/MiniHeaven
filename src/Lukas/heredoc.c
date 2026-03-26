@@ -6,34 +6,64 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:22:37 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/24 14:50:38 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:34:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-int	handle_heredoc(t_redir *redir)
+static void	heredoc_sigint(int sig)
 {
-	int		fd[2];
+	(void)sig;
+	write(1, "\n", 1);
+	exit (130);
+}
+
+static void	heredoc_child(t_redir *redir, int write_fd)
+{
 	char	*line;
 
-	line = NULL;
-	if (pipe(fd) < 0)
-		return (1);
+	signal(SIGINT, heredoc_sigint);
+	signal(SIGQUIT, SIG_IGN);
+
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
-			break ;
-		if (!line || ft_strcmp(line, redir->file) == 0)
+			exit (0);
+		if (ft_strcmp(line, redir->file) == 0)
 		{
 			free(line);
-			break ;
+			exit(0);
 		}
-		ft_putendl_fd(line, fd[1]);
+		ft_putendl_fd(line, write_fd);
 		free(line);
 	}
+}
+
+int	handle_heredoc(t_redir *redir)
+{
+	int		fd[2];
+	pid_t	pid;
+	int		status;
+
+	if (pipe(fd) == -1)
+		return (1);
+	pid = fork();
+	if (pid == -1)
+		return (1);
+	if (pid == 0)
+	{
+		close(fd[0]);
+		heredoc_child(redir, fd[1]);
+	}
 	close(fd[1]);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+	{
+		close(fd[0]);
+		return (1);
+	}
 	redir->fd = fd[0];
 	return (0);
 }

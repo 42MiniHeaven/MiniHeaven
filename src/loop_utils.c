@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:24:46 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:36 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 11:09:38 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	reset_shell(t_shell *data)
 
 void	free_loop(t_shell *data)
 {
-//	if (data->tokens)
-//		free_tokens(data->tokens);
+	if (data->tokens)
+		free_tokens(data->tokens);
 	if (data->cmds)
 		free_cmds(data->cmds);
 }

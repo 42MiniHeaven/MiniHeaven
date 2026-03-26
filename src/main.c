@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/23 17:31:10 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 10:00:52 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,5 @@ int	main(int argc, char **argv, char **envp)
 	shell_init(&data, envp);		//create env
 	loop(&data);					//loop calling itself 
 	free_environment(data.list);	//cleanup
-//	free_fds(&data);
-//	on_failure(&data, "testcase");
 	return (0);
 }

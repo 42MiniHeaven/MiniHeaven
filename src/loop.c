@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/23 17:48:20 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 21:52:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	loop(t_shell *data)
 //	handle_signals();
 	input = readline("miniheaven> ");
 	if (!input || ft_strcmp(input, "exit") == 0)
-		return (free(input));
+		return (free(input), free_loop(data));
 	if (input)
 	{
 		if (ft_strlen(input) > 0)
@@ -28,12 +28,11 @@ void	loop(t_shell *data)
 		lexer(data, input);
 	}
 //	fake_cmd(&data->cmds);
-	data->cmds = parse(data->tokens);
+	parser(data);
 	printf("after parse\n");
 	expand_commands(data);
-	printf("after expand\n");
 	execute(data);
-	printf("%d\n", data->last_exit);
+//	printf("%d\n", data->last_exit);
 	free(input);
 	free_loop(data);
 	loop(data);

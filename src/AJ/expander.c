@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/21 22:40:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 17:07:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,6 @@ int	needs_expansion(char *word, char *mask)
 	
 	i = 0;
 	needed = 0;
-	printf("Word: %s\n", word);
 	if (ft_strchr(word, '$') != NULL)
 	{
 		while (word[i] && mask[i])

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/24 12:54:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 17:00:51 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
 typedef struct s_fds	t_fds;
+typedef struct s_parser	t_parser;
 
 // main structure comtaining everything, which also can be freed easily
 struct	s_shell
@@ -45,6 +46,15 @@ struct	s_shell
 	t_fds			*fds;
 	int				last_exit;
 	int				should_exit;
+};
+
+struct	s_parser
+{
+	t_cmd	*head;
+	t_cmd	*current;
+	t_token	*tok;
+	int		state;
+	int		last_redir;
 };
 
 struct	s_fds
@@ -92,6 +102,18 @@ void	fake_cmd(t_cmd **cmd);
 
 //on_failure.c
 //void	on_failure(t_shell *data, char *issue);
+
+//PROTOTYPES AJ
+
+//parser_utils.c
+t_cmd	*cmd_new(void);
+int		cmd_add_arg(t_cmd *cmd, const char *word);
+t_redir	*redir_new(int type, const char *file);
+char	**argv_realloc(char **old, int old_len, int new_len);
+
+//parser_utils2.c
+int		cmd_add_redir(t_cmd *cmd, int type, const char *filename);
+int		cmd_add_back(t_cmd **head, t_cmd *new);
 
 //PROTOTYPES LUKAS
 

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 11:24:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,69 +52,54 @@ void	free_tokens(t_token *head)
 			head->value = NULL;
 		}
 		head->type = 0;
-		if (head)
-		{
-			free(head);
-			head = NULL;
-		}
+		free(head);
 		head = next;
 	}
 }
 
+static void	free_redirs(t_redir *head)
+{
+	t_redir	*next;
+
+	while (head)
+	{
+		next = head->next;
+		head->type = 0;
+		if (head->file)
+		{
+			free(head->file);
+			head->file = NULL;
+		}
+		if (head->fd != -1)
+			close(head->fd);
+		free(head);
+		head = next;
+	}
+}
 void	free_cmds(t_cmd *head)
 {
 	t_cmd	*next;
 
-	if (!head)
-		return ;
 	while (head)
 	{
 		next = head->next;
+		if (head->cmd)
+		{
+			free(head->cmd);
+			head->cmd = NULL;
+		}
 		if (head->argv)
 		{
 			free_arr(head->argv);
 			head->argv = NULL;
 		}
-		while (head->redir)
+		if (head->redir)
 		{
-			head->redir->type = 0;
-			free(head->redir->file);
-			head->redir->file = NULL;
-			close(head->redir->fd);
-			free(head);
+			free_redirs(head->redir);
+			head->redir = NULL;
 		}
-		if (head)
-		{
-			free(head);
-			head = NULL;
-		}
+		free(head);
 		head = next;
 	}
 	next = NULL;
 }
-/*
-void	free_env(t_env *head)
-{
-	t_env	*tmp;
-
-	if (!head)
-		return ;
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		if (tmp->key)
-		{
-			free(tmp->key);
-			tmp->key = NULL;
-		}
-		if (tmp->value)
-		{
-			free(tmp->value);
-			tmp->value = NULL;
-		}
-		tmp->flag = 0;
-		free(tmp);
-	}
-	tmp = NULL;
-}*/

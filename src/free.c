@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:05:27 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:21:55 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/26 11:24:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	free_arr(char **arr)
 
 	i = -1;
 	while (arr[++i])
+	{
 		free(arr[i]);
+	}
 	free(arr);
 }
