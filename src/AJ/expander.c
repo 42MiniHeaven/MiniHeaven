@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 14:20:22 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 17:50:59 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,17 +137,18 @@ char	*remove_quotes(char *word, char *mask)
 	return (result);
 }
 
-char	**word_splitting(char *word, char *mask)
-{
-	int		i;
-	int		j;
-	char	*result;
+// char	**word_splitting(t_shell *data, char *word, char *mask)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	**split_result;
 	
-	i = 0;
-	j = 0;
+// 	i = 0;
+// 	j = 0;
 
-	
-}
+// 	split_result = ft_split_extra();
+// 	data->cmds->argv		
+// }
 
 char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
 {
@@ -289,12 +290,10 @@ bool	expand_word(t_shell *data, char *word)
 	printf("New mask: %s\n", mask);
 	if (!mask)
 		return (false);
-	if (ft_strchr(mask, 'N'))
-		word = word_splitting(word, mask);
+	// if (ft_strchr(mask, 'N') && ft_strchr(word, ' ') 
+	// 	&& ft_strchr(word, '\n') && ft_strchr(word, '\t'))
+	// 	word_splitting(data, word, mask);
 	word = remove_quotes(word, mask);
-		
-	// also word splitting if needed
-	// The space, tab and newline are used to separate values when word splitting.
 	
 	free(mask);
 	return (true);
@@ -306,7 +305,8 @@ bool	expand_word(t_shell *data, char *word)
  * and redirection targets).
  */
 
-void	expand_cmd(t_cmd *cmd, t_shell *data)
+void	
+expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	int	i;
 
@@ -349,5 +349,5 @@ void	expand_commands(t_shell *data)
 	{
 		expand_cmd(tmp_cmd, data);
 		tmp_cmd = tmp_cmd->next;
-	}
+	}	
 }
