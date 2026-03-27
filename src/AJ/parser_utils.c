@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 22:16:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/26 21:48:18 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:16:48 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_cmd	*cmd_new(void)
 {
 	t_cmd	*cmd;
 
-	printf("CMD CREATED\n");
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
@@ -39,7 +38,6 @@ int	cmd_add_arg(t_cmd *cmd, const char *word)
 	int		len;
 	char	**new;
 
-	printf("ADD_ARG: %s\n", word);
 	len = argv_len(cmd->argv);
 	new = argv_realloc(cmd->argv, len, len + 2);
 	if (!new)

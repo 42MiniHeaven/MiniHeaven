@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/27 16:17:34 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/27 20:11:42 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC := src/main.c \
 		src/shell_init.c \
 		src/AJ/parser_lukas.c \
 		src/AJ/expander.c \
+		src/AJ/expander_utils.c \
 		src/AJ/quotes.c \
 		src/AJ/lexer_lukas.c \
 		src/AJ/parser_utils.c \

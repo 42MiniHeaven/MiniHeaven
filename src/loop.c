@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 18:31:55 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:29:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ void	loop(t_shell *data)
 	}
 //	fake_cmd(&data->cmds);
 	parser(data);
-	printf("after parse\n");
 	expand_commands(data);
 	execute(data);
-	restore_std_fds(data->fds);
+//	restore_std_fds(data->fds);
 	printf("%d\n", data->last_exit);
-	if (data->should_exit)
+	if (!data->should_exit)
 		return (free(input), free_loop(data));
 	free(input);
 	free_loop(data);
