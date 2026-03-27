@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/23 17:17:44 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 14:20:22 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,18 @@ char	*remove_quotes(char *word, char *mask)
 		j++;
 	}
 	return (result);
+}
+
+char	**word_splitting(char *word, char *mask)
+{
+	int		i;
+	int		j;
+	char	*result;
+	
+	i = 0;
+	j = 0;
+
+	
 }
 
 char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
@@ -277,7 +289,8 @@ bool	expand_word(t_shell *data, char *word)
 	printf("New mask: %s\n", mask);
 	if (!mask)
 		return (false);
-	// word splittling & check if expansion needed
+	if (ft_strchr(mask, 'N'))
+		word = word_splitting(word, mask);
 	word = remove_quotes(word, mask);
 		
 	// also word splitting if needed
