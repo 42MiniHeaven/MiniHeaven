@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/24 12:48:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:17:38 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ void	child(t_cmd *cmds, t_environment *list)
 	path = resolve_path(cmds->argv[0], list->head);
 	if (!path)
 	{
-		printf("%s: command not found\n", cmds->argv[0]);
+		child_error(cmds->argv[0], ": command not found\n");
+//		printf("%s: command not found\n", cmds->argv[0]);
 		free_arr(envp);
 		exit(127);
 	}
 	execve(path, cmds->argv, envp);
 	if (errno == EACCES)
-		printf("%s: permission denied\n", cmds->argv[0]);
+		child_error(cmds->argv[0], ": permission denied\n");
+		//printf("%s: permission denied\n", cmds->argv[0]);
 	else
 		perror(cmds->argv[0]);
 	free(path);

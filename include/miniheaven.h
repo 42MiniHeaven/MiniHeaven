@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/26 17:00:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 16:17:11 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ int		cmd_add_back(t_cmd **head, t_cmd *new);
 
 //child.c
 void	child(t_cmd *cmds, t_environment *list);
+
+//child_utils.c
+void	child_error(char *error, char *msg);
 
 //execute.c
 int		execute(t_shell *data);

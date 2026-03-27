@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/26 10:00:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:48:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	check_args(argc, argv, envp);	//maybe to prevent from missuse on several ./minishell calls
 	shell_init(&data, envp);		//create env
 	loop(&data);					//loop calling itself 
+	restore_std_fds(data.fds);
 	free_environment(data.list);	//cleanup
 	return (0);
 }

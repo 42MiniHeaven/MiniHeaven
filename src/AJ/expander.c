@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/26 17:07:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:31:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ char *expand_word(char *word, t_shell *data)
  * and redirection targets).
  */
 
+
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	int	i;
@@ -283,6 +284,28 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
  // How should redirections be handles here??? Should there genereally be
  // be a special case for redirections??
 
+char	*join_argv(char **argv)
+{
+	int		i;
+	char	*str;
+	char	*tmp;
+
+	i = 0;
+	if (!argv || !argv[0])
+		return (NULL);
+	str = ft_strdup("");
+	while (argv[i])
+	{
+		tmp = ft_strjoin_char(str, argv[i], ' '); 
+		if (!tmp)
+			return (free(str), NULL);
+		free(str);
+		str = tmp;
+		i++;
+	}
+	return (str);
+}
+
 void	expand_commands(t_shell *data)
 {
 	t_cmd	*tmp_cmd;
@@ -291,6 +314,9 @@ void	expand_commands(t_shell *data)
 	while (tmp_cmd)
 	{
 		expand_cmd(tmp_cmd, data);
+		printf("WE ARE HERE:%s\n", join_argv(tmp_cmd->argv));
 		tmp_cmd = tmp_cmd->next;
 	}
+	//expand again!?
+	//wordsplitting
 }

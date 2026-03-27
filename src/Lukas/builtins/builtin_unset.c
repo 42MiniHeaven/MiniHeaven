@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:55:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 14:55:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	builtin_unset(t_cmd *cmd, t_environment *list)
 	if (!list || !cmd)
 		return (0);
 	i = 1;
-	while (cmd[i])
+	while (cmd->argv[i])
 	{
-		env_remove(list, cmd[i]);
+		env_remove(list, cmd->argv[i]);
 		i++;
 	}
 	return (0);

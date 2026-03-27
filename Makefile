@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/26 17:01:26 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/27 16:17:34 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,13 @@ SRC := src/main.c \
 		src/AJ/parser_utils.c \
 		src/AJ/parser_utils2.c \
 		src/Lukas/child.c \
+		src/Lukas/child_utils.c \
 		src/Lukas/execute.c \
 		src/Lukas/exec_single.c \
 		src/Lukas/exec_external.c \
 		src/Lukas/exec_builtin.c \
 		src/Lukas/exec_pipe.c \
+		src/Lukas/fds.c \
 		src/Lukas/redirections.c \
 		src/Lukas/heredoc.c \
 		src/Lukas/builtins/builtin_cd.c \
@@ -39,6 +41,7 @@ SRC := src/main.c \
 		src/Lukas/builtins/builtin_export.c \
 		src/Lukas/builtins/builtin_exit.c \
 		src/Lukas/builtins/builtin_env.c \
+		src/Lukas/builtins/builtin_unset.c \
 		src/Lukas/builtins/builtin_pwd.c \
 		src/Lukas/builtins/builtins.c \
 		src/Lukas/env/create_node.c \

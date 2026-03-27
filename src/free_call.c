@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/26 11:24:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:30:18 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,3 +103,8 @@ void	free_cmds(t_cmd *head)
 	}
 	next = NULL;
 }
+
+//void	free_fds(t_fds *fd)
+//{
+//
+//}

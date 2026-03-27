@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:54:53 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/24 13:00:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:51:01 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	safe_std_fds(t_shell *data)
 	saved = malloc(sizeof(t_fds));
 	if (!saved)
 		return (1);
-	saved->in = dup(STIN_FILENO);
+	saved->in = dup(STDIN_FILENO);
 	saved->out = dup(STDOUT_FILENO);
 	saved->err = dup(STDERR_FILENO);
 	if (saved->in < 0 || saved->out < 0 || saved->err < 0)
@@ -40,12 +40,12 @@ void	restore_std_fds(t_fds *saved)
 	}
 	if (saved->out != -1)
 	{
-		dup(saved->in, STDOUT_FILENO);
+		dup2(saved->in, STDOUT_FILENO);
 		close(saved->out);
 	}
 	if (saved->err != -1)
 	{
-		dup(saved->err, STDERR_FILENO);
+		dup2(saved->err, STDERR_FILENO);
 		close(saved->err);
 	}
 }

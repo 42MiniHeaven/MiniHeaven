@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 19:08:59 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/23 17:50:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 14:54:16 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ int	exec_builtin(t_shell *data)
 	if (ft_strcmp(data->cmds->argv[0], "exit") == 0)
 		return (builtin_exit(data->cmds, data->list));
 	if (ft_strcmp(data->cmds->argv[0], "export") == 0)
-	{
-		printf("1\n");
 		return (builtin_export(data->cmds, data->list));
-	}
 	if (ft_strcmp(data->cmds->argv[0], "pwd") == 0)
 		return (builtin_pwd(data->cmds, data->list));
-//	if (ft_strcmp(data->cmds->argv[0], "unset") == 0)
-//		return (builtin_unset(data->cmds, data->list));
+	if (ft_strcmp(data->cmds->argv[0], "unset") == 0)
+		return (builtin_unset(data->cmds, data->list));
 	return (0);
 }
