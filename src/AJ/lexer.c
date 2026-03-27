@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/23 14:53:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:06:45 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ int ft_is_operator(int c)
 // https://www.linux.org/threads/bash-03-%E2%80%93-command-line-processing.38676/ 
 // "A token that contains no quotes and at least one meta-character is an ‘operator’."
 
+// https://www.linux.org/threads/bash-03-%E2%80%93-command-line-processing.38676/ 
+// "A token that contains no quotes and at least one meta-character is an ‘operator’."
+
 int ft_isspace(int c)
 {
+    return (c == ' ');   // could include more whitespaces (tab and newline)
+    // could also include additional separation characters like & , and ;
     return (c == ' ');   // could include more whitespaces (tab and newline)
     // could also include additional separation characters like & , and ;
 }
@@ -47,7 +52,14 @@ int ft_isspace(int c)
  * DESCRIPTION
  * Adds a new token to the end of the current token list. Function name says what the 
  * functions does (add) and where it does it (back) applying it to tokens.
+ * DESCRIPTION
+ * Adds a new token to the end of the current token list. Function name says what the 
+ * functions does (add) and where it does it (back) applying it to tokens.
  * 
+ * NOTE
+ * t_token **list is a pointer to the head pointer of the list.
+ * In case the list is empty it is needed so the head can be updated.
+ * t_token *new is the token to be added.
  * NOTE
  * t_token **list is a pointer to the head pointer of the list.
  * In case the list is empty it is needed so the head can be updated.
@@ -73,6 +85,8 @@ void	token_add_back(t_token **list, t_token *new)
 }
 
 /*
+ * DESCRIPTION
+ * Combines the gathered info and ONLY creates a new node.
  * DESCRIPTION
  * Combines the gathered info and ONLY creates a new node.
  */
@@ -108,7 +122,7 @@ void	lex_word(char *input, int *i, t_token **tokens)
 {
  	int	start;
 
-	start = *i;
+		start = *i;
     while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
 	{
         if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
@@ -165,12 +179,16 @@ void	lex_operator(char *input, int *i, t_token **tokens)
 /*
  * DESCRIPTION 
  * Converts the received input into tokens and prepares them for parsing.
+ * DESCRIPTION 
+ * Converts the received input into tokens and prepares them for parsing.
  * 
+ * NOTE
+ * Helper functions were created to make the code more readble.
  * NOTE
  * Helper functions were created to make the code more readble.
  */
 
-void	lexer(t_shell *data, char *input)
+void	lexer(t_shell *data, char *input)   // should be called tokeniser??
 {
 	t_token	*tokens;
     size_t	input_len;

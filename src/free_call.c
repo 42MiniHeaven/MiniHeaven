@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_call.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 16:06:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:03:44 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "../include/miniheaven.h"
 
 /*
  * IDEA: 	Either all information from the lexer is duplicated or borrowed.

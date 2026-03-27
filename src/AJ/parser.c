@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/21 21:03:33 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:06:56 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,8 +283,10 @@ t_cmd	*parse(t_token *tokens)
 	state = EXPECT_COMMAND;
 	last_redir = -1;
 	// export as function and call built_command_list()
+	// export as function and call built_command_list()
 	while (tokens)
 	{
+		printf("Token: [%s]\n", tokens->value);
 		printf("Token: [%s]\n", tokens->value);
 		if (state == EXPECT_COMMAND)
 			state = handle_command(state, &current, &last_redir, tokens, &head);
@@ -299,6 +301,7 @@ t_cmd	*parse(t_token *tokens)
 		}
 		tokens = tokens->next;
 	}
+	// export as function and call check_syntax_errors()
 	// export as function and call check_syntax_errors()
 	if (state == EXPECT_REDIR_TARGET)
 	{

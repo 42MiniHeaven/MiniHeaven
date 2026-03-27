@@ -6,12 +6,17 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:07:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:03:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIHEAVEN_H
 # define MINIHEAVEN_H
+
+// needed for sigaction()
+# ifndef _POSIX_C_SOURCE
+#  define _POSIX_C_SOURCE 200809L
+# endif
 
 # include <stdio.h>					// printf
 # include <unistd.h>				// write
@@ -24,7 +29,8 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../../Libft/include/libft.h"
+# include "../Libft/include/libft.h"
+// # include "../../Libft/include/libft.h"
 # include "../src/AJ/parser.h"
 # include "../src/Lukas/env/env.h"
 # include "../src/Lukas/builtins/builtins.h"
