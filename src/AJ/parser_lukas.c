@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_lukas.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/26 21:51:29 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 14:36:36 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ int	parser(t_shell *data)
 	}
 	if (p.state == EXPECT_REDIR_TARGET)
 		return (syntax_error("unexpected end of input"), 0);
+	if (p.state == EXPECT_COMMAND && p.head)
+		return(syntax_error("unexpected pipe at the end"), 0);
 	data->cmds = p.head;
 	return (1);
 }
