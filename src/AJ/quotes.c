@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 18:07:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:10:36 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * Checks for unclosed quotes before the creating tokens.
  */
 
-bool	lex_quotes(char *input, int *i)
+bool	lex_unclosed_quotes(char *input, int *i)
 {	
 	char	quote;
 

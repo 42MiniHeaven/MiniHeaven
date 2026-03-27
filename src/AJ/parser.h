@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 20:02:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:24:35 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 # include "../../include/miniheaven.h"
 
-typedef struct s_shell t_shell; // should be working without as already in miniheaven.h
-
+typedef struct s_shell t_shell;
 typedef struct	s_token t_token;
 typedef struct  s_redir t_redir;
 typedef struct  s_cmd t_cmd;
@@ -74,11 +73,19 @@ struct s_cmd
 	t_cmd       *next;  // next command in pipeline
 };
 
-void	lexer(t_shell *data, char *input);
+// TOKENISING & LEXING
+void	tokeniser(t_shell *data, char *input);
+void	create_token(char *input, int *i, int start, t_token **tokens);
+t_token	*token_new(int type, char *value);
+void	token_add_back(t_token **list, t_token *new);
+int		ft_isspace(int c);
+int 	ft_is_operator(int c);
+
+
 int		parser(t_shell *data);
 void	destroy_all(t_cmd *cmds, t_token *tokens);
 int		syntax_error(char *message);
-int		lex_quotes(char *input, int *i);
+bool	lex_unclosed_quotes(char *input, int *i);
 char	**ft_realloc(char **old, size_t old_count, size_t new_count);
 
 void	handle_signals(int sigtype);

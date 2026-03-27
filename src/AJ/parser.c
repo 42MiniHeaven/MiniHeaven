@@ -6,13 +6,21 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:31:06 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 18:06:56 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 21:20:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
 /*
+ * PARSER
+ * Grammar: 
+ *              input        → pipeline
+ *              pipeline     → command ( '|' command )*
+ *              command      → prefix* WORD suffix*
+ *              prefix       → redirection
+ *              suffix       → WORD | redirection
+ *              redirection  → ('>' | '<' | '>>' | '<<') WORD
  * IDEA: 	Either all information from the lexer is duplicated or borrowed.
  * 			This is important when it comes to freeing.
  * 			Parser in our case borrows everything. Pointers are stored directly

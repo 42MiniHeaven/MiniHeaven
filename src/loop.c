@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2026/03/27 20:01:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 20:13:41 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	loop(t_shell *data)
 	{
 		if (ft_strlen(input) > 0)
 			add_history(input);
-		lexer(data, input);
+		tokeniser(data, input);
 	}
 //	fake_cmd(&data->cmds);
 	parser(data);
