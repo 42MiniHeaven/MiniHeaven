@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/27 18:02:24 by azielnic         ###   ########.fr        #
+#    Updated: 2026/03/27 19:56:27 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,22 +20,28 @@ SRC := src/main.c \
 		src/loop.c \
 		src/loop_utils.c \
 		src/shell_init.c \
-		src/AJ/parser.c \
+		src/AJ/parser_lukas.c \
 		src/AJ/expander.c \
 		src/AJ/quotes.c \
-		src/AJ/lexer.c \
+		src/AJ/lexer_lukas.c \
+		src/AJ/parser_utils.c \
+		src/AJ/parser_utils2.c \
 		src/Lukas/child.c \
+		src/Lukas/child_utils.c \
 		src/Lukas/execute.c \
 		src/Lukas/exec_single.c \
 		src/Lukas/exec_external.c \
 		src/Lukas/exec_builtin.c \
 		src/Lukas/exec_pipe.c \
+		src/Lukas/fds.c \
 		src/Lukas/redirections.c \
+		src/Lukas/heredoc.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \
 		src/Lukas/builtins/builtin_export.c \
 		src/Lukas/builtins/builtin_exit.c \
 		src/Lukas/builtins/builtin_env.c \
+		src/Lukas/builtins/builtin_unset.c \
 		src/Lukas/builtins/builtin_pwd.c \
 		src/Lukas/builtins/builtins.c \
 		src/Lukas/env/create_node.c \
@@ -53,7 +59,7 @@ SRC := src/main.c \
 
 NAME := minishell
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g -I Libft/include
+CFLAGS := -Wall -Wextra -Werror -I Libft/include -I include -g
 LDLIBS := -lreadline
 
 OBJ := $(SRC:.c=.o)
@@ -64,6 +70,9 @@ LIBFT := $(LIBFT_DIR)/libft.a
 .SILENT: all $(NAME)
 
 all: banner $(LIBFT) $(NAME)
+
+debug:
+	$(MAKE) CFLAGS="$(CFLAGS) -g" re
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -84,7 +93,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug $(LIBFT)
 
 banner:
 	@echo '  __  __ _       _ _   _'

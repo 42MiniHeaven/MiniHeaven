@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:15:29 by lwittwer          #+#    #+#             */
-/*   Updated: 2025/05/21 13:30:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:10:49 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 int	ft_atoi(const char *nptr)
 {

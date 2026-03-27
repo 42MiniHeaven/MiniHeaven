@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fake_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:18:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 16:50:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:35 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 void	fake_cmd(t_cmd **cmd)
 {

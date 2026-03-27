@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 19:08:59 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 14:25:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/27 14:54:16 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 int	exec_builtin(t_shell *data)
 {
-	(void)data;
+	printf("0\n");
 	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
 		return (0);
 	if (ft_strcmp(data->cmds->argv[0], "cd") == 0)
@@ -29,7 +29,7 @@ int	exec_builtin(t_shell *data)
 		return (builtin_export(data->cmds, data->list));
 	if (ft_strcmp(data->cmds->argv[0], "pwd") == 0)
 		return (builtin_pwd(data->cmds, data->list));
-//	if (ft_strcmp(data->cmds->argv[0], "unset") == 0)
-//		return (builtin_unset(data->cmds, data->list));
+	if (ft_strcmp(data->cmds->argv[0], "unset") == 0)
+		return (builtin_unset(data->cmds, data->list));
 	return (0);
 }

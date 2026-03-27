@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_environment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 15:36:29 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/14 18:03:53 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:22:36 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 void	free_environment(t_environment *list)
 {

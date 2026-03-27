@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 18:03:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 19:57:57 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../Libft/include/libft.h"
-// # include "../../Libft/include/libft.h"
 # include "../src/AJ/parser.h"
 # include "../src/Lukas/env/env.h"
 # include "../src/Lukas/builtins/builtins.h"
@@ -42,6 +41,7 @@
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
 typedef struct s_fds	t_fds;
+typedef struct s_parser	t_parser;
 
 // main structure comtaining everything, which also can be freed easily
 struct	s_shell
@@ -52,6 +52,15 @@ struct	s_shell
 	t_fds			*fds;
 	int				last_exit;
 	int				should_exit;
+};
+
+struct	s_parser
+{
+	t_cmd	*head;
+	t_cmd	*current;
+	t_token	*tok;
+	int		state;
+	int		last_redir;
 };
 
 struct	s_fds
@@ -100,10 +109,25 @@ void	fake_cmd(t_cmd **cmd);
 //on_failure.c
 //void	on_failure(t_shell *data, char *issue);
 
+//PROTOTYPES AJ
+
+//parser_utils.c
+t_cmd	*cmd_new(void);
+int		cmd_add_arg(t_cmd *cmd, const char *word);
+t_redir	*redir_new(int type, const char *file);
+char	**argv_realloc(char **old, int old_len, int new_len);
+
+//parser_utils2.c
+int		cmd_add_redir(t_cmd *cmd, int type, const char *filename);
+int		cmd_add_back(t_cmd **head, t_cmd *new);
+
 //PROTOTYPES LUKAS
 
 //child.c
 void	child(t_cmd *cmds, t_environment *list);
+
+//child_utils.c
+void	child_error(char *error, char *msg);
 
 //execute.c
 int		execute(t_shell *data);
@@ -121,12 +145,12 @@ int		exec_pipe(t_shell *data);
 int		exec_single(t_shell *data);
 
 //fds.c
-//int		safe_std_fds(t_shell *data);
-//void	restore_std_fds(t_fds *saved);
+int		safe_std_fds(t_shell *data);
+void	restore_std_fds(t_fds *saved);
 
 //heredoc.c
-//int		handle_heredoc(t_redir *redir);
-//int		handle_all_heredocs(t_cmd *cmds);
+int		handle_heredoc(t_redir *redir);
+int		handle_all_heredocs(t_cmd *cmds);
 
 //empty_env_lst_init.c
 void	empty_env_init(t_shell *data);

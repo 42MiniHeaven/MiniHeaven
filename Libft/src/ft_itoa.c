@@ -6,11 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:44:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2025/05/21 13:42:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:10:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 static size_t	countdigits(long n)
 {

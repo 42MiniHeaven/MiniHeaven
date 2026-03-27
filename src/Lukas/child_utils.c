@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_get.c                                          :+:      :+:    :+:   */
+/*   child_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 15:58:24 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/22 11:38:17 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/27 20:02:20 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-char	*get_env_value(t_env *env, char *key)
+void	child_error(char *error, char *msg)
 {
-	while (env)
-	{
-		if (!ft_strcmp(env->key, key))
-			return (env->value);
-		env = env->next;
-	}
-	return (NULL);
+	write(2, error, ft_strlen(error));
+	write(2, msg, ft_strlen(msg));
 }

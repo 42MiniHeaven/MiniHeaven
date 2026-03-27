@@ -5,54 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 18:05:16 by azielnic         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2026/03/27 20:03:08 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include "../include/miniheaven.h"
-
-// Correct Makefile. When libft is changed the libft.a is not remade by typing 
-// 'make' but it should.
-
-
-/*
-int	main(int argc, char **argv, char **envp)
-{
-	char	*input;
-	t_shell	data;
-
-	(void)argc;
-	(void)argv;
-	ft_memset(&data, 0, sizeof(data));
-	init_shell(&data, envp);
-	(void)argc;
-	(void)argv;
-	while (1 && data.should_exit != 2) //and status not true!!
-	{
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, handle_signals);
-		input = readline("MiniHeaven> ");
-		if (!input)
-			break ;
-		if (input)
-		{
-			if (ft_strlen(input) > 0)
-				add_history(input);
-			if (ft_strlen(input) > 0)
-				add_history(input);
-			lexer(&data, input);
-		}
-		// possible to create a function build_commands() which includes
-		// parsing and expansion to keep the main cleaner. 
-		data.cmds = parse(data.tokens);
-		dispatcher(&data);
-		free_call(data, 0, input);
-	}
-	free_call(data, 1, input);
-	return (0);
-}
-*/
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -61,8 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	check_args(argc, argv, envp);	//maybe to prevent from missuse on several ./minishell calls
 	shell_init(&data, envp);		//create env
 	loop(&data);					//loop calling itself 
+	restore_std_fds(data.fds);
 	free_environment(data.list);	//cleanup
-//	free_fds(&data);
-//	on_failure(&data, "testcase");
 	return (0);
 }

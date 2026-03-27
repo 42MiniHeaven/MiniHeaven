@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 18:17:11 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 19:55:06 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,6 +338,28 @@ expand_cmd(t_cmd *cmd, t_shell *data)
  // How should redirections be handles here??? Should there genereally be
  // be a special case for redirections??
 
+char	*join_argv(char **argv)
+{
+	int		i;
+	char	*str;
+	char	*tmp;
+
+	i = 0;
+	if (!argv || !argv[0])
+		return (NULL);
+	str = ft_strdup("");
+	while (argv[i])
+	{
+		tmp = ft_strjoin_char(str, argv[i], ' '); 
+		if (!tmp)
+			return (free(str), NULL);
+		free(str);
+		str = tmp;
+		i++;
+	}
+	return (str);
+}
+
 void	expand_commands(t_shell *data)
 {
 	t_cmd	*tmp_cmd;
@@ -348,6 +370,7 @@ void	expand_commands(t_shell *data)
 	while (tmp_cmd)
 	{
 		expand_cmd(tmp_cmd, data);
+		printf("WE ARE HERE:%s\n", join_argv(tmp_cmd->argv));
 		tmp_cmd = tmp_cmd->next;
 	}	
 }

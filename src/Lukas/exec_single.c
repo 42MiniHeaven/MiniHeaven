@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/23 18:05:14 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/27 20:00:07 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 int	exec_single(t_shell *data)
 {
