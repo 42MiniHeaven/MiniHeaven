@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 18:05:59 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 14:54:14 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniheaven.h"
+
+// Correct Makefile. When libft is changed the libft.a is not remade by typing 
+// 'make' but it should.
+
+
 /*
 int	main(int argc, char **argv, char **envp)
 {

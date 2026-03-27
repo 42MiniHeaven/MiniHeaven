@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
+#    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/22 12:39:29 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/22 18:57:01 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC := src/main.c \
 		src/AJ/parser.c \
 		src/AJ/expander.c \
 		src/AJ/quotes.c \
-		src/AJ/lexer_lukas.c \
+		src/AJ/lexer.c \
 		src/Lukas/child.c \
 		src/Lukas/execute.c \
 		src/Lukas/exec_single.c \

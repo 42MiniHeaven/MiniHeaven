@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 14:31:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:07:40 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>					// printf
 # include <unistd.h>				// write
 # include <stdlib.h>				// malloc
+# include <stdbool.h>				// boolean data type (bool)
 # include <sys/types.h>				// pid_t
 # include <sys/wait.h>				// waitpid
 # include <fcntl.h>					// open flags

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:42:50 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 22:52:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:04:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	is_builtin(const char *name)
 {
-	if (ft_strcmp(name, "cd"))
+	if (ft_strcmp(name, "cd") == 0)
 		return (0);
-	if (ft_strcmp(name, "echo"))
+	if (ft_strcmp(name, "echo") == 0)
 		return (0);
-	if (ft_strcmp(name, "env"))
+	if (ft_strcmp(name, "env") == 0)
 		return (0);
-	if (ft_strcmp(name, "exit"))
+	if (ft_strcmp(name, "exit") == 0)
 		return (0);
-	if (ft_strcmp(name, "export"))
+	if (ft_strcmp(name, "export") == 0)
 		return (0);
-	if (ft_strcmp(name, "pwd"))
+	if (ft_strcmp(name, "pwd") == 0)
 		return (0);
-	if (ft_strcmp(name, "unset"))
+	if (ft_strcmp(name, "unset") == 0)
 		return (0);
 	return (1);
 }

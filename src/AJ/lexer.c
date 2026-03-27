@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/13 22:08:28 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:53:34 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int ft_isspace(int c)
  * t_token *new is the token to be added.
  */
 
-void    token_add_back(t_token **list, t_token *new)
+void	token_add_back(t_token **list, t_token *new)
 {
-    t_token *tmp; // basically our i to find the last node of the list
+    t_token	*tmp; // basically our i to find the last node of the list
 
     if (!list || !new)
         return ;
@@ -77,9 +77,9 @@ void    token_add_back(t_token **list, t_token *new)
  * Combines the gathered info and ONLY creates a new node.
  */
 
-t_token *token_new(int type, char *value)
+t_token	*token_new(int type, char *value)
 {
-    t_token *token;
+    t_token	*token;
 
     token = malloc(sizeof(t_token));
     if (!token)
@@ -92,8 +92,8 @@ t_token *token_new(int type, char *value)
 
 void	create_token(char *input, int *i, int start, t_token **tokens)
 {
-	char    *value;
-    t_token *token;
+	char	*value;
+    t_token	*token;
 
 	value = ft_substr(input, start, *i - start);
     if (!value)
@@ -104,59 +104,18 @@ void	create_token(char *input, int *i, int start, t_token **tokens)
     token_add_back(tokens, token);
 }
 
-// void	lex_word(t_shell *data, char *input, int *i, t_token **tokens)
-// void	lex_word(char *input, int *i, t_token **tokens)
-// {
-// 	char	*word;
-// 	char	*segment;
-// 	char	*tmp;
-// 	char	*temp;
-
-// 	word = ft_strdup("");
-// 	temp = ft_calloc(2, sizeof(char));
-// 	if (!word)
-// 		return ;
-// 	while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
-// 	{
-// 		if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
-// 		{
-// 			segment = quote_handler(input, i);
-// 			if (!segment)
-// 			{
-//  				free(word);
-// 				return ;
-// 			}
-// 			tmp = word;
-// 			word = ft_strjoin(tmp, segment);
-// 			free(tmp);
-// 			free(segment);
-// 		}
-// 		else
-//         {			
-//             temp[0] = input[*i];
-// 			temp[1] = '\0';
-// 			word = ft_strjoin(word, temp);
-// 			(*i)++;
-// 		}
-// 	}
-//     token_add_back(tokens, token_new(WORD, word));
-// }
-
-///////////////////////////// SIMPLE LEXER HANDLER /////////////////////////
-
-void lex_word(char *input, int *i, t_token **tokens)
+void	lex_word(char *input, int *i, t_token **tokens)
 {
- 	int		start;
+ 	int	start;
 
-		start = *i;
+	start = *i;
     while (input[*i] && !(ft_is_operator(input[*i])) && !(ft_isspace(input[*i])))
 	{
         if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
-		{
+        {
 			if (!lex_quotes(input, i))
 				return ;
-            //else continue; // so when the quote is finsihed the token is created
-		}
+        }
 		else
 			(*i)++;
 	}
@@ -176,25 +135,27 @@ void lex_word(char *input, int *i, t_token **tokens)
  *          is appended to this list
  */
 
-void    lex_operator(char *input, int *i, t_token **tokens)
+ // Also explain why str_dup is used
+
+void	lex_operator(char *input, int *i, t_token **tokens)
 {
-    t_token *token;
+    t_token	*token;
 
     token = NULL;
     if (input[*i] == '|')
-        token = token_new(PIPE, "|");
+        token = token_new(PIPE, ft_strdup("|"));
     else if (input[*i] == '>' && input[(*i) + 1] != '>')
-        token = token_new(REDIR_OUT, ">");
+        token = token_new(REDIR_OUT, ft_strdup(">"));
     else if (input[*i] == '<' && input[(*i) + 1] != '<')
-        token = token_new(REDIR_IN, "<");
+        token = token_new(REDIR_IN, ft_strdup("<"));
     else if (input[*i] == '>' && input[(*i) + 1] == '>')
     {
-        token = token_new(APPEND, ">>");
+        token = token_new(APPEND, ft_strdup(">>"));
         (*i)++;
     }
     else if (input[*i] == '<' && input[(*i) + 1] == '<')
     {
-        token = token_new(HEREDOC, "<<");
+        token = token_new(HEREDOC, ft_strdup("<<"));
         (*i)++;
     }
     (*i)++;
@@ -209,18 +170,20 @@ void    lex_operator(char *input, int *i, t_token **tokens)
  * Helper functions were created to make the code more readble.
  */
 
-void	lexer(t_shell *data, char *input)   // should be called tokeniser??
+void	lexer(t_shell *data, char *input)
 {
-	t_token *tokens;
-    size_t  input_len;
-    int     i;
+	t_token	*tokens;
+    size_t	input_len;
+    int		i;
 
 //  if (validity_check(input) == 0 / 1);
 //      return (error);
-	ft_memset(&tokens, 0, sizeof(tokens));
+	tokens = NULL;
+	if (!data || !input)
+		return ;
     input_len = ft_strlen(input);
     i = 0;
-	while ((size_t)i < input_len)   // could only be input[i] but that way is safer
+	while ((size_t)i < input_len)
 	{
 		if (ft_isspace(input[i]))
         {

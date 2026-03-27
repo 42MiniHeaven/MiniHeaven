@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/21 22:43:46 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/22 14:57:50 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	child(t_cmd *cmds, t_environment *list)
 	char	**envp;
 	char	*path;
 
-	printf("2\n");
 	if (!cmds || !cmds->argv || !cmds->argv[0])
 		exit (0);
 	if (setup_redirections(cmds->redir))
