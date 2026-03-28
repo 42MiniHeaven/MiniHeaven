@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 15:01:09 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 15:24:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	loop(t_shell *data)
 	expand_commands(data);
 	execute(data);
 //	restore_std_fds(data->fds);
-	printf("%d\n", data->last_exit);
+	// printf("%d\n", data->last_exit);
 	if (!data->should_exit)
 		return (free(input), free_loop(data));
 	free(input);

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/28 14:59:05 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 15:20:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,63 +93,6 @@ char	*str_join_free(char *str1, char *str2)
 	return (new);	
 }
 
-/*
- * DESCRIPTION
- * Exists for the remove_quotes funtion to check the length of the new string without the quotes. 
- * It uses the mask and substracts the number of quotes.
- */
-
-int	count_len(char *mask)
-{
-	int	i;
-	int	len;
-	
-	i = 0;
-	len = 0;
-	while (mask[i])
-	{
-		if (mask[i] != 'Q')
-			len++;
-		i++;
-	}
-	return(len);
-}
-
-char	*remove_quotes(char *word, char *mask)
-{
-	int		i;
-	int		j;
-	char	*result;
-	
-	i = 0;
-	j = 0;
-	result = ft_calloc(count_len(mask) + 1, sizeof(char));
-	if (!result)
-		return (NULL); // do we need an error?
-	while (word[j] && mask[j])
-	{
-		while (mask[j] && mask[j] == 'Q')
-			j++;
-		result[i] = word[j];
-		i++;
-		j++;
-	}
-	return (result);
-}
-
-// char	**word_splitting(t_shell *data, char *word, char *mask)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**split_result;
-	
-// 	i = 0;
-// 	j = 0;
-
-// 	split_result = ft_split_extra();
-// 	data->cmds->argv		
-// }
-
 char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
 {
 	int		start;
@@ -171,29 +114,26 @@ char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
 	return (result);
 }
 
-/*
- * DESCRIPTION
- * Goes through the string which could contain more than one $, meaning also $ in single
- * quotes could be present. This also has to be handled.
- */
 // Looks if key exists (key = whatever is writte after $)
 
-char	*expand_var(t_shell *data, char *word, char *mask)
+char	*replace_var(t_shell *data, char *word, char *mask) // add shell 
 {
 	int		i;
 	char	*tmp_exit;
 	char	*result;
 
+	if (!word)
+		return (NULL);
 	i = 0;
 	tmp_exit = ft_itoa(data->last_exit); // We need to have this as ft_itoa allocates memory and we would get leaks if we used it directly instead of tmp;
 	result = ft_strdup("");
 	while (word[i])
 	{
-		if (word[i] == '$' && mask[i] != 'S') // could be exported to handles expandable_dollar()
+		if (word[i] == '$' && mask[i] != 'S')
 		{
 			if (word[i + 1] && word[i + 1] == '?')
 			{
-				result = str_join_free(result, tmp_exit);
+				result = str_join_free(result, tmp_exit); // join result and exit code
 				i = i + 2;
 			}
 			else if (ft_isalnum(word[i + 1]) || word[i + 1] == '_')
@@ -211,7 +151,6 @@ char	*expand_var(t_shell *data, char *word, char *mask)
 		}
 	}
 	free (tmp_exit);
-	free(word);
 	return (result);
 	// look for key using: t_env	*env_find(t_env *env, char *key)
 	// once key is found value for key needs to be found: char	*get_env_value(char *key, t_env *env)
@@ -228,7 +167,7 @@ void	fill_mask(char *str, char *mask, int *i, char c, char type)
 
 static char	*create_mask(char *str)
 {
-	int		i;
+	int	i;
 	char	*mask;
 
 	mask = ft_calloc((strlen(str) + 1), sizeof(char));
@@ -246,57 +185,60 @@ static char	*create_mask(char *str)
 	}
 	return (mask);	
 }
-
 /*
  * DESCRIPTION
  * Checks if word contains $ and if yes, if the $ is not in single quotes.
  * Returns either 0 or 1 (false or true).
  */
-
-bool	needs_expansion(char *word, char *mask)
+// make it a bool?
+int	needs_expansion(char *word, char *mask)
 {
 	int i;
 	int needed;
 	
 	i = 0;
-	needed = false;
+	needed = 0;
 	if (ft_strchr(word, '$') != NULL)
 	{
 		while (word[i] && mask[i])
 		{
 			if (word[i] == '$' && mask[i] != 'S')
-				needed = true;
+				needed = 1;
 			i++;
 		}
 	}
 	return (needed);
 }
 
-bool	expand_word(t_shell *data, char *word)
-{
-	char	*mask;
+// Checks for $, handles quotes and removes quotes and replaces it with the expansion.
+// 1. Single quotes: Trims quotes only
+// 2. Double quotes: Trims quotes and expands varaiable
+// 3. No quotes: Expands and splits words
 
-	mask = NULL;
+char	*expand_variables(char *word, char *mask, t_shell *data)
+{
+	char	*expanded_word;
+	
+	
+	if (!needs_expansion(word, mask))
+		return (word);
+	expanded_word = replace_var(data, word, mask);
+	free(word);
+	return (expanded_word);
+}
+
+char *expand_word(char *word, t_shell *data)
+{
+	char *mask;
+
 	mask = create_mask(word);
-	if (!mask)
-		return (false);
-	if (needs_expansion(word, mask))
-		word = expand_var(data, word, mask);
-	if (!word)
-		return (false);
-	free(mask);
-	mask = NULL;
-	mask = create_mask(word);
-	printf("New mask: %s\n", mask);
-	if (!mask)
-		return (false);
-	// if (ft_strchr(mask, 'N') && ft_strchr(word, ' ') 
-	// 	&& ft_strchr(word, '\n') && ft_strchr(word, '\t'))
-	// 	word_splitting(data, word, mask);
-	word = remove_quotes(word, mask);
+	word = expand_variables(word, mask, data);
+	// word = remove_quotes(word); // needs to be created	
+	
+	// also word splitting if needed
 	
 	free(mask);
-	return (true);
+	return (word);
 }
 
 /*
@@ -305,16 +247,15 @@ bool	expand_word(t_shell *data, char *word)
  * and redirection targets).
  */
 
-void	
-expand_cmd(t_cmd *cmd, t_shell *data)
+
+void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	int	i;
 
 	i = 0;
-	while (cmd->argv[i]) // if or while??
+	while (cmd->argv[i])
 	{
-		if (!expand_word(data, cmd->argv[i]))
-			return ; // handle malloc failure
+		cmd->argv[i] = expand_word(cmd->argv[i], data);
 		i++;
 	}
 	// if (cmd->argv)
@@ -459,15 +400,18 @@ void	expand_commands(t_shell *data)
 	t_cmd	*tmp_cmd;
 	char	**tmp;
 	
-	if (!data || !data->cmds)
-		return ;
 	tmp_cmd = data->cmds;
 	while (tmp_cmd)
 	{
 		expand_cmd(tmp_cmd, data);
-		printf("WE ARE HERE:%s\n", join_argv(tmp_cmd->argv));
-		tmp_cmd = tmp_cmd->next;
+		tmp = expander_split(join_argv(tmp_cmd->argv), " \t\n");
+		free_arr(tmp_cmd->argv);
+		tmp_cmd->argv = tmp;
+		if (!needs_exp(tmp_cmd->argv))
+		{
+			if (!quotes_removal(tmp_cmd->argv))
+				printf("failed on quotes removal\n");
+			tmp_cmd = tmp_cmd->next;
+		}
 	}
-	//expand again!?
-	//wordsplitting
 }
