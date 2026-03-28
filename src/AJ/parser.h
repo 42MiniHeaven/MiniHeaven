@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/28 16:44:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:13:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,14 @@ int		syntax_error(char *message);
 
 // EXPANSION
 char	*create_mask(char *str);
+bool	quotes_removal(char **argv);
+bool	needs_expansion_word(char *word, char *mask);
+bool	needs_expansion_argv(char **arr);
+char	*join_argv(char **argv);
+char	*handle_env_var(char *word, int *i, char *result, t_shell *data);
+char	*str_join_free(char *str1, char *str2);
+char	*append_char(char *str, char c);
+char	*replace_var(t_shell *data, char *word, char *mask);
 
 
 // COULD BE ADDED TO LIBFT
