@@ -6,14 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/28 15:20:05 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 16:25:53 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-
-// Before the head is returned to the main including the commands for the execution
-// expansion needs to happen.
 
 // Checks for $, handles quotes and removes quotes and replaces it with the expansion.
 // 1. Single quotes: Trims quotes only
@@ -154,36 +151,6 @@ char	*replace_var(t_shell *data, char *word, char *mask) // add shell
 	return (result);
 	// look for key using: t_env	*env_find(t_env *env, char *key)
 	// once key is found value for key needs to be found: char	*get_env_value(char *key, t_env *env)
-}
-
-void	fill_mask(char *str, char *mask, int *i, char c, char type)
-{
-	mask[(*i)++] = 'Q';
-	while (str[*i] && str[*i] != c)
-		mask[(*i)++] = type;
-	if (str[*i])
-		mask[(*i)++] = 'Q';
-}
-
-static char	*create_mask(char *str)
-{
-	int	i;
-	char	*mask;
-
-	mask = ft_calloc((strlen(str) + 1), sizeof(char));
-	if (!mask)
-		return NULL;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '"')
-			fill_mask(str, mask, &i, '"', 'D');
-		else if (str[i] == '\'')
-			fill_mask(str, mask, &i, '\'', 'S');
-		else
-			mask[i++] = 'N';
-	}
-	return (mask);	
 }
 /*
  * DESCRIPTION

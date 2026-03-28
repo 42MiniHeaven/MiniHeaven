@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 22:16:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 21:16:48 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/28 16:05:36 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_cmd	*cmd_new(void)
 	return (cmd);
 }
 
-int	cmd_add_arg(t_cmd *cmd, const char *word)
+bool	cmd_add_arg(t_cmd *cmd, const char *word)
 {
 	int		len;
 	char	**new;
@@ -41,11 +41,11 @@ int	cmd_add_arg(t_cmd *cmd, const char *word)
 	len = argv_len(cmd->argv);
 	new = argv_realloc(cmd->argv, len, len + 2);
 	if (!new)
-		return (0);
+		return (false);
 	cmd->argv = new;
 	cmd->argv[len] = ft_strdup(word);
 	cmd->argv[len + 1] = NULL;
-	return (1);
+	return (true);
 }
 
 t_redir	*redir_new(int type, const char *file)

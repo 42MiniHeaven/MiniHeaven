@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_lukas.c                                     :+:      :+:    :+:   */
+/*   2_parser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 15:39:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 16:22:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
+
+/*
+ * *** PARSER ***
+ * The parser takes the tokens produced by the lexer and builds a linked
+ * command structure incl an array which can be passed to the execution.
+ */
 
 static void	parser_init(t_parser *p, t_shell *data)
 {
@@ -21,29 +27,29 @@ static void	parser_init(t_parser *p, t_shell *data)
 	p->last_redir = -1;
 }
 
-static int	handle_expect_command(t_parser *p)
+static bool	handle_expect_command(t_parser *p)
 {
 	if (p->tok->type == WORD)
 	{
 		p->current = cmd_new();
 		if (!p->current || !cmd_add_back(&p->head, p->current))
-			return (0);
+			return (false);
 		p->current->cmd = ft_strdup(p->tok->value);
 		if (!p->current->cmd || !cmd_add_arg(p->current, p->tok->value))
-			return (0);
+			return (false);
 		p->state = EXPECT_ARG_OR_REDIR;
 	}
 	else if (p->tok->type >= REDIR_OUT && p->tok->type <= HEREDOC)
 	{
 		p->current = cmd_new();
 		if (!p->current || !cmd_add_back(&p->head, p->current))
-			return (0);
+			return (false);
 		p->last_redir = p->tok->type;
 		p->state = EXPECT_REDIR_TARGET;
 	}
 	else
 		return (syntax_error("unexpected token"), 0);
-	return (1);
+	return (true);
 }
 
 static bool	handle_expect_arg(t_parser *p)

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 21:24:35 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 16:44:07 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,25 @@ struct s_cmd
 // TOKENISING & LEXING
 void	tokeniser(t_shell *data, char *input);
 void	create_token(char *input, int *i, int start, t_token **tokens);
-t_token	*token_new(int type, char *value);
 void	token_add_back(t_token **list, t_token *new);
-int		ft_isspace(int c);
-int 	ft_is_operator(int c);
-
-
-int		parser(t_shell *data);
-void	destroy_all(t_cmd *cmds, t_token *tokens);
-int		syntax_error(char *message);
+t_token	*token_new(int type, char *value);
 bool	lex_unclosed_quotes(char *input, int *i);
+
+// PARSING
+int		parser(t_shell *data);
+int		syntax_error(char *message);
+
+// EXPANSION
+char	*create_mask(char *str);
+
+
+// COULD BE ADDED TO LIBFT
+int 	ft_is_operator(int c);
+int		ft_isspace(int c);
 char	**ft_realloc(char **old, size_t old_count, size_t new_count);
+
+
+void	destroy_all(t_cmd *cmds, t_token *tokens);
 
 void	handle_signals(int sigtype);
 int		rl_hook(void);
