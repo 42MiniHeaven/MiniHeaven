@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2026/03/27 20:13:41 by azielnic         ###   ########.fr       */
+/*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/28 15:01:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ void	loop(t_shell *data)
 	}
 //	fake_cmd(&data->cmds);
 	parser(data);
-	printf("after parse\n");
 	expand_commands(data);
 	execute(data);
-	restore_std_fds(data->fds);
+//	restore_std_fds(data->fds);
 	printf("%d\n", data->last_exit);
-	if (data->should_exit)
+	if (!data->should_exit)
 		return (free(input), free_loop(data));
 	free(input);
 	free_loop(data);

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 19:55:06 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 14:59:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,9 +360,104 @@ char	*join_argv(char **argv)
 	return (str);
 }
 
+static int	needs_exp(char **arr)
+{
+	int		i;
+	int		j;
+	char	*mask;
+	
+	i = 0;
+	while (arr[i])
+	{
+		j = 0;
+		mask = create_mask(arr[i]);
+		if (!mask)
+			return (free(mask), 0);
+		if (ft_strchr(arr[i], '$') != NULL)
+		{
+			while (arr[i][j] && mask[j])
+			{
+				if (arr[i][j] == '$' && mask[j] != 'S')
+					return (free(mask), 1);
+				j++;
+			}
+		}
+		free(mask);
+		i++;
+	}
+	return (0);
+}
+
+/*
+ * DESCRIPTION
+ * Exists for the remove_quotes funtion to check the length of the new string without the quotes. 
+ * It uses the mask and substracts the number of quotes.
+ */
+
+int	count_len(char *mask)
+{
+	int	i;
+	int	len;
+	
+	i = 0;
+	len = 0;
+	while (mask[i])
+	{
+		if (mask[i] != 'Q')
+			len++;
+		i++;
+	}
+	return(len);
+}
+
+char	*remove_quotes(char *word, char *mask)
+{
+	int		i;
+	int		j;
+	char	*result;
+
+	i = 0;
+	j = 0;
+	result = ft_calloc(count_len(mask) + 1, sizeof(char));
+	if (!result)
+		return (NULL); // do we need an error?
+	while (word[j] && mask[j])
+	{
+		while (mask[j] && mask[j] == 'Q')
+			j++;
+		result[i] = word[j];
+		i++;
+		j++;
+	}
+	printf("quotes: %s\n", result);
+	return (result);
+}
+
+int	quotes_removal(char **argv)
+{
+	int		i;
+	char	*mask;
+	char	*tmp;
+
+	i = 0;
+	while (argv[i])
+	{
+		mask = create_mask(argv[i]);
+		tmp = remove_quotes(argv[i], mask);
+		if (!tmp)
+			return (free(mask), 0);
+		free(argv[i]);
+		free(mask);
+		argv[i] = tmp;
+		i++;
+	}
+	return (1);
+}
+
 void	expand_commands(t_shell *data)
 {
 	t_cmd	*tmp_cmd;
+	char	**tmp;
 	
 	if (!data || !data->cmds)
 		return ;
@@ -372,5 +467,7 @@ void	expand_commands(t_shell *data)
 		expand_cmd(tmp_cmd, data);
 		printf("WE ARE HERE:%s\n", join_argv(tmp_cmd->argv));
 		tmp_cmd = tmp_cmd->next;
-	}	
+	}
+	//expand again!?
+	//wordsplitting
 }

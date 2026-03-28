@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 19:57:57 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/28 15:00:51 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ char	**argv_realloc(char **old, int old_len, int new_len);
 //parser_utils2.c
 int		cmd_add_redir(t_cmd *cmd, int type, const char *filename);
 int		cmd_add_back(t_cmd **head, t_cmd *new);
+
+//expander_utils.c
+char	**expander_split(char *s, char *delim);
 
 //PROTOTYPES LUKAS
 

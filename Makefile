@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/27 21:22:36 by azielnic         ###   ########.fr        #
+#    Updated: 2026/03/28 15:00:30 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC := src/main.c \
 		src/shell_init.c \
 		src/AJ/parser_lukas.c \
 		src/AJ/expander.c \
+		src/AJ/expander_utils.c \
 		src/AJ/quotes.c \
 		src/AJ/1_lexer.c \
 		src/AJ/1_lexer_utils.c \
