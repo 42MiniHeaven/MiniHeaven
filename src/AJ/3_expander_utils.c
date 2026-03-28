@@ -1,58 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander2.c                                        :+:      :+:    :+:   */
+/*   3_expander_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/28 20:52:53 by azielnic         ###   ########.fr       */
+/*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
+/*   Updated: 2026/03/28 21:24:32 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-
-// Looks if key exists (key = whatever is writte after $)
-
-char	*replace_var(t_shell *data, char *word, char *mask) // add shell 
-{
-	int		i;
-	char	*tmp_exit;
-	char	*result;
-
-	if (!word)
-		return (NULL);
-	i = 0;
-	tmp_exit = ft_itoa(data->last_exit); // We need to have this as ft_itoa allocates memory and we would get leaks if we used it directly instead of tmp;
-	result = ft_strdup("");
-	while (word[i])
-	{
-		if (word[i] == '$' && mask[i] != 'S')
-		{
-			if (word[i + 1] && word[i + 1] == '?')
-			{
-				result = str_join_free(result, tmp_exit); // join result and exit code
-				i = i + 2;
-			}
-			else if (ft_isalnum(word[i + 1]) || word[i + 1] == '_')
-				result = handle_env_var(word, &i, result, data); // look up var
-			else
-			{
-				result = append_char(result, '$');
-				i++;
-			}
-		}
-		else
-		{
-			result = append_char(result, word[i]);
-			i++;	
-		}
-	}
-	free (tmp_exit);
-	return (result);
-	// look for key using: t_env	*env_find(t_env *env, char *key)
-	// once key is found value for key needs to be found: char	*get_env_value(char *key, t_env *env)
-}
 
 /*
  * Explain why +2 (one for the char c and one for the null terminator)
@@ -99,27 +57,6 @@ char	*str_join_free(char *str1, char *str2)
 	new[len1 + len2] = '\0';
 	free(str1);
 	return (new);	
-}
-
-char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
-{
-	int		start;
-	int		j;
-	char	*key;
-	char	*value;
-	
-	start = *i + 1;
-	j = start;
-	while (ft_isalnum(word[j]) || word[j] == '_')
-		j++;
-	key = ft_substr(word, start, j - start);
-	value = get_env_value(data->list->head, key);
-	if (!value)
-		value = "";
-	result = str_join_free(result, value);
-	free(key);
-	*i = j;
-	return (result);
 }
 
 char	*join_argv(char **argv)

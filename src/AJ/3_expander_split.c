@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander_utils.c                                   :+:      :+:    :+:   */
+/*   3_expander_split.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:52:54 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 21:23:57 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/28 21:48:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-static int	in_str(char c, char *str)
+static bool	in_str(char c, char *str)
 {
 	int	i;
 
@@ -20,10 +20,10 @@ static int	in_str(char c, char *str)
 	while (str[i])
 	{
 		if (c == str[i])
-			return (1);
+			return (true);
 		i++;
 	}
-	return (0);
+	return (false);
 }
 
 static int	countwords(char *input, char *delim)
