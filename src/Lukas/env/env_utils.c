@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 12:45:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/29 14:59:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*get_key(const char *str)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
-	if (str[i] != '=')
-		return (NULL);
+//	if (str[i] != '=')
+//		return (NULL);
 	return (ft_substr(str, 0, i));
 }
 
