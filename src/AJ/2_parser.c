@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 16:22:09 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/29 21:16:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,20 @@ int	parser(t_shell *data)
 	while (p.tok)
 	{
 		if (p.state == EXPECT_COMMAND)
-			p.state = handle_expect_command(&p);
+		{
+			if (!handle_expect_command(&p))
+				return (0);
+		}
 		else if (p.state == EXPECT_ARG_OR_REDIR)
-			p.state = handle_expect_arg(&p);
+		{
+			if (!handle_expect_arg(&p))
+				return (0);
+		}
 		else if (p.state == EXPECT_REDIR_TARGET)
-			p.state = handle_expect_redir(&p);
+		{
+			if (!handle_expect_redir(&p))
+				return (0);
+		}
 		p.tok = p.tok->next;
 		// if (p.state == -1) // have to check if this is needed
 		// {

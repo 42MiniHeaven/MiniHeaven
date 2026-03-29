@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 15:24:12 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/29 21:53:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,24 @@
 
 void	loop(t_shell *data)
 {
-	char	*input;
-
-	reset_shell(data);
-//	handle_signals();
-	input = readline("miniheaven> ");
-	if (!input || ft_strcmp(input, "exit") == 0)
-		return (free(input), free_loop(data));
-	if (input)
+	while (1)
 	{
-		if (ft_strlen(input) > 0)
-			add_history(input);
-		tokeniser(data, input);
+		reset_shell(data);
+	//	handle_signals();
+		data->input = readline("miniheaven> ");
+		if (!data->input || ft_strcmp(data->input, "exit") == 0)
+			break ;
+		if (data->input)
+		{
+			if (ft_strlen(data->input) > 0)
+				add_history(data->input);
+			tokeniser(data, data->input);
+		}
+		parser(data);
+		expand_commands(data);
+		execute(data);
+		free_loop(data);
 	}
-//	fake_cmd(&data->cmds);
-	parser(data);
-	expand_commands(data);
-	execute(data);
-//	restore_std_fds(data->fds);
-	// printf("%d\n", data->last_exit);
-	if (!data->should_exit)
-		return (free(input), free_loop(data));
-	free(input);
-	free_loop(data);
-	loop(data);
+	if (data->input)
+		free(data->input);
 }

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 21:21:26 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/29 15:44:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	shell_init(t_shell *data, char **envp)
 		env_init(list, envp);
 	else
 		env_init(list, empty_env());
-//	safe_std_fds(data);
+	safe_std_fds(data);
 	data->list = list;
 	data->last_exit = 0;
 }

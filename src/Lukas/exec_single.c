@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 20:00:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/29 15:46:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int	exec_single(t_shell *data)
 	if (!is_builtin(data->cmds->argv[0]))
 		data->last_exit = exec_builtin(data);
 	else
+	{
+		printf("entered external\n");
 		exec_external(data);
+	}
 	return (0);
 }
