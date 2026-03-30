@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/29 21:53:24 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:17:29 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	loop(t_shell *data)
 		parser(data);
 		expand_commands(data);
 		execute(data);
+		printf("%i\n", data->last_exit);
 		free_loop(data);
 	}
 	if (data->input)

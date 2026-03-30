@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/29 21:37:25 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:04:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int		handle_all_heredocs(t_cmd *cmds);
 void	empty_env_init(t_shell *data);
 
 //redirections.c
-int		setup_redirections(t_redir *redir);
+void	setup_redirections(t_redir *redir);
 
 //resolve_path.c
 char	*resolve_path(char *cmd, t_env *env);
@@ -168,4 +168,25 @@ int		is_builtin(const char *name);
 
 //env_arr.c
 char	**env_arr(t_env *env);
+
+//wrapper.c
+
+//wopen.c
+int		wopen(const char *path, int flags, mode_t mode);
+
+//wclose.c
+void	wclose(int fd);
+
+//wdup2.c
+void	wdup2(int oldfd, int newfd);
+
+//wfork.c
+pid_t	wfork(void);
+
+//wpipe.c
+void	wpipe(int pipefd[2]);
+
+//fatal.c
+void	fatal(const char *msg, int exit_code);
+
 #endif
