@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:22:37 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/24 15:34:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/30 20:41:33 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	handle_heredoc(t_redir *redir)
 		close(fd[0]);
 		return (1);
 	}
-	redir->fd = fd[0];
+	redir->fd = fd[0]; 
 	return (0);
 }
 
-int	handle_all_heredocs(t_cmd *cmds)
+int	handle_all_heredocs(t_cmd *cmds) // TODO: heredoc needs to be moved to parser
 {
 	t_cmd	*cmd;
 	t_redir	*r;

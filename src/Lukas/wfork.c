@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   wfork.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 17:28:10 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/24 17:54:06 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/30 11:44:02 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/30 15:26:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
-int	builtin_pwd(t_cmd *cmd, t_env **env)
+pid_t	wfork(void)
 {
-	char	*cwd;
+	pid_t	pid;
 
-	(void)cmd;
-	(void)env;
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
+	pid = fork();
+	if (pid == -1)
 	{
-		perror("pwd");
-		return (1);
+		perror("fork");
+		exit(EXIT_FAILURE);
 	}
-	write(1, cwd, ft_strlen(cwd));
-	write(1, "\n", 1);
-	free(cwd);
-	return (0);
+	return (pid);
 }
+

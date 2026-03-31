@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   wopen.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/24 14:55:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/24 22:41:45 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/30 11:13:01 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/30 22:52:21 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
-void	init_shell(t_shell *data, char **envp)
+int	wopen(const char *path, int flags, mode_t mode)
 {
-	if (envp[0] != NULL)
-		create_env_list(&data->lst, envp);
-	else
-		init_empty_env(&data->lst);
-	safe_std_fds(data);
+	int	fd;
+
+	fd = open(path, flags, mode);
+	if (fd == -1)
+		fatal(path, 1);
+	return (fd);
 }
