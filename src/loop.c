@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 22:53:12 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/31 21:53:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	loop(t_shell *data)
 	while (1)
 	{
 		reset_shell(data);
-	//	handle_signals();
+		handle_signals();
 		data->input = readline("miniheaven> ");
 		if (!data->input || ft_strcmp(data->input, "exit") == 0)
 			break ;
