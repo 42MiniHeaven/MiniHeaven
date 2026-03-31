@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_single.c                                      :+:      :+:    :+:   */
+/*   wfork.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 22:56:20 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/30 11:44:02 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/30 15:26:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-int	exec_single(t_shell *data)
+pid_t	wfork(void)
 {
-	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
-		return (0);
-	if (!is_builtin(data->cmds->argv[0]))
-		data->last_exit = exec_builtin(data);
-	else
-		exec_external(data);
-	return (0);
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	return (pid);
 }
+

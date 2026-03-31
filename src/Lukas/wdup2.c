@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_single.c                                      :+:      :+:    :+:   */
+/*   wdup2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 22:56:20 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/30 11:16:15 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/30 18:45:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-int	exec_single(t_shell *data)
+void	wdup2(int oldfd, int newfd)
 {
-	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
-		return (0);
-	if (!is_builtin(data->cmds->argv[0]))
-		data->last_exit = exec_builtin(data);
-	else
-		exec_external(data);
-	return (0);
+	if (dup2(oldfd, newfd) == -1)
+		fatal("dup2", 1);
+	printf("entered\n");
 }

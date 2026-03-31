@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:42:50 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 19:59:29 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/30 22:55:55 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ int	is_builtin(const char *name)
 		return (0);
 	if (ft_strcmp(name, "unset") == 0)
 		return (0);
-	printf("exited builtin\n");
 	return (1);
 }

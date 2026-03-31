@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 16:12:06 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:04:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ struct	s_shell
 	t_fds			*fds;
 	int				last_exit;
 	int				should_exit;
+	char			*input;
 };
 
 struct	s_parser
@@ -81,11 +82,9 @@ void	free_environment(t_environment *list);
 //void	free_fds(t_shell *data);
 
 //free_call.c
-void	free_call(t_shell data, int args, char *input);
 void	free_tokens(t_token *lst);
 void	free_cmds(t_cmd *lst);
-void	free_shell(t_shell *data);
-void	free_env(t_env *head);
+void	free_fds(t_fds *fd);
 
 //shell_init.c
 void	shell_init(t_shell *data, char **envp);
@@ -159,7 +158,7 @@ int		handle_all_heredocs(t_cmd *cmds);
 void	empty_env_init(t_shell *data);
 
 //redirections.c
-int		setup_redirections(t_redir *redir);
+void	setup_redirections(t_redir *redir);
 
 //resolve_path.c
 char	*resolve_path(char *cmd, t_env *env);
@@ -169,4 +168,25 @@ int		is_builtin(const char *name);
 
 //env_arr.c
 char	**env_arr(t_env *env);
+
+//wrapper.c
+
+//wopen.c
+int		wopen(const char *path, int flags, mode_t mode);
+
+//wclose.c
+void	wclose(int fd);
+
+//wdup2.c
+void	wdup2(int oldfd, int newfd);
+
+//wfork.c
+pid_t	wfork(void);
+
+//wpipe.c
+void	wpipe(int pipefd[2]);
+
+//fatal.c
+void	fatal(const char *msg, int exit_code);
+
 #endif

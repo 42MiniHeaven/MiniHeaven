@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/28 21:43:43 by azielnic         ###   ########.fr        #
+#    Updated: 2026/03/30 17:04:04 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,12 @@ SRC := src/main.c \
 		src/Lukas/fds.c \
 		src/Lukas/redirections.c \
 		src/Lukas/heredoc.c \
+		src/Lukas/wfork.c \
+		src/Lukas/wpipe.c \
+		src/Lukas/wopen.c \
+		src/Lukas/wclose.c \
+		src/Lukas/wdup2.c \
+		src/Lukas/fatal.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \
 		src/Lukas/builtins/builtin_export.c \

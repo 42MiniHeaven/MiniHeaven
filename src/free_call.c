@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 19:58:56 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/30 22:48:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ static void	free_redirs(t_redir *head)
 			free(head->file);
 			head->file = NULL;
 		}
-		if (head->fd != -1)
-			close(head->fd);
 		free(head);
 		head = next;
 	}
@@ -104,7 +102,10 @@ void	free_cmds(t_cmd *head)
 	next = NULL;
 }
 
-//void	free_fds(t_fds *fd)
-//{
-//
-//}
+void	free_fds(t_fds *fd)
+{
+	close(fd->in);
+	close(fd->out);
+	close(fd->err);
+	free(fd);
+}

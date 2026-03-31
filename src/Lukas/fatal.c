@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_single.c                                      :+:      :+:    :+:   */
+/*   fatal.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 22:56:20 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/03/30 11:42:50 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/03/30 15:20:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-int	exec_single(t_shell *data)
+void	fatal(const char *msg, int exit_code)
 {
-	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
-		return (0);
-	if (!is_builtin(data->cmds->argv[0]))
-		data->last_exit = exec_builtin(data);
-	else
-		exec_external(data);
-	return (0);
+	perror(msg);
+	exit(exit_code);
 }
