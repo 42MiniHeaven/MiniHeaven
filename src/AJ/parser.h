@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/30 22:50:58 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/31 22:27:50 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ struct s_cmd
 	t_cmd       *next;  // next command in pipeline
 };
 
+// SIGNALHANDLING
+void	handle_signals(void);
+int		rl_hook(void);
+
 // TOKENISING & LEXING
 void	tokeniser(t_shell *data, char *input);
 void	create_token(char *input, int *i, int start, t_token **tokens);
@@ -102,10 +106,8 @@ int		ft_isspace(int c);
 char	**ft_realloc(char **old, size_t old_count, size_t new_count);
 
 
-void	destroy_all(t_cmd *cmds, t_token *tokens);
+// void	destroy_all(t_cmd *cmds, t_token *tokens);
 
-void	handle_signals(int sigtype);
-int		rl_hook(void);
 // void	check_signals(t_shell data);
 void	expand_commands(t_shell *data);
 

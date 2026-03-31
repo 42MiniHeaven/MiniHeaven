@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/30 17:04:04 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/03/31 22:28:30 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC := src/main.c \
 		src/AJ/3_expander_split.c \
 		src/AJ/3_expander_utils.c \
 		src/AJ/3_expander_core.c \
+		src/AJ/signals.c \
 		src/Lukas/child.c \
 		src/Lukas/child_utils.c \
 		src/Lukas/execute.c \

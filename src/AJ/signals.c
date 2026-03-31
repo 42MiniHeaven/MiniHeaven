@@ -6,19 +6,14 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/02/24 21:45:56 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/03/31 22:34:39 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 #include <sys/ioctl.h>
 
-/*
- * First initialised in 
- * extern -> 
- */
-
-extern volatile sig_atomic_t	g_signal_status;
+volatile sig_atomic_t	g_signal_status;
 
 /*
  * DESCRIPTION
@@ -92,7 +87,7 @@ int	rl_hook(void)
  * 
  */
 
-void	handle_signals(int sigtype)
+void	handle_sigint(int sigtype)
 {
 	g_signal_status = sigtype;
 	// if (sigtype == SIGINT)
@@ -102,4 +97,10 @@ void	handle_signals(int sigtype)
 	// 	rl_replace_line("", 0);
 	// 	rl_redisplay();
 	// }
+}
+
+void	handle_signals(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_sigint);
 }
