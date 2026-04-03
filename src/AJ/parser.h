@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/31 22:27:50 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:21:57 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ struct s_cmd
 
 // SIGNALHANDLING
 void	handle_signals(void);
+void	set_exit_code(t_shell *data);
 int		rl_hook(void);
 
 // TOKENISING & LEXING
@@ -89,10 +90,10 @@ int		parser(t_shell *data);
 int		syntax_error(char *message);
 
 // EXPANSION
-char	*create_mask(char *str);
 bool	quotes_removal(char **argv);
 bool	needs_expansion_word(char *word, char *mask);
 bool	needs_expansion_argv(char **arr);
+char	*create_mask(char *str);
 char	*join_argv(char **argv);
 char	*handle_env_var(char *word, int *i, char *result, t_shell *data);
 char	*str_join_free(char *str1, char *str2);

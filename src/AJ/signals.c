@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/03 17:57:32 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:20:40 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,17 @@ volatile sig_atomic_t	g_signal_status = 0;
  * signal(SIGQUIT, SIG_DFL);
  */
 
+void	set_exit_code(t_shell *data)
+{
+	data->last_exit = 128 + g_signal_status;
+	g_signal_status = 0;
+}
+
 int	rl_hook(void)
 {
 	// consider setting and if (g_signal == SIGINT), g_signal = 0;
-	ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
+		perror("ioctl");
 	rl_replace_line("", 0);
 	rl_clear_history();
 	return (0);
@@ -80,23 +87,14 @@ int	rl_hook(void)
 // 	}
 // }
 
-/*
- * ctrl-c = SIGINT	"interrupt" displays a new prompt on a new line
- * ctrl-\ = SIGQUIT	
- * 
- */
-
 void	handle_sigint(int sigtype)
 {
 	g_signal_status = sigtype;
-	// if (sigtype == SIGINT)
-	// {
-	// 	write(1, "\n", 1);
-	// 	rl_on_new_line();
-	// 	rl_replace_line("", 0);
-	// 	rl_redisplay();
-	// }
 }
+/*
+ * ctrl-\ = SIGQUIT
+ * ctrl-c = SIGINT "interrupt" displays a new prompt on a new line
+ */
 
 void	handle_signals(void)
 {

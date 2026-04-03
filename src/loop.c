@@ -6,12 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/31 21:53:12 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:23:23 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "miniheaven.h"
+
+extern volatile sig_atomic_t	g_signal_status;
 
 void	loop(t_shell *data)
 {
@@ -22,6 +23,8 @@ void	loop(t_shell *data)
 		data->input = readline("miniheaven> ");
 		if (!data->input || ft_strcmp(data->input, "exit") == 0)
 			break ;
+		if (g_signal_status != 0)
+			set_exit_code(data);
 		if (data->input)
 		{
 			if (ft_strlen(data->input) > 0)
