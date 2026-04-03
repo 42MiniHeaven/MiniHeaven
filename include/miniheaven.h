@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/03 17:58:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 22:40:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
 typedef struct s_fds	t_fds;
 typedef struct s_parser	t_parser;
+typedef struct s_hdnode	t_hdnode;
 
 // main structure comtaining everything, which also can be freed easily
 struct	s_shell
@@ -71,6 +72,13 @@ struct	s_fds
 	int	out;
 	int	err;
 };
+
+struct	s_hdnode
+{
+	t_redir			*redir;
+	struct s_hdnode	*next;
+};
+
 //PROTOTYPES GENERAL
 
 //free.c
@@ -123,6 +131,12 @@ bool	cmd_add_back(t_cmd **head, t_cmd *new);
 
 //expander_utils.c
 char	**expander_split(char *s, char *delim);
+
+//4_heredoc.c
+int		prepare_heredocs(t_shell *data, t_cmd *cmds);
+
+//4_expander_heredoc.c 
+char	*expand_line(t_shell *data, char *input);
 
 //PROTOTYPES LUKAS
 

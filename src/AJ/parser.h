@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/31 22:27:50 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 21:58:18 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ struct  s_redir
 {
 	int             type;   // REDIR_IN, REDIR_OUT, APPEND, HEREDOC
 	int				fd;
+	int				expand;
 	char            *file;
 	struct s_redir  *next;
 };
@@ -98,6 +99,9 @@ char	*handle_env_var(char *word, int *i, char *result, t_shell *data);
 char	*str_join_free(char *str1, char *str2);
 char	*append_char(char *str, char c);
 char	*replace_var(t_shell *data, char *word, char *mask);
+char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit);
+char	*remove_quote(char *str);
+int		need_heredoc_expansion(char *str);
 
 
 // COULD BE ADDED TO LIBFT

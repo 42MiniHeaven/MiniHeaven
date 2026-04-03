@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/28 22:00:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 21:07:49 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 /*
  * DESCRIPTION
@@ -26,7 +26,7 @@
  * @note	Does not perform expansion if conditions are not met.
  */
 
-static char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
+char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
 {
 	if (w[(*i) + 1] && w[(*i) + 1] == '?')
 	{
