@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 17:04:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:58:23 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <fcntl.h>					// open flags
 # include <errno.h>
 # include <signal.h>
+# include <sys/ioctl.h>				// needed for signals
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../Libft/include/libft.h"

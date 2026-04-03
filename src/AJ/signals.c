@@ -6,14 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/31 22:34:39 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:57:32 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
-#include <sys/ioctl.h>
 
-volatile sig_atomic_t	g_signal_status;
+volatile sig_atomic_t	g_signal_status = 0;
 
 /*
  * DESCRIPTION
@@ -28,8 +27,8 @@ volatile sig_atomic_t	g_signal_status;
  * to perform device-specific I/O operations (that don't fit into the standard 
  * read or write categories).
  * 
- * STDIN_FILENO: This is the file descriptor for Standard Input (usually 0). 
- * It tells the system we want to perform an action on the input stream.
+ * STDIN_FILENO: This is the file descriptor for Standard Input (usually 0). It 
+ * tells the system we want to perform an action on the input stream.
  * 
  * TIOCSTI: Stands for Terminal I/O Control - simulates/fakes terminal input.
  * 
@@ -37,19 +36,19 @@ volatile sig_atomic_t	g_signal_status;
  * (Enter key).
  * 
  * So if the user presses Ctrl+C:
- * 		-The signal handler sets g_signaln
+ * 		-The signal handler sets g_signal_status
  * 		-Readline continues waiting
  * 		-The hook injects a newline
  * 		-Readline finishes immediately
  * 
- * Effect: The prompt returns instantly.
- * Without this, Readline would still be blocking.
+ * Effect: The prompt returns instantly. Without this, Readline would still be 
+ * blocking.
  */
 
 /*
  * TO BE IMPLEMENTED
  * Ctrl+C behaviour for:
- * 		[ ]Prompt mode
+ * 		[x]Prompt mode
  * 		[ ]Here-doc mode
  * 		[ ]Execution mode
  * 		[ ]Child processes
@@ -101,6 +100,7 @@ void	handle_sigint(int sigtype)
 
 void	handle_signals(void)
 {
+	rl_signal_event_hook = rl_hook;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, handle_sigint);
 }
