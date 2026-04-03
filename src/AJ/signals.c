@@ -6,13 +6,23 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/03 20:20:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/03 23:10:30 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
 volatile sig_atomic_t	g_signal_status = 0;
+
+/*
+ * *** SIGNAL HANDLING ***
+ * Handles Ctrl-C (SIGINT) and Ctrl-\ (SIGQUIT) in minishell.
+ * Plays a role in the prompt (refresh on interrupt), heredoc (stop input) and 
+ * execution (forward signals to child processes).
+ * 
+ * handle_signals() -> signals_heredoc() --> signals_exec() --> child: reset
+ * --> returns to prompt mode after execution completes 
+ */
 
 /*
  * DESCRIPTION
@@ -45,13 +55,12 @@ volatile sig_atomic_t	g_signal_status = 0;
  * blocking.
  */
 
-/*
+/* //TODO
  * TO BE IMPLEMENTED
  * Ctrl+C behaviour for:
- * 		[x]Prompt mode
- * 		[ ]Here-doc mode
- * 		[ ]Execution mode
- * 		[ ]Child processes
+ * 		[x]Prompt mode (waiting for input)
+ * 		[ ]Here-doc mode (reading << input)
+ * 		[ ]Execution mode (parent + child processes)
  * 
  * During execution (before fork): ??
  * signal(SIGINT, SIG_IGN);
@@ -62,38 +71,36 @@ volatile sig_atomic_t	g_signal_status = 0;
  * signal(SIGQUIT, SIG_DFL);
  */
 
+//TODO: for HEREDOC
+// handle_sigint_heredoc()
+// sets g_signal_status
+// write("\n") + close fd
+// set exit code in handle_sigint() (exit_code = 130)
+
 void	set_exit_code(t_shell *data)
 {
 	data->last_exit = 128 + g_signal_status;
 	g_signal_status = 0;
 }
 
-int	rl_hook(void)
+static void	handle_sigint(int sigtype)
 {
-	// consider setting and if (g_signal == SIGINT), g_signal = 0;
+	g_signal_status = sigtype;
+}
+
+static int	rl_hook(void)
+{
 	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
 		perror("ioctl");
 	rl_replace_line("", 0);
 	rl_clear_history();
 	return (0);
 }
- 
-// void	check_signals(t_shell data, char *input)
-// {
-// 	if (g_signal_status == SIGINT)
-// 	{
-// 		data.exit_code = 128 + SIGINT; // should be 130
-// 		g_signal_status = 0;
-// 	}
-// }
-
-void	handle_sigint(int sigtype)
-{
-	g_signal_status = sigtype;
-}
+// ** PROMPT MODE **
 /*
- * ctrl-\ = SIGQUIT
- * ctrl-c = SIGINT "interrupt" displays a new prompt on a new line
+ * rl_hook; injects \n so readline unblocks
+ * ctrl-\ = SIGQUIT; silenced at prompt
+ * ctrl-c = SIGINT; sets g_signal_status
  */
 
 void	handle_signals(void)
