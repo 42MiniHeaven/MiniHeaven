@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/03 21:07:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/04 19:08:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
 	if (w[(*i) + 1] && w[(*i) + 1] == '?')
 	{
 		res = str_join_free(res, exit);
-		i = i + 2;
+		(*i) += 2;
 	}
 	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_')
 		res = handle_env_var(w, i, res, d);
 	else
 	{
 		res = append_char(res, '$');
-		i++;
+		(*i)++;
 	}
 	return (res);
 }
@@ -69,6 +69,7 @@ char	*replace_var(t_shell *data, char *word, char *mask)
 	result = ft_strdup("");
 	while (word[i])
 	{
+		printf("I is: %i\n", i);
 		if (word[i] == '$' && mask[i] != 'S')
 			result = handle_dollar(data, word, &i, result, tmp_exit);
 		else
