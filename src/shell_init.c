@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 23:05:21 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:15:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	shell_init(t_shell *data, char **envp)
 		env_init(list, empty_env());
 	safe_std_fds(data);
 	data->list = list;
-	data->last_exit = 130;
+	data->last_exit = 0;
 }
