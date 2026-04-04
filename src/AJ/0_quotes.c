@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/03 22:44:13 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/04 14:57:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char	*remove_quote(char *str)
 	if (!str)
 		return (NULL);
 	len = ft_strlen(str);
-	if ((str[0] == str[len]) && (str[0] == '"' || str[0] == '\''))
+	if ((str[0] == str[len - 1]) && (str[0] == '"' || str[0] == '\''))
 	{
 		ret = ft_substr(str, 1, len - 2);
 		free(str);
@@ -138,7 +138,7 @@ int	need_heredoc_expansion(char *str)
 	if (!str)
 		return (0);
 	len = ft_strlen(str);
-	if (str[0] == str[len] && (str[0] == '\'' || str[0] == '"'))
+	if (str[0] == str[len - 1] && (str[0] == '\'' || str[0] == '"'))
 		return (0);
 	return (1);
 }

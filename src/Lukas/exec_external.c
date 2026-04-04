@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:52:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/04 17:58:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ int	exec_external(t_shell *data)
 	if (pid == 0)
 		child(data->cmds, data->list);
 	else
+	{
+		if (data->cmds->redir->type == HEREDOC)
+			close(data->cmds->redir->fd);
 		wait_child(pid, data);
+	}
 	return (0);
 }
