@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/03 20:21:57 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/04 18:54:02 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ struct s_cmd
 };
 
 // SIGNALHANDLING
-void	handle_signals(void);
+void	handle_signals_prompt(void);
+void	handle_signals_exec_parent(void);
+void	handle_signals_exec_child(void);
 void	set_exit_code(t_shell *data);
-int		rl_hook(void);
+// int		rl_hook(void);
 
 // TOKENISING & LEXING
 void	tokeniser(t_shell *data, char *input);

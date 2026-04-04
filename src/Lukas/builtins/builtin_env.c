@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:34:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/29 15:08:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/04 14:32:36 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
  * @param   str		Input str
  */
 
+
+ // TODO: update _ when using env (currently not correct)
 int	builtin_env(t_cmd *cmd, t_environment *list)
 {
 	t_env	*tmp;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   0_signals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/03 23:10:30 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/04 18:53:45 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,7 @@ volatile sig_atomic_t	g_signal_status = 0;
  * Ctrl+C behaviour for:
  * 		[x]Prompt mode (waiting for input)
  * 		[ ]Here-doc mode (reading << input)
- * 		[ ]Execution mode (parent + child processes)
- * 
- * During execution (before fork): ??
- * signal(SIGINT, SIG_IGN);
- * signal(SIGQUIT, SIG_IGN);
- * 
- * Child processes should restore default: ???????
- * signal(SIGINT, SIG_DFL);
- * signal(SIGQUIT, SIG_DFL);
+ * 		[X]Execution mode (parent + child processes)
  */
 
 //TODO: for HEREDOC
@@ -83,7 +75,7 @@ void	set_exit_code(t_shell *data)
 	g_signal_status = 0;
 }
 
-static void	handle_sigint(int sigtype)
+static void	handle_sig(int sigtype)
 {
 	g_signal_status = sigtype;
 }
@@ -96,16 +88,50 @@ static int	rl_hook(void)
 	rl_clear_history();
 	return (0);
 }
-// ** PROMPT MODE **
 /*
- * rl_hook; injects \n so readline unblocks
- * ctrl-\ = SIGQUIT; silenced at prompt
- * ctrl-c = SIGINT; sets g_signal_status
+ * DESCRIPTION
+ * Instead of using the default behaviour for SIGINT (SIG_DFL) - which would
+ * terminate the shell on Ctrl+C - it is intercepted by handle_sig() to set
+ * g_signal_status and unblock readline via the rl_hook, redisplaying a fresh
+ * prompt. SIGQUIT is silenced as bash ignores it at the prompt.
  */
 
-void	handle_signals(void)
+void	handle_signals_prompt(void)
 {
 	rl_signal_event_hook = rl_hook;
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handle_sigint);
+	signal(SIGINT, handle_sig);
+}
+
+/*
+ * DESCRIPTION
+ * Signals are ignored in the parent as the terminal delivers them to the 
+ * entire foregournd process group (all processes currently running and
+ * interacting with the terminal, incl. the child). This means the child 
+ * recives the signals automatically. Ignoring them in the parent prevents 
+ * the shell itself from being killed while it waits for the child to finsih.
+ * 
+ * Setting the hook to NULL prevents it from firing outside readline.
+ */
+
+void	handle_signals_exec_parent(void)
+{
+	rl_signal_event_hook = NULL;
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+}
+
+/*
+ * DESCRIPTION
+ * Both signals are restored to the default kernel behaviour after fork() but
+ * before execve(). This lets Ctril+C kill the child (SIGINT -> exit 130) and
+ * Ctrl+\ quit the child and print "Quit (core dupmed)" (SIGQUIT -> exit 131)
+ * matching the bash behaviour.
+ */
+
+void	handle_signals_exec_child(void)
+{
+	rl_signal_event_hook = NULL;
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 }
