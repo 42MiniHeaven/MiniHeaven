@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/04 14:18:08 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:10:04 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	child(t_cmd *cmds, t_environment *list)
 	if (errno == EACCES)
 		child_error(cmds->argv[0], ": permission denied\n");
 	else
-		perror(cmds->argv[0]);
+		child_error(cmds->argv[0], ": No such file or directory");
 	free(path);
 	free_arr(envp);
 	exit((errno == EACCES) ? 126 : 127);

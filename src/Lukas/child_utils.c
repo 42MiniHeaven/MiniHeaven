@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 11:38:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 20:02:20 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:09:15 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	child_error(char *error, char *msg)
 {
+	write(2, "bash: ", 7);
 	write(2, error, ft_strlen(error));
 	write(2, msg, ft_strlen(msg));
 }

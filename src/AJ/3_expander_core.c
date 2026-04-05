@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/04 19:38:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/05 19:37:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*replace_var(t_shell *data, char *word, char *mask)
 	result = ft_strdup("");
 	while (word[i])
 	{
-		printf("I is: %i\n", i);
+		// printf("I is: %i\n", i);
 		if (word[i] == '$' && mask[i] != 'S')
 			result = handle_dollar(data, word, &i, result, tmp_exit);
 		else

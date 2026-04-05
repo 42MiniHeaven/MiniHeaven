@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:32:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:26:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	builtin_echo(t_cmd *cmd, t_environment *list)
 	{
 		write(1, cmd->argv[i], ft_strlen(cmd->argv[i]));
 		if (cmd->argv[i + 1])
-			write(1, " ", 1);
+			write(2, " ", 1);
 		i++;
 	}
 	if (newline)
-		write(1, "\n", 1);
+		write(2, "\n", 1);
 	return (0);
 }
