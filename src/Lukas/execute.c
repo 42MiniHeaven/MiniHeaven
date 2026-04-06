@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:10:10 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/04 18:07:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:33:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	execute(t_shell *data)
 {
-	if (!data->cmds || !data->cmds->argv[0])
+	if (!data || !data->cmds)
 		return (0);
-	if (ft_strcmp(data->cmds->argv[0], "exit") && data->cmds->next == NULL)
+	if (data->cmds->argv && ft_strcmp(data->cmds->argv[0], "exit") && data->cmds->next == NULL)
 		data->should_exit = 1;
 	if (!data->cmds->next)
 		return (exec_single(data));

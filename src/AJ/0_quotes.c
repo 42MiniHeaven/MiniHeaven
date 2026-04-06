@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/04 14:57:58 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:24:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ bool	quotes_removal(char **argv)
 	char	*mask;
 	char	*tmp;
 
+	if (!argv)
+		return (true);
 	i = 0;
 	while (argv[i])
 	{
