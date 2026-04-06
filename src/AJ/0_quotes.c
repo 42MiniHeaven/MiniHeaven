@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_quotes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/04 14:57:58 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 18:27:01 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ bool	quotes_removal(char **argv)
 	char	*tmp;
 
 	i = 0;
+	if (!argv)
+		return (true);
 	while (argv[i])
 	{
 		mask = create_mask(argv[i]);

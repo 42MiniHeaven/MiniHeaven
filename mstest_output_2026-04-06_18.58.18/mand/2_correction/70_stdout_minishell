@@ -1,0 +1,12 @@
+_=/home/azielnic/MiniHeaven/minishell
+OLDPWD=/home/azielnic/MiniHeaven
+MAIL=azielnic@student.42vienna.com
+PATH=/bin:/usr/bin:/usr/sbin:/home/azielnic/.local/funcheck/host:/opt/pyenv/plugins/pyenv-virtualenv/shims:/opt/pyenv/shims:/opt/pyenv/bin:/home/azielnic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+XDG_DATA_DIRS=/home/azielnic/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+PYENV_ROOT=/home/azielnic/.pyenv
+USER=azielnic
+HOME=/home/azielnic
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/azielnic
+XAUTHORITY=/home/azielnic/.Xauthority
+LOGNAME=azielnic
+LD_PRELOAD=/home/azielnic/42_minishell_tester/utils/libintercept/libintercept.so
