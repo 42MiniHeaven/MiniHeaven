@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/05 20:46:09 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:30:57 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # include "../src/AJ/parser.h"
 # include "../src/Lukas/env/env.h"
 # include "../src/Lukas/builtins/builtins.h"
-# include "../get_next_line/get_next_line.h"
 
 // Maybe delete later
 # include <aio.h>
@@ -204,5 +203,12 @@ void	wpipe(int pipefd[2]);
 
 //fatal.c
 void	fatal(const char *msg, int exit_code);
+
+
+// TESTING PURPOSES
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+char	*get_next_line(int fd);
 
 #endif

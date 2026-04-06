@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/28 20:30:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:00:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,31 @@ bool	needs_expansion_word(char *word, char *mask)
  * contains a '$' outside of single quotes.
  */
 
-bool	needs_expansion_argv(char **arr)
-{
-	int		i;
-	int		j;
-	char	*mask;
+// bool	needs_expansion_argv(char **arr)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*mask;
 	
-	i = 0;
-	while (arr[i])
-	{
-		j = 0;
-		mask = create_mask(arr[i]);
-		if (!mask)
-			return (free(mask), false);
-		if (ft_strchr(arr[i], '$') != NULL)
-		{
-			while (arr[i][j] && mask[j])
-			{
-				if (arr[i][j] == '$' && mask[j] != 'S')
-					return (free(mask), true);
-				j++;
-			}
-		}
-		free(mask);
-		i++;
-	}
-	return (false);
-}
+// 	i = 0;
+// 	while (arr[i])
+// 	{
+// 		j = 0;
+// 		mask = create_mask(arr[i]);
+// 		if (!mask)
+// 			return (free(mask), false);
+// 		if (ft_strchr(arr[i], '$') != NULL)
+// 		{
+// 			while (arr[i][j] && mask[j])
+// 			{
+// 				if (arr[i][j] == '$' && mask[j] != 'S')
+// 					return (free(mask), true);
+// 				j++;
+// 			}
+// 		}
+// 		free(mask);
+// 		i++;
+// 	}
+// 	return (false);
+// }
 

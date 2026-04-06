@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/05 19:37:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:13:22 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
 		res = str_join_free(res, exit);
 		(*i) += 2;
 	}
-	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_')
+	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_' || w[(*i) + 1] == '"')
 		res = handle_env_var(w, i, res, d);
 	else
 	{
@@ -56,6 +56,11 @@ char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
  * @note	Return a newly allocated expanded string.
  */
 
+// bool	is_valid(char c)
+// {
+// 	if (c == ft_isalnum(c) || c == '_' || c == '')
+// }
+ 
 char	*replace_var(t_shell *data, char *word, char *mask)
 {
 	int		i;
@@ -69,8 +74,7 @@ char	*replace_var(t_shell *data, char *word, char *mask)
 	result = ft_strdup("");
 	while (word[i])
 	{
-		// printf("I is: %i\n", i);
-		if (word[i] == '$' && mask[i] != 'S')
+		if (word[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
 			result = handle_dollar(data, word, &i, result, tmp_exit);
 		else
 		{
