@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/06 12:35:44 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/06 16:41:53 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ SRC := src/main.c \
 		src/Lukas/env/env_utils.c \
 		src/Lukas/env/env_get.c \
 		src/Lukas/external/resolve.c \
-		src/Lukas/external/env_arr.c
+		src/Lukas/external/env_arr.c \
+		get_next_line/get_next_line.c
 
 NAME := minishell
 CC := cc

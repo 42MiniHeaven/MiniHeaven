@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 12:36:13 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:44:04 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@
 # include <aio.h>
 # include <ctype.h>
 
-# define TMP_DIR "/tmp"
-# define MAX_ATTEMPTS 1000
-# define HEREDOC_MAX_SIZE (1024 * 1024)
+# define TMP_DIR "/tmp"					//TODO: is this corret?
+# define MAX_ATTEMPTS 1000				//TODO: same
+# define HEREDOC_MAX_SIZE (1024 * 1024)	//TODO: same
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
@@ -118,8 +122,6 @@ void	free_loop(t_shell *data);
 //fake_cmd.c
 void	fake_cmd(t_cmd **cmd);
 
-//on_failure.c
-//void	on_failure(t_shell *data, char *issue);
 
 //PROTOTYPES AJ
 
@@ -172,10 +174,6 @@ void	restore_std_fds(t_fds *saved);
 //heredoc_tmpfile.c
 int		create_heredoc(t_redir *redir, t_shell *data);
 
-//heredoc.c
-//int		handle_heredoc(t_redir *redir);
-//int		handle_all_heredocs(t_cmd *cmds);
-
 //empty_env_lst_init.c
 void	empty_env_init(t_shell *data);
 
@@ -211,4 +209,5 @@ void	wpipe(int pipefd[2]);
 //fatal.c
 void	fatal(const char *msg, int exit_code);
 
+char	*get_next_line(int fd);
 #endif
