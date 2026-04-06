@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 17:40:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:46:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,13 @@ char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
 {
 	if (w[(*i) + 1] && w[(*i) + 1] == '?')
 	{
-		printf("entered1\n");
 		res = str_join_free(res, exit);
 		(*i) += 2;
 	}
 	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_' || w[(*i) + 1] == '"')
 		res = handle_env_var(w, i, res, d);
-	}
 	else
 	{
-		printf("entered3\n");
 		res = append_char(res, '$');
 		(*i) += 1;
 	}
@@ -69,14 +66,13 @@ char	*replace_var(t_shell *data, char *word, char *mask)
 	int		i;
 	char	*tmp_exit;
 	char	*result;
-	int		j = 1;
 
 	if (!word)
 		return (NULL);
 	i = 0;
 	tmp_exit = ft_itoa(data->last_exit); 
 	result = ft_strdup("");
-	while (word[i] && i < j)
+	while (word[i])
 	{
 		if (word[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
 			result = handle_dollar(data, word, &i, result, tmp_exit);
