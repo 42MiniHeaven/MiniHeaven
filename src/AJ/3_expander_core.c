@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 19:23:24 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:38:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,13 @@ char	*replace_var(t_shell *data, char *word, char *mask)
 	int		i;
 	char	*tmp_exit;
 	char	*result;
-	int		j = 1;
 
 	if (!word)
 		return (NULL);
 	i = 0;
 	tmp_exit = ft_itoa(data->last_exit); 
 	result = ft_strdup("");
-	while (word[i] && i < j)
+	while (word[i])
 	{
 		if (word[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
 			result = handle_dollar(data, word, &i, result, tmp_exit);

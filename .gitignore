@@ -5,7 +5,7 @@
 ./a.out
 *.vscode
 *.txt
-.swp
+*.swp
 *.a
 *.o
 supress.sh
