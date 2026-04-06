@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   empty_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 17:28:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 21:27:32 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**empty_env(void)
 	char	**env;
 	int		shlvl;
 
-	env = malloc(sizeof(char *) * 4);
+	env = malloc(sizeof(char *) * 4); //TODO
 	if (!env)
 		return (NULL);
 	shlvl = 1;

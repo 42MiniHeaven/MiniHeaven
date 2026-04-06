@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 12:38:18 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:47 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 21:27:27 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*env_create_node(char *key, char *value)
 {
 	t_env	*node;
 
-	node = malloc(sizeof(t_env));
+	node = malloc(sizeof(t_env)); //TODO
 	if (!node)
 		return (NULL);
 	node->key = key;

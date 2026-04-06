@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   2_parser_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 22:16:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/04 15:02:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 21:36:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_redir	*redir_new(int type, const char *file)
 	r->file = ft_strdup(file);
 	r->expand = need_heredoc_expansion(r->file);
 	if (r->type == HEREDOC)
-		r->file = remove_quote(r->file);
+		r->file = handle_heredoc_quotes(r->file);
 	return (r);
 }
 
