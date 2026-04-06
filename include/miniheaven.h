@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/03 22:40:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:36:13 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@
 // Maybe delete later
 # include <aio.h>
 # include <ctype.h>
+
+# define TMP_DIR "/tmp"
+# define MAX_ATTEMPTS 1000
+# define HEREDOC_MAX_SIZE (1024 * 1024)
 
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
@@ -165,9 +169,12 @@ int		exec_single(t_shell *data);
 int		safe_std_fds(t_shell *data);
 void	restore_std_fds(t_fds *saved);
 
+//heredoc_tmpfile.c
+int		create_heredoc(t_redir *redir, t_shell *data);
+
 //heredoc.c
-int		handle_heredoc(t_redir *redir);
-int		handle_all_heredocs(t_cmd *cmds);
+//int		handle_heredoc(t_redir *redir);
+//int		handle_all_heredocs(t_cmd *cmds);
 
 //empty_env_lst_init.c
 void	empty_env_init(t_shell *data);

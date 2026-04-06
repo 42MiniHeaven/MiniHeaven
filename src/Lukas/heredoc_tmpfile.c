@@ -6,29 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 12:19:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:41:27 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "miniheaven.h"
-
-#include <readline/readline.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-#ifndef TMP_DIR
-# define TMP_DIR "/tmp"
-#endif
-
-#ifndef MAX_ATTEMPTS
-# define MAX_ATTEMPTS 1000
-#endif
-
-#define HEREDOC_MAX_SIZE (1024 * 1024)
+#include "miniheaven.h"
 
 static void	append_number(char *buf, size_t *j, long n)
 {
@@ -57,7 +39,7 @@ static void	build_tmp_path(char *path, int counter)
 
 	pid = getpid();
 	strcpy(path, TMP_DIR "/.heredoc_");
-	i = strlen(path);
+	i = ft_strlen(path);
 	append_number(path, &i, (long)pid);
 	path[i++] = '_';
 	append_number(path, &i, (long)counter);
@@ -73,7 +55,7 @@ int	create_heredoc_tmpfile(char *path_out)
 	while (attempt < MAX_ATTEMPTS)
 	{
 		build_tmp_path(path_out, attempt);
-		fd = open(path_out, O_CREAT | O_EXCL | O_RDWR, 0600);
+		fd = wopen(path_out, O_CREAT | O_EXCL | O_RDWR, 0600);
 		if (fd >= 0)
 			return (fd);
 		if (errno != EEXIST)
@@ -83,21 +65,14 @@ int	create_heredoc_tmpfile(char *path_out)
 	return (-1);
 }
 
-static int	safe_write(int fd, char *buf, size_t len, size_t *total, int expand)
+static int	safe_write(int fd, char *buf, size_t len, size_t *total)
 {
 	ssize_t	written;
-	char	*expanded;
 
 	if (*total + len > HEREDOC_MAX_SIZE)
 	{
 		write(2, "minishell: heredoc too large\n", 29);
 		return (-1);
-	}
-	if (expand)
-	{
-		expanded = expand_line(data, buf);
-		free(buf);
-		buf = expanded;
 	}
 	written = write(fd, buf, len);
 	if (written < 0)
@@ -110,12 +85,13 @@ static int	safe_write(int fd, char *buf, size_t len, size_t *total, int expand)
 }
 
 
-int	create_heredoc(const char *delimiter)
+int	create_heredoc(t_redir *hd, t_shell *data)
 {
 	char	path[256];
 	int		fd;
 	char	*line;
 	size_t	total_written;
+	char	*expanded;
 
 	total_written = 0;
 	fd = create_heredoc_tmpfile(path);
@@ -130,10 +106,16 @@ int	create_heredoc(const char *delimiter)
 		line = readline("> ");
 		if (!line)
 			break;
-		if (strcmp(line, delimiter) == 0)
+		if (ft_strcmp(line, hd->file) == 0)
 		{
 			free(line);
 			break;
+		}
+		if (hd->expand)
+		{
+			expanded = expand_line(data, line);
+			free(line);
+			line = expanded;
 		}
 		if (safe_write(fd, line, strlen(line), &total_written) < 0 || safe_write(fd, "\n", 1, &total_written) < 0)
 		{
@@ -150,10 +132,4 @@ int	create_heredoc(const char *delimiter)
 		return (-1);
 	}
 	return (fd);
-}
-
-int	main()
-{
-	create_heredoc("A");
-	return (0);
 }
