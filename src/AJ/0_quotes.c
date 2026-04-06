@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 20:44:20 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 20:47:41 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,36 +113,4 @@ bool	quotes_removal(char **argv)
 		i++;
 	}
 	return (true);
-}
-
-//********************************EXPANDER_HEREDOC*******************************
-
-char	*remove_quote(char *str)
-{
-	int		len;
-	char	*ret;
-
-	if (!str)
-		return (NULL);
-	len = ft_strlen(str);
-	if ((str[0] == str[len - 1]) && (str[0] == '"' || str[0] == '\''))
-	{
-		ret = ft_substr(str, 1, len - 2);
-		free(str);
-		return (ret);
-	}
-	else
-		return (str);
-}
-
-int	need_heredoc_expansion(char *str)
-{
-	int	len;
-
-	if (!str)
-		return (0);
-	len = ft_strlen(str);
-	if (str[0] == str[len - 1] && (str[0] == '\'' || str[0] == '"'))
-		return (0);
-	return (1);
 }

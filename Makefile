@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
+#    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/06 17:38:12 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/06 20:48:50 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC := src/main.c \
 		src/loop_utils.c \
 		src/shell_init.c \
 		src/AJ/0_quotes.c \
+		src/AJ/0_quotes_heredoc.c \
 		src/AJ/0_signals.c \
 		src/AJ/1_lexer.c \
 		src/AJ/1_lexer_utils.c \
