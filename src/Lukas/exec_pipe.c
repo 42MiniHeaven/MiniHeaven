@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 22:08:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 21:18:33 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@ static pid_t	fork_child(t_cmd *cmd, t_environment *l, int prev_fd, int *fd)
 {
 	pid_t	pid;
 
-	pid = fork();
-	if (pid < 0)
-	{
-		perror("fork");
-		return (-1);
-	}
+	pid = wfork();
 	if (pid == 0)
 	{
 		if (prev_fd != -1)

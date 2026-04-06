@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:44:02 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/04 14:03:38 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 21:18:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ pid_t	wfork(void)
 
 	handle_signals_exec_parent();
 	pid = fork();
-	if (pid == -1)
+	if (pid < 0)
 	{
 		perror("fork");
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
 	return (pid);
 }
