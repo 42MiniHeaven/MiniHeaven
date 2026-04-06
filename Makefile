@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
+#    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/06 17:30:36 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/06 17:38:12 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC := src/main.c \
 		src/Lukas/exec_pipe.c \
 		src/Lukas/fds.c \
 		src/Lukas/redirections.c \
-		src/Lukas/heredoc.c \
+		src/Lukas/heredoc_tmpfile.c \
 		src/Lukas/wfork.c \
 		src/Lukas/wpipe.c \
 		src/Lukas/wopen.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/28 21:24:32 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:20:18 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*append_char(char *str, char c)
 
 	if(!str)
 		return (NULL);
-	len = ft_strlen(str);
+	len = ft_strlen(str); //TODO: WE START THE NEVERENDING LOOP HERE
 	new = ft_calloc(len + 2, sizeof(char));
 	if (!new)
 	{

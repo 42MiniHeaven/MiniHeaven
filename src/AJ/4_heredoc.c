@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 21:25:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/03 22:46:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:36:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	hd_add_back(t_hdnode **head, t_hdnode **tail, t_redir *redir)
 		(*tail)->next = new;
 	*tail = new;
 }
-
+/*
 static int	read_single_heredoc(t_redir *hd, t_shell *data)
 {
 	int	pipefd[2];
@@ -69,7 +69,7 @@ static int	read_single_heredoc(t_redir *hd, t_shell *data)
 	close(pipefd[1]);
 	return (pipefd[0]);
 }
-
+*/
 static t_hdnode	*collect_heredocs(t_cmd *cmds)
 {
 	t_hdnode	*head = NULL;
@@ -98,7 +98,8 @@ static int	process_all_heredocs(t_hdnode *list, t_shell *data)
 
 	while (list)
 	{
-		fd = read_single_heredoc(list->redir, data);
+		//fd = read_single_heredoc(list->redir, data);
+		fd = create_heredoc(list->redir, data);
 		if (fd < 0)
 			return (-1);
 		list->redir->fd = fd;
