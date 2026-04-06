@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 18:27:01 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 20:44:20 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ bool	quotes_removal(char **argv)
 	char	*mask;
 	char	*tmp;
 
+	if (!argv)
+		return (true);
 	i = 0;
 	if (!argv)
 		return (true);

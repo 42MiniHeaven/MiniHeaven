@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/05 20:10:04 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:28:01 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	child(t_cmd *cmds, t_environment *list)
 	char	*path;
 
 	handle_signals_exec_child();
-	if (!cmds || !cmds->argv || !cmds->argv[0])
+	if (!cmds)
 		exit (0);
 	setup_redirections(cmds->redir);
 	envp = env_arr(list->head);
