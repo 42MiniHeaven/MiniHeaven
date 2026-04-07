@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 18:28:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/07 20:09:10 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,9 @@ void	expand_commands(t_shell *data)
 		tmp = expander_split(join_argv(tmp_cmd->argv), " \t\n");
 		free_arr(tmp_cmd->argv);
 		tmp_cmd->argv = tmp;
-		// if (!needs_expansion_argv(tmp_cmd->argv))
-		// {
-		if (!quotes_removal(tmp_cmd->argv))
+		if (!resolve_quotes(tmp_cmd->argv))
 			printf("failed on quotes removal\n");
 		tmp_cmd = tmp_cmd->next;
-		// }
 	}
 }
 

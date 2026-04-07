@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 23:15:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/07 20:43:51 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*remove_quotes(char *word, char *mask)
 	j = 0;
 	result = ft_calloc(count_len(mask) + 1, sizeof(char));
 	if (!result)
-		return (NULL); // do we need an error?
+		return (NULL);
 	while (word[j] && mask[j])
 	{
 		while (mask[j] && mask[j] == 'Q')
@@ -96,7 +96,14 @@ static char	*remove_quotes(char *word, char *mask)
 	return (result);
 }
 
-bool	quotes_removal(char **argv)
+static bool	needs_quote_removal(char *mask)
+{
+	if (!ft_strchr(mask, 'Q'))
+		return (false);
+	return (true);
+}
+
+bool	resolve_quotes(char **argv)
 {
 	int		i;
 	char	*mask;
@@ -105,17 +112,20 @@ bool	quotes_removal(char **argv)
 	if (!argv)
 		return (true);
 	i = 0;
-	if (!argv)
-		return (true);
 	while (argv[i])
 	{
 		mask = create_mask(argv[i]);
-		tmp = remove_quotes(argv[i], mask);
-		if (!tmp)
-			return (free(mask), false);
-		free(argv[i]);
-		free(mask);
-		argv[i] = tmp;
+		if (!mask)
+			return (false);
+		if (needs_quote_removal(mask))
+		{
+			tmp = remove_quotes(argv[i], mask);
+			if (!tmp)
+				return (free(mask), false);
+			free(argv[i]);
+			free(mask);
+			argv[i] = tmp;
+		}
 		i++;
 	}
 	return (true);

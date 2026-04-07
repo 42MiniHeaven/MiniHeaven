@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 21:39:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/07 20:06:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		parser(t_shell *data);
 int		syntax_error(char *message);
 
 // EXPANSION
-bool	quotes_removal(char **argv);
+bool	resolve_quotes(char **argv);
 bool	needs_expansion_word(char *word, char *mask);
 bool	needs_expansion_argv(char **arr);
 char	*create_mask(char *str);
