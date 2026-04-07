@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:16:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/04 18:20:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:26:11 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void	wdup2(int oldfd, int newfd)
 {
-	if (dup2(oldfd, newfd) == -1)
-		fatal("dup2", 1);
+	dup2(oldfd, newfd);
 }

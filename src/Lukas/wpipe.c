@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:23:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 15:24:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:25:00 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 void	wpipe(int pipefd[2])
 {
 	if (pipe(pipefd) == -1)
-		fatal("pipe", 1);
+		return ;
+//		fatal("pipe", 1);
 }

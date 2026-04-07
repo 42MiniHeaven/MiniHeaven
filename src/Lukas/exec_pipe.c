@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 21:18:33 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:59:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ static pid_t	fork_child(t_cmd *cmd, t_environment *l, int prev_fd, int *fd)
 	{
 		if (prev_fd != -1)
 		{
-			dup2(prev_fd, STDIN_FILENO);
-			close(prev_fd);
+			wdup2(prev_fd, STDIN_FILENO);
+			wclose(prev_fd);
 		}
 		if (cmd->next)
 		{
-			close(fd[0]);
-			dup2(fd[1], STDOUT_FILENO);
-			close(fd[1]);
+			wclose(fd[0]);
+			wdup2(fd[1], STDOUT_FILENO);
+			wclose(fd[1]);
 		}
+		close_all_fds();
 		child(cmd, l);
 	}
 	return (pid);
@@ -48,10 +49,12 @@ static pid_t	fork_child(t_cmd *cmd, t_environment *l, int prev_fd, int *fd)
 static void	parent_pipe_cleanup(t_cmd *cmd, int *prev_fd, int *fd)
 {
 	if (*prev_fd != -1)
-		close(*prev_fd);
+		wclose(*prev_fd);
+	if (cmd->redir && cmd->redir->fd != -1)
+		wclose(cmd->redir->fd);
 	if (cmd->next)
 	{
-		close(fd[1]);
+		wclose(fd[1]);
 		*prev_fd = fd[0];
 	}
 	else
@@ -89,13 +92,13 @@ int	exec_pipe(t_shell *data)
 	{
 		if (create_pipe(tmp, fd))
 		{
-			data->last_exit = 1;
+			data->last_exit = 0;
 			return (0);
 		}
 		pid = fork_child(tmp, data->list, prev_fd, fd);
 		if (pid < 0)
 		{
-			data->last_exit = 1;
+			data->last_exit = 0;
 			return (0);
 		}
 		last_pid = pid;
