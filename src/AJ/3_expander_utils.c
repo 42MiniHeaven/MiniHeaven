@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 14:20:18 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/07 22:54:54 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
+
+bool	needs_wordsplitting(char *str)
+{
+	char	*mask;
+
+	mask = create_mask(str);
+	if (!mask)
+		return (false); // TODO: needs to be handled differently because error is not propagated to next funtion correctly??
+	if (ft_strchr(mask, 'N'))
+		return (true);
+	free(mask);
+	return (false);
+}
 
 /*
  * Explain why +2 (one for the char c and one for the null terminator)

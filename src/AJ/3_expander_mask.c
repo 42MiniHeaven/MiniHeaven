@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 20:07:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 16:36:33 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/07 22:50:41 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,45 @@
  * @return NULL:	If memory allocation fails.
  */
 
-static void	fill_mask(char *str, char *mask, int *i, char c, char type)
+static void	fill_mask(char c, char *quote, char *mask_char)
 {
-	mask[(*i)++] = 'Q';
-	while (str[*i] && str[*i] != c)
-		mask[(*i)++] = type;
-	if (str[*i])
-		mask[(*i)++] = 'Q';
+	if (*quote == 0 && (c == '"' || c == '\''))
+	{
+		*quote = c;
+		*mask_char = 'Q';
+	}
+	else if (*quote != 0 && c == *quote)
+	{
+		*mask_char = 'Q';
+		*quote = 0;
+	}
+	else if (*quote == '\'')
+		*mask_char = 'S';
+	else if (*quote == '"')
+		*mask_char = 'D';
+	else
+		*mask_char = 'N';
 }
 
 char	*create_mask(char *str)
 {
-	int	i;
+	int		i;
 	char	*mask;
+	char	quote;
+	char	mask_char;
 
+	if (!str)
+		return (NULL);
 	mask = ft_calloc((strlen(str) + 1), sizeof(char));
 	if (!mask)
 		return (NULL);
 	i = 0;
+	quote = 0;
 	while (str[i])
 	{
-		if (str[i] == '"')
-			fill_mask(str, mask, &i, '"', 'D');
-		else if (str[i] == '\'')
-			fill_mask(str, mask, &i, '\'', 'S');
-		else
-			mask[i++] = 'N';
+		fill_mask(str[i], &quote, &mask_char);
+		mask[i] = mask_char;
+		i++;
 	}
 	return (mask);	
 }

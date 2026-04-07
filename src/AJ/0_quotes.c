@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 20:43:51 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/07 22:21:35 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,6 @@ static int	count_len(char *mask)
 	}
 	return(len);
 }
-
-// TODO: fix quote removal within quotes
-/*
- * miniheaven> echo "hello 'this is a test' bye"
- * hello this is a test bye
- */
 
 static char	*remove_quotes(char *word, char *mask)
 {
