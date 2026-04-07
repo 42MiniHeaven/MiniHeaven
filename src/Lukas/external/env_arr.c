@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_arr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:42:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/15 16:07:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 21:27:46 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**env_arr(t_env *env)
 			i++;
 		tmp = tmp->next;
 	}
-	envp = malloc(sizeof(char *) * (i + 1));
+	envp = malloc(sizeof(char *) * (i + 1)); //TODO
 	if (!envp)
 		return (NULL);
 	i = 0;

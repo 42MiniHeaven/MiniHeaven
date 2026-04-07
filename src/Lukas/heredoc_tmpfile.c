@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_tmpfile.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 12:41:27 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/06 22:33:55 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,20 @@ int	create_heredoc(t_redir *hd, t_shell *data)
 	unlink(path);
 	while (1)
 	{
-		line = readline("> ");
+		// line = readline("> "); // ONLY COMMENTED OUT TO TEST! COMMENT BACK IN
+
+		//needs to be commented out
+		if (isatty(fileno(stdin)))
+			line = readline("> ");
+		else
+		{
+			char *line_2;
+			line_2 = get_next_line(fileno(stdin));
+			line = ft_strtrim(line_2, "\n");
+			free(line_2);
+		}
+		//
+		
 		if (!line)
 			break;
 		if (ft_strcmp(line, hd->file) == 0)

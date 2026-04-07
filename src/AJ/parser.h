@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/04 19:17:19 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/07 20:06:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		parser(t_shell *data);
 int		syntax_error(char *message);
 
 // EXPANSION
-bool	quotes_removal(char **argv);
+bool	resolve_quotes(char **argv);
 bool	needs_expansion_word(char *word, char *mask);
 bool	needs_expansion_argv(char **arr);
 char	*create_mask(char *str);
@@ -103,8 +103,8 @@ char	*str_join_free(char *str1, char *str2);
 char	*append_char(char *str, char c);
 char	*replace_var(t_shell *data, char *word, char *mask);
 char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit);
-char	*remove_quote(char *str);
-int		need_heredoc_expansion(char *str);
+char	*handle_heredoc_quotes(char *str);
+bool	need_heredoc_expansion(char *str);
 
 
 // COULD BE ADDED TO LIBFT

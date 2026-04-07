@@ -12,3 +12,4 @@ supress.sh
 minishell.supp
 minishell
 old
+*mstest*
