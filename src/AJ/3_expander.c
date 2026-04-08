@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 22:54:45 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:55:51 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 char	*expand_variables(char *word, char *mask, t_shell *data)
 {
 	char	*expanded_word;
-	
 	if (!needs_expansion_word(word, mask))
 		return (word);
 	expanded_word = replace_var(data, word, mask);
@@ -72,21 +71,28 @@ char *expand_word(char *word, t_shell *data)
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	int		i;
-	char	**tmp;
+	// char	**tmp;
+	// int		error;
 
 	i = 0;
 	while (cmd->argv[i])
 	{
 		cmd->argv[i] = expand_word(cmd->argv[i], data);
+		//printf("WHAT would go in needs_wordsplitting argv[i]: %s\n", cmd->argv[i]);
+		// if (needs_wordsplitting(cmd->argv[i], &error))
+		// {
+		// 	printf("Here\n");
+		// 	tmp = expander_split(join_argv(cmd->argv), " \t\n");
+		// 	free_arr(cmd->argv);
+		// 	cmd->argv = tmp;
+		// }
 		i++;
 	}
-	if (needs_wordsplitting(cmd->argv[i]))
-	{
-		tmp = expander_split(join_argv(cmd->argv), " \t\n");
-		free_arr(cmd->argv);
-		cmd->argv = tmp;
-		i++;
-	}
+	// error = 1;
+	i = 0;
+	printf("after\n");
+	// if (error == -1)
+	// 	printf("Something needs to be done, Lukas\n"); //TODO: Lukas take care please <3 calloc failed
 	if (!resolve_quotes(cmd->argv))
 		printf("failed on quotes removal\n");
 	// if (cmd->redir)

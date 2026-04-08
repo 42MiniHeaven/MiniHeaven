@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 22:21:35 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:02:34 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ bool	resolve_quotes(char **argv)
 			if (!tmp)
 				return (free(mask), false);
 			free(argv[i]);
-			free(mask);
 			argv[i] = tmp;
 		}
+		free(mask);
 		i++;
 	}
 	return (true);

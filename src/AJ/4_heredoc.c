@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 21:25:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 22:28:11 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:10:44 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	hd_add_back(t_hdnode **head, t_hdnode **tail, t_redir *redir)
 {
 	t_hdnode	*new;
 
-	new = malloc(sizeof(t_hdnode)); //TODO
+	new = malloc(sizeof(t_hdnode));
 	new->redir = redir;
 	new->next = NULL;
 	if (!*head)
