@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 19:28:01 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:53:15 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	child(t_cmd *cmds, t_environment *list)
 {
 	char	**envp;
 	char	*path;
+	int		exit_code;
 
 	handle_signals_exec_child();
 	if (!cmds)
@@ -29,12 +30,20 @@ void	child(t_cmd *cmds, t_environment *list)
 		free_arr(envp);
 		exit(127);
 	}
+	close_all_fds();
 	execve(path, cmds->argv, envp);
 	if (errno == EACCES)
+	{
 		child_error(cmds->argv[0], ": permission denied\n");
+		exit_code = 126;
+	}
 	else
-		child_error(cmds->argv[0], ": No such file or directory");
+	{
+		if (cmds->redir && cmds->redir->file)
+			child_error(cmds->redir->file, ": No such file or directory\n");
+		exit_code = 127;
+	}
 	free(path);
 	free_arr(envp);
-	exit((errno == EACCES) ? 126 : 127);
+	exit(exit_code);
 }

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wfork.c                                            :+:      :+:    :+:   */
+/*   bash_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 11:44:02 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 21:18:07 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/04/07 22:40:11 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/04/07 22:47:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-pid_t	wfork(void)
+void	bash_error(const char *name)
 {
-	pid_t	pid;
-
-	handle_signals_exec_parent();
-	pid = fork();
-	if (pid < 0)
-	{
-		perror("fork");
-		return (-1);
-	}
-	return (pid);
+	fprintf(stderr, "bash: %s: %s\n", name, strerror(errno));
 }
-

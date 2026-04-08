@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:20:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 17:06:42 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:07:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 void	wclose(int fd)
 {
 	if (fd >= 0 && close(fd) == -1)
-		fatal("close", 1);
+//		fatal("close", 0);
+	fd = -1;
 }

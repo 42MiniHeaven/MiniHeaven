@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 22:48:05 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/07 16:29:54 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	free_cmds(t_cmd *head)
 
 void	free_fds(t_fds *fd)
 {
-	close(fd->in);
-	close(fd->out);
-	close(fd->err);
+	wclose(fd->in);
+	wclose(fd->out);
+	wclose(fd->err);
 	free(fd);
 }

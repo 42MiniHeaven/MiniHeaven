@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/08 18:02:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:59:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ static char	*remove_quotes(char *word, char *mask)
 		return (NULL);
 	while (word[j] && mask[j])
 	{
-		while (mask[j] && mask[j] == 'Q')
+		while (word[j] && mask[j] && mask[j] == 'Q')
 			j++;
-		result[i] = word[j];
-		i++;
-		j++;
+		if (!word[j] || !mask[j])
+			break;
+		result[i++] = word[j++];
 	}
 	return (result);
 }
