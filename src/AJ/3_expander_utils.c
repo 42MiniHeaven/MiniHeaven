@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 22:54:54 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:23:53 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	needs_wordsplitting(char *str)
 
 	mask = create_mask(str);
 	if (!mask)
-		return (false); // TODO: needs to be handled differently because error is not propagated to next funtion correctly??
+		return (false);
 	if (ft_strchr(mask, 'N'))
 		return (true);
 	free(mask);
@@ -36,7 +36,7 @@ char	*append_char(char *str, char c)
 
 	if(!str)
 		return (NULL);
-	len = ft_strlen(str); //TODO: WE START THE NEVERENDING LOOP HERE
+	len = ft_strlen(str);
 	new = ft_calloc(len + 2, sizeof(char));
 	if (!new)
 	{

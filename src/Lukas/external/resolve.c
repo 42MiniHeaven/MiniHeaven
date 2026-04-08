@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:41:29 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 13:13:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:33:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ char	*resolve_path(char *cmd, t_env *env)
 		i++;
 	}
 	free_arr(dirs);
-	return (NULL);
+	return (cmd);
 }

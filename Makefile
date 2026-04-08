@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/08 14:54:21 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/06 20:48:50 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC := src/main.c \
 		src/AJ/4_expander_heredoc.c \
 		src/AJ/4_heredoc.c \
 		src/Lukas/child.c \
+		src/Lukas/child_utils.c \
 		src/Lukas/execute.c \
 		src/Lukas/exec_single.c \
 		src/Lukas/exec_external.c \
@@ -71,7 +72,6 @@ SRC := src/main.c \
 		src/Lukas/env/env_get.c \
 		src/Lukas/external/resolve.c \
 		src/Lukas/external/env_arr.c \
-		src/Lukas/exit_child.c \
 		get_next_line/get_next_line.c
 		
 

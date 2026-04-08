@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 13:55:20 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:53:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	create_pipe(t_cmd *cmd, int *fd)
 	return (0);
 }
 
-static pid_t	fork_child(t_cmd *cmd, t_shell *data, int prev_fd, int *fd)
+static pid_t	fork_child(t_cmd *cmd, t_environment *l, int prev_fd, int *fd)
 {
 	pid_t	pid;
 
@@ -41,7 +41,7 @@ static pid_t	fork_child(t_cmd *cmd, t_shell *data, int prev_fd, int *fd)
 			wclose(fd[1]);
 		}
 //		close_all_fds();
-		child(cmd, data);
+		child(cmd, l);
 	}
 	return (pid);
 }
@@ -95,7 +95,7 @@ int	exec_pipe(t_shell *data)
 			data->last_exit = 0;
 			return (0);
 		}
-		pid = fork_child(tmp, data, prev_fd, fd);
+		pid = fork_child(tmp, data->list, prev_fd, fd);
 		if (pid < 0)
 		{
 			data->last_exit = 0;

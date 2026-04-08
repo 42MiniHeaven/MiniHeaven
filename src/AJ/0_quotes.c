@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_quotes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/08 11:27:07 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:19:23 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*remove_quotes(char *word, char *mask)
 	{
 		while (word[j] && mask[j] && mask[j] == 'Q')
 			j++;
-		if (!word[j] || !mask[j]) //TODO: added for invalid read
+		if (!word[j] || !mask[j])
 			break;
 		result[i++] = word[j++];
 	}
@@ -119,7 +119,7 @@ bool	resolve_quotes(char **argv)
 			free(argv[i]);
 			argv[i] = tmp;
 		}
-		free(mask); //TODO: moved down to this position to fix leak (+3)
+		free(mask);
 		i++;
 	}
 	return (true);
