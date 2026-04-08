@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:41:29 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:33:25 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 20:53:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ char	*resolve_path(char *cmd, t_env *env)
 	int		i;
 
 	if (ft_strchr(cmd, '/'))
-		return (cmd);
+		return (ft_strdup(cmd));
 	path = get_env_value(env, "PATH");
 	if (!path)
-		return (cmd);
+		return (ft_strdup(cmd));
 	dirs = ft_split(path, ':');
 	if (!dirs)
-		return (cmd);
+		return (ft_strdup(cmd));
 	i = 0;
 	while (dirs[i])
 	{
@@ -37,5 +37,5 @@ char	*resolve_path(char *cmd, t_env *env)
 		i++;
 	}
 	free_arr(dirs);
-	return (cmd);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 22:33:55 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 20:29:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	create_heredoc(t_redir *hd, t_shell *data)
 		else
 		{
 			char *line_2;
-			line_2 = get_next_line(fileno(stdin));
+			line_2 = read_file(fileno(stdin));
 			line = ft_strtrim(line_2, "\n");
 			free(line_2);
 		}

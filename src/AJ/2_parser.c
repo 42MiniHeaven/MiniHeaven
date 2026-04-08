@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 18:18:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:44:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static bool	handle_expect_arg(t_parser *p)
 		p->state = EXPECT_COMMAND;
 	}
 	else
-		return (syntax_error("unexpected token"), false);
+		return (syntax_error("unexpected token '|'"), false);
 	return (true);
 }
 

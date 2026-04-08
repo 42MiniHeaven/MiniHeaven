@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 12:33:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 20:27:08 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,13 @@ char	*expand_line(t_shell *data, char *input);
 //PROTOTYPES LUKAS
 
 //child.c
-void	child(t_cmd *cmds, t_environment *list);
+void	child(t_cmd *cmds, t_shell *data);
 
 //child_utils.c
 void	child_error(char *error, char *msg);
+
+//exit_child.c
+void	exit_child(t_shell *data, char **envp, char *path, int exit_code);
 
 //execute.c
 int		execute(t_shell *data);
@@ -216,8 +219,9 @@ void	fatal(const char *msg, int exit_code);
 
 // TESTING PURPOSES
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10000
 # endif
 char	*get_next_line(int fd);
+char	*read_file(int fd);
 
 #endif

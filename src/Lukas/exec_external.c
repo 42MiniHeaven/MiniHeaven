@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:52:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 16:42:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:55:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	exec_external(t_shell *data)
 	if (pid < 0)
 		return (1);
 	if (pid == 0)
-		child(data->cmds, data->list);
+		child(data->cmds, data);
 	else
 	{
 		if (data->cmds->redir && data->cmds->redir->type == HEREDOC)

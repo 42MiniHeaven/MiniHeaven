@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/08 17:19:23 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 19:54:48 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ static char	*remove_quotes(char *word, char *mask)
 		while (word[j] && mask[j] && mask[j] == 'Q')
 			j++;
 		if (!word[j] || !mask[j])
+		{
 			break;
+		}
 		result[i++] = word[j++];
 	}
 	return (result);
@@ -104,7 +106,7 @@ bool	resolve_quotes(char **argv)
 	char	*tmp;
 
 	if (!argv)
-		return (true);
+		return (true);	//TODO: not false?
 	i = 0;
 	while (argv[i])
 	{
