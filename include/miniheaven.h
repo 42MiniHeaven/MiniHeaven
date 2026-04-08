@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 13:55:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 14:15:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,10 @@ void	wpipe(int pipefd[2]);
 
 //fatal.c
 void	fatal(const char *msg, int exit_code);
+
+//exit_child.c
+void	exit_child(t_shell *data, char **envp, char *path, int err, char *msg);
+
 
 
 // TESTING PURPOSES

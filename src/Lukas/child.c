@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 13:56:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 14:27:52 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,17 @@ void	child(t_cmd *cmds, t_shell *data)
 	setup_redirections(cmds->redir);
 	envp = env_arr(data->list->head);
 	path = resolve_path(cmds->argv[0], data->list->head);
-	if (!path)
-	{
-		child_error(cmds->argv[0], ": command not found\n");
-		free_arr(envp);
-		exit(127);
-	}
 	close_all_fds();
 	execve(path, cmds->argv, envp);
 	if (errno == EACCES)
 	{
-		child_error(cmds->argv[0], ": permission denied\n");
 		exit_code = 126;
+		exit_child(data, envp, path, exit_code, ":permission denied\n");
 	}
 	else
 	{
-		if (cmds->redir && cmds->redir->file)
-			child_error(cmds->redir->file, ": No such file or directory\n");
 		exit_code = 127;
+		if (cmds->redir && cmds->redir->file)
+			exit_child(data, envp, path, exit_code, ":No such file or directory\n");
 	}
-	free(path);
-	free_arr(envp);
-	exit(exit_code);
 }
