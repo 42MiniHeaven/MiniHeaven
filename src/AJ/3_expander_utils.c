@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/08 17:23:53 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 23:09:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	needs_wordsplitting(char *str)
 	if (!mask)
 		return (false);
 	if (ft_strchr(mask, 'N'))
-		return (true);
+		return (free(mask), true);
 	free(mask);
 	return (false);
 }
