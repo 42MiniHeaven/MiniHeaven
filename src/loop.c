@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 20:48:56 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:00:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	loop(t_shell *data)
 		else
 		{
 			char *line;
-			line = get_next_line(fileno(stdin));
+			line = read_file(fileno(stdin));
 			data->input = ft_strtrim(line, "\n");
 			free(line);
 		}
@@ -45,7 +45,12 @@ void	loop(t_shell *data)
 				add_history(data->input);
 			tokeniser(data, data->input);
 		}
-		parser(data);
+		if (parser(data) != 0)
+		{
+			data->last_exit = 2;
+			free_loop(data);
+			continue;
+		}
 		if (prepare_heredocs(data, data->cmds) < 0)
 		{
 			free_loop(data);

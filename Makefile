@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/08 20:26:30 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/08 21:00:42 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC := src/main.c \
 		src/Lukas/wclose.c \
 		src/Lukas/wdup2.c \
 		src/Lukas/fatal.c \
+		src/Lukas/exit_child.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \
 		src/Lukas/builtins/builtin_export.c \
@@ -72,7 +73,8 @@ SRC := src/main.c \
 		src/Lukas/env/env_get.c \
 		src/Lukas/external/resolve.c \
 		src/Lukas/external/env_arr.c \
-		get_next_line/get_next_line.c
+		get_next_line/get_next_line.c \
+		readFile.c
 		
 
 NAME := minishell
