@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/07 17:59:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:53:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static pid_t	fork_child(t_cmd *cmd, t_environment *l, int prev_fd, int *fd)
 			wdup2(fd[1], STDOUT_FILENO);
 			wclose(fd[1]);
 		}
-		close_all_fds();
+//		close_all_fds();
 		child(cmd, l);
 	}
 	return (pid);

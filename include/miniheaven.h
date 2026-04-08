@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 10:28:53 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:33:16 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ int		exec_single(t_shell *data);
 int		safe_std_fds(t_shell *data);
 void	restore_std_fds(t_fds *saved);
 void	close_all_fds(void);
+void	close_backup_fds(t_fds *saved);
 
 //heredoc_tmpfile.c
 int		create_heredoc(t_redir *redir, t_shell *data);
