@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/06 20:48:50 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/08 20:26:30 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDLIBS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
