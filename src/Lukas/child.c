@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/07 17:57:03 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 10:43:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	child(t_cmd *cmds, t_environment *list)
 	}
 	else
 	{
-		child_error(cmds->argv[0], ": No such file or directory\n");
+		child_error(cmds->redir->file, ": No such file or directory\n");
 		exit_code = 127;
 	}
 	free(path);

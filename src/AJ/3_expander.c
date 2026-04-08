@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 20:09:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/07 22:54:45 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char *expand_word(char *word, t_shell *data)
 
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
-	int	i;
+	int		i;
+	char	**tmp;
 
 	i = 0;
 	while (cmd->argv[i])
@@ -79,6 +80,15 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 		cmd->argv[i] = expand_word(cmd->argv[i], data);
 		i++;
 	}
+	if (needs_wordsplitting(cmd->argv[i]))
+	{
+		tmp = expander_split(join_argv(cmd->argv), " \t\n");
+		free_arr(cmd->argv);
+		cmd->argv = tmp;
+		i++;
+	}
+	if (!resolve_quotes(cmd->argv))
+		printf("failed on quotes removal\n");
 	// if (cmd->redir)
 	// 	expand_redir(cmd->redir, data); // needs to be created
 }
@@ -102,22 +112,14 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
  * @note	Advances through command list using a temporary pointer.
  */
 
- // Protection for heredoc delimiters from expanding???????????????????
-
 void	expand_commands(t_shell *data)
 {
 	t_cmd	*tmp_cmd;
-	char	**tmp;
 	
 	tmp_cmd = data->cmds;
 	while (tmp_cmd)
 	{
 		expand_cmd(tmp_cmd, data);
-		tmp = expander_split(join_argv(tmp_cmd->argv), " \t\n");
-		free_arr(tmp_cmd->argv);
-		tmp_cmd->argv = tmp;
-		if (!resolve_quotes(tmp_cmd->argv))
-			printf("failed on quotes removal\n");
 		tmp_cmd = tmp_cmd->next;
 	}
 }

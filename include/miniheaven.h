@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/07 17:56:10 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 10:28:53 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define MAX_ATTEMPTS 1000				//TODO: same
 # define HEREDOC_MAX_SIZE (1024 * 1024)	//TODO: same
 
+
+// TODO: remove later
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
