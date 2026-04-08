@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/04 18:53:45 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:50:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,24 @@ static void	handle_sig(int sigtype)
 {
 	g_signal_status = sigtype;
 }
-
+//TODO: KHUK thinks this is not necessary:
+//static int	rl_hook(void)
+//{
+//	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
+//		perror("ioctl");
+//	rl_replace_line("", 0);
+//	rl_clear_history();
+//	return (0);
+//}
+//TODO : THIS should be there pls check and let me know ty.
 static int	rl_hook(void)
 {
-	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
-		perror("ioctl");
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	rl_replace_line("", 0);
 	rl_clear_history();
 	return (0);
 }
+
 /*
  * DESCRIPTION
  * Instead of using the default behaviour for SIGINT (SIG_DFL) - which would

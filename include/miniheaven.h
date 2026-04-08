@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 12:33:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:55:51 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char	*expand_line(t_shell *data, char *input);
 //PROTOTYPES LUKAS
 
 //child.c
-void	child(t_cmd *cmds, t_environment *list);
+void	child(t_cmd *cmds, t_shell *data);
 
 //child_utils.c
 void	child_error(char *error, char *msg);
