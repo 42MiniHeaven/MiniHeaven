@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resolve.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:41:29 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/16 16:33:25 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 20:54:26 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ char	*resolve_path(char *cmd, t_env *env)
 		i++;
 	}
 	free_arr(dirs);
-	return (cmd);
+	return (NULL);
 }
