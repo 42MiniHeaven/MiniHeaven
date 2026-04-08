@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 23:18:43 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 15:24:20 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 char	*expand_variables(char *word, char *mask, t_shell *data)
 {
 	char	*expanded_word;
-	
 	if (!needs_expansion_word(word, mask))
 		return (word);
 	expanded_word = replace_var(data, word, mask);
@@ -82,6 +81,7 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 		i++;
 	}
 	error = 1;
+	i = 0;
 	if (needs_wordsplitting(cmd->argv[i], &error))
 	{
 		tmp = expander_split(join_argv(cmd->argv), " \t\n");
@@ -89,7 +89,7 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 		cmd->argv = tmp;
 		i++;
 	}
-	if (error = -1)
+	if (error == -1)
 		printf("Something needs to be done, Lukas\n"); //TODO: Lukas take care please <3 calloc failed
 	if (!resolve_quotes(cmd->argv))
 		printf("failed on quotes removal\n");

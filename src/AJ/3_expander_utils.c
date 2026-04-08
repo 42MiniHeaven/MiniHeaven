@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 23:16:51 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 15:16:52 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	needs_wordsplitting(char *str, int *error)
 
 	mask = create_mask(str);
 	if (!mask)
-		error = -1;
+		*error = -1;
 	if (ft_strchr(mask, 'N'))
 		return (true);
 	free(mask);
