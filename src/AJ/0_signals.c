@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/04 18:53:45 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 19:43:19 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,13 @@ static void	handle_sig(int sigtype)
 
 static int	rl_hook(void)
 {
-	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
-		perror("ioctl");
-	rl_replace_line("", 0);
-	rl_clear_history();
+	if (g_signal_status == SIGINT)
+	{
+		if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
+			perror("ioctl");
+		rl_replace_line("", 0);
+		rl_clear_history();
+	}
 	return (0);
 }
 /*
