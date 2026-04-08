@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1_lexer_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 21:27:04 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:19:52 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_token	*token_new(int type, char *value)
 {
     t_token	*token;
 
-    token = malloc(sizeof(t_token)); //TODO: change to calloc
+    token = malloc(sizeof(t_token));
     if (!token)
         return (NULL);
     token->value = value;

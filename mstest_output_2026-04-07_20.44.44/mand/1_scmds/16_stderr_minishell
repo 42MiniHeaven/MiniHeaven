@@ -1,3 +1,0 @@
-awk: cmd. line:1: BEGIN{srand(42);
-awk: cmd. line:1:                 ^ unexpected newline or end of string
-awk: fatal: cannot open file `END' for reading: No such file or directory

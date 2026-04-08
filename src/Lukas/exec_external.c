@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:52:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 20:56:04 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 16:42:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ void	wait_child(pid_t pid, t_shell *data)
 	{
 		g_signal_status = WTERMSIG(status);
 		if (g_signal_status == SIGQUIT)
-			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-		//data->last_exit = 128 + sig;
+			write(STDOUT_FILENO, "Quit (core dumped)", 18);
+		write(STDOUT_FILENO, "\n", 1);
+		data->last_exit = g_signal_status + 128;
 		g_signal_status = 0;
 	}
-	// else
-	// 	data->last_exit = 1;
 }
 
 int	exec_external(t_shell *data)
