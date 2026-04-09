@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_update.c                                       :+:      :+:    :+:   */
+/*   2_parser_cleanup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 16:13:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 12:23:27 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/04/09 12:55:32 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/04/09 13:10:09 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-void	env_update(t_env *env, char *value)
+void	parser_exit(t_parser *p)	//TODO: pls check if that is ok for you
 {
-	if (!env)
-		return ;
-	if (!value)
-	{
-		free(env->value);
-		env->value = NULL;
-		env->flag = 1;
-		return ;
-	}
-	free(env->value);
-	env->value = value;
-	if (env->key && env->value)
-		env->flag = 0;
+	if (p->head)
+		free_cmds(p->head);
+	if (p->current)
+		p->current = NULL;
+	p->state = 0;
+	p->last_redir = 0;
 }

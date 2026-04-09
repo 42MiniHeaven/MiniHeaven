@@ -6,11 +6,12 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 21:46:12 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:48:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
+extern volatile sig_atomic_t    g_signal_status;
 
 static void	append_number(char *buf, size_t *j, long n)
 {
@@ -101,8 +102,10 @@ int	create_heredoc(t_redir *hd, t_shell *data)
 		return (1);
 	}
 	unlink(path);
+	handle_signals_heredoc();
 	while (1)
 	{
+
 		// line = readline("> "); // ONLY COMMENTED OUT TO TEST! COMMENT BACK IN
 
 		//needs to be commented out
@@ -116,7 +119,15 @@ int	create_heredoc(t_redir *hd, t_shell *data)
 			free(line_2);
 		}
 		//
-		
+		if (g_signal_status == SIGINT)
+		{
+            if (line)
+                free(line);
+            close(fd);
+            data->last_exit = 130;
+            g_signal_status = 0;
+            return (-1);
+        }
 		if (!line)
 			break;
 		if (ft_strcmp(line, hd->file) == 0)

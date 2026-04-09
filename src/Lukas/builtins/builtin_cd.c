@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:13:40 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:32:26 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:48:29 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	update_pwd_oldpwd(t_env *env, char *oldpwd)
 	newpwd = getcwd(NULL, 0);
 	env_update(env_find(env, "OLDPWD"), oldpwd);
 	env_update(env_find(env, "PWD"), newpwd);
-	free(newpwd);
 }
 
 static int	cd_error(const char *message, const char *path)

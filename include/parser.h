@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 17:15:56 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:42:31 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	handle_signals_prompt(void);
 void	handle_signals_exec_parent(void);
 void	handle_signals_exec_child(void);
 void	set_exit_code(t_shell *data);
+void    handle_signals_heredoc(void);
+
 // int		rl_hook(void);
 
 // TOKENISING & LEXING

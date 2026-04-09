@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/08 21:52:57 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:43:08 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*handle_heredoc_quotes(char *str)
 	i = 0;
 	j = 0;
 	result = ft_calloc(len + 1, sizeof(char));
-	mask = ft_calloc(len + 1, sizeof(char));
+	//mask = ft_calloc(len + 1, sizeof(char)); //TODO we create mask in create_mask! no alloc needed
 	mask = create_mask(str);
 	while (str[i])
 	{
