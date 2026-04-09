@@ -6,11 +6,9 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 13:34:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 16:20:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../include/miniheaven.h"
 

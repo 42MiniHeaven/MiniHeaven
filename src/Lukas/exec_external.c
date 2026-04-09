@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:52:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 18:55:57 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:50:57 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	exec_external(t_shell *data)
 	pid_t	pid;
 
 	handle_signals_exec_parent(); // have to remove this after wfork is implemented
-	pid = fork();
+	pid = wfork();
 	if (pid < 0)
 		return (1);
 	if (pid == 0)
