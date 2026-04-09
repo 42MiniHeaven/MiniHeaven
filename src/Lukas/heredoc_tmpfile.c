@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 20:29:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:46:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	safe_write(int fd, char *buf, size_t len, size_t *total)
 	written = write(fd, buf, len);
 	if (written < 0)
 	{
-		perror("write");
+		// perror("write");
 		return (-1);
 	}
 	*total += written;

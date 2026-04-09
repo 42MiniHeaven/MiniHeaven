@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 21:00:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:02:04 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	loop(t_shell *data)
 			continue;
 		}
 		expand_commands(data);
-		printf("Token: %s\n", data->cmds->argv[0]);
 		execute(data);
 		// printf("%i\n", data->last_exit);
 		free_loop(data);

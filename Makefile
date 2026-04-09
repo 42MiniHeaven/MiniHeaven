@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/08 21:00:42 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/09 17:14:16 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC := src/main.c \
 		src/AJ/3_expander_mask.c \
 		src/AJ/3_expander_check.c \
 		src/AJ/3_expander_split.c \
+		src/AJ/3_expander_split2.c \
 		src/AJ/3_expander_utils.c \
 		src/AJ/3_expander_core.c \
 		src/AJ/4_expander_heredoc.c \

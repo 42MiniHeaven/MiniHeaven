@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 22:49:21 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:52:57 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	find_heredoc_len(char *str)
 			len--;
 		i++;
 	}
+	free(mask);
 	return (len);
 }
 
@@ -66,7 +67,7 @@ char	*handle_heredoc_quotes(char *str)
 		}
 		i++;
 	}
-	free (str);
+	free(str);
 	str = result;
 	free(mask);
 	return (str);

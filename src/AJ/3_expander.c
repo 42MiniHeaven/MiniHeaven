@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 22:54:45 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:05:18 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,29 @@ char *expand_word(char *word, t_shell *data)
 
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
-	int		i;
 	char	**tmp;
+	bool	needs_split;
+	int		i;
+	int		split_len;
 
 	i = 0;
-	while (cmd->argv[i])
-	{
-		cmd->argv[i] = expand_word(cmd->argv[i], data);
-		i++;
-	}
-	if (needs_wordsplitting(cmd->argv[i]))
-	{
-		tmp = expander_split(join_argv(cmd->argv), " \t\n");
-		free_arr(cmd->argv);
-		cmd->argv = tmp;
-		i++;
-	}
+    while (cmd->argv[i])
+    {
+        needs_split = needs_wordsplitting(cmd->argv[i]);
+        cmd->argv[i] = expand_word(cmd->argv[i], data);
+        if (needs_split)
+        {
+            tmp = expander_split(cmd->argv[i], " \t\n");
+            if (!tmp)
+                return ;
+            free(cmd->argv[i]);
+            split_len = argv_len(tmp);
+            cmd->argv = argv_replace_word_with_split(cmd->argv, i, tmp);
+            i += split_len;
+            continue ;
+        }
+        i++;
+    }
 	if (!resolve_quotes(cmd->argv))
 		printf("failed on quotes removal\n");
 	// if (cmd->redir)

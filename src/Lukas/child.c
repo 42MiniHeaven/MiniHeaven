@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 19:51:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:30:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	child(t_cmd *cmds, t_shell *data)
 	if (!path)
 	{
 		child_error(cmds->argv[0], ": command not found\n");
-		free_arr(envp);
-		exit(127);
+		exit_child(data, envp, path, 127);
 	}
 	execve(path, cmds->argv, envp);
 	if (errno == EACCES)
