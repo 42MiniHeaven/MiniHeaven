@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/08 20:24:30 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/09 12:59:06 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC := src/main.c \
 		src/AJ/2_parser.c \
 		src/AJ/2_parser_utils.c \
 		src/AJ/2_parser_utils2.c \
+		src/AJ/2_parser_cleanup.c \
 		src/AJ/3_expander.c \
 		src/AJ/3_expander_mask.c \
 		src/AJ/3_expander_check.c \

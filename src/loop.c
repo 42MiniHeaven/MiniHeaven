@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 20:29:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 13:04:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ void	loop(t_shell *data)
 				add_history(data->input);
 			tokeniser(data, data->input);
 		}
-		if (parser(data) != 0)
-		{
-			data->last_exit = 2;
-			free_loop(data);
-			continue;
-		}
+//		if (parser(data) != 0)
+//		{
+//			data->last_exit = 2;
+//			free_loop(data);
+//			continue;
+//		}
+		parser(data);
 		if (prepare_heredocs(data, data->cmds) < 0)
 		{
 			free_loop(data);
