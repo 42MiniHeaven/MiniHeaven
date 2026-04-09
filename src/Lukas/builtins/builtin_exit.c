@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 11:14:50 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 22:05:33 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 22:12:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	builtin_exit(t_cmd *cmd, t_shell *data)
 	int	status;
 
 	(void)data;
-	if (!cmd->argv[1])
-		return -1;
 	ft_putstr_fd("exit\n", 1);
-	if (!ft_is_numeric(cmd->argv[1]))
+	if (!cmd->argv[1])
+		return (0);
+	if (cmd->argv[1] && !ft_is_numeric(cmd->argv[1]))
 	{
 		ft_error("exit: ", "numeric argument required\n", 2);
 		return (2);

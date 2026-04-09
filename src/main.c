@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 19:46:46 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 22:27:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	data;
-	
+	int		i;
+
+	i = 0;
 	check_args(argc, argv, envp);	//maybe to prevent from missuse on several ./minishell calls
 	shell_init(&data, envp);		//create env
 	loop(&data);					//loop calling itself 
+	i = data.last_exit;
 	free_environment(data.list);	//cleanup
-	return (0);
+	return (i);
 }
 //TODO: LUKAS AJ handle >">" asd correct in parser/lexer and close fd in execution!
 //TODO: LUKAS handle >> $HOME check in exection for EISDIR! 10_16_52

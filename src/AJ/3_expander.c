@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 19:49:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 22:31:18 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
             tmp = expander_split(cmd->argv[i], " \t\n");
             if (!tmp)
                 return ;
-            free(cmd->argv[i]);
             split_len = argv_len(tmp);
             cmd->argv = argv_replace_word_with_split(cmd->argv, i, tmp);
             i += split_len;

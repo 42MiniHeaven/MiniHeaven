@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:32:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 12:13:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 23:13:55 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ int	builtin_echo(t_cmd *cmd, t_environment *list)
 	{
 		write(1, cmd->argv[i], ft_strlen(cmd->argv[i]));
 		if (cmd->argv[i + 1])
-			write(2, " ", 1);
+			write(1, " ", 1);
 		i++;
 	}
+
 	if (newline)
-		write(2, "\n", 1);
+		write(1, "\n", 1);
 	return (0);
 }
