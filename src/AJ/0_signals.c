@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 15:09:12 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:10:38 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	rl_hook(void)
 	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
 		perror("ioctl");
 	rl_replace_line("", 0);
-	//rl_clear_history();
+	//rl_clear_history(); //TODO: AJ
 	return (0);
 }
 /*
@@ -135,7 +135,7 @@ void	handle_signals_exec_child(void)
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 }
-
+//TODO: AJ check bellow!
 static int    rl_heredoc_hook(void)
 {
     if (g_signal_status == SIGINT )
