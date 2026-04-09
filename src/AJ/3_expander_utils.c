@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 17:47:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 21:54:34 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*str_join_free(char *str1, char *str2)
 	ft_memcpy(new + len1, str2, len2);
 	new[len1 + len2] = '\0';
 	free(str1);
-	return (new);	
+	return (new);
 }
 
 char	*join_argv(char **argv)

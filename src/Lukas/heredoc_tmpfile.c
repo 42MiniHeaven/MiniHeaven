@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:48:24 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:54:55 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,19 +121,19 @@ int	create_heredoc(t_redir *hd, t_shell *data)
 		//
 		if (g_signal_status == SIGINT)
 		{
-            if (line)
-                free(line);
-            close(fd);
-            data->last_exit = 130;
-            g_signal_status = 0;
-            return (-1);
-        }
+			if (line)
+				free(line);
+			close(fd);
+			data->last_exit = 130;
+			g_signal_status = 0;
+			return (-1);
+		}
 		if (!line)
-			break;
+			break ;
 		if (ft_strcmp(line, hd->file) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		if (hd->expand)
 		{

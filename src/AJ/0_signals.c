@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 17:44:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:50:30 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,8 @@ void	handle_signals_exec_child(void)
 //TODO: AJ check bellow!
 static int    rl_heredoc_hook(void)
 {
-    if (g_signal_status == SIGINT )
+    if (g_signal_status == SIGINT)
     {
-
         ioctl(STDIN_FILENO, TIOCSTI, "\n");
         write(STDOUT_FILENO, "^C\n", 3);
         rl_on_new_line();//you need to specifically call this to move the cursor to a new line after the signal

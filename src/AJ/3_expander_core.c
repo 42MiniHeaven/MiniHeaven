@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 19:38:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 20:44:19 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
 {
 	if (w[(*i) + 1] && w[(*i) + 1] == '?')
 	{
-		res = str_join_free(res, exit);
+		res = str_join_free(res, exit); //TODO: protect res
 		(*i) += 2;
 	}
 	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_' || w[(*i) + 1] == '"')
@@ -70,12 +70,12 @@ char	*replace_var(t_shell *data, char *word, char *mask)
 	if (!word)
 		return (NULL);
 	i = 0;
-	tmp_exit = ft_itoa(data->last_exit); 
+	tmp_exit = ft_itoa(data->last_exit); //TODO: protect tmp_exit & result
 	result = ft_strdup("");
 	while (word[i])
 	{
 		if (word[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
-			result = handle_dollar(data, word, &i, result, tmp_exit);
+			result = handle_dollar(data, word, &i, result, tmp_exit); //TODO: protect result
 		else
 		{
 			result = append_char(result, word[i]);
@@ -108,11 +108,11 @@ char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
 	j = start;
 	while (ft_isalnum(word[j]) || word[j] == '_')
 		j++;
-	key = ft_substr(word, start, j - start);
+	key = ft_substr(word, start, j - start); //TODO: protect key
 	value = get_env_value(data->list->head, key);
 	if (!value)
 		value = "";
-	result = str_join_free(result, value);
+	result = str_join_free(result, value); //TODO: protect result
 	free(key);
 	*i = j;
 	return (result);
