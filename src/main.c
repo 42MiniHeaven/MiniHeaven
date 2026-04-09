@@ -6,13 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 12:42:04 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:35:40 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#include "../include/miniheaven.h"
+#include "miniheaven.h"
 
 int	main(int argc, char **argv, char **envp)
 {
