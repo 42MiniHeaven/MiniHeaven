@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 19:46:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 21:56:08 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ bool	resolve_quotes(char **argv);
 bool	needs_expansion_word(char *word, char *mask);
 bool	needs_expansion_argv(char **arr);
 bool	need_heredoc_expansion(char *str);
-bool	needs_wordsplitting(char *str, int *error);
+bool	needs_wordsplitting(char *str);
 char	*create_mask(char *str);
 char	*join_argv(char **argv);
 char	*handle_env_var(char *word, int *i, char *result, t_shell *data);

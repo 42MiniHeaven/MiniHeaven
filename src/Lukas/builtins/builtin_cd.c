@@ -6,20 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:13:40 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 19:49:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 21:56:53 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-static char	*get_cd_target(char **args, t_env *env)
-{
-	if (!args[1] || (ft_strcmp(args[1], "~") == 0))
-		return (get_env_value(env, "HOME"));
-	if (ft_strcmp(args[1], "-") == 0)
-		return (get_env_value(env, "OLDPWD"));
-	return (args[1]);
-}
 
 static void	update_pwd_oldpwd(t_env *env, char *oldpwd)
 {
