@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 12:38:18 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 21:27:27 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:38:38 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*env_create_node(char *key, char *value)
 {
 	t_env	*node;
 
-	node = malloc(sizeof(t_env)); //TODO
+	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
 	node->key = key;

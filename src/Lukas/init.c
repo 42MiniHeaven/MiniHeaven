@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:35:21 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:38:29 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	env_i(t_env **llist)
 	char	*shlvl_str;
 	int		shlvl;
 
-	env = malloc (sizeof(char *) * 4); //TODO
+	env = malloc (sizeof(char *) * 4);
 	if (!env)
 		return ;
 	
@@ -71,8 +71,8 @@ void	init_shell(t_shell *data, char **envp)
 {
 	
 	if (envp[0] != NULL)
-		create_env_list(&data->llist, envp);
+		create_env_list(&data->list, envp);
 	else
-		env_i(&data->llist);
+		env_i(&data->list);
 	safe_std_fds(data);
 }
