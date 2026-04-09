@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:55:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/27 14:55:28 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:33:01 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../env/env.h"
 #include "miniheaven.h"
 
 /**
