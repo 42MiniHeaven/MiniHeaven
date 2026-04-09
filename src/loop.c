@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 20:29:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 22:28:26 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	loop(t_shell *data)
 
 	
 		// data->input = readline("miniheaven> ");
-		if (!data->input || ft_strcmp(data->input, "exit") == 0)
+		if (!data->input)
 			break ;
 		if (g_signal_status != 0)
 			set_exit_code(data);
@@ -58,9 +58,10 @@ void	loop(t_shell *data)
 		}
 		expand_commands(data);
 		execute(data);
-		// printf("%i\n", data->last_exit);
 		free_loop(data);
+		if (data->should_exit == 1)
+		{
+			break ;
+		}
 	}
-	if (data->input)
-		free(data->input);
 }

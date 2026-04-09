@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_quotes_heredoc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/06 22:49:21 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:47:23 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	find_heredoc_len(char *str)
 			len--;
 		i++;
 	}
+	free(mask);
 	return (len);
 }
 
@@ -55,7 +56,6 @@ char	*handle_heredoc_quotes(char *str)
 	i = 0;
 	j = 0;
 	result = ft_calloc(len + 1, sizeof(char));
-	mask = ft_calloc(len + 1, sizeof(char));
 	mask = create_mask(str);
 	while (str[i])
 	{
@@ -66,7 +66,7 @@ char	*handle_heredoc_quotes(char *str)
 		}
 		i++;
 	}
-	free (str);
+	free(str);
 	str = result;
 	free(mask);
 	return (str);

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:32:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/05 20:26:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 23:13:55 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,20 @@ int	is_valid_n_flag(char *str)
 {
 	int	i;
 
-	i = 1;
-	while (str[i] && str[0] == '-' && str[i] == 'n')
-		i++;
-	if (str[0] == '-' && str[i - 1] == 'n' && str[i] == '\0')
-		return (i);
-	else
+	if (!str)
 		return (0);
+	if (str[0] != '-')
+		return (0);
+	i = 1;
+	if (str[i] == '\0')
+		return (0);
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	builtin_echo(t_cmd *cmd, t_environment *list)
@@ -43,7 +50,7 @@ int	builtin_echo(t_cmd *cmd, t_environment *list)
 	(void)list;
 	i = 1;
 	newline = 1;
-	while (cmd->argv[i] && is_valid_n_flag(cmd->argv[i]))
+	while (cmd->argv && cmd->argv[i] && is_valid_n_flag(cmd->argv[i]))
 	{
 		newline = 0;
 		i++;
@@ -52,10 +59,11 @@ int	builtin_echo(t_cmd *cmd, t_environment *list)
 	{
 		write(1, cmd->argv[i], ft_strlen(cmd->argv[i]));
 		if (cmd->argv[i + 1])
-			write(2, " ", 1);
+			write(1, " ", 1);
 		i++;
 	}
+
 	if (newline)
-		write(2, "\n", 1);
+		write(1, "\n", 1);
 	return (0);
 }

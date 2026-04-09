@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/02 15:14:44 by lwittwer          #+#    #+#              #
-#    Updated: 2026/03/22 16:51:37 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/09 19:46:37 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,10 +58,10 @@ OBJ_SRCS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 all: ${NAME}
 
 ${NAME}: ${OBJ_SRCS}
-	${LIBC} ${NAME} ${OBJ_SRCS}
+	@${LIBC} ${NAME} ${OBJ_SRCS}
 
 $(OBJ_SRCS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $@

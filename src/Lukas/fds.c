@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:54:53 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 12:38:27 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 11:25:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,23 @@ void	close_backup_fds(t_fds *saved)
 {
 	if (!saved)
 		return ;
-	if (saved->in)
+	if (saved->in >= 0)
 	{
 		wclose(saved->in);
 		saved->in = -1;
 	}
-	if (saved->out)
+	if (saved->out >= 0)
 	{
 		wclose(saved->out);
 		saved->out = -1;
 	}
-	if (saved->err)
+	if (saved->err >= 0)
 	{
 		wclose(saved->err);
 		saved->err = -1;
 	}
 	free(saved);
+	saved = NULL;
 }
 
 void	close_all_fds(void)

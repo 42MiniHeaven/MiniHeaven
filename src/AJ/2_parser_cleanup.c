@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_environment.c                                 :+:      :+:    :+:   */
+/*   2_parser_cleanup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/14 15:36:29 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 22:02:09 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/04/09 12:55:32 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/04/09 13:10:09 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-void	free_environment(t_environment *list)
+void	parser_exit(t_parser *p)	//TODO: pls check if that is ok for you
 {
-	t_env	*curr;
-	t_env	*tmp;
-
-	if (!list)
-		return ;
-	curr = list->head;
-	while (curr)
-	{
-		tmp = curr->next;
-		if (curr->key)
-			free(curr->key);
-		if (curr->value)
-			free(curr->value);
-		free(curr);
-		curr = tmp;
-	}
-	free(list);
+	if (p->head)
+		free_cmds(p->head);
+	if (p->current)
+		p->current = NULL;
+	p->state = 0;
+	p->last_redir = 0;
 }

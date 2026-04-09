@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 13:11:16 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/14 15:09:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:33:14 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "miniheaven.h"
 
 int	env_add(t_environment *list, t_env *node)
 {

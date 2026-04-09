@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
+#    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/08 20:24:30 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/09 21:58:00 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,12 @@ SRC := src/main.c \
 		src/AJ/2_parser.c \
 		src/AJ/2_parser_utils.c \
 		src/AJ/2_parser_utils2.c \
+		src/AJ/2_parser_cleanup.c \
 		src/AJ/3_expander.c \
 		src/AJ/3_expander_mask.c \
 		src/AJ/3_expander_check.c \
 		src/AJ/3_expander_split.c \
+		src/AJ/3_expander_split2.c \
 		src/AJ/3_expander_utils.c \
 		src/AJ/3_expander_core.c \
 		src/AJ/4_expander_heredoc.c \
@@ -73,7 +75,6 @@ SRC := src/main.c \
 		src/Lukas/env/env_get.c \
 		src/Lukas/external/resolve.c \
 		src/Lukas/external/env_arr.c \
-		get_next_line/get_next_line.c \
 		readFile.c
 		
 
@@ -101,7 +102,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDLIBS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)

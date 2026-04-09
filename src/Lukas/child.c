@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 19:51:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:49:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,24 @@
 
 void	child(t_cmd *cmds, t_shell *data)
 {
-	char	**envp;
-	char	*path;
-	int		exit_code;
-
+	close_all_fds();
+	data->envp = NULL;
+	data->path = NULL;
 	handle_signals_exec_child();
 	if (!cmds)
 		exit (0);
 	setup_redirections(data->cmds->redir);
-	envp = env_arr(data->list->head);
-	path = resolve_path(cmds->argv[0], data->list->head);
-	if (!path)
-	{
-		child_error(cmds->argv[0], ": command not found\n");
-		free_arr(envp);
-		exit(127);
-	}
-	execve(path, cmds->argv, envp);
+	data->envp = env_arr(data->list->head);
+	data->path = resolve_path(cmds->argv[0], data->list->head);
+	if (!data->path)
+		exit_child(data, errno, cmds->argv[0], ": command not found\n");
+	execve(data->path, cmds->argv, data->envp);
 	if (errno == EACCES)
-	{
-		child_error(cmds->argv[0], ": permission denied\n");
-		exit_code = 126;
-	}
+		exit_child(data, errno, cmds->argv[0], ": permission denied\n");
 	else
 	{
 		if (data->cmds->redir && data->cmds->redir->file)
-			child_error(cmds->redir->file, ": No such file or directory\n");
-		exit_code = 127;
+			exit_child(data, errno, cmds->argv[0], "No such file or directory\n");
+		exit_child(data, errno, cmds->argv[0], "no clue what belongs here\n");
 	}
-	exit_child(data, envp, path, exit_code);
-//	free(path);
-//	free_arr(envp);
-//	exit(exit_code);
 }

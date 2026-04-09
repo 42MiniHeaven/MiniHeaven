@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_signals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/04 18:53:45 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:48:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,22 @@ static void	handle_sig(int sigtype)
 	g_signal_status = sigtype;
 }
 
+/*
+ * DESCRIPTION
+ * The Readline event hook handles asynchronous signals (e.g. SIGINT). When an 
+ * interrupt is detected via g_signal_status, it simulates a newline input to 
+ * safely break the current readline state, clears the current input line and 
+ * resets the history to ensure a clean prompt is displayed.
+ */
+
 static int	rl_hook(void)
 {
-	if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
-		perror("ioctl");
-	rl_replace_line("", 0);
-	rl_clear_history();
+	if (g_signal_status == SIGINT)
+	{
+		if (ioctl(STDIN_FILENO, TIOCSTI, "\n") == -1)
+			perror("ioctl");
+		rl_replace_line("", 0);
+	}
 	return (0);
 }
 /*
@@ -134,4 +144,26 @@ void	handle_signals_exec_child(void)
 	rl_signal_event_hook = NULL;
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
+}
+//TODO: AJ check bellow!
+static int    rl_heredoc_hook(void)
+{
+    if (g_signal_status == SIGINT )
+    {
+
+        ioctl(STDIN_FILENO, TIOCSTI, "\n");
+        write(STDOUT_FILENO, "^C\n", 3);
+        rl_on_new_line();//you need to specifically call this to move the cursor to a new line after the signal
+        rl_replace_line("", 0);
+        rl_done = 1; // This tells readline to stop waiting for input and return control to the main loop
+    }
+    return (0);
+}
+
+void    handle_signals_heredoc(void)
+{
+    rl_catch_signals = 0;
+    rl_event_hook = rl_heredoc_hook;
+    signal(SIGINT, handle_sig);
+    signal(SIGQUIT, SIG_IGN);
 }

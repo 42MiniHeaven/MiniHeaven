@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:08:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/17 22:26:47 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 22:12:42 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				builtin_echo(t_cmd *cmd, t_environment *list);
 int				builtin_env(t_cmd *cmd, t_environment *list);
 
 //builtin_exit.c
-int				builtin_exit(t_cmd *cmd, t_environment *list);
+int				builtin_exit(t_cmd *cmd, t_shell *data);
 
 //builtin_export.c
 int				builtin_export(t_cmd *cmd, t_environment *list);

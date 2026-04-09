@@ -6,13 +6,19 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 20:01:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 16:21:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-void	exit_child(t_shell *data, char **envp, char *path, int exit_code)
+static void	child_output(char *error, char *msg)
+{
+	write(2, error, ft_strlen(error));
+	write(2, msg, ft_strlen(msg));
+}
+
+static void	free_child(t_shell *data)
 {
 	if (data->tokens)
 		free_tokens(data->tokens);
@@ -20,15 +26,33 @@ void	exit_child(t_shell *data, char **envp, char *path, int exit_code)
 		free_cmds(data->cmds);
 	if (data->list)
 		free_environment(data->list);
-	if (envp)
-		free_arr(envp);
-	if (path)
+	if (data->envp)
+		free_arr(data->envp);
+	if (data->path)
 	{
-		free(path);
-		path = NULL;
+		free(data->path);
+		data->path = NULL;
 	}
 	if (data->input)
 		free(data->input);
-	close_backup_fds(data->fds);
-	exit(exit_code);
+	if (data->fds)
+		close_backup_fds(data->fds);
+}
+
+static void	exit_handler(int err)
+{
+	if (err == ENOENT || err == EFAULT)
+		exit(127);
+	if (err == EACCES || err == ENOTDIR || err == EISDIR)
+		exit(126);
+	if (err == ENOEXEC)
+		exit(0);
+	exit(1);
+}
+
+void	exit_child(t_shell *data, int err, char *error, char *msg)
+{
+	child_output(error, msg);
+	free_child(data);
+	exit_handler(err);
 }

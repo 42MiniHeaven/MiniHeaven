@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:13:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 12:23:27 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	env_update(t_env *env, char *value)
 		return ;
 	}
 	free(env->value);
-	env->value = ft_strdup(value);
+	env->value = value;
 	if (env->key && env->value)
 		env->flag = 0;
 }

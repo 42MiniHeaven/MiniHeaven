@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/07 22:55:24 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 21:56:08 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	handle_signals_prompt(void);
 void	handle_signals_exec_parent(void);
 void	handle_signals_exec_child(void);
 void	set_exit_code(t_shell *data);
+void    handle_signals_heredoc(void);
+
 // int		rl_hook(void);
 
 // TOKENISING & LEXING
@@ -106,6 +108,8 @@ char	*append_char(char *str, char c);
 char	*replace_var(t_shell *data, char *word, char *mask);
 char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit);
 char	*handle_heredoc_quotes(char *str);
+char	**argv_replace_word_with_split(char **argv, int idx, char **split);
+int		argv_len(char **argv);
 
 
 // COULD BE ADDED TO LIBFT

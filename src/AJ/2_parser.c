@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 18:44:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 12:58:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,17 @@ int	parser(t_shell *data)
 		if (p.state == EXPECT_COMMAND)
 		{
 			if (!handle_expect_command(&p))
-				return (1);
+				return (parser_exit(&p), 1);
 		}
 		else if (p.state == EXPECT_ARG_OR_REDIR)
 		{
 			if (!handle_expect_arg(&p))
-				return (1);
+				return (parser_exit(&p), 1);
 		}
 		else if (p.state == EXPECT_REDIR_TARGET)
 		{
 			if (!handle_expect_redir(&p))
-				return (1);
+				return (parser_exit(&p), 1);
 		}
 		p.tok = p.tok->next;
 		// if (p.state == -1) // have to check if this is needed
@@ -116,9 +116,9 @@ int	parser(t_shell *data)
 		// }	
 	}
 	if (p.state == EXPECT_REDIR_TARGET)
-		return (syntax_error("unexpected end of input"), 1);
+		return (parser_exit(&p), syntax_error("unexpected end of input"), 1);
 	if (p.state == EXPECT_COMMAND && p.head)
-		return(syntax_error("unexpected pipe at the end"), 1);
+		return(parser_exit(&p), syntax_error("unexpected pipe at the end"), 1);
 	data->cmds = p.head;
 	return (0);
 }

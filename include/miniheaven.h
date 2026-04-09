@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheaven.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 20:27:08 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:42:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../Libft/include/libft.h"
-# include "../src/AJ/parser.h"
-# include "../src/Lukas/env/env.h"
-# include "../src/Lukas/builtins/builtins.h"
+# include "parser.h"
+# include "env.h"
+# include "builtins.h"
 
 // Maybe delete later
 # include <aio.h>
@@ -43,11 +43,6 @@
 # define MAX_ATTEMPTS 1000				//TODO: same
 # define HEREDOC_MAX_SIZE (1024 * 1024)	//TODO: same
 
-
-// TODO: remove later
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
 
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;
@@ -65,6 +60,8 @@ struct	s_shell
 	int				last_exit;
 	int				should_exit;
 	char			*input;
+	char			**envp;
+	char			*path;
 };
 
 struct	s_parser
@@ -137,6 +134,9 @@ char	**argv_realloc(char **old, int old_len, int new_len);
 bool	cmd_add_redir(t_cmd *cmd, int type, const char *filename);
 bool	cmd_add_back(t_cmd **head, t_cmd *new);
 
+//2_parser_cleanup.c
+void	parser_exit(t_parser *p);
+
 //expander_utils.c
 char	**expander_split(char *s, char *delim);
 
@@ -155,7 +155,7 @@ void	child(t_cmd *cmds, t_shell *data);
 void	child_error(char *error, char *msg);
 
 //exit_child.c
-void	exit_child(t_shell *data, char **envp, char *path, int exit_code);
+void	exit_child(t_shell *data, int exit_code, char *error, char *msg);
 
 //execute.c
 int		execute(t_shell *data);
