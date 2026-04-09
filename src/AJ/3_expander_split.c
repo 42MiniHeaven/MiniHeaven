@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:52:54 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 21:48:24 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:17:00 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	in_str(char c, char *str)
 	return (false);
 }
 
-static int	countwords(char *input, char *delim)
+static int	countwords(char *input, char *delim, char *mask)
 {
 	int	i;
 	int	check;
@@ -37,12 +37,12 @@ static int	countwords(char *input, char *delim)
 	count = 0;
 	while (input[i])
 	{
-		if (!in_str(input[i], delim) && check == 0)
+		if (!in_str(input[i], delim) && mask[i] == 'N' &&check == 0)
 		{
 			check = 1;
 			count++;
 		}
-		else if (in_str(input[i], delim))
+		else if (in_str(input[i], delim) && mask[i] == 'N')
 			check = 0;
 		i++;
 	}
@@ -59,13 +59,12 @@ static char	*createnfillarr(const char *str, int start, int end)
 	if (!ret)
 		return (NULL);
 	while (start < end)
-	{
 		ret[i++] = str[start++];
-	}
 	return (ret);
 }
 
-static char	**findstartend(const char *str, char **arr, char *delim, int words)
+static char	**findstartend(const char *str, char **arr, char *delim, int words, 
+	char *mask)
 {
 	int	i;
 	int	j;
@@ -75,10 +74,10 @@ static char	**findstartend(const char *str, char **arr, char *delim, int words)
 	k = 0;
 	while (str[i] && k < words)
 	{
-		while (str[i] && in_str(str[i], delim))
+		while ((str[i] && in_str(str[i], delim)) && mask[i] == 'N')
 			i++;
 		j = i;
-		while (str[j] && !in_str(str[j], delim))
+		while (str[j] && !(in_str(str[j], delim) && mask[j] == 'N'))
 			j++;
 		if (j > i)
 		{
@@ -97,14 +96,20 @@ char	**expander_split(char *s, char *delim)
 {
 	int		words;
 	char	**arr;
+	char	*mask;
 
 	if (!s || !delim)
 		return (NULL);
-	words = countwords(s, delim);
+	mask = create_mask(s);
+	if (!mask)
+		return (NULL);
+	words = countwords(s, delim, mask);
 	arr = ft_calloc(words + 1, sizeof(char *));
 	if (!arr)
 		return (NULL);
-	if (!findstartend(s, arr, delim, words))
+	if (!findstartend(s, arr, delim, words, mask))
 		return (NULL);
-	return (free(s), arr);
+	free(mask);
+	free(s);
+	return (arr);
 }

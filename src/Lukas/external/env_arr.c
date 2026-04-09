@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:42:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 21:27:46 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:34:54 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/miniheaven.h"
+#include "miniheaven.h"
 
 char	**env_arr(t_env *env)
 {

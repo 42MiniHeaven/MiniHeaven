@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/08 17:55:51 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:49:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,29 @@ char *expand_word(char *word, t_shell *data)
 
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
+	char	**tmp;
+	bool	needs_split;
 	int		i;
-	// char	**tmp;
-	// int		error;
+	int		split_len;
 
 	i = 0;
-	while (cmd->argv[i])
-	{
-		cmd->argv[i] = expand_word(cmd->argv[i], data);
-		//printf("WHAT would go in needs_wordsplitting argv[i]: %s\n", cmd->argv[i]);
-		// if (needs_wordsplitting(cmd->argv[i], &error))
-		// {
-		// 	printf("Here\n");
-		// 	tmp = expander_split(join_argv(cmd->argv), " \t\n");
-		// 	free_arr(cmd->argv);
-		// 	cmd->argv = tmp;
-		// }
-		i++;
-	}
-	// error = 1;
-	i = 0;
-	printf("after\n");
-	// if (error == -1)
-	// 	printf("Something needs to be done, Lukas\n"); //TODO: Lukas take care please <3 calloc failed
+    while (cmd->argv[i])
+    {
+        needs_split = needs_wordsplitting(cmd->argv[i]);
+        cmd->argv[i] = expand_word(cmd->argv[i], data);
+        if (needs_split)
+        {
+            tmp = expander_split(cmd->argv[i], " \t\n");
+            if (!tmp)
+                return ;
+            free(cmd->argv[i]);
+            split_len = argv_len(tmp);
+            cmd->argv = argv_replace_word_with_split(cmd->argv, i, tmp);
+            i += split_len;
+            continue ;
+        }
+        i++;
+    }
 	if (!resolve_quotes(cmd->argv))
 		printf("failed on quotes removal\n");
 	// if (cmd->redir)

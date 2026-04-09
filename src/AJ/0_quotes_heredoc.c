@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 16:29:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:47:23 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*handle_heredoc_quotes(char *str)
 		}
 		i++;
 	}
-	free (str);
+	free(str);
 	str = result;
 	free(mask);
 	return (str);

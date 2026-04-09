@@ -6,24 +6,20 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 19:43:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:48:36 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniheaven.h"
 
-bool	needs_wordsplitting(char *str, int *error)
+int argv_len(char **argv)
 {
-	char	*mask;
-
-	mask = create_mask(str);
-	printf("Mask: %s\n", mask);
-	if (!mask)
-		return (false);
-	if (ft_strchr(mask, 'N'))
-		return (free(mask), true);
-	free(mask);
-	return (false);
+    int i = 0;
+    if (!argv)
+        return (0);
+    while (argv[i])
+        i++;
+    return (i);
 }
 
 /*

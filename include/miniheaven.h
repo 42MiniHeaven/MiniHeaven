@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheaven.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 13:02:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:42:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../Libft/include/libft.h"
-# include "../src/AJ/parser.h"
-# include "../src/Lukas/env/env.h"
-# include "../src/Lukas/builtins/builtins.h"
+# include "parser.h"
+# include "env.h"
+# include "builtins.h"
 
 // Maybe delete later
 # include <aio.h>

@@ -6,7 +6,7 @@
 #    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/09 19:42:49 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/09 19:46:25 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC := src/main.c \
 		src/AJ/3_expander_mask.c \
 		src/AJ/3_expander_check.c \
 		src/AJ/3_expander_split.c \
+		src/AJ/3_expander_split2.c \
 		src/AJ/3_expander_utils.c \
 		src/AJ/3_expander_core.c \
 		src/AJ/4_expander_heredoc.c \

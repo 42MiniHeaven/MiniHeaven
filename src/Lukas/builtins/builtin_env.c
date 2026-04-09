@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:34:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/04 14:32:36 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:38:46 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
  * @param   data	Struct containing env list and envp
  * @param   str		Input str
  */
-
 
  // TODO: update _ when using env (currently not correct)
 int	builtin_env(t_cmd *cmd, t_environment *list)

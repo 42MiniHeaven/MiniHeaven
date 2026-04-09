@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 17:28:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 21:27:32 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:38:33 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**empty_env(void)
 	char	**env;
 	int		shlvl;
 
-	env = malloc(sizeof(char *) * 4); //TODO
+	env = malloc(sizeof(char *) * 4);
 	if (!env)
 		return (NULL);
 	shlvl = 1;
