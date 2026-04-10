@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/10 15:46:19 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/11 01:21:19 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,6 @@ SRC := src/main.c \
 		src/Lukas/env/env_get.c \
 		src/Lukas/external/resolve.c \
 		src/Lukas/external/env_arr.c \
-		get_next_line/get_next_line.c \
 		readFile.c
 		
 

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/10 23:11:44 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 01:21:45 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 char	*expand_variables(char *word, char *mask, t_shell *data)
 {
 	char	*expanded_word;
-	
 	if (!needs_expansion_word(word, mask))
 		return (word);
 	expanded_word = replace_var(data, word, mask);

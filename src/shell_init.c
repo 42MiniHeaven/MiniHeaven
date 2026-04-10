@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 23:25:03 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/09 22:14:59 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	shell_init(t_shell *data, char **envp)
 	data->fds = NULL;
 	data->list = list;
 	data->last_exit = 0;
+	data->should_exit = 0;
 }

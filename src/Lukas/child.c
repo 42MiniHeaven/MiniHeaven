@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:48:16 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:49:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	child(t_cmd *cmds, t_shell *data)
 {
+	close_all_fds();
 	data->envp = NULL;
 	data->path = NULL;
 	handle_signals_exec_child();
@@ -24,7 +25,6 @@ void	child(t_cmd *cmds, t_shell *data)
 	data->path = resolve_path(cmds->argv[0], data->list->head);
 	if (!data->path)
 		exit_child(data, errno, cmds->argv[0], ": command not found\n");
-//		child_error(cmds->argv[0], ": command not found\n"); //TODO: FIX!
 	execve(data->path, cmds->argv, data->envp);
 	if (errno == EACCES)
 		exit_child(data, errno, cmds->argv[0], ": permission denied\n");

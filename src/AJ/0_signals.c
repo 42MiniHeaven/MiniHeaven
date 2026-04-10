@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 18:59:05 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 17:50:30 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 01:21:32 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,14 @@ static void	handle_sig(int sigtype)
 {
 	g_signal_status = sigtype;
 }
+
+/*
+ * DESCRIPTION
+ * The Readline event hook handles asynchronous signals (e.g. SIGINT). When an 
+ * interrupt is detected via g_signal_status, it simulates a newline input to 
+ * safely break the current readline state, clears the current input line and 
+ * resets the history to ensure a clean prompt is displayed.
+ */
 
 static int	rl_hook(void)
 {
