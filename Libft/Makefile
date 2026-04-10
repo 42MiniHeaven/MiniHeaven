@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/02 15:14:44 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/08 20:27:25 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/10 17:34:39 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = ft_atoi.c \
 	ft_putstr_fd.c \
 	ft_split.c \
 	ft_strchr.c \
+	ft_strstr.c \
 	ft_strdup.c \
 	ft_striteri.c \
 	ft_strjoin.c \
@@ -50,7 +51,7 @@ SRCS = ft_atoi.c \
 NAME = libft.a
 LIBC = ar rcs
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iinclude
+CFLAGS = -Wall -Werror -Wextra -Iinclude -g
 SRC_DIR = src/
 OBJ_DIR = obj/
 OBJ_SRCS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))

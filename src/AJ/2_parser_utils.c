@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 22:16:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:45:56 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:29:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_redir	*redir_new(int type, const char *file)
 	r->expand = need_heredoc_expansion(r->file);
 	if (r->type == HEREDOC)
 		r->file = handle_heredoc_quotes(r->file);
+	r->success = true;
 	return (r);
 }
 

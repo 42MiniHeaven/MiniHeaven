@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:56:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/02/24 20:23:54 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/10 17:14:11 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_toupper(int c);
 char	*ft_itoa(int n);
 char	**ft_split(const char *s, char c);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strstr(const char *s, const char *check);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/10 16:31:20 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/10 16:33:55 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,6 @@ char	*expand_word(char *word, t_shell *data)
  // How should redirections be handles here??? Should there genereally be
  // be a special case for redirections??
 
- // For heredoc:
-// $hi -> does not expand
-// "$hi" -> trims quotes only, $ stays
-// '$hi' -> trims quotes only, $ stays
 
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {

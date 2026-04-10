@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/10 16:21:42 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:30:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@
 ** }
 **
 */
-char	*handle_env_var_redir(char *file, int *i, char *result, t_shell *data)
+
+//arr[0] - word or filename
+//arr[1] - result
+char	*handle_env_var_redir(char **arr, int *i, t_shell *data, bool *success)
 {
 	int		start;
 	int		j;
@@ -73,22 +76,25 @@ char	*handle_env_var_redir(char *file, int *i, char *result, t_shell *data)
 	value = NULL;
 	start = *i + 1;
 	j = start;
-	while (ft_isalnum(file[j]) || file[j] == '_')
+	while (ft_isalnum(arr[0][j]) || arr[0][j] == '_')
 		j++;
-	key = ft_substr(file, start, j - start);
+	key = ft_substr(arr[0], start, j - start);
 	if (!key)
 		return (NULL);
 	value = get_env_value(data->list->head, key);
-	if (!value)
-		return (free(key), *i = j, file);
-	result = str_join_free(result, value);
-	if (!result)
-		return (free(key), free(value), NULL);
+	if (!value || ft_strcmp(value, "") == 0 || (ft_strstr(value, "\"'")) 
+		|| (ft_strstr(value, " \t") && !ft_strchr(arr[0], '"')))
+		return (free(key), *i = j, *success = false, arr[0]);
+	arr[1] = str_join_free(arr[1], value);
+	if (!arr[1])
+		return (free(key), free(value), *success = false, NULL);
 	*i = j;
-	return (free(key), free(value), result);
+	return (free(key), free(value), arr[1]);
 }
 
-char	*handle_dollar_redir(t_shell *d, char *w, int *i, char *res)
+//arr[0] - word
+//arr[1] - result
+char	*handle_dollar_redir(t_shell *d, char**arr, int *i, bool *success)
 {
 	char	*tmp_exit;
 
@@ -96,67 +102,65 @@ char	*handle_dollar_redir(t_shell *d, char *w, int *i, char *res)
 	tmp_exit = ft_itoa(d->last_exit);
 	if(!tmp_exit)
 		return (NULL);
-	if (w[(*i) + 1] && w[(*i) + 1] == '?')
+	if (arr[0][(*i) + 1] && arr[0][(*i) + 1] == '?')
 	{
-		res = str_join_free(res, tmp_exit);
+		arr[1] = str_join_free(arr[1], tmp_exit);
 		(*i) += 2;
 	}
-	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_' || w[(*i) + 1] == '"')
-		res = handle_env_var_redir(w, i, res, d);
+	else if (ft_isalnum(arr[0][(*i) + 1]) || arr[0][(*i) + 1] == '_' || arr[0][(*i) + 1] == '"')
+		arr[1] = handle_env_var_redir(arr, i, d, success);
 	else
 	{
-		res = append_char(res, '$');
+		arr[1] = append_char(arr[1], '$');
 		(*i) += 1;
 	}
 	free (tmp_exit);
-	return (res);
+	return (arr[1]);
 }
 
 char	*replace_file_var(t_shell *data, char *file, char *mask, bool *success)
 {
 	int		i;
-	char	*result;
+	char	*res;
 
-	result = NULL;
+	res = NULL;
 	i = 0;
 	if (!file)
 		return (NULL);
-	result = ft_strdup("");
-	if (!result)
+	res = ft_strdup("");
+	if (!res)
 		return (NULL);
 	while (file[i])
 	{
 		if (file[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
 		{
-			result = handle_dollar_redir(data, file, &i, result); 
-			if (!result)
+			res = handle_dollar_redir(data, (char *[]){file, res}, &i, success); 
+			if (!res)
 				return (NULL);
 		}
 		else
 		{
-			result = append_char(result, file[i]);
+			res = append_char(res, file[i]);
 			i++;	
 		}
 	}
-	return (*success = true, result);
+	return (res);
 }
 
 void	redir_error()
 {
-	
+	ft_putstr_fd("bash: ambiguous redirect", 2);
 }
 
 char	*expand_file_name(t_redir *tmp, char *mask, t_shell *data)
 {
 	char	*expanded_file;
-	bool	success;
 
-	success = false;
 	if (!needs_expansion_word(tmp->file, mask))
 		return (tmp->file);
-	expanded_file = replace_file_var(data, tmp->file, mask, &success);
-	if (!expanded_file || !success)
-		redir_error(); //TODO: write it
+	expanded_file = replace_file_var(data, tmp->file, mask, &tmp->success);
+	if (!expanded_file || !tmp->success)
+		redir_error(); //TODO: write it and exit the program clean!!!
 	//expand double quotes
 	//expand single quotes
 	return (expanded_file);
