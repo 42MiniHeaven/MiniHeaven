@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/10 16:33:55 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/10 23:11:44 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 		printf("failed on quotes removal\n");
 	if (cmd->redir)
 	{
-		if (!expand_redir(cmd, data))
-			printf("failed on redir expansion\n");
+		expand_redir(cmd, data);
 	}
 }
 

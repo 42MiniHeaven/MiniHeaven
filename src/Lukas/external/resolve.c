@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:41:29 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:35:00 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/10 22:44:33 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ char	*resolve_path(char *cmd, t_env *env)
 	dirs = ft_split(path, ':');
 	if (!dirs)
 		return (ft_strdup(cmd));
-	i = 0;
-	while (dirs[i])
+	i = -1;
+	while (dirs[++i])
 	{
 		full = ft_strjoin_char(dirs[i], cmd, '/');
+		if (!full)
+			return (free_arr(dirs), NULL);
 		if (access(full, X_OK) == 0)
 			return (free_arr(dirs), full);
 		free(full);
-		i++;
 	}
-	free_arr(dirs);
-	return (NULL);
+	return (free_arr(dirs), NULL);
 }

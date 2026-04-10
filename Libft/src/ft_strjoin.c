@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 11:13:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:11:00 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/11 00:12:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	lenstrjoin;
 	char	*ptr;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
 	lenstrjoin = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	ptr = ft_calloc(lenstrjoin +1, sizeof(char));
 	if (ptr == NULL)
 		return (0);
-	i = 0;
-	while (s1[i] != '\0')
-	{
+	i = -1;
+	while (s1[++i] != '\0')
 		ptr[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j] != '\0')
-	{
+	j = -1;
+	while (s2[++j] != '\0')
 		ptr[i + j] = s2[j];
-		j++;
-	}
 	return (ptr);
 }
 /*

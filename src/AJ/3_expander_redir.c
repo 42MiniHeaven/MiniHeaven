@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/10 18:30:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 01:08:58 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,63 @@
 **
 */
 
-//arr[0] - word or filename
-//arr[1] - result
-char	*handle_env_var_redir(char **arr, int *i, t_shell *data, bool *success)
+// khuk@khuk-pc:~$ > $NONEXIST
+// bash: $NONEXIST: ambiguous redirect
+// khuk@khuk-pc:~$ export EMPTY=""
+// khuk@khuk-pc:~$ > $EMPTY
+// bash: $EMPTY: ambiguous redirect
+// khuk@khuk-pc:~$ export TWO_WORDS="a b"
+// khuk@khuk-pc:~$ > $WTO_WORDS
+// bash: $WTO_WORDS: ambiguous redirect
+// khuk@khuk-pc:~$ 
+
+// azielnic@c2r5p14:~$ export TEST="x y"
+// azielnic@c2r5p14:~$ echo $TEST
+// x y
+// azielnic@c2r5p14:~$ > $TEST
+// bash: $TEST: ambiguous redirect
+// azielnic@c2r5p14:~$ > "$TEST"
+// azielnic@c2r5p14:~$ ls
+//  42_minishell_tester   Evaluations   MiniHeaven   Public       test.c
+//  Desktop	       exam_prep     Music	  sgoinfre     Videos
+//  Documents	       fract-ol      Pictures	  src_github  'x y'
+//  Downloads	       goinfre	     Piscine	  Templates
+// azielnic@c2r5p14:~$ > '$TEST'
+// azielnic@c2r5p14:~$ ls
+// '$TEST'		       Downloads     goinfre	  Piscine      Templates
+//  42_minishell_tester   Evaluations   MiniHeaven   Public       test.c
+//  Desktop	       exam_prep     Music	  sgoinfre     Videos
+//  Documents	       fract-ol      Pictures	  src_github  'x y'
+// azielnic@c2r5p14:~$ 
+
+
+bool	redir_validation_check(char *file, char *value)
+{
+	size_t	len;
+	int		i;
+	
+	// if filename is in double quotes all will be expanded and printed -> true
+	len = ft_strlen(file);
+	if (file[0] == '"' && file[len - 1] == '"')
+		return (true);
+	// if value consists of two or more words and filename is NOT in double quotes -> false
+	i = 0;
+	while (ft_isspace(value[i]))
+		i++;
+	if (value[i] == '\0')
+		return (false);
+	while (!ft_isspace(value[i]))
+		i++;
+	if (value[i] == '\0')
+		return (true);
+	while (ft_isspace(value[i]))
+		i++;
+	if (value[i] != '\0')
+		return (false);
+	return (true);
+}
+
+char	*handle_env_var_redir(t_shell *d, t_redir *tmp, char**res, int *i)
 {
 	int		start;
 	int		j;
@@ -76,25 +130,22 @@ char	*handle_env_var_redir(char **arr, int *i, t_shell *data, bool *success)
 	value = NULL;
 	start = *i + 1;
 	j = start;
-	while (ft_isalnum(arr[0][j]) || arr[0][j] == '_')
+	while (ft_isalnum(tmp->file[j]) || tmp->file[j] == '_')
 		j++;
-	key = ft_substr(arr[0], start, j - start);
+	key = ft_substr(tmp->file, start, j - start);
 	if (!key)
 		return (NULL);
-	value = get_env_value(data->list->head, key);
-	if (!value || ft_strcmp(value, "") == 0 || (ft_strstr(value, "\"'")) 
-		|| (ft_strstr(value, " \t") && !ft_strchr(arr[0], '"')))
-		return (free(key), *i = j, *success = false, arr[0]);
-	arr[1] = str_join_free(arr[1], value);
-	if (!arr[1])
-		return (free(key), free(value), *success = false, NULL);
+	value = get_env_value(d->list->head, key);
+	if (!value || ft_strcmp(value, "") == 0 || !redir_validation_check(tmp->file, value))
+		return (free(key), free(*res), *i = j, tmp->success = false, tmp->file);//free (res);
+	*res = str_join_free(*res, value);
+	if (!*res)
+		return (free(key), tmp->success = false, NULL);
 	*i = j;
-	return (free(key), free(value), arr[1]);
+	return (free(key), *res);
 }
 
-//arr[0] - word
-//arr[1] - result
-char	*handle_dollar_redir(t_shell *d, char**arr, int *i, bool *success)
+char	*handle_dollar_redir(t_shell *d, t_redir *tmp, char**res, int *i)
 {
 	char	*tmp_exit;
 
@@ -102,70 +153,82 @@ char	*handle_dollar_redir(t_shell *d, char**arr, int *i, bool *success)
 	tmp_exit = ft_itoa(d->last_exit);
 	if(!tmp_exit)
 		return (NULL);
-	if (arr[0][(*i) + 1] && arr[0][(*i) + 1] == '?')
+	if (tmp->file[(*i) + 1] && tmp->file[(*i) + 1] == '?')
 	{
-		arr[1] = str_join_free(arr[1], tmp_exit);
+		*res = str_join_free(*res, tmp_exit);
 		(*i) += 2;
 	}
-	else if (ft_isalnum(arr[0][(*i) + 1]) || arr[0][(*i) + 1] == '_' || arr[0][(*i) + 1] == '"')
-		arr[1] = handle_env_var_redir(arr, i, d, success);
+	else if (ft_isalnum(tmp->file[(*i) + 1]) || tmp->file[(*i) + 1] == '_' || tmp->file[(*i) + 1] == '"')
+		*res = handle_env_var_redir(d, tmp, res, i);
 	else
 	{
-		arr[1] = append_char(arr[1], '$');
+		*res = append_char(*res, '$');
 		(*i) += 1;
 	}
 	free (tmp_exit);
-	return (arr[1]);
+	return (*res);
 }
 
-char	*replace_file_var(t_shell *data, char *file, char *mask, bool *success)
+char	*replace_file_var(t_shell *data, t_redir *tmp, char *mask)
 {
 	int		i;
 	char	*res;
 
 	res = NULL;
 	i = 0;
-	if (!file)
+	if (!tmp->file)
 		return (NULL);
 	res = ft_strdup("");
 	if (!res)
 		return (NULL);
-	while (file[i])
+	while (tmp->file[i])
 	{
-		if (file[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
-		{
-			res = handle_dollar_redir(data, (char *[]){file, res}, &i, success); 
-			if (!res)
-				return (NULL);
-		}
+		if (tmp->file[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
+			res = handle_dollar_redir(data, tmp, &res, &i); 
 		else
 		{
-			res = append_char(res, file[i]);
+			res = append_char(res, tmp->file[i]);
 			i++;	
 		}
+		if (!res)
+			return (NULL);
 	}
 	return (res);
 }
 
-void	redir_error()
+void	redir_error(t_redir *tmp)
 {
-	ft_putstr_fd("bash: ambiguous redirect", 2);
+	ft_error(tmp->file ,": ambiguous redirect", 2);
+	free(tmp->file);
+	tmp->file = NULL;
 }
 
 char	*expand_file_name(t_redir *tmp, char *mask, t_shell *data)
 {
 	char	*expanded_file;
+	char	*trimmed_file;
+	size_t	file_len;
 
+	trimmed_file = NULL;
 	if (!needs_expansion_word(tmp->file, mask))
-		return (tmp->file);
-	expanded_file = replace_file_var(data, tmp->file, mask, &tmp->success);
+	{
+		trimmed_file = ft_strtrim(tmp->file, "'");
+		return (trimmed_file);
+	}
+	expanded_file = replace_file_var(data, tmp, mask);
 	if (!expanded_file || !tmp->success)
-		redir_error(); //TODO: write it and exit the program clean!!!
-	//expand double quotes
-	//expand single quotes
+		return (redir_error(tmp), NULL);
+	file_len = ft_strlen(tmp->file);
+	if (tmp->file[0] == '"' && tmp->file[file_len - 1] == '"')
+	{
+		trimmed_file = ft_strtrim(expanded_file, "\"");
+		free(expanded_file);
+		return(trimmed_file);
+	}
 	return (expanded_file);
 }
-
+// TODO: redir need to be also handled in the execution, checking the success varaiable in the redir struct
+// could be made a void as it doesn't catch anything
 bool	expand_redir(t_cmd *cmd, t_shell *data)
 {
 	t_redir	*tmp;
@@ -178,11 +241,12 @@ bool	expand_redir(t_cmd *cmd, t_shell *data)
 	{
 		mask = create_mask(tmp->file);
 		if (!mask)
-			return (false);
+			return (ft_error("malloc failed for mask", NULL, 2), false);
 		result = expand_file_name(tmp, mask, data);
 		if (!result)
-			return (false);
+			return (free(mask), false);
 		// free(tmp->file); //  had the folloeing issue: Invalid free() / delete / delete[] / realloc()
+		free(tmp->file);
 		tmp->file = result; //ft_strdup(result);
 		if (!tmp->file)
 			return (free(mask), false);
