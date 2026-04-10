@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 23:51:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/10 16:21:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/miniheaven.h"
+#include "miniheaven.h"
 
 /*
 ** AMBIGUOUS REDIRECT — ALL CASES
@@ -39,11 +39,7 @@
 ** 5. Multiple expansions producing multiple words
 **    - > $A $B
 **
-** 6. Globbing (*) expands to multiple files
-**    - > *
-**    - > $VAR where VAR="*"
-**
-** 7. Mixed expansions resulting in multiple tokens
+** 6. Mixed expansions resulting in multiple tokens
 **    - combinations that produce more than one word
 **
 ** IMPORTANT RULES:
@@ -94,8 +90,9 @@ char	*handle_env_var_redir(char *file, int *i, char *result, t_shell *data)
 
 char	*handle_dollar_redir(t_shell *d, char *w, int *i, char *res)
 {
-	char	*tmp_exit; //TODO: Null the pointer
+	char	*tmp_exit;
 
+	tmp_exit = NULL;
 	tmp_exit = ft_itoa(d->last_exit);
 	if(!tmp_exit)
 		return (NULL);
@@ -115,14 +112,14 @@ char	*handle_dollar_redir(t_shell *d, char *w, int *i, char *res)
 	return (res);
 }
 
-char	*replace_file_var(t_shell *data, char *file, char *mask)
+char	*replace_file_var(t_shell *data, char *file, char *mask, bool *success)
 {
 	int		i;
 	char	*result;
 
 	result = NULL;
 	i = 0;
-	if(!file)
+	if (!file)
 		return (NULL);
 	result = ft_strdup("");
 	if (!result)
@@ -141,16 +138,25 @@ char	*replace_file_var(t_shell *data, char *file, char *mask)
 			i++;	
 		}
 	}
-	return (result);
+	return (*success = true, result);
+}
+
+void	redir_error()
+{
+	
 }
 
 char	*expand_file_name(t_redir *tmp, char *mask, t_shell *data)
 {
 	char	*expanded_file;
+	bool	success;
 
+	success = false;
 	if (!needs_expansion_word(tmp->file, mask))
 		return (tmp->file);
-	expanded_file = replace_file_var(data, tmp->file, mask);
+	expanded_file = replace_file_var(data, tmp->file, mask, &success);
+	if (!expanded_file || !success)
+		redir_error(); //TODO: write it
 	//expand double quotes
 	//expand single quotes
 	return (expanded_file);

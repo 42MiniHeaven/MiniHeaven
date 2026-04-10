@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 17:42:31 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/10 15:42:54 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit);
 char	*handle_heredoc_quotes(char *str);
 char	**argv_replace_word_with_split(char **argv, int idx, char **split);
 int		argv_len(char **argv);
+bool	expand_redir(t_cmd *cmd, t_shell *data);
 
 
 // COULD BE ADDED TO LIBFT

@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   4_expander_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 20:28:03 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/03 22:44:45 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/10 15:29:17 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
+
+// For heredoc:
+// $hi -> does not expand
+// "$hi" -> trims quotes only, $ stays
+// '$hi' -> trims quotes only, $ stays
 
 static char	*replace_var_heredoc(t_shell *data, char *word)
 {
