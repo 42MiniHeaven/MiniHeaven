@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 20:34:15 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 21:06:21 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,15 +236,19 @@ bool	expand_redir(t_cmd *cmd, t_shell *data)
 	mask = NULL;
 	while (tmp)
 	{
+		if (tmp->type == HEREDOC)
+		{
+			tmp = tmp->next;
+			continue ;
+		}
 		mask = create_mask(tmp->file);
 		if (!mask)
 			return (ft_error("malloc failed for mask", NULL, 2), false);
 		result = expand_file_name(tmp, mask, data);
 		if (!result)
 			return (free(mask), false);
-		// free(tmp->file); //  had the folloeing issue: Invalid free() / delete / delete[] / realloc()
 		free(tmp->file);
-		tmp->file = result; //ft_strdup(result);
+		tmp->file = result;
 		if (!tmp->file)
 			return (free(mask), false);
 		tmp = tmp->next;
