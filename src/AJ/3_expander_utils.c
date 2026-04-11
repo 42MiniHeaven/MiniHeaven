@@ -6,20 +6,36 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:22:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 01:21:41 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:11:02 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
-int argv_len(char **argv)
+bool	in_str(char c, char *str)
 {
-    int i = 0;
-    if (!argv)
-        return (0);
-    while (argv[i])
-        i++;
-    return (i);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (c == str[i])
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+int	argv_len(char **argv)
+{
+	int	i;
+
+	i = 0;
+	if (!argv)
+		return (0);
+	while (argv[i])
+		i++;
+	return (i);
 }
 
 /*
@@ -31,7 +47,7 @@ char	*append_char(char *str, char c)
 	char	*new;
 	int		len;
 
-	if(!str)
+	if (!str)
 		return (NULL);
 	len = ft_strlen(str);
 	new = ft_calloc(len + 2, sizeof(char));
@@ -43,7 +59,7 @@ char	*append_char(char *str, char c)
 	ft_memcpy(new, str, len);
 	new[len] = c;
 	free(str);
-	return(new);
+	return (new);
 }
 
 char	*str_join_free(char *str1, char *str2)
@@ -51,7 +67,7 @@ char	*str_join_free(char *str1, char *str2)
 	char	*new;
 	int		len1;
 	int		len2;
-	
+
 	if (!str1 || !str2)
 		return (NULL);
 	len1 = ft_strlen(str1);
@@ -81,7 +97,7 @@ char	*join_argv(char **argv)
 	str = ft_strdup("");
 	while (argv[i])
 	{
-		tmp = ft_strjoin_char(str, argv[i], ' '); 
+		tmp = ft_strjoin_char(str, argv[i], ' ');
 		if (!tmp)
 			return (free(str), NULL);
 		free(str);

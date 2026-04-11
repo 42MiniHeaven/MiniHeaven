@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 20:44:19 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 00:11:22 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,28 @@
  * @note	Does not perform expansion if conditions are not met.
  */
 
-char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
+char	*handle_dollar(t_shell *d, char *w, int *i, char *res)
 {
+	char	*tmp_exit;
+
+	tmp_exit = NULL;
+	tmp_exit = ft_itoa(d->last_exit);
+	if (!tmp_exit)
+		return (NULL);
 	if (w[(*i) + 1] && w[(*i) + 1] == '?')
 	{
-		res = str_join_free(res, exit); //TODO: protect res
+		res = str_join_free(res, tmp_exit);
 		(*i) += 2;
 	}
-	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_' || w[(*i) + 1] == '"')
+	else if (ft_isalnum(w[(*i) + 1]) || w[(*i) + 1] == '_'
+		|| w[(*i) + 1] == '"')
 		res = handle_env_var(w, i, res, d);
 	else
 	{
 		res = append_char(res, '$');
 		(*i) += 1;
 	}
+	free (tmp_exit);
 	return (res);
 }
 
@@ -56,33 +64,24 @@ char	*handle_dollar(t_shell *d, char *w, int *i, char *res, char *exit)
  * @note	Return a newly allocated expanded string.
  */
 
-// bool	is_valid(char c)
-// {
-// 	if (c == ft_isalnum(c) || c == '_' || c == '')
-// }
- 
 char	*replace_var(t_shell *data, char *word, char *mask)
 {
 	int		i;
-	char	*tmp_exit;
 	char	*result;
 
 	if (!word)
 		return (NULL);
 	i = 0;
-	tmp_exit = ft_itoa(data->last_exit); //TODO: protect tmp_exit & result
 	result = ft_strdup("");
 	while (word[i])
 	{
 		if (word[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
-			result = handle_dollar(data, word, &i, result, tmp_exit); //TODO: protect result
-		else
+			result = handle_dollar(data, word, &i, result);
 		{
 			result = append_char(result, word[i]);
-			i++;	
+			i++;
 		}
 	}
-	free (tmp_exit);
 	return (result);
 }
 
@@ -103,16 +102,22 @@ char	*handle_env_var(char *word, int *i, char *result, t_shell *data)
 	int		j;
 	char	*key;
 	char	*value;
-	
+
+	key = NULL;
+	value = NULL;
 	start = *i + 1;
 	j = start;
 	while (ft_isalnum(word[j]) || word[j] == '_')
 		j++;
-	key = ft_substr(word, start, j - start); //TODO: protect key
+	key = ft_substr(word, start, j - start);
+	if (!key)
+		return (NULL);
 	value = get_env_value(data->list->head, key);
 	if (!value)
 		value = "";
-	result = str_join_free(result, value); //TODO: protect result
+	result = str_join_free(result, value);
+	if (!result)
+		return (free(key), NULL);
 	free(key);
 	*i = j;
 	return (result);

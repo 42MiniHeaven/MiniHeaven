@@ -6,23 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 22:16:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 01:21:37 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:33:23 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-// static int	argv_len(char **argv)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!argv)
-// 		return (0);
-// 	while (argv && argv[i])
-// 		i++;
-// 	return (i);
-// }
 
 t_cmd	*cmd_new(void)
 {

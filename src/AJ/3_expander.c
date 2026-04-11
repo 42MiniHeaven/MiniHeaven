@@ -6,20 +6,20 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 01:21:45 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:12:54 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 /*
  * *** EXPANDER ***
  * The expander replaces variables and handles quotes in tokens.
- * 
+ *
  * - Single quotes: remove quotes, no expansion
  * - Double quotes: remove quotes, expand variables
  * - No quotes: expand variables, word splitting if needed
- * 
+ *
  * Special case: HEREDOC
  * In heredoc, no variable expansion occurs. Quotes are trimmed but any '$'
  * characters remain unchanged.
@@ -28,6 +28,7 @@
 char	*expand_variables(char *word, char *mask, t_shell *data)
 {
 	char	*expanded_word;
+
 	if (!needs_expansion_word(word, mask))
 		return (word);
 	expanded_word = replace_var(data, word, mask);
@@ -37,7 +38,7 @@ char	*expand_variables(char *word, char *mask, t_shell *data)
 
 char	*expand_word(char *word, t_shell *data)
 {
-	char *mask;
+	char	*mask;
 
 	mask = create_mask(word);
 	word = expand_variables(word, mask, data);
@@ -48,21 +49,20 @@ char	*expand_word(char *word, t_shell *data)
 /*
  * DESCRIPTION
  * Expands all arguments of a command node.
- * 
+ *
  * Iterates through cmd->argv and applies expansion to each argument using
  * expand_word().
- * 
+ *
  * PARAMETERS
  * @param	Pointer to command structure to process.
  * @param	Pointer to shell structure containing environment data.
- * 
+ *
  * BEHAVIOUR
  * @note	Modifies cmd->argv in place.
  */
 
- // How should redirections be handles here??? Should there genereally be
- // be a special case for redirections??
-
+// How should redirections be handles here??? Should there genereally be
+// be a special case for redirections??
 
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
@@ -71,42 +71,40 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 	int		split_len;
 
 	i = 0;
-    while (cmd->argv[i])
-    {
-        cmd->argv[i] = expand_word(cmd->argv[i], data);
-        if (needs_wordsplitting(cmd->argv[i]))
-        {
-            tmp = expander_split(cmd->argv[i], " \t\n");
-            if (!tmp)
-                return ;
-            split_len = argv_len(tmp);
-            cmd->argv = argv_replace_word_with_split(cmd->argv, i, tmp);
-            i += split_len;
-            continue ;
-        }
-        i++;
-    }
+	while (cmd->argv[i])
+	{
+		cmd->argv[i] = expand_word(cmd->argv[i], data);
+		if (needs_wordsplitting(cmd->argv[i]))
+		{
+			tmp = expander_split(cmd->argv[i], " \t\n");
+			if (!tmp)
+				return ;
+			split_len = argv_len(tmp);
+			cmd->argv = argv_replace_word_with_split(cmd->argv, i, tmp);
+			i += split_len;
+			continue ;
+		}
+		i++;
+	}
 	if (!resolve_quotes(cmd->argv))
 		printf("failed on quotes removal\n");
 	if (cmd->redir)
-	{
 		expand_redir(cmd, data);
-	}
 }
 
 /*
- * DESCRIPTION 
- * Iterates through command list data->cmds and performs an expansion on each 
+ * DESCRIPTION
+ * Iterates through command list data->cmds and performs an expansion on each
  * command node. Calls expand_cmd() for every command in the pipeline, then
  * joins and splits arguments to handle word splitting (only for not quoted
  * expansion) and removes quotes if no futher expansion is needed.
- * 
+ *
  * PARAMETERS
  * @param data:		Pointer to the shell structure containing the pointer
  * 					to the command struct.
- * @param tmp_cmd:	A temporary pointer which is used not to destroy the head 
+ * @param tmp_cmd:	A temporary pointer which is used not to destroy the head
  * 					pointer of data->cmds itself.
- * 
+ *
  * BEHAVIOUR
  * @note	Modifies cmd->argv for each command node.
  * @note	Allocates and frees memory during join/split operations.
@@ -116,7 +114,7 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 void	expand_commands(t_shell *data)
 {
 	t_cmd	*tmp_cmd;
-	
+
 	tmp_cmd = data->cmds;
 	while (tmp_cmd)
 	{
@@ -124,4 +122,3 @@ void	expand_commands(t_shell *data)
 		tmp_cmd = tmp_cmd->next;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 12:58:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:44:40 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
  * The parser takes the tokens produced by the lexer and builds a linked
  * command structure incl an array which can be passed to the execution.
  */
-
-static void	parser_init(t_parser *p, t_shell *data)
-{
-	p->head = NULL;
-	p->current = NULL;
-	p->tok = data->tokens;
-	p->state = EXPECT_COMMAND;
-	p->last_redir = -1;
-}
 
 static bool	handle_expect_command(t_parser *p)
 {
@@ -86,40 +77,41 @@ static bool	handle_expect_redir(t_parser *p)
 	return (true);
 }
 
+static bool	parse_loop(t_parser *p)
+{
+	while (p->tok)
+	{
+		if (p->state == EXPECT_COMMAND)
+		{
+			if (!handle_expect_command(p))
+				return (false);
+		}
+		else if (p->state == EXPECT_ARG_OR_REDIR)
+		{
+			if (!handle_expect_arg(p))
+				return (false);
+		}
+		else if (p->state == EXPECT_REDIR_TARGET)
+		{
+			if (!handle_expect_redir(p))
+				return (false);
+		}
+		p->tok = p->tok->next;
+	}
+	return (true);
+}
+
 int	parser(t_shell *data)
 {
 	t_parser	p;
 
 	parser_init(&p, data);
-	while (p.tok)
-	{
-		if (p.state == EXPECT_COMMAND)
-		{
-			if (!handle_expect_command(&p))
-				return (parser_exit(&p), 1);
-		}
-		else if (p.state == EXPECT_ARG_OR_REDIR)
-		{
-			if (!handle_expect_arg(&p))
-				return (parser_exit(&p), 1);
-		}
-		else if (p.state == EXPECT_REDIR_TARGET)
-		{
-			if (!handle_expect_redir(&p))
-				return (parser_exit(&p), 1);
-		}
-		p.tok = p.tok->next;
-		// if (p.state == -1) // have to check if this is needed
-		// {
-		// 	free_cmds(p.head);
-		// 	return (NULL);
-		// }	
-	}
+	if (!parse_loop(&p))
+		return (parser_exit(&p), 1);
 	if (p.state == EXPECT_REDIR_TARGET)
 		return (parser_exit(&p), syntax_error("unexpected end of input"), 1);
 	if (p.state == EXPECT_COMMAND && p.head)
-		return(parser_exit(&p), syntax_error("unexpected pipe at the end"), 1);
+		return (parser_exit(&p), syntax_error("unexpected pipe at the end"), 1);
 	data->cmds = p.head;
 	return (0);
 }
-

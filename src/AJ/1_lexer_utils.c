@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/08 18:59:53 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:22:03 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 int	ft_is_operator(int c)
 {

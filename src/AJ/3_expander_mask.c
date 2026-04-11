@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 20:07:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/07 22:50:41 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 00:32:00 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 /*
  * DESCRIPTION
@@ -67,6 +67,5 @@ char	*create_mask(char *str)
 		mask[i] = mask_char;
 		i++;
 	}
-	return (mask);	
+	return (mask);
 }
-

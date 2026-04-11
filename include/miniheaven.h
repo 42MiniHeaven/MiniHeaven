@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/10 23:01:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:58:22 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,9 @@
 # include "env.h"
 # include "builtins.h"
 
-// Maybe delete later
-# include <aio.h>
-# include <ctype.h>
-
-# define TMP_DIR "/tmp"					//TODO: is this corret?
-# define MAX_ATTEMPTS 1000				//TODO: same
-# define HEREDOC_MAX_SIZE (1024 * 1024)	//TODO: same
-
+# define TMP_DIR "/tmp"
+# define MAX_ATTEMPTS 1000
+# define HEREDOC_MAX_SIZE (1024 * 1024)
 
 typedef struct s_token	t_token;
 typedef struct s_shell	t_shell;

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 20:10:57 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:45:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 bool	needs_expansion_word(char *word, char *mask)
 {
-	int i;
-	int needed;
-	
+	int	i;
+	int	needed;
+
 	i = 0;
 	needed = 0;
 	if (ft_strchr(word, '$') != NULL)

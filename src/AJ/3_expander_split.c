@@ -6,27 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:52:54 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:17:00 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:01:48 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-static bool	in_str(char c, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (c == str[i])
-			return (true);
-		i++;
-	}
-	return (false);
-}
-
-static int	countwords(char *input, char *delim, char *mask)
+static int	countwords_mask(char *input, char *delim, char *mask)
 {
 	int	i;
 	int	check;
@@ -37,7 +23,7 @@ static int	countwords(char *input, char *delim, char *mask)
 	count = 0;
 	while (input[i])
 	{
-		if (!in_str(input[i], delim) && mask[i] == 'N' &&check == 0)
+		if (!in_str(input[i], delim) && mask[i] == 'N' && check == 0)
 		{
 			check = 1;
 			count++;
@@ -49,7 +35,7 @@ static int	countwords(char *input, char *delim, char *mask)
 	return (count);
 }
 
-static char	*createnfillarr(const char *str, int start, int end)
+static char	*create_fill_arr(const char *str, int start, int end)
 {
 	char	*ret;
 	int		i;
@@ -63,31 +49,53 @@ static char	*createnfillarr(const char *str, int start, int end)
 	return (ret);
 }
 
-static char	**findstartend(const char *str, char **arr, char *delim, int words, 
-	char *mask)
+static int	fill_word(const char *str, char *mask, char **arr, void **context)
 {
-	int	i;
-	int	j;
-	int	k;
+	char	*delim;
+	int		*i;
+	int		*k;
+	int		j;
+
+	delim = (char *)context[0];
+	i = (int *)context[1];
+	k = (int *)context[2];
+	while ((str[*i] && in_str(str[*i], delim)) && mask[*i] == 'N')
+		(*i)++;
+	j = *i;
+	while (str[j] && !(in_str(str[j], delim) && mask[j] == 'N'))
+		j++;
+	if (j > *i)
+	{
+		arr[*k] = create_fill_arr(str, *i, j);
+		if (!arr[*k])
+			return (free_arr(arr), 0);
+		(*k)++;
+	}
+	*i = j;
+	return (1);
+}
+
+static char	**findstartend(char *str, char **arr, char *delim, int words)
+{
+	void	*context[3];
+	int		i;
+	int		k;
+	char	*mask;
 
 	i = 0;
 	k = 0;
+	mask = create_mask(str);
+	if (!mask)
+		return (NULL);
+	context[0] = (void *)delim;
+	context[1] = (void *)&i;
+	context[2] = (void *)&k;
 	while (str[i] && k < words)
 	{
-		while ((str[i] && in_str(str[i], delim)) && mask[i] == 'N')
-			i++;
-		j = i;
-		while (str[j] && !(in_str(str[j], delim) && mask[j] == 'N'))
-			j++;
-		if (j > i)
-		{
-			arr[k] = createnfillarr(str, i, j);
-			if (!arr[k])
-				return (free_arr(arr), NULL);
-			k++;
-		}
-		i = j;
+		if (!fill_word(str, mask, arr, context))
+			return (free(mask), NULL);
 	}
+	free(mask);
 	arr[k] = NULL;
 	return (arr);
 }
@@ -103,11 +111,11 @@ char	**expander_split(char *s, char *delim)
 	mask = create_mask(s);
 	if (!mask)
 		return (NULL);
-	words = countwords(s, delim, mask);
+	words = countwords_mask(s, delim, mask);
 	arr = ft_calloc(words + 1, sizeof(char *));
 	if (!arr)
 		return (NULL);
-	if (!findstartend(s, arr, delim, words, mask))
+	if (!findstartend(s, arr, delim, words))
 		return (NULL);
 	free(mask);
 	free(s);

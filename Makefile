@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/11 01:21:19 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/12 00:26:53 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,20 +23,21 @@ SRC := src/main.c \
 		src/AJ/0_quotes.c \
 		src/AJ/0_quotes_heredoc.c \
 		src/AJ/0_signals.c \
+		src/AJ/0_signals_utils.c \
 		src/AJ/1_lexer.c \
 		src/AJ/1_lexer_utils.c \
 		src/AJ/2_parser.c \
 		src/AJ/2_parser_utils.c \
 		src/AJ/2_parser_utils2.c \
-		src/AJ/2_parser_cleanup.c \
 		src/AJ/3_expander.c \
 		src/AJ/3_expander_mask.c \
 		src/AJ/3_expander_check.c \
 		src/AJ/3_expander_split.c \
 		src/AJ/3_expander_split2.c \
 		src/AJ/3_expander_utils.c \
-		src/AJ/3_expander_core.c \
 		src/AJ/3_expander_redir.c \
+		src/AJ/3_expander_core.c \
+		src/AJ/3_expander_core_redir.c \
 		src/AJ/4_expander_heredoc.c \
 		src/AJ/4_heredoc.c \
 		src/Lukas/child.c \

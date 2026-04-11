@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 22:14:59 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 00:18:28 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,16 @@ void	shell_init(t_shell *data, char **envp)
 	data->list = list;
 	data->last_exit = 0;
 	data->should_exit = 0;
+}
+
+// TODO: Lukas please create a generic init file with all inits
+// I saw you have a init file but its not in the Makefile so what you are 
+//doing in there is not connected to our code. Why have it?
+void	parser_init(t_parser *p, t_shell *data)
+{
+	p->head = NULL;
+	p->current = NULL;
+	p->tok = data->tokens;
+	p->state = EXPECT_COMMAND;
+	p->last_redir = -1;
 }

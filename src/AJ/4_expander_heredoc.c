@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 20:28:03 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/10 15:29:17 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:13:49 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,22 @@
 
 static char	*replace_var_heredoc(t_shell *data, char *word)
 {
-	int	i;
+	int		i;
 	char	*tmp_exit;
 	char	*result;
 
 	if (!word)
 		return (NULL);
+	tmp_exit = NULL;
 	i = 0;
 	tmp_exit = ft_itoa(data->last_exit);
+	if (!tmp_exit)
+		return (NULL);
 	result = ft_strdup("");
 	while (word[i])
 	{
 		if (word[i] == '$')
-			result = handle_dollar(data, word, &i, result, tmp_exit);
+			result = handle_dollar(data, word, &i, result);
 		else
 		{
 			result = append_char(result, word[i]);
@@ -44,7 +47,6 @@ static char	*replace_var_heredoc(t_shell *data, char *word)
 
 char	*expand_line(t_shell *data, char *input)
 {
-	//just check the word after $ for expansion
 	char	*ret;
 
 	ret = replace_var_heredoc(data, input);

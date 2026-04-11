@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:58:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/28 16:12:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:34:19 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	cmd_add_redir(t_cmd *cmd, int type, const char *file)
 	tmp->next = new;
 	return (true);
 }
-// check if return values
+
 bool	cmd_add_back(t_cmd **head, t_cmd *new)
 {
 	t_cmd	*tmp;

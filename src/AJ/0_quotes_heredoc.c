@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   0_quotes_heredoc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 19:47:23 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:21:40 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 /*
  * QUOTE HANDLING
@@ -53,44 +53,20 @@ char	*handle_heredoc_quotes(char *str)
 	if (!ft_strchr(str, '\'') && !ft_strchr(str, '"'))
 		return (str);
 	len = find_heredoc_len(str);
-	i = 0;
-	j = 0;
+	i = -1;
+	j = -1;
 	result = ft_calloc(len + 1, sizeof(char));
 	mask = create_mask(str);
 	while (str[i])
 	{
-		if (mask[i] != 'Q')
-		{
-			result[j] = str[i];
-			j++;
-		}
-		i++;
+		if (mask[++i] != 'Q')
+			result[++j] = str[i];
 	}
 	free(str);
 	str = result;
 	free(mask);
 	return (str);
 }
-
-// char	*remove_quote(char *str)
-// {
-// 	int		len;
-// 	char	*result;
-
-// 	if (!str)
-// 		return (NULL);
-// 	len = find_heredoc_len(str);
-	
-	
-// 	if ((str[0] == str[len - 1]) && (str[0] == '"' || str[0] == '\''))
-// 	{
-// 		result = ft_substr(str, 1, len - 2);
-// 		free(str);
-// 		return (result);
-// 	}
-// 	else
-// 		return (str);
-// }
 
 bool	need_heredoc_expansion(char *str)
 {

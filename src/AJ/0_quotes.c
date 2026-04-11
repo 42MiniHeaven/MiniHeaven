@@ -6,11 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 20:33:36 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 23:21:44 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/miniheaven.h"
+#include "miniheaven.h"
 
 /*
  * QUOTE HANDLING
@@ -26,7 +26,7 @@
  */
 
 bool	lex_unclosed_quotes(char *input, int *i)
-{	
+{
 	char	quote;
 
 	quote = input[*i];
@@ -36,15 +36,13 @@ bool	lex_unclosed_quotes(char *input, int *i)
 	if (!input[*i])
 	{
 		syntax_error("unclosed quote");
-		// set exit code
-		return (false);	
+		return (false);
 	}
 	(*i)++;
 	return (true);
 }
- 
-// ******************************** EXPANDER **********************************
 
+// ******************************** EXPANDER **********************************
 /*
  * DESCRIPTION
  * Function exists for the remove_quotes() funtion to check the length of the 
@@ -56,7 +54,7 @@ int	count_len(char *mask)
 {
 	int	i;
 	int	len;
-	
+
 	i = 0;
 	len = 0;
 	while (mask[i])
@@ -65,7 +63,7 @@ int	count_len(char *mask)
 			len++;
 		i++;
 	}
-	return(len);
+	return (len);
 }
 
 char	*remove_quotes(char *word, char *mask)
@@ -85,7 +83,7 @@ char	*remove_quotes(char *word, char *mask)
 			j++;
 		if (!word[j] || !mask[j])
 		{
-			break;
+			break ;
 		}
 		result[i++] = word[j++];
 	}
@@ -106,7 +104,7 @@ bool	resolve_quotes(char **argv)
 	char	*tmp;
 
 	if (!argv)
-		return (true);	//TODO: not false?
+		return (false);
 	i = 0;
 	while (argv[i])
 	{

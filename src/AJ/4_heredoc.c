@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 21:25:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 19:00:17 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:16:14 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	free_hdlist(t_hdnode *list)
 {
-	t_hdnode *tmp;
+	t_hdnode	*tmp;
 
 	while (list)
 	{
@@ -37,6 +37,8 @@ static void	hd_add_back(t_hdnode **head, t_hdnode **tail, t_redir *redir)
 		(*tail)->next = new;
 	*tail = new;
 }
+
+// TODO: Lukas check if we need that commented out function otherwise delete
 /*
 static int	read_single_heredoc(t_redir *hd, t_shell *data)
 {
@@ -72,11 +74,13 @@ static int	read_single_heredoc(t_redir *hd, t_shell *data)
 */
 static t_hdnode	*collect_heredocs(t_cmd *cmds)
 {
-	t_hdnode	*head = NULL;
-	t_hdnode	*tail = NULL;
+	t_hdnode	*head;
+	t_hdnode	*tail;
 	t_cmd		*tmp;
 	t_redir		*r;
 
+	head = NULL;
+	tail = NULL;
 	tmp = cmds;
 	while (tmp)
 	{
@@ -98,6 +102,7 @@ static int	process_all_heredocs(t_hdnode *list, t_shell *data)
 
 	while (list)
 	{
+		// TODO: Lukas check if it can be removed otherwise norminette friendly
 		//fd = read_single_heredoc(list->redir, data);
 		fd = create_heredoc(list->redir, data);
 		if (fd < 0)
