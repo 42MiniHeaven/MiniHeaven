@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 22:28:26 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/11 20:37:50 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,24 @@ void	loop(t_shell *data)
 		
 		
 		if (isatty(fileno(stdin)))
+		{
 			data->input = readline("miniheaven> ");
+			if (!data->input)
+				break ;
+		}
 		else
 		{
 			char *line;
 			line = read_file(fileno(stdin));
+			if (!line)
+				break ;
 			data->input = ft_strtrim(line, "\n");
 			free(line);
 		}
 
 	
 		// data->input = readline("miniheaven> ");
-		if (!data->input)
+		if (!data->input) // this should handle ctrl+D
 			break ;
 		if (g_signal_status != 0)
 			set_exit_code(data);

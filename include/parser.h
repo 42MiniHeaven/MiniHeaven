@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 01:21:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 20:33:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ char	*handle_heredoc_quotes(char *str);
 char	**argv_replace_word_with_split(char **argv, int idx, char **split);
 int		argv_len(char **argv);
 bool	expand_redir(t_cmd *cmd, t_shell *data);
+
+// GENERAL UTILS
+int		count_len(char *mask);
+char	*remove_quotes(char *word, char *mask);
 
 
 // COULD BE ADDED TO LIBFT

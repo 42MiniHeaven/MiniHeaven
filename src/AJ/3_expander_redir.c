@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 01:08:58 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 20:34:15 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 **
 */
 
+
 // khuk@khuk-pc:~$ > $NONEXIST
 // bash: $NONEXIST: ambiguous redirect
 // khuk@khuk-pc:~$ export EMPTY=""
@@ -92,12 +93,11 @@
 //  Documents	       fract-ol      Pictures	  src_github  'x y'
 // azielnic@c2r5p14:~$ 
 
-
 bool	redir_validation_check(char *file, char *value)
 {
 	size_t	len;
 	int		i;
-	
+
 	// if filename is in double quotes all will be expanded and printed -> true
 	len = ft_strlen(file);
 	if (file[0] == '"' && file[len - 1] == '"')
@@ -108,7 +108,7 @@ bool	redir_validation_check(char *file, char *value)
 		i++;
 	if (value[i] == '\0')
 		return (false);
-	while (!ft_isspace(value[i]))
+	while (value[i] && !ft_isspace(value[i]))
 		i++;
 	if (value[i] == '\0')
 		return (true);
@@ -119,7 +119,7 @@ bool	redir_validation_check(char *file, char *value)
 	return (true);
 }
 
-char	*handle_env_var_redir(t_shell *d, t_redir *tmp, char**res, int *i)
+char	*handle_env_var_redir(t_shell *d, t_redir *tmp, char **res, int *i)
 {
 	int		start;
 	int		j;
@@ -136,7 +136,9 @@ char	*handle_env_var_redir(t_shell *d, t_redir *tmp, char**res, int *i)
 	if (!key)
 		return (NULL);
 	value = get_env_value(d->list->head, key);
-	if (!value || ft_strcmp(value, "") == 0 || !redir_validation_check(tmp->file, value))
+	if (!value || ft_strcmp(value, "") == 0)
+		return (free(key), free(*res), *i = j, tmp->success = false, NULL);
+	if (!redir_validation_check(tmp->file, value))
 		return (free(key), free(*res), *i = j, tmp->success = false, NULL);
 	*res = str_join_free(*res, value);
 	if (!*res)
@@ -145,7 +147,7 @@ char	*handle_env_var_redir(t_shell *d, t_redir *tmp, char**res, int *i)
 	return (free(key), *res);
 }
 
-char	*handle_dollar_redir(t_shell *d, t_redir *tmp, char**res, int *i)
+char	*handle_dollar_redir(t_shell *d, t_redir *tmp, char **res, int *i)
 {
 	char	*tmp_exit;
 
@@ -207,25 +209,20 @@ char	*expand_file_name(t_redir *tmp, char *mask, t_shell *data)
 {
 	char	*expanded_file;
 	char	*trimmed_file;
-	size_t	file_len;
+	char	*expanded_mask;
 
-	trimmed_file = NULL;
-	if (!needs_expansion_word(tmp->file, mask))
-	{
-		trimmed_file = ft_strtrim(tmp->file, "'");
-		return (trimmed_file);
-	}
 	expanded_file = replace_file_var(data, tmp, mask);
 	if (!expanded_file || !tmp->success)
 		return (redir_error(tmp), NULL);
-	file_len = ft_strlen(tmp->file);
-	if (tmp->file[0] == '"' && tmp->file[file_len - 1] == '"')
-	{
-		trimmed_file = ft_strtrim(expanded_file, "\"");
-		free(expanded_file);
-		return(trimmed_file);
-	}
-	return (expanded_file);
+	expanded_mask = create_mask(expanded_file);
+	if (!expanded_mask)
+		return (free(expanded_file), redir_error(tmp), NULL);
+	trimmed_file = remove_quotes(expanded_file, expanded_mask);
+	free(expanded_mask);
+	free(expanded_file);
+	if (!trimmed_file || trimmed_file[0] == '\0')
+		return (free(trimmed_file), redir_error(tmp), NULL);
+	return (trimmed_file);
 }
 // TODO: redir need to be also handled in the execution, checking the success varaiable in the redir struct
 // could be made a void as it doesn't catch anything

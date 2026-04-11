@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0_quotes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/09 19:42:57 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/11 20:33:36 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	lex_unclosed_quotes(char *input, int *i)
  * quotes.
  */
 
-static int	count_len(char *mask)
+int	count_len(char *mask)
 {
 	int	i;
 	int	len;
@@ -68,7 +68,7 @@ static int	count_len(char *mask)
 	return(len);
 }
 
-static char	*remove_quotes(char *word, char *mask)
+char	*remove_quotes(char *word, char *mask)
 {
 	int		i;
 	int		j;
