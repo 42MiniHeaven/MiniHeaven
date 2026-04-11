@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 16:13:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/10 21:19:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/11 22:45:17 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	env_update(t_env *env, char *value)
 		return ;
 	}
 	free(env->value);
-	env->value = value;
+	env->value = ft_strdup(value); // AJ added strdup
 	if (env->key && env->value)
 		env->flag = 0;
 }

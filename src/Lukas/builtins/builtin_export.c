@@ -60,6 +60,7 @@ static int	export_update_env(t_environment *list, char *str)
 	{
 		env_update(env_find(list->head, key), value);
 		free(key);
+		free(value);
 	}
 	else
 		env_add(list, env_create_node(key, value));		
