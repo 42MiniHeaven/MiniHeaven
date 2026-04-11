@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 12:45:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/29 14:59:45 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:22:26 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
+//TODO: Lukas check comment otherwise remove
 char	*get_key(const char *str)
 {
 	int		i;

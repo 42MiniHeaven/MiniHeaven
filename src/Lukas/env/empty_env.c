@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 17:28:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:38:33 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:23:22 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*get_pwd(void)
 	return (ret);
 }
 
-static char *get_shlvl(int shlvl)
+static char	*get_shlvl(int shlvl)
 {
 	char	*tmp;
 	char	*ret;
@@ -82,4 +82,3 @@ char	**empty_env(void)
 	env[3] = NULL;
 	return (env);
 }
-
