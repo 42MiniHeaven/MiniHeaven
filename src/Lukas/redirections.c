@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/06 21:15:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:44:16 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	setup_redir_append(t_redir *redir)
 	wdup2(fd, STDOUT_FILENO);
 	return (fd);
 }
+
 void	setup_redirections(t_redir *redir)
 {
 	int	fd;

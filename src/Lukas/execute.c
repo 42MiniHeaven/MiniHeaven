@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:10:10 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 22:23:38 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:46:53 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int	execute(t_shell *data)
 {
 	if (!data || !data->cmds)
 		return (0);
-	if (data->cmds->argv && data->cmds->argv[0] 
-		&& (ft_strcmp(data->cmds->argv[0], "exit") == 0) && data->cmds->next == NULL)
+	if (data->cmds->argv && data->cmds->argv[0]
+		&& (ft_strcmp(data->cmds->argv[0], "exit") == 0)
+		&& data->cmds->next == NULL)
 		data->should_exit = 1;
 	if (!data->cmds->next)
 		return (exec_single(data));

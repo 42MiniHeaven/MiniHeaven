@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 18:52:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:39:55 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static pid_t	fork_child(t_cmd *cmd, t_shell *data, int prev_fd, int *fd)
 			wdup2(fd[1], STDOUT_FILENO);
 			wclose(fd[1]);
 		}
-//		close_all_fds();
+//		close_all_fds(); //TODO: Lukas please check otherwise remove
 		child(cmd, data);
 	}
 	return (pid);
@@ -66,7 +66,8 @@ static void	wait_last_child(pid_t last_pid, int *last_exit)
 	int		status;
 	pid_t	pid;
 
-	while ((pid = wait(&status)) > 0)
+	pid = wait(&status);
+	while (pid > 0)
 	{
 		if (pid == last_pid)
 		{
@@ -75,6 +76,7 @@ static void	wait_last_child(pid_t last_pid, int *last_exit)
 			else if (WIFSIGNALED(status))
 				*last_exit = 128 + WTERMSIG(status);
 		}
+		pid = wait(&status);
 	}
 }
 
@@ -91,16 +93,10 @@ int	exec_pipe(t_shell *data)
 	while (tmp)
 	{
 		if (create_pipe(tmp, fd))
-		{
-			data->last_exit = 0;
-			return (0);
-		}
+			return (data->last_exit = 0, 0);
 		pid = fork_child(tmp, data, prev_fd, fd);
 		if (pid < 0)
-		{
-			data->last_exit = 0;
-			return (0);
-		}
+			return (data->last_exit = 0, 0);
 		last_pid = pid;
 		parent_pipe_cleanup(tmp, &prev_fd, fd);
 		tmp = tmp->next;

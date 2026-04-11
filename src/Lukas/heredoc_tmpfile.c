@@ -6,12 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:54:55 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:43:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-extern volatile sig_atomic_t    g_signal_status;
+
+extern volatile sig_atomic_t	g_signal_status;
 
 static void	append_number(char *buf, size_t *j, long n)
 {
@@ -78,13 +79,12 @@ static int	safe_write(int fd, char *buf, size_t len, size_t *total)
 	written = write(fd, buf, len);
 	if (written < 0)
 	{
-		// perror("write");
+		// perror("write"); // TODO: Lukas check or remove
 		return (-1);
 	}
 	*total += written;
 	return (0);
 }
-
 
 int	create_heredoc(t_redir *hd, t_shell *data)
 {
@@ -105,7 +105,6 @@ int	create_heredoc(t_redir *hd, t_shell *data)
 	handle_signals_heredoc();
 	while (1)
 	{
-
 		// line = readline("> "); // ONLY COMMENTED OUT TO TEST! COMMENT BACK IN
 
 		//needs to be commented out
@@ -141,7 +140,8 @@ int	create_heredoc(t_redir *hd, t_shell *data)
 			free(line);
 			line = expanded;
 		}
-		if (safe_write(fd, line, strlen(line), &total_written) < 0 || safe_write(fd, "\n", 1, &total_written) < 0)
+		if (safe_write(fd, line, strlen(line), &total_written) < 0
+			|| safe_write(fd, "\n", 1, &total_written) < 0)
 		{
 			free(line);
 			close(fd);

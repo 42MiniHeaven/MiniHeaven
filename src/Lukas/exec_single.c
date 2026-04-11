@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 16:03:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:26:58 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	exec_single(t_shell *data)
 		&& !is_builtin(data->cmds->argv[0]))
 	{
 		{
-		if (data->cmds->redir)
-			if(safe_std_fds(data))
-				return (1);
+			if (data->cmds->redir)
+				if (safe_std_fds(data))
+					return (1);
 		}
 		data->last_exit = exec_builtin(data);
 		if (data->cmds->redir && data->fds)

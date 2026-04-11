@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wclose.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:20:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/07 18:07:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:45:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	wclose(int fd)
 {
 	if (fd >= 0 && close(fd) == -1)
-//		fatal("close", 0);
+//		fatal("close", 0); // TODO: Lukas please handle
 	fd = -1;
 }
