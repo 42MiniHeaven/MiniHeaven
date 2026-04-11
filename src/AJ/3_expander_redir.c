@@ -137,7 +137,7 @@ char	*handle_env_var_redir(t_shell *d, t_redir *tmp, char**res, int *i)
 		return (NULL);
 	value = get_env_value(d->list->head, key);
 	if (!value || ft_strcmp(value, "") == 0 || !redir_validation_check(tmp->file, value))
-		return (free(key), free(*res), *i = j, tmp->success = false, tmp->file);//free (res);
+		return (free(key), free(*res), *i = j, tmp->success = false, NULL);
 	*res = str_join_free(*res, value);
 	if (!*res)
 		return (free(key), tmp->success = false, NULL);
