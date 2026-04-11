@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:43:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/04 18:20:24 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:19:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	export_update_env(t_environment *list, char *str)
 		free(value);
 	}
 	else
-		env_add(list, env_create_node(key, value));		
+		env_add(list, env_create_node(key, value));
 	return (0);
 }
 

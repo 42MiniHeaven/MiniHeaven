@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:13:40 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 22:47:43 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 01:21:00 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	update_pwd_oldpwd(t_env *env, char *oldpwd)
 	newpwd = getcwd(NULL, 0);
 	env_update(env_find(env, "OLDPWD"), oldpwd);
 	env_update(env_find(env, "PWD"), newpwd);
-	free(newpwd); // AJ added
+	free(newpwd);
 }
 
 static int	cd_error(const char *message, const char *path)
@@ -56,7 +56,8 @@ int	builtin_cd(t_cmd *cmd, t_environment *list)
 	if (cmd->argv[1] && cmd->argv[2])
 		return (cd_error("too many arguments", NULL));
 	if (cmd->argv[1] && ft_strcmp(cmd->argv[1], "-") == 0)
-		return (cd_error("switch to OLDPWD in the future", "- not implemented"));
+		return (cd_error("switch to OLDPWD in the future",
+				"- not implemented"));
 	target = get_cd_target(cmd->argv, list->head);
 	if (!target)
 		return (cd_error("HOME not set", NULL));
