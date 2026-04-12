@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 20:19:12 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 23:21:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:11:59 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ char	*handle_heredoc_quotes(char *str)
 	j = -1;
 	result = ft_calloc(len + 1, sizeof(char));
 	mask = create_mask(str);
-	while (str[i])
+	while (str[++i])
 	{
-		if (mask[++i] != 'Q')
+		if (mask[i] != 'Q')
 			result[++j] = str[i];
 	}
 	free(str);
