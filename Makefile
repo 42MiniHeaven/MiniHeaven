@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/12 00:26:53 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/12 19:46:46 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,9 @@ SRC := src/main.c \
 		src/Lukas/exec_pipe.c \
 		src/Lukas/fds.c \
 		src/Lukas/redirections.c \
+		src/Lukas/heredoc.c \
 		src/Lukas/heredoc_tmpfile.c \
+		src/Lukas/heredoc_utils.c \
 		src/Lukas/wfork.c \
 		src/Lukas/wpipe.c \
 		src/Lukas/wopen.c \

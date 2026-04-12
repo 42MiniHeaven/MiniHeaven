@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_external.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:52:17 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:25:56 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 20:56:54 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,12 @@ int	exec_external(t_shell *data)
 {
 	pid_t	pid;
 
-	handle_signals_exec_parent(); // TODO: Lukas have to remove this after wfork is implemented
 	pid = wfork();
 	if (pid < 0)
 		return (1);
 	if (pid == 0)
 		child(data->cmds, data);
 	else
-	{
-		if (data->cmds->redir && data->cmds->redir->type == HEREDOC)
-			close(data->cmds->redir->fd);
 		wait_child(pid, data);
-	}
 	return (0);
 }

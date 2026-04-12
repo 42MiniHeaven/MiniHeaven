@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/12 01:00:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 20:30:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ struct s_token
 struct  s_redir
 {
 	int             type;   // REDIR_IN, REDIR_OUT, APPEND, HEREDOC
-	int				fd;
+//	int				fd;
 	int				expand;
 	char            *file;
+	char			*tmp_file;	//TODO: ok wenn das dazukommt?
 	bool			success;
 	
 	struct s_redir  *next;

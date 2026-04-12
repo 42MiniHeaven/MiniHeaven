@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 23:14:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 22:12:32 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ static void	free_redirs(t_redir *head)
 		{
 			free(head->file);
 			head->file = NULL;
+		}
+		if (head->tmp_file)
+		{
+			free(head->tmp_file);
+			head->tmp_file = NULL;
 		}
 		free(head);
 		head = next;
