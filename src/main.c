@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 22:27:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:21:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,3 @@ int	main(int argc, char **argv, char **envp)
 	free_environment(data.list);	//cleanup
 	return (i);
 }
-//TODO: LUKAS AJ handle >">" asd correct in parser/lexer and close fd in execution!
-//TODO: LUKAS handle >> $HOME check in exection for EISDIR! 10_16_52
-
-//TODO: LUKAS handle  $notexists | ls | $notexists for 11_1_5 think in execution check if cmd exists
-//TODO: LUKAS handle > $notexists echo "haha" in child
-

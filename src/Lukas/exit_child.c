@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 23:32:17 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:13:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,4 @@ void	exit_child(t_shell *data, int err, char *error, char *msg)
 	child_output(error, msg);
 	free_child(data);
 	exit_handler(err);
-}
-
-//TODO: Lukas check if you can rename this file and just call it exit to have
-// less files
-void	parser_exit(t_parser *p)
-{
-	if (p->head)
-		free_cmds(p->head);
-	if (p->current)
-		p->current = NULL;
-	p->state = 0;
-	p->last_redir = 0;
 }

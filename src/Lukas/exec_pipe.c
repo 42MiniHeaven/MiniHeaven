@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 19:53:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:34:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	create_pipe(t_cmd *cmd, int *fd)
 {
-	if (cmd->next && pipe(fd) < 0)
+	if (cmd->next && wpipe(fd) < 0)
 	{
 		perror("pipe");
 		return (1);

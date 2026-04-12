@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
+#    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/12 19:46:46 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/12 23:15:22 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC := src/main.c \
 		src/AJ/2_parser.c \
 		src/AJ/2_parser_utils.c \
 		src/AJ/2_parser_utils2.c \
+		src/AJ/2_parser_exit.c \
 		src/AJ/3_expander.c \
 		src/AJ/3_expander_mask.c \
 		src/AJ/3_expander_check.c \

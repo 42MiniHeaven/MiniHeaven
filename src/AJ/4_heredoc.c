@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4_heredoc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 21:25:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 20:32:28 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:17:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,6 @@ static void	hd_add_back(t_hdnode **head, t_hdnode **tail, t_redir *redir)
 	*tail = new;
 }
 
-// TODO: Lukas check if we need that commented out function otherwise delete
-/*
-static int	read_single_heredoc(t_redir *hd, t_shell *data)
-{
-	int	pipefd[2];
-	char	*line;
-	char	*expanded;
-
-	if (pipe(pipefd) < 0)
-		return (-1);
-	while (1)
-	{
-		line = readline("> ");
-		if (!line)
-			break;
-		if (ft_strcmp(line, hd->file) == 0)
-		{
-			free(line);
-			break;
-		}
-		if (hd->expand)
-		{
-			expanded = expand_line(data, line);
-			free(line);
-			line = expanded;
-		}
-		write(pipefd[1], line, ft_strlen(line));
-		write(pipefd[1], "\n", 1);
-		free(line);
-	}
-	close(pipefd[1]);
-	return (pipefd[0]);
-}
-*/
 static t_hdnode	*collect_heredocs(t_cmd *cmds)
 {
 	t_hdnode	*head;
@@ -98,16 +64,9 @@ static t_hdnode	*collect_heredocs(t_cmd *cmds)
 
 static int	process_all_heredocs(t_hdnode *list, t_shell *data)
 {
-//	int	fd;
-
 	while (list)
 	{
-		// TODO: Lukas check if it can be removed otherwise norminette friendly
-		//fd = read_single_heredoc(list->redir, data);
-		create_heredoc(list->redir, data); // fd = 
-//		if (fd < 0)
-//			return (-1);
-//		list->redir->fd = fd;
+		create_heredoc(list->redir, data);
 		list = list->next;
 	}
 	return (0);

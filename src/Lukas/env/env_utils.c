@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 12:45:45 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:22:26 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:11:04 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-//TODO: Lukas check comment otherwise remove
 char	*get_key(const char *str)
 {
 	int		i;
@@ -22,8 +21,6 @@ char	*get_key(const char *str)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
-//	if (str[i] != '=')
-//		return (NULL);
 	return (ft_substr(str, 0, i));
 }
 
