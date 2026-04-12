@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 21:25:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 22:46:20 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:15:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,16 @@ static t_hdnode	*collect_heredocs(t_cmd *cmds)
 
 static int	process_all_heredocs(t_hdnode *list, t_shell *data)
 {
-	int	fd;
+//	int	fd;
 
 	while (list)
 	{
 		// TODO: Lukas check if it can be removed otherwise norminette friendly
 		//fd = read_single_heredoc(list->redir, data);
-		fd = create_heredoc(list->redir, data);
-		if (fd < 0)
-			return (-1);
-		list->redir->fd = fd;
+		create_heredoc(list->redir, data); // fd = 
+//		if (fd < 0)
+//			return (-1);
+//		list->redir->fd = fd;
 		list = list->next;
 	}
 	return (0);

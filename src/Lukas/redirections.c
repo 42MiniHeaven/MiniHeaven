@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:44:16 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 19:56:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ static int	setup_redir_out(t_redir *redir)
 
 static int	setup_redir_heredoc(t_redir *redir)
 {
-	wdup2(redir->fd, STDIN_FILENO);
-	return (redir->fd);
+	int	fd;
+
+	fd = wopen(redir->tmp_file, O_RDONLY, 0);
+	wdup2(fd, STDIN_FILENO);
+	return (fd);
 }
 
 static int	setup_redir_append(t_redir *redir)

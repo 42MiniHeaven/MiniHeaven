@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 00:18:28 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 20:54:21 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	shell_init(t_shell *data, char **envp)
 	data->should_exit = 0;
 }
 
-// TODO: Lukas please create a generic init file with all inits
-// I saw you have a init file but its not in the Makefile so what you are 
-//doing in there is not connected to our code. Why have it?
 void	parser_init(t_parser *p, t_shell *data)
 {
 	p->head = NULL;

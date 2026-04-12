@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:58:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 00:19:42 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 20:51:38 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-//TODO: Lukas Hope its fine to have it in a generic error file
 
 void	redir_error(t_redir *tmp)
 {

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 20:56:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/10 17:14:11 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 14:10:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 //Minishell ones
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strjoin_char(char const *s1, char const *s2, char c);
+char	*ft_strcpy(char *dest, const char *src);
 #endif

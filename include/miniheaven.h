@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 23:58:22 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 19:46:18 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,16 @@ void	restore_std_fds(t_fds *saved);
 void	close_all_fds(void);
 void	close_backup_fds(t_fds *saved);
 
+//heredoc.c
+int		create_heredoc(t_redir *hd, t_shell *data);
+
+//heredoc_utils.c
+int		is_delimiter(char *line, char *eof);
+char	*process_line(t_redir *hd, t_shell *data, char *line);
+char	*read_heredoc_line(void);
+
 //heredoc_tmpfile.c
-int		create_heredoc(t_redir *redir, t_shell *data);
+int		create_heredoc_tmpfile(char *path_out, char *eof);
 
 //empty_env_lst_init.c
 void	empty_env_init(t_shell *data);

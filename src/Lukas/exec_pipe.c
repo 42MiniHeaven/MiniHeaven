@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:37:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:39:55 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 19:53:11 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static pid_t	fork_child(t_cmd *cmd, t_shell *data, int prev_fd, int *fd)
 			wdup2(fd[1], STDOUT_FILENO);
 			wclose(fd[1]);
 		}
-//		close_all_fds(); //TODO: Lukas please check otherwise remove
 		child(cmd, data);
 	}
 	return (pid);
@@ -50,8 +49,6 @@ static void	parent_pipe_cleanup(t_cmd *cmd, int *prev_fd, int *fd)
 {
 	if (*prev_fd != -1)
 		wclose(*prev_fd);
-	if (cmd->redir && cmd->redir->fd != -1)
-		wclose(cmd->redir->fd);
 	if (cmd->next)
 	{
 		wclose(fd[1]);

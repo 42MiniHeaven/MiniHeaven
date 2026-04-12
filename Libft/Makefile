@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/02 15:14:44 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/11 01:21:28 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/12 14:10:40 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = ft_atoi.c \
 	ft_strjoin_char.c \
 	ft_strlcat.c \
 	ft_strlcpy.c \
+	ft_strcpy.c \
 	ft_strlen.c \
 	ft_strmapi.c \
 	ft_strcmp.c \
