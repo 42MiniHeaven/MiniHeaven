@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 23:44:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:58:38 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	handle_expect_command(t_parser *p)
 		p->state = EXPECT_REDIR_TARGET;
 	}
 	else
-		return (syntax_error("unexpected token"), 0);
+		return (syntax_error(p->tok->value), 0);
 	return (true);
 }
 
@@ -58,19 +58,19 @@ static bool	handle_expect_arg(t_parser *p)
 	else if (p->tok->type == PIPE)
 	{
 		if (!p->current || !p->current->argv[0])
-			return (syntax_error("empty command before pipe"), false);
+			return (syntax_error(p->tok->value), false);
 		p->current = NULL;
 		p->state = EXPECT_COMMAND;
 	}
 	else
-		return (syntax_error("unexpected token '|'"), false);
+		return (syntax_error(p->tok->value), false);
 	return (true);
 }
 
 static bool	handle_expect_redir(t_parser *p)
 {
 	if (p->tok->type != WORD)
-		return (syntax_error("expected filename"), false);
+		return (syntax_error(p->tok->value), false);
 	if (!cmd_add_redir(p->current, p->last_redir, p->tok->value))
 		return (false);
 	p->state = EXPECT_ARG_OR_REDIR;
@@ -109,9 +109,9 @@ int	parser(t_shell *data)
 	if (!parse_loop(&p))
 		return (parser_exit(&p), 1);
 	if (p.state == EXPECT_REDIR_TARGET)
-		return (parser_exit(&p), syntax_error("unexpected end of input"), 1);
+		return (parser_exit(&p), syntax_error(data->tokens->value), 1);
 	if (p.state == EXPECT_COMMAND && p.head)
-		return (parser_exit(&p), syntax_error("unexpected pipe at the end"), 1);
+		return (parser_exit(&p), syntax_error(data->tokens->value), 1);
 	data->cmds = p.head;
 	return (0);
 }

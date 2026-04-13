@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:58:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 20:51:38 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:40:09 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,16 @@ void	redir_error(t_redir *tmp)
 
 void	ft_error(char *func, char *error, int fd)
 {
-	char *msh;
 	char *first;
 	char *second;
 	
-	msh = ft_strdup("minishell: ");
-	if (!msh)
-		return ;
-	first = ft_strjoin(msh, func);
+	first = ft_strjoin("minishell: ", func);
 	if (!first)
-		return (free(msh));
+		return ;
 	second = ft_strjoin(first, error);
 	if (!second)
-		return (free(msh), free(first));
+		return (free(first));
 	ft_putstr_fd(second, fd);
 	free(first);
 	free(second);
-	free(msh);
 }

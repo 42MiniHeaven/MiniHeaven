@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:58:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 23:34:19 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:49:32 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,16 @@ bool	cmd_add_back(t_cmd **head, t_cmd *new)
 	return (true);
 }
 
-int	syntax_error(char *msg)
+int	syntax_error(char *type)
 {
-	ft_putstr_fd("Syntax error: ", 2);
-	ft_putendl_fd(msg, 2);
+	char	*msg_part;
+	char	*msg_final;
+
+	// ft_putstr_fd("Minishell: ", 2);
+	msg_part = ft_strjoin("syntax error near unexpected token `", type);
+	msg_final = ft_strjoin(msg_part, "'");
+	ft_putendl_fd(msg_final, 2);
+	free(msg_part);
+	free(msg_final);
 	return (-1);
 }

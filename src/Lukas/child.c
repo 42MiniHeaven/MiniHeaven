@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 11:52:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:01:06 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	child(t_cmd *cmds, t_shell *data)
 		exit_child(data, errno, cmds->argv[0], ": permission denied\n");
 	if (data->cmds->redir && data->cmds->redir->file)
 			exit_child(data, errno, cmds->argv[0], "No such file or directory\n");
-	exit_child(data, errno, cmds->argv[0], "no clue what belongs here\n");
+	exit_child(data, errno, cmds->argv[0], ": Is a directory\n");
 }
