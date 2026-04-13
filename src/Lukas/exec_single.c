@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 10:22:28 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 10:33:17 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	exec_single(t_shell *data)
 		if (data->cmds->redir && data->fds)
 		{
 			restore_std_fds(data->fds);
-			close_backup_fds(data->fds); // added new
-			data->fds = NULL; // added new
+			close_backup_fds(data->fds);
+			data->fds = NULL;
 		}
 	}
 	else
