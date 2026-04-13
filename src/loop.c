@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 12:23:14 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:45:23 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void	loop(t_shell *data)
 	{
 		reset_shell(data);
 		handle_signals_prompt();
-
-		
-		
+		// needs to be removed
 		if (isatty(fileno(stdin)))
 		{
 			data->input = readline("miniheaven> ");
@@ -38,10 +36,9 @@ void	loop(t_shell *data)
 			data->input = ft_strtrim(line, "\n");
 			free(line);
 		}
-
-	
+		// needs to be removed 
 		// data->input = readline("miniheaven> ");
-		if (!data->input) // this should handle ctrl+D
+		if (!data->input)
 			break ;
 		if (g_signal_status != 0)
 			set_exit_code(data);
@@ -55,12 +52,12 @@ void	loop(t_shell *data)
 		{
 			data->last_exit = 2;
 			free_loop(data);
-			continue;
+			continue ;
 		}
 		if (prepare_heredocs(data, data->cmds) < 0)
 		{
 			free_loop(data);
-			continue;
+			continue ;
 		}
 		expand_commands(data);
 		execute(data);

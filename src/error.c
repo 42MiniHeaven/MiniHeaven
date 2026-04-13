@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:58:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 15:40:09 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:37:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_error(char *func, char *error, int fd)
 	second = ft_strjoin(first, error);
 	if (!second)
 		return (free(first));
-	ft_putstr_fd(second, fd);
+	ft_putendl_fd(second, fd);
 	free(first);
 	free(second);
 }
