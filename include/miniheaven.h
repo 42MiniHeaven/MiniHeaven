@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 19:46:18 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/13 17:16:29 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ int		create_heredoc_tmpfile(char *path_out, char *eof);
 void	empty_env_init(t_shell *data);
 
 //redirections.c
-void	setup_redirections(t_redir *redir);
+int		setup_redirections(t_redir *redir);
 void	close_redir_fds(void);
 
 //resolve_path.c

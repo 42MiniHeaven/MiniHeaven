@@ -6,13 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 11:01:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 23:15:18 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 17:24:53 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-extern volatile sig_atomic_t	g_signal_status;
 
 static void	append_number(char *buf, size_t *j, long n)
 {
@@ -34,19 +32,32 @@ static void	append_number(char *buf, size_t *j, long n)
 		buf[(*j)++] = tmp[i];
 }
 
+/*
+ * DESCRIPTION
+ * To create a temporary file for the heredoc a uniquie identifier is needed.
+ * For this char *eof is casted into a hexadecimal address. To achieve this
+ * an unsigned long is required resulting in a unique number.
+ */
+
 static void	build_tmp_path(char *path, int counter, char *eof)
 {
-	size_t	i;
-	long	num;
+	size_t			i;
+	unsigned long	num;
 
-	num = (counter + (int)eof[0]) + (ft_strlen(eof) * counter);
+	num = (unsigned long)eof;
 	ft_strcpy(path, TMP_DIR "/.heredoc_");
 	i = ft_strlen(path);
-	append_number(path, &i, num);
+	append_number(path, &i, (long)num);
 	path[i++] = '_';
 	append_number(path, &i, (long)counter);
 	path[i] = '\0';
 }
+
+/*
+ * DESCRIPTION
+ * In heredoc we are creating a temporary file to save the strings written 
+ * in the terminal to later output them. 
+ */
 
 int	create_heredoc_tmpfile(char *path_out, char *eof)
 {
