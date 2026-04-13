@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 19:49:20 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/13 09:51:06 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
+
+//TODO: Info: added close_redir_fd() which fixed the leak
 
 void	child(t_cmd *cmds, t_shell *data)
 {
@@ -24,12 +26,19 @@ void	child(t_cmd *cmds, t_shell *data)
 	data->envp = env_arr(data->list->head);
 	data->path = resolve_path(cmds->argv[0], data->list->head);
 	if (!data->path)
+	{
+		close_redir_fds();
 		exit_child(data, errno, cmds->argv[0], ": command not found\n");
+	}
 	execve(data->path, cmds->argv, data->envp);
 	if (errno == EACCES)
+	{
+		close_redir_fds();
 		exit_child(data, errno, cmds->argv[0], ": permission denied\n");
+	}
 	else
 	{
+		close_redir_fds();
 		if (data->cmds->redir && data->cmds->redir->file)
 			exit_child(data, errno, cmds->argv[0], "No such file or directory\n");
 		exit_child(data, errno, cmds->argv[0], "no clue what belongs here\n");

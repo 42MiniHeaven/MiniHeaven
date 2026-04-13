@@ -189,6 +189,7 @@ void	empty_env_init(t_shell *data);
 
 //redirections.c
 void	setup_redirections(t_redir *redir);
+void	close_redir_fds(void);
 
 //resolve_path.c
 char	*resolve_path(char *cmd, t_env *env);
