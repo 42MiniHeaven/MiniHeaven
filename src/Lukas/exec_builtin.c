@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 19:08:59 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 17:26:24 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 17:32:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	exec_builtin(t_shell *data)
 {
 	if (setup_redirections(data->cmds->redir) == -1)
-		return (0);
+		return (1);
 	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
 		return (0);
 	if (ft_strcmp(data->cmds->argv[0], "cd") == 0)
