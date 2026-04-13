@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 20:43:04 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/13 12:23:14 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	loop(t_shell *data)
 		execute(data);
 		free_loop(data);
 		if (data->should_exit == 1)
-		{
 			break ;
-		}
 	}
 }
