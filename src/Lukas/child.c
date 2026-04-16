@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 17:55:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/16 16:20:58 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	child(t_cmd *cmds, t_shell *data)
 	handle_signals_exec_child();
 	if (!cmds)
 		exit (0);
-	if (setup_redirections(data->cmds->redir) == -1)
+	if (setup_redirections(cmds->redir) == -1)
 	{
 		close_redir_fds();
 		exit_child(data, errno, NULL, NULL);
