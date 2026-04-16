@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 16:55:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 17:33:01 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/16 16:36:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	builtin_unset(t_cmd *cmd, t_environment *list)
 	i = 1;
 	while (cmd->argv[i])
 	{
-		env_remove(list, cmd->argv[i]);
+		if (cmd->argv[i])
+			env_remove(list, cmd->argv[i]);
 		i++;
 	}
 	return (0);

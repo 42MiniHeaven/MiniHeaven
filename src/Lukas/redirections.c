@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 14:24:17 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 16:38:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	setup_redir_in(t_redir *redir)
 {
 	int	fd;
 
-	printf("%s\n", redir->file);
 	fd = wopen(redir->file, O_RDONLY, 0);
 	wdup2(fd, STDIN_FILENO);
 	return (fd);
@@ -51,22 +50,26 @@ static int	setup_redir_append(t_redir *redir)
 
 int	setup_redirections(t_redir *redir)
 {
-	int	fd;
+	int		fd;
+	t_redir	*tmp;
 
-	while (redir)
+	if (!redir)
+		return (0);
+	tmp = redir;
+	while (tmp)
 	{
-		if (redir->type == REDIR_IN)
-			fd = setup_redir_in(redir);
-		else if (redir->type == REDIR_OUT)
-			fd = setup_redir_out(redir);
-		else if (redir->type == HEREDOC)
-			fd = setup_redir_heredoc(redir);
-		else if (redir->type == APPEND)
-			fd = setup_redir_append(redir);
-		if (fd == -1)
-			return (-1);
-		wclose(fd);
-		redir = redir->next;
+		if (tmp->type == REDIR_IN)
+			fd = setup_redir_in(tmp);
+		else if (tmp->type == REDIR_OUT)
+			fd = setup_redir_out(tmp);
+		else if (tmp->type == HEREDOC)
+			fd = setup_redir_heredoc(tmp);
+		else if (tmp->type == APPEND)
+			fd = setup_redir_append(tmp);
+		tmp = tmp->next;
 	}
+	if (fd == -1)
+		return (-1);
+	wclose(fd);
 	return (0);
 }
