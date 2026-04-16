@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:54:53 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 15:11:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/15 19:31:48 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	safe_std_fds(t_shell *data)
 		return (1);
 	saved->in = dup(STDIN_FILENO);
 	saved->out = dup(STDOUT_FILENO);
-	saved->err = dup(STDERR_FILENO);
 	if (saved->in < 0 || saved->out < 0 || saved->err < 0)
 	{
 		free(saved);
