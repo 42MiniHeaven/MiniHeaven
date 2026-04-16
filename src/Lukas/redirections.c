@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 14:19:46 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 14:24:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	setup_redir_append(t_redir *redir)
 	return (fd);
 }
 
-void	setup_redirections(t_redir *redir)
+int	setup_redirections(t_redir *redir)
 {
 	int	fd;
 
@@ -63,7 +63,10 @@ void	setup_redirections(t_redir *redir)
 			fd = setup_redir_heredoc(redir);
 		else if (redir->type == APPEND)
 			fd = setup_redir_append(redir);
+		if (fd == -1)
+			return (-1);
 		wclose(fd);
 		redir = redir->next;
 	}
+	return (0);
 }

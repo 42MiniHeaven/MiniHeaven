@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 14:52:54 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/11 23:22:03 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:57:49 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,13 @@ void	create_token(char *input, int *i, int start, t_token **tokens)
 	char	*value;
     t_token	*token;
 
+    value = NULL; // added later
+    token = NULL; // added later
 	value = ft_substr(input, start, *i - start);
     if (!value)
-        syntax_error("failure assigning 'value' in lex_word function"); // Free when error;
+        syntax_error(token->value);
     token = token_new(WORD, value);
     if (!token)
-        syntax_error("failure assigning 'token' in lex_word function"); // Free when error;
+        syntax_error(token->value);
     token_add_back(tokens, token);
 }

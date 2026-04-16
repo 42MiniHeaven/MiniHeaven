@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 23:13:10 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 14:24:09 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	child_output(char *error, char *msg)
 {
-	write(2, error, ft_strlen(error));
-	write(2, msg, ft_strlen(msg));
+	if (error)
+		write(2, error, ft_strlen(error));
+	if (msg)
+		write(2, msg, ft_strlen(msg));
 }
 
 static void	free_child(t_shell *data)

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/12 00:11:22 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:38:28 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,13 @@ char	*replace_var(t_shell *data, char *word, char *mask)
 		return (NULL);
 	i = 0;
 	result = ft_strdup("");
+	if (!result)
+		return (NULL);
 	while (word[i])
 	{
 		if (word[i] == '$' && mask[i] != 'S' && mask[i] != 'Q')
 			result = handle_dollar(data, word, &i, result);
+		else
 		{
 			result = append_char(result, word[i]);
 			i++;

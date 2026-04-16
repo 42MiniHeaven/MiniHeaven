@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   fds.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:54:53 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/09 11:25:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:11:34 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
+
+void	close_redir_fds(void)
+{
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+}
 
 int	safe_std_fds(t_shell *data)
 {

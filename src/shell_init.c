@@ -31,14 +31,19 @@ void	shell_init(t_shell *data, char **envp)
 {
 	t_environment	*list;
 
+	if (!envp)
+	{
+		write(1, "No environment on startup\n", 26);
+		exit (1);
+	}
 	list = malloc(sizeof(t_environment));
 	if (!list)
 		return ;
 	list->head = NULL;
 	if (envp[0] != NULL)
 		env_init(list, envp);
-	else
-		env_init(list, empty_env());
+	//else
+		//env_init(list, empty_env());
 	data->fds = NULL;
 	data->list = list;
 	data->last_exit = 0;

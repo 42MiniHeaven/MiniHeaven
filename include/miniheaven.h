@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheaven.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 23:41:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 14:23:33 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,8 @@ int		create_heredoc_tmpfile(char *path_out, char *eof);
 void	empty_env_init(t_shell *data);
 
 //redirections.c
-void	setup_redirections(t_redir *redir);
+int		setup_redirections(t_redir *redir);
+void	close_redir_fds(void);
 
 //resolve_path.c
 char	*resolve_path(char *cmd, t_env *env);

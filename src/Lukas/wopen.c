@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wopen.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:13:01 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/07 20:17:30 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/13 17:14:37 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 int	wopen(const char *path, int flags, mode_t mode)
 {
-	int	fd;
+	int		fd;
+	char	*err;
 
 	fd = open(path, flags, mode);
+	if (fd < 0)
+	{
+		err = ft_strjoin(": ", strerror(errno));
+		if (!err)
+			return (-1);
+		ft_error((char *)path, err, 2);
+		free(err);
+		return (-1);
+	}
 	return (fd);
 }
