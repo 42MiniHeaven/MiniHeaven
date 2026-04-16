@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:32:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 15:58:38 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:41:26 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static bool	handle_expect_command(t_parser *p)
 		p->current = cmd_new();
 		if (!p->current || !cmd_add_back(&p->head, p->current))
 			return (false);
-		p->current->cmd = ft_strdup(p->tok->value);
-		if (!p->current->cmd || !cmd_add_arg(p->current, p->tok->value))
+		if (!cmd_add_arg(p->current, p->tok->value))
 			return (false);
 		p->state = EXPECT_ARG_OR_REDIR;
 	}

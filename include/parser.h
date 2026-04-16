@@ -6,77 +6,18 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:57:14 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/12 20:30:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:34:40 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PARSER_H
 # define PARSER_H
 
 # include "../../include/miniheaven.h"
 
-typedef struct	s_shell t_shell;
-typedef struct	s_token t_token;
-typedef struct  s_redir t_redir;
-typedef struct  s_cmd t_cmd;
-typedef struct	s_parser	t_parser;
+# include "structs.h"
 
-/* 	
-	WORD		ls, -l, filename
-	PIPE		|
-	REDIR_OUT	>
-	REDIR_IN	<
-	APPEND		>>
-	HEREDOC		<<
-*/
 
-enum	e_token_type
-{
-	WORD = 0,
-	PIPE = 1,
-	REDIR_OUT = 2,
-	REDIR_IN = 3,
-	APPEND = 4,
-	HEREDOC = 5
-};
-
-enum	e_parser_state
-{
-	EXPECT_COMMAND = 0,
-	EXPECT_ARG_OR_REDIR = 1,
-	EXPECT_REDIR_TARGET = 2
-};
-
-// Product of the lexer
-struct s_token
-{
-	char            *value;
-	int             type;
-	struct s_token  *next;
-};
-
-// Redirection node, expansion for the parser product
-struct  s_redir
-{
-	int             type;   // REDIR_IN, REDIR_OUT, APPEND, HEREDOC
-//	int				fd;
-	int				expand;
-	char            *file;
-	char			*tmp_file;	//TODO: ok wenn das dazukommt?
-	bool			success;
-	
-	struct s_redir  *next;
-};
-
-// Product of the parser
-struct s_cmd 
-{
-	char        *cmd;	// command only
-	char		**argv;	// flags ["-l", NULL], dymanic uses realloc
-	t_redir		*redir; // linked list of redirections
-	t_cmd       *next;  // next command in pipeline
-};
 
 // SIGNALHANDLING
 void	handle_signals_prompt(void);
@@ -139,7 +80,7 @@ char	**ft_realloc(char **old, size_t old_count, size_t new_count);
 
 // void	destroy_all(t_cmd *cmds, t_token *tokens);
 
-// void	check_signals(t_shell data);
+// void	check_signals(t_shell data);for the functions in the parser section
 void	expand_commands(t_shell *data);
 
 #endif

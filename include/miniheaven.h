@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 17:16:29 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:34:31 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,51 +35,11 @@
 # include "env.h"
 # include "builtins.h"
 
+# include "structs.h"
+
 # define TMP_DIR "/tmp"
 # define MAX_ATTEMPTS 1000
 # define HEREDOC_MAX_SIZE (1024 * 1024)
-
-typedef struct s_token	t_token;
-typedef struct s_shell	t_shell;
-typedef struct s_fds	t_fds;
-typedef struct s_parser	t_parser;
-typedef struct s_hdnode	t_hdnode;
-
-// main structure comtaining everything, which also can be freed easily
-struct	s_shell
-{
-	t_token			*tokens;
-	t_cmd			*cmds;
-	t_environment	*list;
-	t_fds			*fds;
-	int				last_exit;
-	int				should_exit;
-	char			*input;
-	char			**envp;
-	char			*path;
-};
-
-struct	s_parser
-{
-	t_cmd	*head;
-	t_cmd	*current;
-	t_token	*tok;
-	int		state;
-	int		last_redir;
-};
-
-struct	s_fds
-{
-	int	in;
-	int	out;
-	int	err;
-};
-
-struct	s_hdnode
-{
-	t_redir			*redir;
-	struct s_hdnode	*next;
-};
 
 //PROTOTYPES GENERAL
 

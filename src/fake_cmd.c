@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fake_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:18:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:22:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:41:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	fake_cmd(t_cmd **cmd)
 		free(tmp);
 		return ;
 	}
-	tmp->cmd = NULL;
 	arg[0] = ft_strdup("pwd");
 	arg[1] = NULL;
 	tmp->argv = arg;
