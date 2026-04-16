@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   cleanup.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 16:08:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 18:37:09 by azielnic         ###   ########.fr       */
+/*   Created: 2026/04/16 19:52:36 by azielnic          #+#    #+#             */
+/*   Updated: 2026/04/16 20:09:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef CLEANUP_H
+# define CLEANUP_H
 
 # include "structs.h"
 
-int	builtin_cd(t_cmd *cmd, t_environment *list);
-int	builtin_echo(t_cmd *cmd, t_environment *list);
-int	builtin_env(t_cmd *cmd, t_environment *list);
-int	builtin_exit(t_cmd *cmd, t_shell *data);
-int	builtin_export(t_cmd *cmd, t_environment *list);
-int	builtin_pwd(t_cmd *cmd, t_environment *list);
-int	builtin_unset(t_cmd *cmd, t_environment *list);
+// Freeing
+void	free_arr(char **arr);
+void	free_environment(t_environment *list);
+void	free_tokens(t_token *lst);
+void	free_cmds(t_cmd *lst);
+void	free_fds(t_fds *fd);
+void	free_loop(t_shell *data);
+
+// Error handling
+void	ft_error(char *func, char *error, int fd);
+void	redir_error(t_redir *tmp);
 
 #endif

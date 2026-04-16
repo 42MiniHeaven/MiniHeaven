@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:05:25 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/16 18:40:49 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/16 20:23:23 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "miniheaven.h"
 
 // Main structs
-typedef struct s_shell	t_shell;
-typedef struct s_token	t_token;
-typedef struct s_redir	t_redir;
-typedef struct s_cmd	t_cmd;
+typedef struct s_shell			t_shell;
+typedef struct s_token			t_token;
+typedef struct s_redir			t_redir;
+typedef struct s_cmd			t_cmd;
 
 // Helper structs
 typedef struct s_parser			t_parser;

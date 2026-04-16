@@ -6,14 +6,13 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/12 19:46:46 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/16 19:41:54 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC := src/main.c \
 		src/check_args.c \
 		src/error.c \
-		src/fake_cmd.c \
 		src/free.c \
 		src/free_environment.c \
 		src/free_call.c \
@@ -57,7 +56,6 @@ SRC := src/main.c \
 		src/Lukas/wopen.c \
 		src/Lukas/wclose.c \
 		src/Lukas/wdup2.c \
-		src/Lukas/fatal.c \
 		src/Lukas/exit_child.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \
