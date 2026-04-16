@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 19:56:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 14:19:46 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	setup_redir_in(t_redir *redir)
 {
 	int	fd;
 
+	printf("%s\n", redir->file);
 	fd = wopen(redir->file, O_RDONLY, 0);
 	wdup2(fd, STDIN_FILENO);
 	return (fd);

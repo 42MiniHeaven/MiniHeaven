@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 19:46:18 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/12 23:41:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void	wdup2(int oldfd, int newfd);
 pid_t	wfork(void);
 
 //wpipe.c
-void	wpipe(int pipefd[2]);
+int		wpipe(int pipefd[2]);
 
 //fatal.c
 void	fatal(const char *msg, int exit_code);

@@ -6,13 +6,33 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:19:36 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 20:43:04 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 14:02:51 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
 extern volatile sig_atomic_t	g_signal_status;
+
+void	print_parser_data(t_cmd *cmds)
+{
+	t_cmd	*tmp;
+	t_redir	*tmp2;
+	int		i = 0;
+
+	tmp = cmds;
+	while(tmp)
+	{
+		tmp2 = cmds->redir;
+		while(tmp2)
+		{
+			printf("[%i][%s]%s\n", i, tmp->argv[0], tmp2->file);
+			tmp2 = tmp2->next;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+}
 
 void	loop(t_shell *data)
 {
@@ -57,6 +77,7 @@ void	loop(t_shell *data)
 			free_loop(data);
 			continue;
 		}
+		print_parser_data(data->cmds);
 		if (prepare_heredocs(data, data->cmds) < 0)
 		{
 			free_loop(data);

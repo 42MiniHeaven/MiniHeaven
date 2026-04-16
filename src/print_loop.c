@@ -1,23 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wpipe.c                                            :+:      :+:    :+:   */
+/*   print_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 15:23:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 23:41:02 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/04/16 13:56:13 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/04/16 13:56:21 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniheaven.h"
 
-int	wpipe(int pipefd[2])
-{
-	if (pipe(pipefd) == -1)
-	{
-		ft_error("wpipe", "could not pipe", 2);
-		return (1);
-	}
-	return (0);
-}
