@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_redir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/12 00:34:11 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/16 19:31:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static char	*expand_file_name(t_redir *tmp, char *mask, t_shell *data)
 	char	*expanded_mask;
 
 	expanded_file = replace_file_var(data, tmp, mask);
+	if (!expanded_file && ft_strchr(mask, 'Q'))
+		return (tmp->success = true, ft_strdup(""));
 	if (!expanded_file || !tmp->success)
 		return (redir_error(tmp), NULL);
 	expanded_mask = create_mask(expanded_file);
