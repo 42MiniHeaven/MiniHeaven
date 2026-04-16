@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fake_cmd.c                                         :+:      :+:    :+:   */
+/*   cleanup.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 13:18:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 19:39:55 by azielnic         ###   ########.fr       */
+/*   Created: 2026/04/16 19:52:36 by azielnic          #+#    #+#             */
+/*   Updated: 2026/04/16 20:09:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniheaven.h"
+#ifndef CLEANUP_H
+# define CLEANUP_H
 
-void	fake_cmd(t_cmd **cmd)
-{
-	t_cmd	*tmp;
-	char	**arg;
+# include "structs.h"
 
-	tmp = malloc(sizeof(t_cmd));
-	if (!tmp)
-		return ;
-	arg = malloc(sizeof(char *) * 2);
-	if (!arg)
-	{
-		free(tmp);
-		return ;
-	}
-	tmp->cmd = NULL;
-	arg[0] = ft_strdup("pwd");
-	arg[1] = NULL;
-	tmp->argv = arg;
-	tmp->redir = NULL;
-	tmp->next = NULL;
-	*cmd = tmp;
-}
+// Freeing
+void	free_arr(char **arr);
+void	free_environment(t_environment *list);
+void	free_tokens(t_token *lst);
+void	free_cmds(t_cmd *lst);
+void	free_fds(t_fds *fd);
+void	free_loop(t_shell *data);
+
+// Error handling
+void	ft_error(char *func, char *error, int fd);
+void	redir_error(t_redir *tmp);
+
+#endif

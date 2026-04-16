@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:09:47 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 22:12:32 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:41:16 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ void	free_cmds(t_cmd *head)
 	while (head)
 	{
 		next = head->next;
-		if (head->cmd)
-		{
-			free(head->cmd);
-			head->cmd = NULL;
-		}
 		if (head->argv)
 		{
 			free_arr(head->argv);
