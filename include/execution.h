@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:52:43 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/16 20:23:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 14:56:54 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int		wopen(const char *path, int flags, mode_t mode);
 pid_t	wfork(void);
 void	wclose(int fd);
 void	wdup2(int oldfd, int newfd);
-void	wpipe(int pipefd[2]);
+int		wpipe(int pipefd[2]);
 
 #endif

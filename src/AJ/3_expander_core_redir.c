@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/12 00:30:08 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:01:26 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ static char	*handle_env_var_redir(t_shell *d, t_redir *tmp, char **res, int *i)
 	if (!key)
 		return (NULL);
 	value = get_env_value(d->list->head, key);
-	if (!value || ft_strcmp(value, "") == 0
-		|| !redir_validation_check(tmp->file, value))
+	if (!value || ft_strcmp(value, "") == 0)
+		value = "";
+	if (!redir_validation_check(tmp->file, value))
 		return (free(key), free(*res), *i = j, tmp->success = false, NULL);
 	*res = str_join_free(*res, value);
 	if (!*res)
@@ -107,7 +108,7 @@ char	*replace_file_var(t_shell *data, t_redir *tmp, char *mask)
 			res = handle_dollar_redir(data, tmp, &res, &i);
 		else
 		{
-			res = append_char(res, tmp->file[i]);
+			res = append_char(res, tmp->file[i]); // maybe pass &res
 			i++;
 		}
 		if (!res)
