@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 14:33:26 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 17:07:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:52:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static char	*get_shlvl(char *shlvl)
 	ret = ft_itoa(lvl);
 	return (ret);
 }
+
 int	env_init(t_environment *start, char **envp)
 {
 	size_t	i;

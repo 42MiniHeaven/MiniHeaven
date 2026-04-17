@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/17 16:14:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:39:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,63 @@
 
 static int	setup_redir_in(t_redir *redir)
 {
+	int	check;
+
 	if (!redir->success)
 		return (-1);
 	redir->fd = wopen(redir->file, O_RDONLY, 0);
 	if (redir->fd == -1)
 		return (-1);
-	wdup2(redir->fd, STDIN_FILENO);
+	check = wdup2(redir->fd, STDIN_FILENO);
+	if (check == -1)
+		return (-1);
+	wclose(redir->fd);
 	return (0);
 }
 
 static int	setup_redir_out(t_redir *redir)
 {
+	int	check;
+
 	if (!redir->success)
 		return (-1);
 	redir->fd = wopen(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (redir->fd == -1)
 		return (-1);
-	wdup2(redir->fd, STDOUT_FILENO);
+	check = wdup2(redir->fd, STDOUT_FILENO);
+	if (check == -1)
+		return (-1);
+	wclose(redir->fd);
 	return (0);
 }
 
 static int	setup_redir_heredoc(t_redir *redir)
 {
+	int	check;
+
 	redir->fd = wopen(redir->tmp_file, O_RDONLY, 0);
 	if (redir->fd == -1)
 		return (-1);
-	wdup2(redir->fd, STDIN_FILENO);
+	check = wdup2(redir->fd, STDIN_FILENO);
+	if (check == -1)
+		return (-1);
+	wclose(redir->fd);
 	return (0);
 }
 
 static int	setup_redir_append(t_redir *redir)
 {
+	int	check;
+
 	if (!redir->success)
 		return (-1);
 	redir->fd = wopen(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (redir->fd == -1)
 		return (-1);
-	wdup2(redir->fd, STDOUT_FILENO);
+	check = wdup2(redir->fd, STDOUT_FILENO);
+	if (check == -1)
+		return (-1);
+	wclose(redir->fd);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:52:43 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/17 17:25:12 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:40:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		is_builtin(const char *name);
 int		wopen(const char *path, int flags, mode_t mode);
 int		wpipe(int pipefd[2]);
 int		wclose(int fd);
-void	wdup2(int oldfd, int newfd);
+int		wdup2(int oldfd, int newfd);
 pid_t	wfork(void);
 
 #endif
