@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:52:43 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/16 20:23:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:10:29 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ char	*resolve_path(char *cmd, t_env *env);
 // Utils / wrappers
 int		is_builtin(const char *name);
 int		wopen(const char *path, int flags, mode_t mode);
-pid_t	wfork(void);
-void	wclose(int fd);
+int		wpipe(int pipefd[2]);
+int		wclose(int fd);
 void	wdup2(int oldfd, int newfd);
-void	wpipe(int pipefd[2]);
+pid_t	wfork(void);
 
 #endif

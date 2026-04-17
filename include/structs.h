@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:05:25 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/16 20:23:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 16:03:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ struct	s_redir
 {
 	int		type;	// REDIR_IN, REDIR_OUT, APPEND, HEREDOC
 	int		expand;
+	int		fd;
 	char	*file;
 	char	*tmp_file;
 	bool	success;

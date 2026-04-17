@@ -6,16 +6,15 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:20:22 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 12:01:53 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:10:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-void	wclose(int fd)
+int	wclose(int fd)
 {
-	if (fd >= 0)
-		close(fd);
-//		fatal("close", 0); // TODO: Lukas please handle
-	fd = -1;
+	if (fd < 0)
+		return (-1);
+	return (close(fd));
 }
