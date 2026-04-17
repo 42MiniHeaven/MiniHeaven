@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 22:16:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:05:55 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	child(t_cmd *cmds, t_shell *data)
 	if (!cmds)
 		exit (0);
 	if (setup_redirections(cmds->redir) == -1)
-		return(close_redir_fds(), exit_child(data, errno, NULL, NULL));
+		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
 	if (!cmds->argv || cmds->argv[0] == NULL)
 		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
 	data->envp = env_arr(data->list->head);
@@ -38,6 +38,6 @@ void	child(t_cmd *cmds, t_shell *data)
 	if (errno == EACCES)
 		exit_child(data, errno, cmds->argv[0], ": permission denied\n");
 	if (data->cmds->redir && data->cmds->redir->file)
-			exit_child(data, errno, cmds->argv[0], "No such file or directory\n");
+		exit_child(data, errno, cmds->argv[0], "No such file or directory\n");
 	exit_child(data, errno, cmds->argv[0], ": Is a directory\n");
 }

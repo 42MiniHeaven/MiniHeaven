@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/17 19:45:43 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:18:31 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,41 @@ static char	*expand_file_name(t_redir *tmp, char *mask, t_shell *data)
 	return (trimmed_file);
 }
 
+static bool	process_redir(t_redir *tmp, t_shell *data)
+{
+	char	*mask;
+	char	*result;
+
+	mask = create_mask(tmp->file);
+	if (!mask)
+		return (ft_error("malloc failed for mask", NULL, 2), false);
+	result = expand_file_name(tmp, mask, data);
+	free(mask);
+	if (!result)
+		return (false);
+	free(tmp->file);
+	tmp->file = result;
+	if (!tmp->file)
+		return (false);
+	mask = NULL;
+	return (true);
+}
+
 bool	expand_redir(t_cmd *cmd, t_shell *data)
 {
 	t_redir	*tmp;
 	char	*mask;
-	char	*result;
 
 	tmp = cmd->redir;
 	mask = NULL;
 	while (tmp)
 	{
-		if (tmp->type == HEREDOC)
+		if (tmp->type != HEREDOC)
 		{
-			tmp = tmp->next;
-			continue ;
+			if (!(process_redir(tmp, data)))
+				return (false);
 		}
-		mask = create_mask(tmp->file);
-		if (!mask)
-			return (ft_error("malloc failed for mask", NULL, 2), false);
-		result = expand_file_name(tmp, mask, data);
-		if (!result)
-			return (free(mask), false);
-		free(tmp->file);
-		tmp->file = result;
-		if (!tmp->file)
-			return (free(mask), false);
 		tmp = tmp->next;
-		free(mask);
-		mask = NULL;
 	}
 	return (true);
 }

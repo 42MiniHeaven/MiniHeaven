@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/17 16:42:24 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:21:04 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ char	*expand_word(char *word, t_shell *data)
  * BEHAVIOUR
  * @note	Modifies cmd->argv in place.
  */
-
-// How should redirections be handles here??? Should there genereally be
-// be a special case for redirections??
 
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {

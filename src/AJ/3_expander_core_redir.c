@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/17 17:01:26 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:00:20 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*replace_file_var(t_shell *data, t_redir *tmp, char *mask)
 			res = handle_dollar_redir(data, tmp, &res, &i);
 		else
 		{
-			res = append_char(res, tmp->file[i]); // maybe pass &res
+			res = append_char(res, tmp->file[i]);
 			i++;
 		}
 		if (!res)
