@@ -6,24 +6,21 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 23:56:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 18:22:08 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-/*
- * volatile -> prevents compiler optimizations that could break signal
- */
-
+// volatile -> prevents compiler optimisations that could break the signal
 volatile sig_atomic_t	g_signal_status = 0;
 
-static char	*get_shell_path()
+static char	*get_shell_path(void)
 {
 	char	buf[4096];
 	ssize_t	len;
 
-	len = readlink("/proc/self/exe", buf, sizeof(buf)-1);
+	len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
 	if (len == -1)
 	{
 		perror("readlink");
@@ -33,7 +30,7 @@ static char	*get_shell_path()
 	return (ft_strdup(buf));
 }
 
-static char	*get_pwd()
+static char	*get_pwd(void)
 {
 	char	*cwd;
 
@@ -41,7 +38,7 @@ static char	*get_pwd()
 	if (!cwd)
 	{
 		perror("getcwd");
-		return NULL;
+		return (NULL);
 	}
 	return (cwd);
 }
@@ -55,7 +52,6 @@ static void	env_i(t_env **llist)
 	env = malloc (sizeof(char *) * 4);
 	if (!env)
 		return ;
-	
 	shlvl_str = get_env_value("SHLVL", *llist);
 	shlvl = 0;
 	if (shlvl_str)
@@ -69,7 +65,6 @@ static void	env_i(t_env **llist)
 
 void	init_shell(t_shell *data, char **envp)
 {
-	
 	if (envp[0] != NULL)
 		create_env_list(&data->list, envp);
 	else

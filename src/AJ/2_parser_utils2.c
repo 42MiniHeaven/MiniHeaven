@@ -6,11 +6,21 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 16:58:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/13 15:49:32 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:44:07 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
+
+void	parser_exit(t_parser *p)
+{
+	if (p->head)
+		free_cmds(p->head);
+	if (p->current)
+		p->current = NULL;
+	p->state = 0;
+	p->last_redir = 0;
+}
 
 bool	cmd_add_redir(t_cmd *cmd, int type, const char *file)
 {
@@ -46,18 +56,4 @@ bool	cmd_add_back(t_cmd **head, t_cmd *new)
 		tmp = tmp->next;
 	tmp->next = new;
 	return (true);
-}
-
-int	syntax_error(char *type)
-{
-	char	*msg_part;
-	char	*msg_final;
-
-	// ft_putstr_fd("Minishell: ", 2);
-	msg_part = ft_strjoin("syntax error near unexpected token `", type);
-	msg_final = ft_strjoin(msg_part, "'");
-	ft_putendl_fd(msg_final, 2);
-	free(msg_part);
-	free(msg_final);
-	return (-1);
 }

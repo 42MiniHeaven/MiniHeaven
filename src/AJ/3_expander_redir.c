@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_redir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/16 19:31:50 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:45:43 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ static char	*expand_file_name(t_redir *tmp, char *mask, t_shell *data)
 	return (trimmed_file);
 }
 
-// TODO: Lukas redir need to be also handled in the execution, checking 
-// the success varaiable in the redir struct
-// could be made a void as it doesn't catch anything
 bool	expand_redir(t_cmd *cmd, t_shell *data)
 {
 	t_redir	*tmp;
@@ -47,7 +44,6 @@ bool	expand_redir(t_cmd *cmd, t_shell *data)
 	mask = NULL;
 	while (tmp)
 	{
-		// TODO: HEREDOC check possibly not needed - check needed
 		if (tmp->type == HEREDOC)
 		{
 			tmp = tmp->next;

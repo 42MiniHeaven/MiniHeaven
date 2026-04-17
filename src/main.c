@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 14:23:51 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 18:37:26 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	main(int argc, char **argv, char **envp)
 	int		i;
 
 	i = 0;
-	check_args(argc, argv, envp);	//maybe to prevent from missuse on several ./minishell calls
-	shell_init(&data, envp);		//create env
-	loop(&data);					//loop calling itself 
+	check_args(argc, argv, envp);
+	shell_init(&data, envp);
+	loop(&data);
 	i = data.last_exit;
-	free_environment(data.list);	//cleanup
+	free_environment(data.list);
 	return (i);
 }

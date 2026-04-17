@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+         #
+#    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/16 22:15:19 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/17 19:44:20 by azielnic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,7 @@ SRC := src/main.c \
 		src/check_args.c \
 		src/error.c \
 		src/free.c \
-		src/free_environment.c \
-		src/free_call.c \
 		src/loop.c \
-		src/loop_utils.c \
 		src/shell_init.c \
 		src/AJ/0_quotes.c \
 		src/AJ/0_quotes_heredoc.c \
@@ -28,7 +25,6 @@ SRC := src/main.c \
 		src/AJ/2_parser.c \
 		src/AJ/2_parser_utils.c \
 		src/AJ/2_parser_utils2.c \
-		src/AJ/2_parser_exit.c \
 		src/AJ/3_expander.c \
 		src/AJ/3_expander_mask.c \
 		src/AJ/3_expander_check.c \
@@ -44,19 +40,13 @@ SRC := src/main.c \
 		src/Lukas/child_utils.c \
 		src/Lukas/execute.c \
 		src/Lukas/exec_single.c \
-		src/Lukas/exec_external.c \
-		src/Lukas/exec_builtin.c \
 		src/Lukas/exec_pipe.c \
 		src/Lukas/fds.c \
 		src/Lukas/redirections.c \
 		src/Lukas/heredoc.c \
 		src/Lukas/heredoc_tmpfile.c \
 		src/Lukas/heredoc_utils.c \
-		src/Lukas/wfork.c \
-		src/Lukas/wpipe.c \
-		src/Lukas/wopen.c \
-		src/Lukas/wclose.c \
-		src/Lukas/wdup2.c \
+		src/Lukas/wrapper.c \
 		src/Lukas/exit_child.c \
 		src/Lukas/builtins/builtin_cd.c \
 		src/Lukas/builtins/builtin_echo.c \
