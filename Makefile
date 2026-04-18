@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/17 19:44:20 by azielnic         ###   ########.fr        #
+#    Updated: 2026/04/18 16:38:23 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,8 +67,7 @@ SRC := src/main.c \
 		src/Lukas/env/env_utils.c \
 		src/Lukas/env/env_get.c \
 		src/Lukas/external/resolve.c \
-		src/Lukas/external/env_arr.c \
-		readFile.c
+		src/Lukas/external/env_arr.c 
 		
 
 NAME := minishell
@@ -89,7 +88,7 @@ debug:
 	$(MAKE) CFLAGS="$(CFLAGS) -g" re
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDLIBS) -o $(NAME)

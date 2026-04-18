@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 15:04:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:35:21 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ static void	exit_handler(int err)
 	if (err == ENOEXEC)
 		exit(0);
 	exit(1);
+}
+
+void	exit_early(t_shell *data, t_cmd *cmds)
+{
+	int	ret;
+
+	ret = 0;
+	if (cmds && cmds->argv[0] && cmds->argv[1]
+		&& ft_strcmp(cmds->argv[0], "exit") == 0)
+		ret = ft_atoi(cmds->argv[1]);
+	free_child(data);
+	exit(ret % 256);
 }
 
 void	exit_child(t_shell *data, int err, char *error, char *msg)

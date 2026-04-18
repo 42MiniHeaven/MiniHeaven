@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:34:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 14:17:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:34:22 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
  * @param   str		Input str
  */
 
-// TODO: update _ when using env (currently not correct)
 int	builtin_env(t_cmd *cmd, t_environment *list)
 {
 	t_env	*tmp;
@@ -34,7 +33,6 @@ int	builtin_env(t_cmd *cmd, t_environment *list)
 	tmp = list->head;
 	while (tmp)
 	{
-//		if (tmp->key[0] != '\0')
 		if (tmp->value && tmp->value[0] != '\0')
 			printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;

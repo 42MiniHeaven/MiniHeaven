@@ -6,13 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 15:17:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/18 16:35:40 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-//TODO: Info: added close_redir_fds() which fixed the leak
 
 void	child(t_cmd *cmds, t_shell *data)
 {
@@ -20,8 +18,8 @@ void	child(t_cmd *cmds, t_shell *data)
 	data->envp = NULL;
 	data->path = NULL;
 	handle_signals_exec_child();
-	if (!cmds || !cmds->argv[0] || ft_strcmp(cmds->argv[0], "exit") == 0)	//maybe revert
-		exit_child(data, errno, NULL, NULL);
+	if (!cmds || !cmds->argv[0] || ft_strcmp(cmds->argv[0], "exit") == 0)
+		exit_early(data, cmds);
 	if (setup_redirections(cmds->redir) == -1)
 		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
 	if (!cmds->argv || cmds->argv[0] == NULL)

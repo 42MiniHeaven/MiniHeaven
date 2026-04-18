@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/17 20:21:04 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/18 16:21:01 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 		i++;
 	}
 	if (!resolve_quotes(cmd->argv))
-		printf("failed on quotes removal\n"); // TODO: change from printf to function with proper fd
+		return ;
 	if (cmd->redir)
 		expand_redir(cmd, data);
 }

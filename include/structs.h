@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:05:25 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/17 16:03:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/18 16:33:20 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ struct	s_token
 // Product of the parser
 struct	s_cmd
 {
-	// char	*cmd;	// command only
 	char	**argv;	// flags ["-l", NULL], dymanic uses realloc
 	t_redir	*redir;	// linked list of redirections
 	t_cmd	*next;	// next command in pipeline
