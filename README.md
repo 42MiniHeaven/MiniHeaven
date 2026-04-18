@@ -1,10 +1,11 @@
 _This project has been created as part of the 42 curriculum by azielnic and lwittwer._ 
 
-https://github.com/hamingway2
+https://github.com/hamingway2  
 https://github.com/wittwerl
 
 
 # Minishell
+## Description
 Minishell is a core project of the 42 curriculum focused on recreating a minimal Bash-like shell. It is implemented in C with basic Unix shell features. The goal of this project is to understand how command-like interpreters work internally.
 
 This project focuses on:
