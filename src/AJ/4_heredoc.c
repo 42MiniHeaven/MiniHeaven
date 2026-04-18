@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4_heredoc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 21:25:23 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 14:24:01 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:06:31 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ static void	hd_add_back(t_hdnode **head, t_hdnode **tail, t_redir *redir)
 {
 	t_hdnode	*new;
 
-	new = ft_calloc(sizeof(t_hdnode), 1); // TODO: protect new
+	new = ft_calloc(sizeof(t_hdnode), 1);
+	if (!new)
+		return ;
 	new->redir = redir;
 	new->next = NULL;
 	if (!*head)

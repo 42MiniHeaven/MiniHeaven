@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 15:48:37 by azielnic          #+#    #+#             */
-/*   Updated: 2026/03/27 15:57:55 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:05:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ char	**ft_split(char const *s, char *c)
 	{
 		if (ft_strchr(s, c[i]) != NULL)
 			split = 1;
-		i++;	
-	}	
-	if (split = 1)
+		i++;
+	}
+	if (split == 1)
 	{
 		words = countwords((char *)s, c);
 		arr = ft_calloc(words + 1, sizeof(char *));
@@ -120,4 +120,3 @@ char	**ft_split(char const *s, char *c)
 	}
 	return (arr);
 }
-

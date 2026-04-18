@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:57:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/22 17:10:59 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:01:39 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (arr);
 }
-

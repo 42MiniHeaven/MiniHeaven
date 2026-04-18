@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readFile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 20:21:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/08 20:30:35 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:42:07 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ char	*read_file(int fd)
 	char	*content;
 
 	content = ft_strdup("");
-//	fd = open(infile, O_RDONLY);
-//	if (fd < 0)
-//		return (free(content), NULL);
 	while (1)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
@@ -46,4 +43,3 @@ char	*read_file(int fd)
 		return (free(content), NULL);
 	return (content);
 }
-
