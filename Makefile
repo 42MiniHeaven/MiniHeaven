@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/18 16:38:23 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/18 17:02:06 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ SRC := src/main.c \
 
 NAME := minishell
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -I Libft/include -I include -g
+CFLAGS := -Wall -Wextra -Werror -I Libft/include -I include
 LDLIBS := -lreadline
 
 OBJ := $(SRC:.c=.o)
