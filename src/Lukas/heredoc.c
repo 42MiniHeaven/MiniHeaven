@@ -6,13 +6,13 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 19:06:59 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 19:47:27 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 18:03:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-extern volatile	sig_atomic_t	g_signal_status;
+extern volatile sig_atomic_t	g_signal_status;
 
 static int	handle_heredoc_interrupt(char *line, int fd, t_shell *data)
 {
@@ -65,11 +65,11 @@ static int	fill_heredoc(int fd, t_redir *hd, t_shell *data)
 		if (handle_heredoc_interrupt(line, fd, data) < 0)
 			return (-1);
 		if (!line)
-			break;
+			break ;
 		if (is_delimiter(line, hd->file))
 		{
 			free(line);
-			break;
+			break ;
 		}
 		line = process_line(hd, data, line);
 		if (write_heredoc_line(fd, line, &total) < 0)

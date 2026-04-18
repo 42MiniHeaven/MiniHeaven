@@ -6,19 +6,11 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 14:24:09 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:04:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-static void	child_output(char *error, char *msg)
-{
-	if (error)
-		write(2, error, ft_strlen(error));
-	if (msg)
-		write(2, msg, ft_strlen(msg));
-}
 
 static void	free_child(t_shell *data)
 {
@@ -54,7 +46,8 @@ static void	exit_handler(int err)
 
 void	exit_child(t_shell *data, int err, char *error, char *msg)
 {
-	child_output(error, msg);
+	if (error && msg)
+		ft_error(error, msg, 2);
 	free_child(data);
 	exit_handler(err);
 }

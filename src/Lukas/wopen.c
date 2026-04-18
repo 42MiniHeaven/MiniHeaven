@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:13:01 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/16 18:43:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 18:01:59 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	wopen(const char *path, int flags, mode_t mode)
 {
 	int		fd;
 	char	*err;
-	
+
 	fd = open(path, flags, mode);
 	if (fd < 0)
 	{

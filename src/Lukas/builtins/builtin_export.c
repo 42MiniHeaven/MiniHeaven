@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:43:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:19:42 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:11:09 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	print_export(char **env, int n)
 		}
 	}
 	i = -1;
-	while (env[++i] && ft_strcmp(env[i], "_") && i < n - 1)
+	while (env[++i] && i < n)
 		printf("declare -x %s\n", env[i]);
 }
 
@@ -77,7 +77,7 @@ int	builtin_export(t_cmd *cmd, t_environment *list)
 	{
 		if (!ft_strcmp(cmd->argv[0], "export"))
 		{
-			env = env_arr(list->head);
+			env = env_arr_export(list->head);
 			print_export(env, arr_len(env));
 			free_arr(env);
 			return (0);

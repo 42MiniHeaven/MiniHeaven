@@ -3,14 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   env_arr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:42:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:24:52 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/18 14:49:53 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
+
+static char	*get_export_str(char *key, char *value)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_strjoin_char(key, "\"", '=');
+	if (!tmp)
+		return (NULL);
+	tmp2 = ft_strjoin(tmp, value);
+	if (!tmp2)
+		return (free(tmp), NULL);
+	free(tmp);
+	tmp = NULL;
+	tmp = ft_strjoin(tmp2, "\"");
+	if (!tmp)
+		return (free(tmp2), NULL);
+	free(tmp2);
+	tmp2 = NULL;
+	return (tmp);
+}
+
+char	**env_arr_export(t_env *env)
+{
+	int		i;
+	t_env	*tmp;
+	char	**envp;
+
+	i = 0;
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->value)
+			i++;
+		tmp = tmp->next;
+	}
+	envp = malloc(sizeof(char *) * (i + 1));
+	if (!envp)
+		return (NULL);
+	i = 0;
+	while (env)
+	{
+		if (env->value)
+			envp[i++] = get_export_str(env->key, env->value);
+		env = env->next;
+	}
+	envp[i] = NULL;
+	return (envp);
+}
 
 char	**env_arr(t_env *env)
 {

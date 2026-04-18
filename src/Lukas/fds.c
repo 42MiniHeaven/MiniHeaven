@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fds.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:54:53 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/15 19:31:48 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/18 12:16:42 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	safe_std_fds(t_shell *data)
 		return (1);
 	saved->in = dup(STDIN_FILENO);
 	saved->out = dup(STDOUT_FILENO);
-	if (saved->in < 0 || saved->out < 0 || saved->err < 0)
+	if (saved->in < 0 || saved->out < 0)
 	{
 		free(saved);
 		return (1);
@@ -40,7 +40,6 @@ void	restore_std_fds(t_fds *saved)
 {
 	wdup2(saved->in, STDIN_FILENO);
 	wdup2(saved->out, STDOUT_FILENO);
-	wdup2(saved->err, STDERR_FILENO);
 }
 
 void	close_backup_fds(t_fds *saved)
@@ -56,11 +55,6 @@ void	close_backup_fds(t_fds *saved)
 	{
 		wclose(saved->out);
 		saved->out = -1;
-	}
-	if (saved->err >= 0)
-	{
-		wclose(saved->err);
-		saved->err = -1;
 	}
 	free(saved);
 	saved = NULL;

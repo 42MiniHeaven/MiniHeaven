@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/11 23:56:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:25:19 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 
 volatile sig_atomic_t	g_signal_status = 0;
-
+/*
 static char	*get_shell_path()
 {
 	char	buf[4096];
@@ -32,7 +32,7 @@ static char	*get_shell_path()
 	buf[len] = '\0';
 	return (ft_strdup(buf));
 }
-
+*/
 static char	*get_pwd()
 {
 	char	*cwd;
@@ -62,7 +62,7 @@ static void	env_i(t_env **llist)
 		shlvl = ft_atoi(shlvl_str);
 	env[0] = ft_strjoin("PWD=", get_pwd());
 	env[1] = ft_strjoin("SHLVL=", ft_itoa(shlvl));
-	env[2] = ft_strjoin("_=", get_shell_path());
+	env[2] = ft_strjoin("_=", ft_strdup(""));
 	env[3] = NULL;
 	create_env_list(llist, env);
 }

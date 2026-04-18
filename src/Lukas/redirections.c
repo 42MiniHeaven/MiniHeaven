@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 09:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/17 17:39:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/17 20:04:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	setup_redir_in(t_redir *redir)
 	check = wdup2(redir->fd, STDIN_FILENO);
 	if (check == -1)
 		return (-1);
-	wclose(redir->fd);
 	return (0);
 }
 
@@ -40,7 +39,6 @@ static int	setup_redir_out(t_redir *redir)
 	check = wdup2(redir->fd, STDOUT_FILENO);
 	if (check == -1)
 		return (-1);
-	wclose(redir->fd);
 	return (0);
 }
 
@@ -54,7 +52,6 @@ static int	setup_redir_heredoc(t_redir *redir)
 	check = wdup2(redir->fd, STDIN_FILENO);
 	if (check == -1)
 		return (-1);
-	wclose(redir->fd);
 	return (0);
 }
 
@@ -70,7 +67,6 @@ static int	setup_redir_append(t_redir *redir)
 	check = wdup2(redir->fd, STDOUT_FILENO);
 	if (check == -1)
 		return (-1);
-	wclose(redir->fd);
 	return (0);
 }
 

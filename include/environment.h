@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 20:04:53 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/16 20:05:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/18 14:50:48 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		env_add(t_environment *list, t_env *node);
 int		env_set(t_environment *list, t_env *node);
 int		env_remove(t_environment *list, const char *key);
 char	**env_arr(t_env *env);
+char	**env_arr_export(t_env *env);
 char	**empty_env(void);
 char	*get_env_value(t_env *env, char *key);
 char	*get_key(const char *str);
