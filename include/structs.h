@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:05:25 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/18 16:33:20 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/19 13:16:42 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ struct	s_fds
 {
 	int	in;
 	int	out;
-	int	err;
 };
 
 // Helper struct for heredocs
