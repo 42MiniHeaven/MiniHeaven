@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   empty_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 17:28:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:23:22 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/18 21:26:46 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-static char	*get_shell_path(void)
-{
-	char	buf[4096];
-	char	*ret;
-	ssize_t	len;
-
-	len = readlink("/proc/self/exe", buf, sizeof(buf) - 1);
-	if (len == -1)
-	{
-		perror("readlink");
-		return (NULL);
-	}
-	buf[len] = '\0';
-	ret = ft_strjoin("_=", buf);
-	if (!ret)
-		return (NULL);
-	return (ret);
-}
 
 static char	*get_pwd(void)
 {
@@ -78,7 +59,7 @@ char	**empty_env(void)
 	shlvl = 1;
 	env[0] = get_pwd();
 	env[1] = get_shlvl(shlvl);
-	env[2] = get_shell_path();
+	env[2] = ft_strdup("");
 	env[3] = NULL;
 	return (env);
 }
