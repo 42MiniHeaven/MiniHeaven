@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:23:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 16:34:21 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/22 17:53:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,6 @@ void	reset_shell(t_shell *data);
 void	shell_init(t_shell *data, char **envp);
 void	check_args(int argc, char **argv, char **envp);
 
+char	*read_file(int fd);
+# define BUFFER_SIZE 10000
 #endif

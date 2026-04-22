@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/18 17:02:06 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/22 17:52:03 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRC := src/main.c \
 		src/Lukas/env/env_utils.c \
 		src/Lukas/env/env_get.c \
 		src/Lukas/external/resolve.c \
-		src/Lukas/external/env_arr.c 
+		src/Lukas/external/env_arr.c \
+		readFile.c
 		
 
 NAME := minishell

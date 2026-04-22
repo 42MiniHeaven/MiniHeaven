@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/18 16:02:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 16:12:23 by lwittwer         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "miniheaven.h"
 
 extern volatile sig_atomic_t	g_signal_status;
@@ -39,40 +27,47 @@ void	free_loop(t_shell *data)
 		free(data->path);
 }
 
-static int	process_input(t_shell *data)
-{
-	if (!data->input)
-		return (0);
-	if (g_signal_status != 0)
-		set_exit_code(data);
-	if (*data->input)
-		add_history(data->input);
-	tokeniser(data, data->input);
-	return (1);
-}
-
-static int	parse_and_prepare(t_shell *data)
-{
-	if (parser(data) != 0)
-	{
-		data->last_exit = 2;
-		return (-1);
-	}
-	if (prepare_heredocs(data, data->cmds) < 0)
-		return (-1);
-	return (0);
-}
-
 void	loop(t_shell *data)
 {
 	while (1)
 	{
 		reset_shell(data);
 		handle_signals_prompt();
-		data->input = readline("miniheaven> ");
-		if (!process_input(data))
+		// needs to be removed
+		if (isatty(fileno(stdin)))
+		{
+			data->input = readline("miniheaven> ");
+			if (!data->input)
+				break ;
+		}
+		else
+		{
+			char *line;
+			line = read_file(fileno(stdin));
+			if (!line)
+				break ;
+			data->input = ft_strtrim(line, "\n");
+			free(line);
+		}
+		// needs to be removed 
+		// data->input = readline("miniheaven> ");
+		if (!data->input)
 			break ;
-		if (parse_and_prepare(data) < 0)
+		if (g_signal_status != 0)
+			set_exit_code(data);
+		if (data->input)
+		{
+			if (ft_strlen(data->input) > 0)
+				add_history(data->input);
+			tokeniser(data, data->input);
+		}
+		if (parser(data) != 0)
+		{
+			data->last_exit = 2;
+			free_loop(data);
+			continue ;
+		}
+		if (prepare_heredocs(data, data->cmds) < 0)
 		{
 			free_loop(data);
 			continue ;
@@ -80,7 +75,8 @@ void	loop(t_shell *data)
 		expand_commands(data);
 		execute(data);
 		free_loop(data);
-		if (data->should_exit)
+		if (data->should_exit == 1)
 			break ;
 	}
 }
+
