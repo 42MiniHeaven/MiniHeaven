@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 21:10:10 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/19 11:54:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/22 18:17:18 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	update_env_var(t_shell *data)
 	char	*update;
 	char	*path;
 
+	update = NULL;
 	tmp = data->cmds;
 	while (tmp)
 	{
@@ -42,8 +43,11 @@ int	execute(t_shell *data)
 		&& (ft_strcmp(data->cmds->argv[0], "exit") == 0)
 		&& data->cmds->next == NULL)
 		data->should_exit = 1;
-	update_env_var(data);
 	if (!data->cmds->next)
+	{
+		if (data->cmds && data->cmds->argv)
+			update_env_var(data);
 		return (exec_single(data));
+	}
 	return (exec_pipe(data));
 }
