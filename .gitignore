@@ -9,7 +9,7 @@
 *.a
 *.o
 supress.sh
-minishell.supp
+*.supp
 minishell
 old
 *mstest*

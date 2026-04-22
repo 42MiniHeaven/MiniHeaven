@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:52:43 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/18 15:26:40 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/19 17:26:19 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 // General execution
 int		execute(t_shell *data);
-int		exec_builtin(t_shell *data);
+int		exec_builtin(t_cmd *cmds, t_shell *data);
 int		exec_external(t_shell *data);
 int		exec_pipe(t_shell *data);
 int		exec_single(t_shell *data);

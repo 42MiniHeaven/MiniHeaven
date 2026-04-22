@@ -6,20 +6,27 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 17:27:26 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/22 17:35:18 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
+static void	builtin_child(t_cmd *cmds, t_shell *data)
+{
+	exec_builtin(cmds, data);
+	exit_child(data, errno, NULL, NULL);
+}
+
 void	child(t_cmd *cmds, t_shell *data)
 {
-	close_all_fds();
 	data->envp = NULL;
 	data->path = NULL;
 	handle_signals_exec_child();
 	if (!cmds || !cmds->argv[0] || ft_strcmp(cmds->argv[0], "exit") == 0)
 		exit_early(data, cmds);
+	if (is_builtin(cmds->argv[0]) == 0)
+		builtin_child(cmds, data);
 	if (setup_redirections(cmds->redir) == -1)
 		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
 	if (!cmds->argv || cmds->argv[0] == NULL)

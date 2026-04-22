@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:30:31 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/10 22:02:12 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/22 17:37:08 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-/*
-// checked changed int to size_t
-// V3 checked
-#include <stdio.h>
-#include <string.h>
-int main(void)
-{
-	char	*str = "finishing touch";
-	size_t	count;
-
-	count = ft_strlen(str);
-	printf("Der String:|%s| ist |%lu| Zeichen lang\n", str, count);
-	printf("Der String:|%s| ist |%lu| Zeichen lang\n", str, strlen(str));
-	return(0);
-}*/

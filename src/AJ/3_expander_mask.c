@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_expander_mask.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 20:07:05 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 00:32:00 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/22 17:38:24 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*create_mask(char *str)
 
 	if (!str)
 		return (NULL);
-	mask = ft_calloc((strlen(str) + 1), sizeof(char));
+	mask = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 	if (!mask)
 		return (NULL);
 	i = 0;
