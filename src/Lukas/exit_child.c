@@ -6,13 +6,13 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/23 15:09:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/23 22:11:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
 
-static void	free_child(t_shell *data)
+void	free_child(t_shell *data)
 {
 	if (data->tokens)
 		free_tokens(data->tokens);

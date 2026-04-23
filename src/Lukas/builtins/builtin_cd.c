@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:13:40 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/12 01:21:00 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/23 21:54:42 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@ static void	update_pwd_oldpwd(t_env *env, char *oldpwd)
 	char	*newpwd;
 
 	newpwd = getcwd(NULL, 0);
-	env_update(env_find(env, "OLDPWD"), oldpwd);
-	env_update(env_find(env, "PWD"), newpwd);
+	if (!newpwd)
+		return ;
+	if (env && oldpwd && env_find(env, "OLDPWD"))
+		env_update(env_find(env, "OLDPWD"), oldpwd);
+	if (env && env_find(env, "PWD"))
+		env_update(env_find(env, "PWD"), newpwd);
 	free(newpwd);
 }
+
 
 static int	cd_error(const char *message, const char *path)
 {
@@ -48,6 +53,31 @@ static char	*get_cd_target(char **args, t_env *env)
 	return (args[1]);
 }
 
+static int	handle_cd_dash(t_environment *list)
+{
+	char	*oldpwd;
+	char	*tmp_oldpwd;
+
+	oldpwd = get_env_value(list->head, "OLDPWD");
+	if (!oldpwd)
+		return (cd_error("OLDPWD not set", NULL), 1);
+	tmp_oldpwd = ft_strdup(oldpwd);
+	if (!tmp_oldpwd)
+		return (ft_error("malloc failed for oldpwd", NULL, 2), 1);
+	if (chdir(oldpwd) != 0)
+	{
+		perror("minishell: cd");
+		free(tmp_oldpwd);
+		return (1);
+	}
+	else
+		printf("%s\n", tmp_oldpwd);
+	if (list->head)
+		update_pwd_oldpwd(list->head, tmp_oldpwd);
+	free(tmp_oldpwd);
+	return (0);
+}
+
 int	builtin_cd(t_cmd *cmd, t_environment *list)
 {
 	char	*target;
@@ -56,19 +86,17 @@ int	builtin_cd(t_cmd *cmd, t_environment *list)
 	if (cmd->argv[1] && cmd->argv[2])
 		return (cd_error("too many arguments", NULL));
 	if (cmd->argv[1] && ft_strcmp(cmd->argv[1], "-") == 0)
-		return (cd_error("switch to OLDPWD in the future",
-				"- not implemented"));
+		return (handle_cd_dash(list));
 	target = get_cd_target(cmd->argv, list->head);
 	if (!target)
 		return (cd_error("HOME not set", NULL));
 	oldpwd = getcwd(NULL, 0);
+	if (!oldpwd)
+		return (perror("minishell: cd: error retrieving current directory: getcwd: "), 1);
 	if (chdir(target) != 0)
-	{
-		perror("minishell: cd");
-		free(oldpwd);
-		return (1);
-	}
-	update_pwd_oldpwd(list->head, oldpwd);
+		return (cd_error(strerror(errno), target), free(oldpwd), 1);
+	if (list->head)
+		update_pwd_oldpwd(list->head, oldpwd);
 	free(oldpwd);
 	if (cmd->argv[1]
 		&& ft_strcmp(cmd->argv[1], "-") == 0)
