@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 14:54:25 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/17 18:37:26 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/23 14:26:58 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@ int	main(int argc, char **argv, char **envp)
 	loop(&data);
 	i = data.last_exit;
 	free_environment(data.list);
+	wclose(0);
+	wclose(1);
+	wclose(2);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 15:35:21 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/23 15:09:16 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static void	free_child(t_shell *data)
 		free(data->input);
 	if (data->fds)
 		close_backup_fds(data->fds);
+	wclose(0);
+	wclose(1);
+	wclose(2);
 }
 
 static void	exit_handler(int err)
