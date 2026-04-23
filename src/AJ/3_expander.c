@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/18 16:21:01 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/23 22:57:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,25 @@ char	*expand_word(char *word, t_shell *data)
 void	expand_cmd(t_cmd *cmd, t_shell *data)
 {
 	char	**tmp;
-	int		i;
-	int		split_len;
+	int		i[2];
+	bool	check;
 
-	i = 0;
-	while (cmd->argv[i])
+	i[0] = 0;
+	while (cmd->argv[i[0]])
 	{
-		cmd->argv[i] = expand_word(cmd->argv[i], data);
-		if (needs_wordsplitting(cmd->argv[i]))
+		check = needs_wordsplitting(cmd->argv[i[0]]);
+		cmd->argv[i[0]] = expand_word(cmd->argv[i[0]], data);
+		if (check)
 		{
-			tmp = expander_split(cmd->argv[i], " \t\n");
+			tmp = expander_split(cmd->argv[i[0]], " \t\n");
 			if (!tmp)
 				return ;
-			split_len = argv_len(tmp);
-			cmd->argv = argv_replace_word_with_split(cmd->argv, i, tmp);
-			i += split_len;
+			i[1] = argv_len(tmp);
+			cmd->argv = argv_replace_word_with_split(cmd->argv, i[0], tmp);
+			i[0] += i[1];
 			continue ;
 		}
-		i++;
+		i[0]++;
 	}
 	if (!resolve_quotes(cmd->argv))
 		return ;
