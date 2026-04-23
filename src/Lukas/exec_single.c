@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/17 18:08:55 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/23 21:46:03 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 extern volatile sig_atomic_t	g_signal_status;
 
-int	exec_builtin(t_shell *data)
+int	exec_builtin(t_cmd *cmds, t_shell *data)
 {
 	if (setup_redirections(data->cmds->redir) == -1)
 		return (1);
-	if (!data || !data->cmds || !data->cmds->argv || !data->cmds->argv[0])
+	if (!data || !cmds || !cmds->argv || !cmds->argv[0])
 		return (0);
-	if (ft_strcmp(data->cmds->argv[0], "cd") == 0)
-		return (builtin_cd(data->cmds, data->list));
-	if (ft_strcmp(data->cmds->argv[0], "echo") == 0)
-		return (builtin_echo(data->cmds, data->list));
-	if (ft_strcmp(data->cmds->argv[0], "env") == 0)
-		return (builtin_env(data->cmds, data->list));
-	if (ft_strcmp(data->cmds->argv[0], "exit") == 0)
-		return (builtin_exit(data->cmds, data));
-	if (ft_strcmp(data->cmds->argv[0], "export") == 0)
-		return (builtin_export(data->cmds, data->list));
-	if (ft_strcmp(data->cmds->argv[0], "pwd") == 0)
-		return (builtin_pwd(data->cmds, data->list));
-	if (ft_strcmp(data->cmds->argv[0], "unset") == 0)
-		return (builtin_unset(data->cmds, data->list));
+	if (ft_strcmp(cmds->argv[0], "cd") == 0)
+		return (builtin_cd(cmds, data->list));
+	if (ft_strcmp(cmds->argv[0], "echo") == 0)
+		return (builtin_echo(cmds, data->list));
+	if (ft_strcmp(cmds->argv[0], "env") == 0)
+		return (builtin_env(cmds, data->list));
+	if (ft_strcmp(cmds->argv[0], "exit") == 0)
+		return (builtin_exit(cmds, data));
+	if (ft_strcmp(cmds->argv[0], "export") == 0)
+		return (builtin_export(cmds, data->list));
+	if (ft_strcmp(cmds->argv[0], "pwd") == 0)
+		return (builtin_pwd(cmds, data->list));
+	if (ft_strcmp(cmds->argv[0], "unset") == 0)
+		return (builtin_unset(cmds, data->list));
 	return (0);
 }
 
@@ -84,7 +84,7 @@ int	exec_single(t_shell *data)
 		if (data->cmds->redir)
 			if (safe_std_fds(data))
 				return (1);
-		data->last_exit = exec_builtin(data);
+		data->last_exit = exec_builtin(data->cmds, data);
 		if (data->cmds->redir && data->fds)
 		{
 			restore_std_fds(data->fds);

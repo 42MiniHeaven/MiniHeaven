@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:52:43 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/18 15:26:40 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/23 22:13:51 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@
 
 // General execution
 int		execute(t_shell *data);
-int		exec_builtin(t_shell *data);
+int		exec_builtin(t_cmd *cmds, t_shell *data);
 int		exec_external(t_shell *data);
 int		exec_pipe(t_shell *data);
 int		exec_single(t_shell *data);
 
 // Processes handling
 void	child(t_cmd *cmds, t_shell *data);
+void	exec_builtin_child(t_cmd *cmds, t_shell *data);
 void	child_error(char *error, char *msg);
 void	exit_child(t_shell *data, int exit_code, char *error, char *msg);
 void	exit_early(t_shell *data, t_cmd *cmds);
+void	free_child(t_shell *data);
 
 // File descriptor handling
 int		safe_std_fds(t_shell *data);
