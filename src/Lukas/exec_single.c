@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 13:42:41 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/23 21:46:03 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/24 16:07:30 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 extern volatile sig_atomic_t	g_signal_status;
 
-int	exec_builtin(t_cmd *cmds, t_shell *data)
+int	exec_builtin(t_cmd *cmds, t_shell *data, int in_child)
 {
-	if (setup_redirections(data->cmds->redir) == -1)
-		return (1);
+	if (in_child == 0)
+	{
+		if (setup_redirections(data->cmds->redir) == -1)
+			return (1);
+	}
 	if (!data || !cmds || !cmds->argv || !cmds->argv[0])
 		return (0);
 	if (ft_strcmp(cmds->argv[0], "cd") == 0)
@@ -84,7 +87,7 @@ int	exec_single(t_shell *data)
 		if (data->cmds->redir)
 			if (safe_std_fds(data))
 				return (1);
-		data->last_exit = exec_builtin(data->cmds, data);
+		data->last_exit = exec_builtin(data->cmds, data, 0);
 		if (data->cmds->redir && data->fds)
 		{
 			restore_std_fds(data->fds);

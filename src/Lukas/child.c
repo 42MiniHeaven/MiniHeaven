@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/23 22:13:16 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/24 16:07:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exec_builtin_child(t_cmd *cmds, t_shell *data)
 		exit_early(data, cmds);
 	if (setup_redirections(cmds->redir) == -1)
 		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
-	ret = exec_builtin(cmds, data);
+	ret = exec_builtin(cmds, data, 1);
 	free_child(data);
 	exit (ret);
 }

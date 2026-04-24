@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:42:50 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/03/30 22:55:55 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/24 16:53:04 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(const char *name)
 {
+	if (!name)
+		return (1);
 	if (ft_strcmp(name, "cd") == 0)
 		return (0);
 	if (ft_strcmp(name, "echo") == 0)
