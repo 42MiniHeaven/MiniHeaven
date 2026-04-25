@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 15:42:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 14:49:53 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:13:00 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ char	**env_arr_export(t_env *env)
 	if (!envp)
 		return (NULL);
 	i = 0;
-	while (env)
+	tmp = env;
+	while (tmp)
 	{
-		if (env->value)
-			envp[i++] = get_export_str(env->key, env->value);
-		env = env->next;
+		if (tmp->value)
+			envp[i++] = get_export_str(tmp->key, tmp->value);
+		tmp = tmp->next;
 	}
 	envp[i] = NULL;
 	return (envp);

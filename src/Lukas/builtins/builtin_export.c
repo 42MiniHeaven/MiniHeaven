@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:43:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 15:11:09 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:28:23 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ static void	print_export(char **env, int n)
 	}
 	i = -1;
 	while (env[++i] && i < n)
+	{
+		if (ft_strncmp(env[i], "_=", 2) == 0)
+			continue ;
 		printf("declare -x %s\n", env[i]);
+	}
 }
 
 static int	export_update_env(t_environment *list, char *str)
