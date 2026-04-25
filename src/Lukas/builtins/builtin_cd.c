@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:13:40 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/25 14:47:19 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:50:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	builtin_cd(t_cmd *cmd, t_environment *list)
 		return (cd_error("HOME not set", NULL));
 	oldpwd = getcwd(NULL, 0);
 	if (!oldpwd)
-		return (perror("minishell: cd: error retrieving current
-			directory: getcwd: "), 1);
+		return (perror("minishell: cd: error retrieving current \
+		directory: getcwd: "), 1);
 	if (chdir(target) != 0)
 		return (cd_error(strerror(errno), target), free(oldpwd), 1);
 	if (list->head)
