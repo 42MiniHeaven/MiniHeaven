@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/24 16:07:34 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/24 23:06:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exec_builtin_child(t_cmd *cmds, t_shell *data)
 	if (!cmds && !cmds->argv[0] && ft_strcmp(cmds->argv[0], "exit") == 0)
 		exit_early(data, cmds);
 	if (setup_redirections(cmds->redir) == -1)
-		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
+		return (close_redir_fds(), exit_child(data, 1, NULL, NULL));
 	ret = exec_builtin(cmds, data, 1);
 	free_child(data);
 	exit (ret);
@@ -33,10 +33,10 @@ void	child(t_cmd *cmds, t_shell *data)
 	data->envp = NULL;
 	data->path = NULL;
 	handle_signals_exec_child();
-	if (!cmds && !cmds->argv[0] && ft_strcmp(cmds->argv[0], "exit") == 0)
-		exit_early(data, cmds);
 	if (setup_redirections(cmds->redir) == -1)
-		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
+		return (close_redir_fds(), exit_child(data, 1, NULL, NULL));
+	if (!cmds || !cmds->argv || !cmds->argv[0])
+		exit_early(data, cmds);
 	if (!cmds->argv || cmds->argv[0] == NULL)
 		return (close_redir_fds(), exit_child(data, errno, NULL, NULL));
 	data->envp = env_arr(data->list->head);
