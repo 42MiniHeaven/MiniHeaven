@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/23 22:11:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/25 23:27:54 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ void	exit_early(t_shell *data, t_cmd *cmds)
 
 void	exit_child(t_shell *data, int err, char *error, char *msg)
 {
+	int	fd;
+
+	if  (err == EACCES && error)
+	{
+		fd = open(data->path, O_RDONLY | O_DIRECTORY);
+		if (fd != -1)
+		{
+			ft_error(error, ": Is a directory", 2);
+			free_child(data);
+			exit(126);
+		}
+		close(fd);
+	}
 	if (error && msg)
 		ft_error(error, msg, 2);
 	free_child(data);

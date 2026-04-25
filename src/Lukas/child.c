@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:39:15 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/24 23:06:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/25 23:29:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	child(t_cmd *cmds, t_shell *data)
 	close_redir_fds();
 	if (errno == EACCES)
 		exit_child(data, errno, cmds->argv[0], ": permission denied");
-	if (data->cmds->redir && data->cmds->redir->file)
-		exit_child(data, errno, cmds->argv[0], "No such file or directory");
-	exit_child(data, errno, cmds->argv[0], ": Not a directory");
+	if (errno == ENOENT)
+		exit_child(data, errno, cmds->argv[0], ": No such file or directory");
+	exit_child(data, errno, cmds->argv[0], ": command not found");
 }
