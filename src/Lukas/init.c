@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:59:07 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 15:37:23 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 14:39:15 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheaven.h"
-
-// volatile -> prevents compiler optimisations that could break the signal
-volatile sig_atomic_t	g_signal_status = 0;
 
 static char	*get_pwd(void)
 {
