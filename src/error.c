@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:58:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/25 20:58:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 00:55:29 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_error(char *func, char *error, int fd)
 	free(second);
 }
 
-static char	*ft_strjoin_three(char *s1, char *s2, char *s3)
+char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 {
 	char	*joined;
 	size_t	len1;

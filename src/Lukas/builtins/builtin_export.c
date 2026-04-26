@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:43:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/25 21:28:23 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 01:51:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,61 @@ static void	print_export(char **env, int n)
 	}
 }
 
+static void	ft_err_export_three(char *func, char *error, char *extra)
+{
+	char	*first;
+	char	*second;
+	char	*third;
+
+	first = ft_strjoin("minishell: ", func);
+	if (!first)
+		return ;
+	second = ft_strjoin(first, error);
+	if (!second)
+		return (free(first));
+	third = ft_strjoin_three(second, "': ", extra);
+	if (!third)
+		return (free(first), free(second));
+	ft_putendl_fd(third, 2);
+	free(first);
+	free(second);
+	free(third);
+}
+
+static int	valid_export(char *s)
+{
+	int	i;
+
+	if (!s)
+		return (1);
+	i = 0;
+	if (s[i] && (ft_isalpha(s[i]) || s[i] == '_'))
+	{
+		while (s[i] && s[i] != '=' && (ft_isalnum(s[i]) || s[i] == '_'))
+			i++;
+		if (s[i] == '\0' || s[i] == '=')
+			return (0);
+		return (1);
+	}
+	return (1);
+}
+
 static int	export_update_env(t_environment *list, char *str)
 {
 	char	*key;
 	char	*value;
 
+	if (valid_export(str))
+	{
+		ft_err_export_three("export: `", str, "not a valid identifier");
+		return (1);
+	}
 	key = get_key(str);
+	if (!key)
+	{
+		ft_err_export_three("export: `", str, "not a valid identifier");
+		return (1);
+	}
 	value = get_value(str);
 	if (env_find(list->head, key))
 	{
@@ -89,7 +138,8 @@ int	builtin_export(t_cmd *cmd, t_environment *list)
 	}
 	while (cmd->argv[i])
 	{
-		export_update_env(list, cmd->argv[i]);
+		if (export_update_env(list, cmd->argv[i]))
+			return (1);
 		i++;
 	}
 	return (0);

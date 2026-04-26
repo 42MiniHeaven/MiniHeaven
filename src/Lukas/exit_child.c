@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:31:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/25 23:27:54 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 01:55:03 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	exit_child(t_shell *data, int err, char *error, char *msg)
 {
 	int	fd;
 
-	if  (err == EACCES && error)
+	if  (err == EACCES && error && ft_strcmp(error, "") != 0)
 	{
 		fd = open(data->path, O_RDONLY | O_DIRECTORY);
 		if (fd != -1)
@@ -74,6 +74,8 @@ void	exit_child(t_shell *data, int err, char *error, char *msg)
 		}
 		close(fd);
 	}
+	if (error && ft_strcmp(error, "") == 0)
+		err = ENOENT;
 	if (error && msg)
 		ft_error(error, msg, 2);
 	free_child(data);
