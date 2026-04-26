@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:52:36 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/26 00:55:59 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 13:10:22 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_loop(t_shell *data);
 void	ft_error(char *func, char *error, int fd);
 void	redir_error(t_redir *tmp);
 void	ft_err_three(char *func, char *error, char *extra);
+void	ft_err_export_three(char *func, char *error, char *extra);
 char	*ft_strjoin_three(char *s1, char *s2, char *s3);
 
 #endif

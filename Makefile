@@ -6,7 +6,7 @@
 #    By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/03 18:30:47 by lwittwer          #+#    #+#              #
-#    Updated: 2026/04/18 17:02:06 by lwittwer         ###   ########.fr        #
+#    Updated: 2026/04/26 13:11:20 by lwittwer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC := src/main.c \
 		src/Lukas/builtins/builtin_unset.c \
 		src/Lukas/builtins/builtin_pwd.c \
 		src/Lukas/builtins/builtins.c \
+		src/Lukas/builtins/utils.c \
 		src/Lukas/env/create_node.c \
 		src/Lukas/env/env_init.c \
 		src/Lukas/env/env_add.c \

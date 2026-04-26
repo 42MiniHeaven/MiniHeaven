@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:43:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/26 01:51:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 13:10:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,6 @@ static void	print_export(char **env, int n)
 			continue ;
 		printf("declare -x %s\n", env[i]);
 	}
-}
-
-static void	ft_err_export_three(char *func, char *error, char *extra)
-{
-	char	*first;
-	char	*second;
-	char	*third;
-
-	first = ft_strjoin("minishell: ", func);
-	if (!first)
-		return ;
-	second = ft_strjoin(first, error);
-	if (!second)
-		return (free(first));
-	third = ft_strjoin_three(second, "': ", extra);
-	if (!third)
-		return (free(first), free(second));
-	ft_putendl_fd(third, 2);
-	free(first);
-	free(second);
-	free(third);
 }
 
 static int	valid_export(char *s)
