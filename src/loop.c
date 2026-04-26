@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 16:02:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/26 17:29:11 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:42:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	loop(t_shell *data)
 		handle_signals_prompt();
 		data->input = readline("miniheaven> ");
 		if (!process_input(data))
-		{	
+		{
 			write(1, "exit\n", 5);
 			break ;
 		}
