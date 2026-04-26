@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:43:01 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/16 20:25:13 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:03:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*replace_file_var(t_shell *data, t_redir *tmp, char *mask);
 // Expander split
 char	**expander_split(char *s, char *delim);
 char	**argv_replace_word_with_split(char **argv, int idx, char **split);
-bool	needs_wordsplitting(char *str);
+bool	needs_wordsplitting(t_cmd *cmd, char *str);
 
 // Quote handling
 bool	resolve_quotes(char **argv);

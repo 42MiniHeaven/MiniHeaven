@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 18:43:39 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/23 22:57:25 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:03:52 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	expand_cmd(t_cmd *cmd, t_shell *data)
 	i[0] = 0;
 	while (cmd->argv[i[0]])
 	{
-		check = needs_wordsplitting(cmd->argv[i[0]]);
+		check = needs_wordsplitting(cmd, cmd->argv[i[0]]);
 		cmd->argv[i[0]] = expand_word(cmd->argv[i[0]], data);
 		if (check)
 		{

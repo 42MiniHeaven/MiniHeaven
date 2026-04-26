@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 16:49:10 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/12 01:08:20 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:02:49 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ char	**argv_replace_word_with_split(char **argv, int idx, char **split)
 	return (new);
 }
 
-bool	needs_wordsplitting(char *str)
+bool	needs_wordsplitting(t_cmd *cmd, char *str)
 {
 	char	*mask;
 
 	if (!str)
+		return (false);
+	if (cmd && cmd->argv[0] && ft_strcmp(cmd->argv[0], "export") == 0)
 		return (false);
 	mask = create_mask(str);
 	if (!mask)
