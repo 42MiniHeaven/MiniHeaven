@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 09:43:52 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/26 16:05:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:17:12 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	valid_export(char *s)
 	return (1);
 }
 
-static int	export_update_env(t_environment *list, char *str)
+int	export_update_env(t_environment *list, char *str)
 {
 	char	*key;
 	char	*value;
@@ -111,12 +111,16 @@ int	builtin_export(t_cmd *cmd, t_environment *list)
 		{
 			env = env_arr_export(list->head);
 			print_export(env, arr_len(env));
-			free_arr(env);
-			return (0);
+			return (free_arr(env), 0);
 		}
 	}
 	while (cmd->argv[i])
 	{
+		if (ft_strlen(cmd->argv[i]) > 65536)
+		{
+			handle_export_overflow(list, cmd->argv[i]);
+			return (ft_error("export: ", "malloc failed", 2), 1);
+		}
 		if (export_update_env(list, cmd->argv[i]))
 			return (1);
 		i++;

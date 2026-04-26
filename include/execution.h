@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:52:43 by azielnic          #+#    #+#             */
-/*   Updated: 2026/04/24 16:07:52 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:46:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ int		wclose(int fd);
 int		wdup2(int oldfd, int newfd);
 pid_t	wfork(void);
 
+//new
+int		export_update_env(t_environment *list, char *str);
 #endif

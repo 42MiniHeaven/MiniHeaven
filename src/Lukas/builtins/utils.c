@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 13:09:13 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/26 13:11:49 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:59:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,15 @@ void	ft_err_export_three(char *func, char *error, char *extra)
 	free(first);
 	free(second);
 	free(third);
+}
+
+void	handle_export_overflow(t_environment *list, char *str)
+{
+	char	*key;
+
+	key = get_key(str);
+	if (!key)
+		return ;
+	export_update_env(list, key);
+	free(key);
 }
