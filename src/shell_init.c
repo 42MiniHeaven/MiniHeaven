@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:04:42 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 15:50:25 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:42:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	shell_init(t_shell *data, char **envp)
 {
 	t_environment	*list;
 
-	if (!envp)
+	if (!envp || !*envp)
 	{
 		write(1, "No environment on startup\n", 26);
 		exit (1);
