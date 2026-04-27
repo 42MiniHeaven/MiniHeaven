@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 16:02:30 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/04/18 16:12:23 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:42:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ void	loop(t_shell *data)
 		handle_signals_prompt();
 		data->input = readline("miniheaven> ");
 		if (!process_input(data))
+		{
+			write(1, "exit\n", 5);
 			break ;
+		}
 		if (parse_and_prepare(data) < 0)
 		{
 			free_loop(data);
